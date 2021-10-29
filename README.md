@@ -1,6 +1,6 @@
-# Project Title
+# GitToKnowEachOther
 
-One Paragraph of the project description
+GTKEO is a networking applications that allows engineers to reciprocate connections, follows, and endorsements
 
 Initially appeared on
 [gist](https://gist.github.com/PurpleBooth/109311bb0361f32d87a2). But the page cannot open anymore so that is why I have moved it here.
