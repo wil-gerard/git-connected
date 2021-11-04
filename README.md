@@ -1,6 +1,6 @@
 # GitToKnowEachOther
 
-GTKEO is a networking applications that allows software engineers to reciprocate connections, follows, and endorsements
+GTKEO is a networking application that allows software engineers to reciprocate connections, follows, and endorsements
 
 
 # ** *(The following readme is currently a WIP)* **
