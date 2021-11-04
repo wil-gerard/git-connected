@@ -1,3 +1,7 @@
+@import url('https://fonts.googleapis.com/css2?family=Zen+Kaku+Gothic+Antique:wght@400;500;700&display=swap');
+*{ 
+  font-family: 'Zen Kaku Gothic Antique', sans-serif;
+}
 .App {
   text-align: center;
 }
