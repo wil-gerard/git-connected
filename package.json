@@ -2,7 +2,7 @@
   "name": "client",
   "version": "0.1.0",
   "private": true,
-  "engine":{ 
+  "engine": {
     "node": "14.x"
   },
   "dependencies": {
