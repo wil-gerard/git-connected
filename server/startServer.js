@@ -1,6 +1,4 @@
-const path = require("path");
-const { NODE_ENV, PORT } = process.env;
-require('dotenv').config({ path: path.resolve(__dirname, `../config/.env.${process.env.NODE_ENV}`) });
+require('dotenv').config();
 const createAndSetupServer = require('./serverSetup');
 
-createAndSetupServer(NODE_ENV,PORT);
+createAndSetupServer(process.env.NODE_ENV,process.env.PORT);

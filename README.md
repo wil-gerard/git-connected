@@ -3,6 +3,12 @@
 GTKEO is a networking application that allows software engineers to reciprocate connections, follows, and endorsements
 
 
+
+## .env
+Expects a .env file in root directory with:
+* NODE_ENV=(production or development)
+* PORT=(your choice)
+
 # ** *(The following readme is currently a WIP)* **
 
 Initially appeared on
