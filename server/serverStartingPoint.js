@@ -3,8 +3,6 @@ require('dotenv').config({ path: path.resolve(__dirname, `../config/.env.${proce
 const express = require('express');
 const rootRouter = require('./routes');
 const { NODE_ENV, PORT } = process.env;
-// Initialize the MongoDB Connection
-// require('./db');
 
 function createAndSetupServer(){ 
   const server = express();
@@ -28,7 +26,7 @@ function setRequestResponse(server, environment){
   environment = environment || NODE_ENV;
   if (environment !== 'development') {
     server.get((req,res) =>{
-      const fileToSend = path.join(__dirname, '/public/index.html');
+      const fileToSend = path.join(__dirname, '/build/index.html');
       console.log('Received request, sending', fileToSend);
       res.sendFile(path.join(fileToSend));
     });
@@ -37,9 +35,10 @@ function setRequestResponse(server, environment){
   }
 }
 
-function startListening(server){ 
-  server.listen(PORT, () => {
-    console.log(`Server listening on port ${PORT}.`);
+function startListening(server, port){ 
+  port = port || PORT
+  server.listen(port, () => {
+    console.log(`Server listening on port ${port}.`);
   });
 }
 
