@@ -21,13 +21,12 @@ function setServerUses(server, environment){
     server.use(express.static('build'));
   }
 }
-
 function setRequestResponse(server, environment){
   environment = environment || NODE_ENV;
   if (environment !== 'development') {
     server.get((req,res) =>{
-      const fileToSend = path.join(__dirname, '/build/index.html');
       console.log('Received request, sending', fileToSend);
+      const fileToSend = path.join(__dirname, '/build/index.html');
       res.sendFile(path.join(fileToSend));
     });
   } else {
