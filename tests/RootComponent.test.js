@@ -1,8 +1,8 @@
 import { render, screen } from '@testing-library/react';
-import App from './App';
+import RootComponent from '../src/RootComponent';
 
 test('renders title', () => {
-  render(<App />);
+  render(<RootComponent />);
   const linkElement = screen.getByText(/GitToKnowEachOther/i);
   expect(linkElement).toBeInTheDocument();
 });

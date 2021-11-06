@@ -21,7 +21,7 @@
   },
   "scripts": {
     "start": "cross-env NODE_ENV=production node server/serverStartingPoint.js",
-    "build": "cross-env NODE_ENV=production run-s react:test react:build",
+    "build": "cross-env NODE_ENV=production run-s react:build",
     "dev:start": "cross-env NODE_ENV=development run-p react:start dev:server:start",
     "dev:server:start": "nodemon server/serverStartingPoint.js",
     "react:start": "react-scripts start",
