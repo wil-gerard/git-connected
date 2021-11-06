@@ -1,7 +1,7 @@
 {
-  "name": "boilerplate",
+  "name": "GitToKnowEachOther",
   "version": "0.1.0",
-  "description": "A boilerplate for creating a new project",
+  "description": "A web application to connect software engineers to reciprocate actions for each other on social media",
   "main": "server/serverStartingPoint.js",
   "proxy": "http://localhost:8000",
   "dependencies": {
