@@ -20,10 +20,9 @@
     "web-vitals": "^1.0.1"
   },
   "scripts": {
-    "start": "cross-env NODE_ENV=production node server/startServer.js",
-    "build": "cross-env NODE_ENV=production run-s react:build",
-    "dev:start": "cross-env NODE_ENV=development run-p react:start dev:server:start",
-    "dev:server:start": "nodemon server/startServer.js",
+    "start": "node server/startServer.js",
+    "build": "run-s react:build",
+    "devstart": "nodemon server/startServer.js",
     "react:start": "react-scripts start",
     "react:build": "react-scripts build",
     "react:test": "react-scripts test",

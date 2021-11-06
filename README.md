@@ -1,69 +1,49 @@
+# ** *(The following readme is currently a WIP)* **
 # GitToKnowEachOther
 
-GTKEO is a networking application that allows software engineers to reciprocate connections, follows, and endorsements
+[GTKEO](https://www.gittoknoweachother.com) is a networking application that allows software engineers to reciprocate connections, follows, and endorsements
+
+# (Instructions for using the live site and its features coming soon)
 
 
 
-## .env
-Expects a .env file in root directory with a PORT variable set to your choice of port. If you're unsure what that means:
-* Save a new blank file that is specifically named '.env'  (without the quotes), and save it at the very top level of this project, the same place where this very README exists (that's the root directory)
-* Inside that file, type
-PORT=8000
-* Save the file
-* That's it!
-
-# ** *(The following readme is currently a WIP)* **
-
-Initially appeared on
-[gist](https://gist.github.com/PurpleBooth/109311bb0361f32d87a2). But the page cannot open anymore so that is why I have moved it here.
-
-## Getting Started
+# Development Contributors:
 
 These instructions will give you a copy of the project up and running on
-your local machine for development and testing purposes. See deployment
-for notes on deploying the project on a live system.
+your local machine for development and testing purposes.
 
 ### Prerequisites
 
-Requirements for the software and other tools to build, test and push 
-- [Example 1](https://www.example.com)
-- [Example 2](https://www.example.com)
+* Node
+* NPM
 
 ### Installing
+* Clone repo
+* Navigate to the root directory in your terminal and type 'npm install'
+* Include the .env file:
 
-A step by step series of examples that tell you how to get a development
-environment running
+### .env
+Expects a .env file in root directory with a PORT variable set to your choice of port. If you're unsure what that means:
+* Save a new blank file that is specifically named '.env'  (without the quotes), and save it at the very top level of this project, the same place where this very README exists (that's the root directory)
+* Inside that file, type 'PORT=8000' (without the quotes!)
+* Save the file
+* That's it!
 
-Say what the step will be
+### Running locally
+* Navigate to the root directory in your terminal and type 'npm start'
+* Alternatively, you can type 'npm devstart' to run with nodemon for easier changes
 
-    Give the example
+### Running the tests
 
-And repeat
+* Navigate to root directory in your terminal and type 'npm run test'
 
-    until finished
 
-End with an example of getting some data out of the system or using it
-for a little demo
+# THE FOLLOWING IS STILL BOILERPLATE/COMING SOON
 
-## Running the tests
+## Style, Design, And Architecture
 
-Explain how to run the automated tests for this system
 
-### Sample Tests
 
-Explain what these tests test and why
-
-    Give an example
-
-### Style test
-
-Checks if the best practices and the right coding style has been used.
-
-    Give an example
-
-## Deployment
-
-Add additional notes to deploy this on a live system
 
 ## Built With
 
