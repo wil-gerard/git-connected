@@ -5,8 +5,8 @@
 /.pnp
 .pnp.js
 
-# testing
-/tests
+# testing?
+
 
 # production
 /build

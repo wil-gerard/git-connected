@@ -1,18 +1,18 @@
 {
-  "name": "boilerplate",
+  "name": "GitToKnowEachOther",
   "version": "0.1.0",
-  "description": "A boilerplate for creating a new project",
+  "description": "A web application to connect software engineers to reciprocate actions for each other on social media",
   "main": "server/serverStartingPoint.js",
   "proxy": "http://localhost:8000",
   "dependencies": {
-    "@testing-library/jest-dom": "^5.11.4",
+    "@testing-library/jest-dom": "^5.15.0",
     "@testing-library/react": "^11.1.0",
     "@testing-library/user-event": "^12.1.10",
     "cross-env": "^7.0.3",
-    "dotenv": "^8.2.0",
+    "dotenv": "^8.6.0",
     "express": "^4.17.1",
     "mongo": "^0.1.0",
-    "mongoose": "^5.13.2",
+    "mongoose": "^5.13.13",
     "npm-run-all": "^4.1.5",
     "react": "^17.0.2",
     "react-dom": "^17.0.2",
@@ -26,7 +26,8 @@
     "dev:server:start": "nodemon server/serverStartingPoint.js",
     "react:start": "react-scripts start",
     "react:build": "react-scripts build",
-    "react:test": "react-scripts test"
+    "react:test": "react-scripts test",
+    "test": "jest --env=node"
   },
   "browserslist": {
     "production": [
@@ -41,6 +42,7 @@
     ]
   },
   "devDependencies": {
-    "nodemon": "^2.0.9"
+    "axios": "^0.19.2",
+    "nodemon": "^2.0.14"
   }
 }
