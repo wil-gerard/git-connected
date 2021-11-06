@@ -30,7 +30,9 @@ Expects a .env file in root directory with a PORT variable set to your choice of
 * That's it!
 
 ### Running locally
-* Navigate to the root directory in your terminal and type 'npm start'
+* Navigate to root directory in your terminal
+* Make sure you have an active build (you'll see a /build folder in your directory). If it's your first time and you just cloned the repo, you won't have that. Not to worry! Just type 'npm run build' into your terminal
+* Once you have the active build, type 'npm start'
 * Alternatively, you can type 'npm devstart' to run with nodemon for easier changes
 
 ### Running the tests

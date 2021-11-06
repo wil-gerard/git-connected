@@ -10,7 +10,7 @@ function RootComponent() {
           GitToKnowEachOther
         </p>
         <p>
-          Coming Soon
+          Coming Soon!
         </p>
       </header>
     </div>
