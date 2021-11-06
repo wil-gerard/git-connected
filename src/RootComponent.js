@@ -17,4 +17,4 @@ function RootComponent() {
   );
 }
 
-export default App;
+export default RootComponent;
