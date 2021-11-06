@@ -3,7 +3,7 @@ const axios = require("axios");
 
 describe("serverSetup.js -> createAndSetupServer()", () => {
   const chosenPort = Math.ceil(Math.random() * 10000);
-  const serverAndListenInstance = createAndSetupServer("production",chosenPort);
+  const serverAndListenInstance = createAndSetupServer(chosenPort);
   const connectionKeyArray = serverAndListenInstance.listenInstance._connectionKey.split(":");
   const usedPort = connectionKeyArray[connectionKeyArray.length - 1];
   test('"server" member of return value is truthy', () => {
