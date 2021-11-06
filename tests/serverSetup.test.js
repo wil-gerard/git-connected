@@ -15,7 +15,6 @@ describe("serverSetup.js -> createAndSetupServer()", () => {
   test("the port used is the chosen port", () => {
     expect(usedPort).toBe(chosenPort.toString());
   });
-
   test("GET requests return a valid 200 response", async () => {
     const response = await axios.get("http://localhost:" + usedPort);
     expect(response.status).toBe(200);

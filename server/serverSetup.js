@@ -20,14 +20,19 @@ function setServerUses(server, environment) {
 
 function setRequestResponse(server, environment) {
   if (environment !== "development") {
-    server.get((req, res) => {
-      console.log("Received request, sending", fileToSend);
-      const fileToSend = path.join(__dirname, "/build/index.html");
-      res.sendFile(path.join(fileToSend));
+    server.get((getRequest, response) => {
+      const fileToSend = chooseFileToSendBasedOn(getRequest);
+      response.sendFile(path.join(fileToSend));
     });
   } else {
     console.log(`Running in development mode. Disabling get from build`);
   }
+}
+
+function buildGetResponseBasedOn(getRequest) {
+  console.log(getRequest);
+  const fileToSend = path.join(__dirname, "/build/index.html");
+  return fileToSend;
 }
 
 function startListening(server, port) {
@@ -35,8 +40,8 @@ function startListening(server, port) {
     console.log(`Server listening on port ${port}.`);
   });
   return {
-    "server": server,
-    "listenInstance": listenInstance,
+    server: server,
+    listenInstance: listenInstance,
   };
 }
 
