@@ -22,8 +22,9 @@ describe("serverSetup.js -> createAndSetupServer()", () => {
   });
   test ("GET request response is doctype html", async() => { 
     const response = await axios.get("http://localhost:" + usedPort);
-    expect(response.data.includes(`<!doctype html>`)).toBeTruthy();
+    expect(response.data.includes(`<!doctype html>`)).toBe(true);
     serverAndListenInstance.listenInstance.close();
   })
 });
+
 
