@@ -17,6 +17,7 @@ function setServerUses(server, environment) {
     server.use(express.static("build"));
   }
 }
+
 function setRequestResponse(server, environment) {
   if (environment !== "development") {
     server.get((req, res) => {
