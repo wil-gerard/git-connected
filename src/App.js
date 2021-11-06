@@ -1,12 +1,17 @@
-import logo from "./logo.svg";
-import "./App.css";
+import logo from './logo.svg';
+import './App.css';
 
 function App() {
   return (
     <div className="App">
       <header className="App-header">
         <img src={logo} className="App-logo" alt="logo" />
-        <p>GitToKnowEachOther</p>
+        <p>
+          GitToKnowEachOther
+        </p>
+        <p>
+          Coming Soon
+        </p>
       </header>
     </div>
   );
