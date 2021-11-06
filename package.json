@@ -26,7 +26,8 @@
     "dev:server:start": "nodemon server/serverStartingPoint.js",
     "react:start": "react-scripts start",
     "react:build": "react-scripts build",
-    "react:test": "react-scripts test"
+    "react:test": "react-scripts test",
+    "test":"jest"
   },
   "browserslist": {
     "production": [
