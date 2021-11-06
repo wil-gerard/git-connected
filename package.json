@@ -1,5 +1,5 @@
 {
-  "name": "GitToKnowEachOther",
+  "name": "git-to-know-each-other",
   "version": "0.1.0",
   "description": "A web application to connect software engineers to reciprocate actions for each other on social media",
   "main": "server/startServer.js",
