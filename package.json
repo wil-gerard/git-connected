@@ -2,7 +2,7 @@
   "name": "GitToKnowEachOther",
   "version": "0.1.0",
   "description": "A web application to connect software engineers to reciprocate actions for each other on social media",
-  "main": "server/serverStartingPoint.js",
+  "main": "server/startServer.js",
   "proxy": "http://localhost:8000",
   "dependencies": {
     "@testing-library/jest-dom": "^5.15.0",
@@ -20,10 +20,10 @@
     "web-vitals": "^1.0.1"
   },
   "scripts": {
-    "start": "cross-env NODE_ENV=production node server/serverStartingPoint.js",
+    "start": "cross-env NODE_ENV=production node server/startServer.js",
     "build": "cross-env NODE_ENV=production run-s react:build",
     "dev:start": "cross-env NODE_ENV=development run-p react:start dev:server:start",
-    "dev:server:start": "nodemon server/serverStartingPoint.js",
+    "dev:server:start": "nodemon server/startServer.js",
     "react:start": "react-scripts start",
     "react:build": "react-scripts build",
     "react:test": "react-scripts test",
