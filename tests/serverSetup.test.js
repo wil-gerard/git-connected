@@ -15,11 +15,11 @@ describe("serverSetup.js -> createAndSetupServer()", () => {
   test("the port used is the chosen port", () => {
     expect(usedPort).toBe(chosenPort.toString());
   });
-  test("GET requests return a valid 200 response", async () => {
+  test("plain/homepage GET request returns a valid 200 response", async () => {
     const response = await axios.get("http://localhost:" + usedPort);
     expect(response.status).toBe(200);
   });
-  test ("GET request response is doctype html", async() => { 
+  test ("plain/homepage GET request response is doctype html", async() => { 
     const response = await axios.get("http://localhost:" + usedPort);
     expect(response.data.includes(`<!doctype html>`)).toBe(true);
     serverAndListenInstance.listenInstance.close();

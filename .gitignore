@@ -13,7 +13,6 @@
 
 # misc
 .env
-/config/.env
 .DS_Store
 .env.local
 .env.development

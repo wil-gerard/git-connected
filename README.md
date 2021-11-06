@@ -5,9 +5,12 @@ GTKEO is a networking application that allows software engineers to reciprocate 
 
 
 ## .env
-Expects a .env file in root directory with:
-* NODE_ENV=(production or development)
-* PORT=(your choice)
+Expects a .env file in root directory with a PORT variable set to your choice of port. If you're unsure what that means:
+* Save a new blank file that is specifically named '.env'  (without the quotes), and save it at the very top level of this project, the same place where this very README exists (that's the root directory)
+* Inside that file, type
+PORT=8000
+* Save the file
+* That's it!
 
 # ** *(The following readme is currently a WIP)* **
 
