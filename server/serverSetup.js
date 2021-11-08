@@ -23,11 +23,11 @@ function setRequestResponse(server) {
     });
 }
 
-function startListening(serverObject, port) {
-  const listenObject = serverObject.listen(port, () => {
+function startListening(server, port) {
+  const listenObject = server.listen(port, () => {
     console.log(`Server listening on port ${port}.`);
   });
-  return { serverObject, listenObject };
+  return { "serverObject":server, listenObject };
 }
 
 module.exports = createAndSetupServer;
