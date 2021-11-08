@@ -5,8 +5,8 @@ function createAndSetupServer(port) {
   const server = express();
   setServerUses(server);
   setRequestResponse(server);
-  const serverAndListenInstance = startListening(server, port);
-  return serverAndListenInstance;
+  const serverAndListenObjects = startListening(server, port);
+  return serverAndListenObjects;
 }
 
 function setServerUses(server) {
@@ -24,10 +24,10 @@ function setRequestResponse(server) {
 }
 
 function startListening(server, port) {
-  const listenInstance = server.listen(port, () => {
+  const listenObject = server.listen(port, () => {
     console.log(`Server listening on port ${port}.`);
   });
-  return { server,listenInstance };
+  return { server, listenObject };
 }
 
 module.exports = createAndSetupServer;
