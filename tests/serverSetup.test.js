@@ -1,11 +1,12 @@
 const createAndSetupServer = require("../server/serverSetup.js");
+//const testingSomething = require("../server/startServer.js");
 const axios = require("axios");
 
 describe("serverSetup.js -> createAndSetupServer()", () => {
   const chosenPort = Math.ceil(Math.random() * 10000);
   const serverAndListenObjects = createAndSetupServer(chosenPort);
 
-  //to see which port the instance is actually listening to, we have to look at the connection key which is a string
+  //to see which port is actually being listened to, we have to look at the connection key which is a string
   //but that string has other unneeded data in it. thankfully the port comes at the end of the string and a colon comes before it
   const connectionKeyArray = serverAndListenObjects.listenObject._connectionKey.split(":");
   const usedPort = connectionKeyArray[connectionKeyArray.length - 1];
@@ -28,7 +29,7 @@ describe("serverSetup.js -> createAndSetupServer()", () => {
   });
   test ("plain/homepage GET request response is doctype html", async() => { 
     const response = await axios.get("http://localhost:" + usedPort);
-    expect(response.data.includes(`<!doctype html>`)).toBe(true);
+    expect( response.data.includes(`<!doctype html>`) ).toBe(true);
     serverAndListenObjects.listenObject.close();
   });  
 });

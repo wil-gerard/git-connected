@@ -27,7 +27,10 @@ function startListening(server, port) {
   const listenObject = server.listen(port, () => {
     console.log(`Server listening on port ${port}.`);
   });
-  return { "serverObject":server, listenObject };
+  return { 
+    "serverObject":server, 
+    "listenObject":listenObject 
+  };
 }
 
 module.exports = createAndSetupServer;
