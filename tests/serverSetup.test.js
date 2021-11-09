@@ -14,19 +14,32 @@ describe("serverSetup.js -> createAndSetupServer()", () => {
   test('the server object is truthy', () => {
     expect(serverAndListenObjects.serverObject).toBeTruthy();
   });
+
   test('the server object is an object', () => {
     expect(serverAndListenObjects.serverObject).toBeInstanceOf(Object);
   });
+  
+  test('the listen object is truthy', () => {
+    expect(serverAndListenObjects.listenObject).toBeTruthy();
+  });
+
+  test('the listen object is an object', () => {
+    expect(typeof serverAndListenObjects.listenObject).toBe("object");
+  });
+
   test("the port used is the chosen port", () => {
     expect(usedPort).toBe(chosenPort.toString());
   });
+
   test("plain/homepage GET request returns a valid 200 response", async () => {
     const response = await axios.get("http://localhost:" + usedPort);
     expect(response.status).toBe(200);
   });
+
   test("random invalid GET request returns a 404 response", async () => {
     await expect(axios.get("http://localhost:" + usedPort + "/" + chosenPort.toString())).rejects.toBeInstanceOf(Object);
   });
+  
   test ("plain/homepage GET request response is doctype html", async() => { 
     const response = await axios.get("http://localhost:" + usedPort);
     expect( response.data.includes(`<!doctype html>`) ).toBe(true);
