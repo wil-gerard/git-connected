@@ -1,5 +1,4 @@
 const createAndSetupServer = require("../server/serverSetup.js");
-//const testingSomething = require("../server/startServer.js");
 const axios = require("axios");
 
 describe("serverSetup.js -> createAndSetupServer()", () => {
