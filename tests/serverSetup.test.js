@@ -23,11 +23,14 @@ describe("serverSetup.js -> createAndSetupServer()", () => {
     const response = await axios.get("http://localhost:" + usedPort);
     expect(response.status).toBe(200);
   });
+  test("random invalid GET request returns a 404 response", async () => {
+    await expect(axios.get("http://localhost:" + usedPort + "/" + chosenPort.toString())).rejects.toBeInstanceOf(Object);
+  });
   test ("plain/homepage GET request response is doctype html", async() => { 
     const response = await axios.get("http://localhost:" + usedPort);
     expect(response.data.includes(`<!doctype html>`)).toBe(true);
     serverAndListenObjects.listenObject.close();
-  });
+  });  
 });
 
 
