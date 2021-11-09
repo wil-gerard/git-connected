@@ -14,7 +14,7 @@ describe("serverSetup.js -> createAndSetupServer()", () => {
     expect(serverAndListenObjects.serverObject).toBeTruthy();
   });
 
-  test('the server object is an object', () => {
+  test('the server object is an instance of Object', () => {
     expect(serverAndListenObjects.serverObject).toBeInstanceOf(Object);
   });
   
@@ -22,7 +22,7 @@ describe("serverSetup.js -> createAndSetupServer()", () => {
     expect(serverAndListenObjects.listenObject).toBeTruthy();
   });
 
-  test('the listen object is an object', () => {
+  test('the listen object is typeof object', () => {
     expect(typeof serverAndListenObjects.listenObject).toBe("object");
   });
 
