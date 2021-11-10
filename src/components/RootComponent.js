@@ -1,4 +1,4 @@
-import logo from './logo.svg';
+import logo from '../images/logo.svg';
 import './RootComponent.css';
 
 function RootComponent() {
@@ -10,7 +10,7 @@ function RootComponent() {
           GitToKnowEachOther
         </p>
         <p>
-          Coming Soon!
+          Coming Soon!!
         </p>
       </header>
     </div>

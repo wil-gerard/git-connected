@@ -1,5 +1,4 @@
 const express = require("express");
-const apiRouter = require("./api-routes");
 
 function createAndSetupServer(port) {
   const server = express();
@@ -12,7 +11,6 @@ function createAndSetupServer(port) {
 function setServerUses(server) {
   server.use(express.urlencoded({ extended: false }));
   server.use(express.json());
-  server.use("/api", apiRouter);
   server.use(express.static("build"));
 }
 
