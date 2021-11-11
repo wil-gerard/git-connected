@@ -15,10 +15,13 @@ function setServerUses(server) {
 }
 
 function setRequestResponse(server) {
-    server.get("/", (request, response) => {
-      const fileToSend = path.join(__dirname, "/build/index.html");
-      response.sendFile(path.join(fileToSend));
-    });
+    // server.get("/", (request, response) => {
+    //   const fileToSend = path.join(__dirname, "/build/index.html");
+    //   response.sendFile(path.join(fileToSend));
+    // });
+    server.get("/test", (request, response) => { 
+      response.send("hello world")
+    })
 }
 
 function startListening(server, port) {
