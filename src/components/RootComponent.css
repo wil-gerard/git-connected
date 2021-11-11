@@ -13,6 +13,10 @@
   }
 }
 
+.RootComponent .coming-soon{ 
+  font-size: 30px;
+}
+
 .RootComponent-header {
   background-color: #282c34;
   min-height: 100vh;

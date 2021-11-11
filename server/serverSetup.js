@@ -1,4 +1,5 @@
 const express = require("express");
+const path = require("path");
 
 function createAndSetupServer(port) {
   const server = express();
@@ -15,13 +16,11 @@ function setServerUses(server) {
 }
 
 function setRequestResponse(server) {
-    // server.get("/", (request, response) => {
-    //   const fileToSend = path.join(__dirname, "/build/index.html");
-    //   response.sendFile(path.join(fileToSend));
-    // });
-    server.get("/test", (request, response) => { 
-      response.send("hello world")
-    })
+    server.get("*", (request, response) => {
+      const fileToSend = path.join(__dirname, "..", "/build/index.html");
+      response.sendFile(fileToSend);
+    });
+
 }
 
 function startListening(server, port) {
