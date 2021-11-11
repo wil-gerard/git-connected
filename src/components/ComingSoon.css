@@ -1,23 +1,23 @@
-.RootComponent {
+.ComingSoon {
   text-align: center;
 }
 
-.RootComponent-logo {
+.ComingSoon-logo {
   height: 40vmin;
   pointer-events: none;
 }
 
 @media (prefers-reduced-motion: no-preference) {
-  .RootComponent-logo {
-    animation: RootComponent-logo-spin infinite 20s linear;
+  .ComingSoon-logo {
+    animation: ComingSoon-logo-spin infinite 20s linear;
   }
 }
 
-.RootComponent .coming-soon{ 
+.ComingSoon .coming-soon{ 
   font-size: 30px;
 }
 
-.RootComponent-header {
+.ComingSoon-header {
   background-color: #282c34;
   min-height: 100vh;
   display: flex;
@@ -28,11 +28,11 @@
   color: white;
 }
 
-.RootComponent-link {
+.ComingSoon-link {
   color: #61dafb;
 }
 
-@keyframes RootComponent-logo-spin {
+@keyframes ComingSoon-logo-spin {
   from {
     transform: rotate(0deg);
   }
