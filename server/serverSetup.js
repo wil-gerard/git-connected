@@ -22,6 +22,7 @@ function setRequestResponse(server) {
     });
 }
 
+//care: side effects
 function startListening(server, port) {
   const listenObject = server.listen(port, () => {
     console.log(`Server listening on port ${port}.`);
