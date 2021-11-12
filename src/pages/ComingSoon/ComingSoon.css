@@ -5,6 +5,7 @@
 .ComingSoon-logo {
   height: 40vmin;
   pointer-events: none;
+  margin: 10px;
 }
 
 @media (prefers-reduced-motion: no-preference) {
@@ -13,18 +14,26 @@
   }
 }
 
-.ComingSoon .coming-soon{ 
+.ComingSoon .top-banner{ 
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  background-color: #74c6e2;
+}
+.ComingSoon .top-banner p{
   font-size: 30px;
+  font-weight: 600;
+  height: 40px;
+  margin-top: -3px; 
 }
 
 .ComingSoon-header {
-  background-color: #282c34;
   min-height: 100vh;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  font-size: calc(10px + 2vmin);
+  font-size: calc(20px + 2vmin);
   color: white;
 }
 
