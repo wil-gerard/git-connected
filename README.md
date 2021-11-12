@@ -20,7 +20,7 @@ your local machine for development and testing purposes.
 ### Installing
 * Clone repo
 * Navigate to the root directory in your terminal and type 'npm install'
-*Once that's finished, type 'npm run build' 
+* Once that's finished, type 'npm run build' 
 * Include the .env file:
 
 ### .env

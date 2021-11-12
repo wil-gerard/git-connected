@@ -20,7 +20,6 @@ function setRequestResponse(server) {
       const fileToSend = path.join(__dirname, "..", "build","index.html");
       response.sendFile(fileToSend);
     });
-
 }
 
 function startListening(server, port) {
