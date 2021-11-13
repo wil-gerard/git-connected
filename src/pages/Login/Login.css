@@ -60,7 +60,8 @@
 .Login .login-button {
   padding: 0;
   max-height: 3rem;
-  font-size: 1.5rem;
+  font-size: 1.7rem;
+  font-weight: 700;
   border-color: #4d8396;
   background-color: #74c6e2;
   color: white;
