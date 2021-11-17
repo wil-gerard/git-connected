@@ -25,9 +25,9 @@
     "start": "node server/startServer.js",
     "build": "run-s react:build",
     "devstart": "nodemon server/startServer.js",
-    "react:start": "react-scripts start",
-    "react:build": "react-scripts build",
-    "react:test": "react-scripts test",
+    "react:start": "craco start",
+    "react:build": "craco build",
+    "react:test": "craco test",
     "test": "jest --env=node"
   },
   "browserslist": {
