@@ -7,9 +7,9 @@ import facebookLogo from "../../images/facebook.svg";
 export default function Login() {
   return (
     <div className="Login">
-      <img src={logo} className="logo" alt="logo" />
+      <img src={logo} className="logo animate-spin" alt="logo" />
       <div className="title">
-        <p>Sign in</p>
+
       </div>
       <div className="username">
         <input autoFocus={true} maxLength="100" placeholder="Username" />
