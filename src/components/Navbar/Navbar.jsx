@@ -8,8 +8,8 @@ export default function Navbar() {
                 <div className="flex items-center flex-shrink-0 mr-6">
                     <img class="fill-current h-8 w-8 mr-4" src={logo} alt="logo" />
                 </div>
-                <div className="flex items-center w-auto text-base font-semibold flex-grow">
-                    <div className="flex items-center">
+                <div className="flex items-center w-auto text-base font-semibold text-gray flex-grow">
+                    <div className="flex items-center ">
                         <a href="/profile" className="inline-block mr-6 hover:text-blue-darker text-blue">Profile</a>
                         <a href="/profile" className="inline-block mr-6 hover:text-blue-darker">Connect</a>
                         <a href="/profile" className="inline-block mr-6 hover:text-blue-darker">Settings</a>
