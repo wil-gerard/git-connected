@@ -5,27 +5,28 @@ module.exports = {
   darkMode: false, // or 'media' or 'class'
   theme: {
     colors: {
-      gray: colors.coolGray,
-      blue: colors.lightBlue,
-      red: colors.rose,
-      pink: colors.fuchsia,
+      transparent: 'transparent',
+      current: 'currentColor',
+      black: '#001B29',
+      blue: {
+        DEFAULT: '#74C6E2',
+        darker: '#2487A8',
+        darkest: '#00253A',
+      },
+      red: '#FF3A20',
+      green: '#26C485',
     },
     fontFamily: {
       sans: ['Inter', 'sans-serif'],
     },
     extend: {
-      spacing: {
-        '128': '32rem',
-        '144': '36rem',
-      },
-      borderRadius: {
-        '4xl': '2rem',
-      }
     }
 
   },
   variants: {
-    extend: {},
+    extend: {
+      textColor: ['active'],
+    },
   },
   plugins: [],
 }
