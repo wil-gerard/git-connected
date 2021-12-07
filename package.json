@@ -5,6 +5,8 @@
   "main": "server/startServer.js",
   "proxy": "http://localhost:8000",
   "dependencies": {
+    "@craco/craco": "^6.4.0",
+    "@tailwindcss/forms": "^0.3.4",
     "@testing-library/jest-dom": "^5.15.0",
     "@testing-library/react": "^11.1.0",
     "@testing-library/user-event": "^12.1.10",
@@ -24,9 +26,9 @@
     "start": "node server/startServer.js",
     "build": "run-s react:build",
     "devstart": "nodemon server/startServer.js",
-    "react:start": "react-scripts start",
-    "react:build": "react-scripts build",
-    "react:test": "react-scripts test",
+    "react:start": "craco start",
+    "react:build": "craco build",
+    "react:test": "craco test",
     "test": "jest --env=node"
   },
   "browserslist": {
@@ -42,7 +44,10 @@
     ]
   },
   "devDependencies": {
+    "autoprefixer": "^9.8.8",
     "axios": "^0.19.2",
-    "nodemon": "^2.0.14"
+    "nodemon": "^2.0.15",
+    "postcss": "^7.0.39",
+    "tailwindcss": "npm:@tailwindcss/postcss7-compat@^2.2.17"
   }
 }
