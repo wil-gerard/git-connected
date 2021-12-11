@@ -1,22 +1,49 @@
 // import logo from "../images/logo.svg";
-import TwitterLogo from "../images/twitter.svg";
-// import GoogleLogo from "../images/google.svg";
-// import FacebookLogo from "../images/facebook.svg";
+import tw from "twin.macro";
+import styled from "styled-components";
+import { ReactComponent as TwitterIcon } from "../images/twitter-icon.svg";
+import { ReactComponent as GitHubIcon } from "../images/github-icon.svg";
+import { ReactComponent as LinkedInIcon } from "../images/linkedin-icon.svg";
+
+
+const Container = styled.div`
+  ${tw`flex justify-center items-center h-screen`}
+`
+
+const LoginContainer = styled.div`
+  ${tw`max-w-sm rounded shadow-lg bg-secondary-800`}
+`
+
+const ButtonContainer = styled.div`
+  ${tw`px-10 py-5 flex-col flex`}
+`
+
+const LoginButton = styled.a`
+  ${tw`cursor-pointer p-2 rounded-full bg-primary-500 text-gray-100 hocus:bg-primary-700 transition duration-300 m-2`}
+  svg {
+    ${tw`inline-block w-6 h-6 mr-2`}
+  }
+`;
 
 export default function Login() {
   return (
-    <div className="flex justify-center items-center h-screen text-gray">
-      <div className="max-w-sm rounded shadow-lg">
-        <div className="px-6 py-4 flex-col flex">
-          <button className="rounded-lg text-sm px-5 py-2.5 text-left mr-3 mb-3 bg-blue-darker hover:bg-blue-darkerer ring-gray">
-            
+    <Container>
+      <LoginContainer>
+        <ButtonContainer>
+          <LoginButton>
+            <TwitterIcon />
             Sign in with Twitter
-            </button>
-            <TwitterLogo/>
-          <button className="rounded-lg text-sm px-5 py-2.5 text-left mr-3 mb-3 border-blue-darkest hover:bg-blue-darker focus:ring-blue-darker">Sign in with LinkedIn</button>
-          <button className="rounded-lg text-sm px-5 py-2.5 text-left mr-3 mb-3 border-blue-darkest hover:bg-blue-darker focus:ring-blue-darker">Sign in with GitHub</button>
-        </div>
-      </div>
-    </div>
+          </LoginButton>
+          <LoginButton>
+            <LinkedInIcon />
+            Sign in with LinkedIn
+          </LoginButton>
+          <LoginButton>
+            <GitHubIcon />
+            Sign in with GitHub
+          </LoginButton>
+        </ButtonContainer>
+      </LoginContainer>
+    </Container >
   );
 }

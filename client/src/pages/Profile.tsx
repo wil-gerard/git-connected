@@ -1,8 +1,8 @@
 import Navbar from '../components/Navbar'
 import Footer from '../components/Footer'
-import twitterLogo from "../images/twitter.svg";
-import googleLogo from "../images/google.svg";
-import facebookLogo from "../images/facebook.svg";
+import TwitterIcon from "../images/twitter-icon.svg";
+import GitHubIcon from "../images/github-icon.svg";
+import LinkedInIcon from "../images/linkedin-icon.svg";
 
 let username = "Bob"
 
@@ -25,9 +25,9 @@ export default function Profile() {
                 <div className="mb-12">
                     <h2 className="font-bold text-lg mb-2">Connect Socials</h2>
                     <div>
-                        <img src={twitterLogo} className="mb-4" alt="twitter logo" />
-                        <img src={googleLogo} className="mb-4" alt="google logo" />
-                        <img src={facebookLogo} className="mb-4" alt="facebook logo" />
+                        <img src={TwitterIcon} className="mb-4" alt="twitter logo" />
+                        <img src={GitHubIcon} className="mb-4" alt="github logo" />
+                        <img src={LinkedInIcon} className="mb-4" alt="linkedin logo" />
                     </div>
                 </div>
 
