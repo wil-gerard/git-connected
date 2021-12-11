@@ -1,4 +1,7 @@
 module.exports = {
+  content: [
+    "./src/**/*.{js,jsx,ts,tsx}",
+  ],
   purge: ['./src/**/*.{js,jsx,ts,tsx}', './public/index.html'],
   darkMode: false, // or 'media' or 'class'
   theme: {
@@ -11,6 +14,7 @@ module.exports = {
         light: '#9AD6EA',
         DEFAULT: '#74C6E2',
         darker: '#2487A8',
+        darkerer: '#1D6C87',
         darkest: '#00253A',
       },
       red: '#FF3A20',
@@ -28,7 +32,4 @@ module.exports = {
       textColor: ['active'],
     },
   },
-  plugins: [
-    require('@tailwindcss/forms'),
-  ],
 }

@@ -1,4 +1,4 @@
-import logo from "../../images/logo.svg";
+import logo from "../images/logo.svg";
 
 export default function Navbar() {
     return (
@@ -6,7 +6,7 @@ export default function Navbar() {
             <div className="bg-gradient-to-r from-green via-blue to-red p-0.5"></div>
             <nav className="flex items-center justify-between flex-wrap bg-blue-darkest p-6 lg:p-10 border-blue-darker">
                 <div className="flex items-center flex-shrink-0 mr-6">
-                    <img class="fill-current h-8 w-8 mr-4" src={logo} alt="logo" />
+                    <img className="fill-current h-8 w-8 mr-4" src={logo} alt="logo" />
                 </div>
                 <div className="flex items-center w-auto text-base font-semibold text-gray flex-grow">
                     <div className="flex items-center ">
