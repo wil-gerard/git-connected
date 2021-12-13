@@ -5,4 +5,5 @@
 
 html {
   background-color: #16253b;
+  @apply font-display;
 }

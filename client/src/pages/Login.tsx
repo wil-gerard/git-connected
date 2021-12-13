@@ -19,7 +19,7 @@ const ButtonContainer = styled.div`
 `
 
 const LoginButton = styled.a`
-  ${tw`cursor-pointer py-2 pl-2 pr-8 rounded-full bg-primary-600 text-gray-100 hocus:bg-primary-800 transition duration-300 m-2`}
+  ${tw`cursor-pointer py-2 pl-2 pr-8 rounded-full bg-primary-600 text-gray-100 hocus:bg-primary-800 transition duration-300 m-2 text-sm`}
   svg {
     ${tw`inline-block w-8 h-8 mx-2`}
   }
