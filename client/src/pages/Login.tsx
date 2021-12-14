@@ -33,7 +33,7 @@ export default function Login() {
   }
 
   const githubLogin = () => {
-    // window.open("http://localhost:4000/auth/github", "_self")
+    window.open("http://localhost:4000/auth/github", "_self")
   }
 
   const linkedinLogin = () => {
@@ -48,12 +48,12 @@ export default function Login() {
             <TwitterIcon />
             Sign in with Twitter
           </LoginButton>
-          <LoginButton>
-            <LinkedInIcon onClick={linkedinLogin}/>
+          <LoginButton onClick={linkedinLogin}>
+            <LinkedInIcon />
             Sign in with LinkedIn
           </LoginButton>
-          <LoginButton>
-            <GitHubIcon onClick={githubLogin}/>
+          <LoginButton onClick={githubLogin}>
+            <GitHubIcon />
             Sign in with GitHub
           </LoginButton>
         </ButtonContainer>
