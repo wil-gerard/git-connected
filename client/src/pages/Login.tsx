@@ -27,11 +27,16 @@ const LoginButton = styled.a`
 `;
 
 export default function Login() {
+
+  const twitterLogin = () => {
+    window.open("http://localhost:4000/auth/twitter", "_self")
+  }
+
   return (
     <Container>
       <LoginContainer>
         <ButtonContainer>
-          <LoginButton>
+          <LoginButton onClick={twitterLogin}>
             <TwitterIcon />
             Sign in with Twitter
           </LoginButton>

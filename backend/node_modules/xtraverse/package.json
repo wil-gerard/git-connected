@@ -1,0 +1,54 @@
+{
+  "name": "xtraverse",
+  "version": "0.1.0",
+  "description": "Wrapper for simplifying XML traversal.",
+  "keywords": [
+    "xml",
+    "dom",
+    "traversal",
+    "builder",
+    "jquery"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/jaredhanson/node-xtraverse.git"
+  },
+  "bugs": {
+    "url": "http://github.com/jaredhanson/node-xtraverse/issues"
+  },
+  "author": {
+    "name": "Jared Hanson",
+    "email": "jaredhanson@gmail.com",
+    "url": "http://www.jaredhanson.net/"
+  },
+  "licenses": [
+    {
+      "type": "MIT",
+      "url": "http://www.opensource.org/licenses/MIT"
+    }
+  ],
+  "main": "./lib",
+  "dependencies": {
+    "xmldom": "0.1.x"
+  },
+  "devDependencies": {
+    "mocha": "1.x.x",
+    "chai": "1.x.x"
+  },
+  "engines": {
+    "node": ">= 0.4.0"
+  },
+  "scripts": {
+    "test": "node_modules/.bin/mocha --reporter spec --require test/bootstrap/node test/*.test.js"
+  },
+  "testling": {
+    "browsers": [
+      "chrome/latest"
+    ],
+    "harness" : "mocha",
+    "files": [
+      "test/bootstrap/testling.js",
+      "test/*.test.js"
+    ]
+  }
+}

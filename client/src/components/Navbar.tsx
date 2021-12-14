@@ -18,7 +18,7 @@ export default function Navbar() {
         <>
             <GradientBar />
             <NavContainer>
-                <NavLink to="/">
+                <NavLink to="/home">
                     <Logo />
                 </NavLink>
                 <NavLink to="/profile">Profile</NavLink>
