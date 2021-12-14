@@ -4,6 +4,9 @@ import dotenv from "dotenv"
 import cors from "cors"
 import session from "express-session"
 import passport from "passport"
+import User from "./User"
+import { IUser } from "./types"
+
 
 const TwitterStrategy = require("passport-twitter").Strategy
 const GitHubStrategy = require("passport-github").Strategy
@@ -44,9 +47,34 @@ passport.deserializeUser((user, done) => {
     return done(null, user)
 })
 
-// First Name
-// Last Name
-// ID of OAuth
+// GitHub Passport Strategy
+
+passport.use(new GitHubStrategy({
+    clientID: `${process.env.GITHUB_CLIENT_ID}`,
+    clientSecret: `${process.env.GITHUB_CLIENT_SECRET}`,
+    callbackURL: "http://localhost:4000/auth/github/callback"
+},
+    function (accessToken: any, refreshToken: any, profile: any, cb: any) {
+        User.findOne({ githubId: profile.id }, async (err: Error, doc: IUser) => {
+            if (err) {
+                return cb(err, null)
+            }
+
+            if (!doc) {
+                const newUser = new User({
+                    githubId: profile.id,
+                    username: profile.name.givenName
+                })
+
+                await newUser.save()
+            }
+        })
+
+        cb(null, profile)
+    }
+))
+
+// Twitter Passport Strategy
 
 passport.use(new TwitterStrategy({
     consumerKey: `${process.env.TWITTER_CLIENT_ID}`,
@@ -58,18 +86,6 @@ passport.use(new TwitterStrategy({
         cb(null, profile)
     }
 ))
-
-passport.use(new GitHubStrategy({
-    clientID: `${process.env.GITHUB_CLIENT_ID}`,
-    clientSecret: `${process.env.GITHUB_CLIENT_SECRET}`,
-    callbackURL: "http://localhost:4000/auth/github/callback"
-},
-    function (accessToken: any, refreshToken: any, profile: any, cb: any) {
-        console.log(profile)
-        cb(null, profile)
-    }
-));
-
 
 app.get('/auth/twitter',
     passport.authenticate('twitter'));
