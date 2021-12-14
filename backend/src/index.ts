@@ -19,7 +19,7 @@ mongoose.connect(`${process.env.START_MONGODB}${process.env.MONGODB_USERNAME}:${
 // Middleware
 
 app.use(express.json())
-app.use(cors({ origin: "https://localhost:3000/login", credentials: true }))
+app.use(cors({ origin: "https://localhost:3000", credentials: true }))
 
 app.set("trust proxy", 1)
 
@@ -42,22 +42,17 @@ passport.deserializeUser((user, done) => {
     return done(null, user)
 })
 
-app.get("/", (req, res) => {
-    res.send("hello world!")
-})
 
-app.listen(4000, () => {
-    console.log("server started")
-})
+
 
 passport.use(new TwitterStrategy({
     consumerKey: `${process.env.TWITTER_API_KEY}`,
     consumerSecret: `${process.env.TWITTER_API_KEY_SECRET}`,
     callbackURL: "http://localhost:4000/auth/twitter/callback"
 },
-    function (accessToken: any, refreshToken: any, profile: any, cb: any) {
-        console.log(profile)
-        cb(null, profile)
+    function (accessToken: any, refreshToken: any, user: any, cb: any) {
+        console.log(user)
+        cb(null, user)
     }));
 
 
@@ -65,8 +60,21 @@ app.get('/auth/twitter',
     passport.authenticate('twitter'));
 
 app.get('/auth/twitter/callback',
-    passport.authenticate('twitter', { failureRedirect: 'http://localhost:3000/login' }),
+    passport.authenticate('twitter', { failureRedirect: 'http://localhost:3000' }),
     function (req, res) {
         // Successful authentication, redirect home.
         res.redirect('http://localhost:3000/home');
     });
+
+
+app.get("/", (req, res) => {
+    res.send("hello world!")
+})
+
+app.get("/getuser", (req, res) => {
+    res.send(req.user)
+})
+
+app.listen(4000, () => {
+    console.log("server started")
+})
