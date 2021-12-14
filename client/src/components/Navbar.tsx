@@ -1,21 +1,30 @@
-import logo from "../images/logo.svg";
+import React from 'react'
+import tw from "twin.macro"
+import styled from "styled-components"
+import { ReactComponent as LogoBase } from "../assets/logo.svg"
+import { GradientBar } from "./GradiantBar"
+import { Link } from 'react-router-dom'
+
+const NavContainer = styled.div`
+    ${tw`flex bg-secondary-700 p-6 lg:p-10 w-full`}
+`
+
+const Logo = tw(LogoBase)`mr-6 h-8 w-8`
+
+const NavLink = tw(Link)`cursor-pointer flex items-center mr-6 hover:text-primary-500 transition duration-300 text-base font-semibold text-gray-300`
 
 export default function Navbar() {
     return (
         <>
-            <div className="bg-gradient-to-r from-green via-blue to-red p-0.5"></div>
-            <nav className="flex items-center justify-between flex-wrap bg-blue-darkest p-6 lg:p-10 border-blue-darker">
-                <div className="flex items-center flex-shrink-0 mr-6">
-                    <img className="fill-current h-8 w-8 mr-4" src={logo} alt="logo" />
-                </div>
-                <div className="flex items-center w-auto text-base font-semibold text-gray flex-grow">
-                    <div className="flex items-center ">
-                        <a href="/profile" className="inline-block mr-6 hover:text-blue-darker text-blue">Profile</a>
-                        <a href="/profile" className="inline-block mr-6 hover:text-blue-darker">Connect</a>
-                        <a href="/profile" className="inline-block mr-6 hover:text-blue-darker">Settings</a>
-                    </div>
-                </div>
-            </nav>
+            <GradientBar />
+            <NavContainer>
+                <NavLink to="/">
+                    <Logo />
+                </NavLink>
+                <NavLink to="/profile">Profile</NavLink>
+                <NavLink to="/home">Connect</NavLink>
+                <NavLink to="/login">Logout</NavLink>
+            </NavContainer>
         </>
     )
 }

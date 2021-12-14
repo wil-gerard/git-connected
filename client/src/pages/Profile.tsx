@@ -1,16 +1,30 @@
+import tw from "twin.macro";
+import styled from "styled-components";
+import { css } from "styled-components/macro"; //eslint-disable-line
 import Navbar from '../components/Navbar'
 import Footer from '../components/Footer'
-import TwitterIcon from "../images/twitter-icon.svg";
-import GitHubIcon from "../images/github-icon.svg";
-import LinkedInIcon from "../images/linkedin-icon.svg";
+import { ReactComponent as TwitterIcon } from "../assets/twitter-icon.svg";
+import { ReactComponent as GitHubIcon } from "../assets/github-icon.svg";
+import { ReactComponent as LinkedInIcon } from "../assets/linkedin-icon.svg";
 
 let username = "Bob"
+
+const ButtonContainer = styled.div`
+  ${tw`flex-col flex w-3/12`}
+`
+
+const ConnectButton = styled.a`
+  ${tw`cursor-pointer py-2 pl-2 pr-8 rounded-full bg-primary-600 text-gray-100 hocus:bg-primary-800 transition duration-300 m-2 text-sm`}
+  svg {
+    ${tw`inline-block w-8 h-8 mx-2`}
+  }
+`;
 
 export default function Profile() {
     return (
         <>
             <Navbar />
-            <div className="flex-col px-6 md:ml-14 lg:ml-56 container mx-auto text-gray">
+            <div className="flex-col px-6  md:ml-auto lg:ml-8 xl:ml-64 container text-gray-100">
 
                 <div className="mb-6">
                     <h1 className="flex items-center text-2xl mb-4 font-bold">Hi, {username}!</h1>
@@ -24,11 +38,20 @@ export default function Profile() {
 
                 <div className="mb-12">
                     <h2 className="font-bold text-lg mb-2">Connect Socials</h2>
-                    <div>
-                        <img src={TwitterIcon} className="mb-4" alt="twitter logo" />
-                        <img src={GitHubIcon} className="mb-4" alt="github logo" />
-                        <img src={LinkedInIcon} className="mb-4" alt="linkedin logo" />
-                    </div>
+                    <ButtonContainer>
+                        <ConnectButton>
+                            <TwitterIcon />
+                            Connect your Twitter
+                        </ConnectButton>
+                        <ConnectButton>
+                            <GitHubIcon />
+                            Connect your GitHub
+                        </ConnectButton>
+                        <ConnectButton>
+                            <LinkedInIcon />
+                            Connect your LinkedIn
+                        </ConnectButton>
+                    </ButtonContainer>
                 </div>
 
             </div>

@@ -1,9 +1,10 @@
 // import logo from "../images/logo.svg";
 import tw from "twin.macro";
 import styled from "styled-components";
-import { ReactComponent as TwitterIcon } from "../images/twitter-icon.svg";
-import { ReactComponent as GitHubIcon } from "../images/github-icon.svg";
-import { ReactComponent as LinkedInIcon } from "../images/linkedin-icon.svg";
+import { css } from "styled-components/macro"; //eslint-disable-line
+import { ReactComponent as TwitterIcon } from "../assets/twitter-icon.svg";
+import { ReactComponent as GitHubIcon } from "../assets/github-icon.svg";
+import { ReactComponent as LinkedInIcon } from "../assets/linkedin-icon.svg";
 
 
 const Container = styled.div`
