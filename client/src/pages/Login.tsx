@@ -32,6 +32,14 @@ export default function Login() {
     window.open("http://localhost:4000/auth/twitter", "_self")
   }
 
+  const githubLogin = () => {
+    // window.open("http://localhost:4000/auth/github", "_self")
+  }
+
+  const linkedinLogin = () => {
+    // window.open("http://localhost:4000/auth/linkedin", "_self")
+  }
+
   return (
     <Container>
       <LoginContainer>
@@ -41,11 +49,11 @@ export default function Login() {
             Sign in with Twitter
           </LoginButton>
           <LoginButton>
-            <LinkedInIcon />
+            <LinkedInIcon onClick={linkedinLogin}/>
             Sign in with LinkedIn
           </LoginButton>
           <LoginButton>
-            <GitHubIcon />
+            <GitHubIcon onClick={githubLogin}/>
             Sign in with GitHub
           </LoginButton>
         </ButtonContainer>

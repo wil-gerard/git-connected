@@ -42,8 +42,9 @@ passport.deserializeUser((user, done) => {
     return done(null, user)
 })
 
-
-
+// First Name
+// Last Name
+// ID of OAuth
 
 passport.use(new TwitterStrategy({
     consumerKey: `${process.env.TWITTER_API_KEY}`,

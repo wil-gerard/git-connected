@@ -1,15 +1,16 @@
 import React, { createContext, useEffect, useState } from 'react'
 import Axios, { AxiosResponse } from 'axios'
 
-const myContext = createContext({});
+export const myContext = createContext({});
 
 export default function Context(props: any) {
 
     const [userObject, setUserObject] = useState<any>()
 
     useEffect(() => {
-        Axios.get("http://localhost4000/getuser").then((res: AxiosResponse) => {
+        Axios.get("http://localhost4000/getuser", { withCredentials: true }).then((res: AxiosResponse) => {
             if (res.data) {
+                console.log(res)
                 setUserObject(res.data)
             }
         })
