@@ -23,7 +23,7 @@ export default function Navbar() {
                 </NavLink>
                 <NavLink to="/profile">Profile</NavLink>
                 <NavLink to="/home">Connect</NavLink>
-                <NavLink to="/login">Logout</NavLink>
+                <NavLink to="/">Logout</NavLink>
             </NavContainer>
         </>
     )

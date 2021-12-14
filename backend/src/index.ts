@@ -9,7 +9,7 @@ import { IUser } from "./types"
 
 
 const TwitterStrategy = require("passport-twitter").Strategy
-const GitHubStrategy = require("passport-github").Strategy
+const GitHubStrategy = require("passport-github2").Strategy
 
 dotenv.config()
 
@@ -24,7 +24,7 @@ mongoose.connect(`${process.env.START_MONGODB}${process.env.MONGODB_USERNAME}:${
 // Middleware
 
 app.use(express.json())
-app.use(cors({ origin: "https://localhost:3000", credentials: true }))
+app.use(cors({ origin: "http://localhost:3000", credentials: true }))
 
 app.set("trust proxy", 1)
 
@@ -39,11 +39,11 @@ app.use(
 app.use(passport.initialize())
 app.use(passport.session())
 
-passport.serializeUser((user, done) => {
+passport.serializeUser((user: any, done: any) => {
     return done(null, user)
 })
 
-passport.deserializeUser((user, done) => {
+passport.deserializeUser((user: any, done: any) => {
     return done(null, user)
 })
 
@@ -55,6 +55,7 @@ passport.use(new GitHubStrategy({
     callbackURL: "http://localhost:4000/auth/github/callback"
 },
     function (accessToken: any, refreshToken: any, profile: any, cb: any) {
+        console.log(profile)
         User.findOne({ githubId: profile.id }, async (err: Error, doc: IUser) => {
             if (err) {
                 return cb(err, null)
@@ -63,7 +64,7 @@ passport.use(new GitHubStrategy({
             if (!doc) {
                 const newUser = new User({
                     githubId: profile.id,
-                    username: profile.name.givenName
+                    username: profile.displayName
                 })
 
                 await newUser.save()

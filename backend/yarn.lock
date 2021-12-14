@@ -121,10 +121,10 @@
   dependencies:
     "@types/node" "*"
 
-"@types/passport-github@^1.1.6":
-  version "1.1.6"
-  resolved "https://registry.yarnpkg.com/@types/passport-github/-/passport-github-1.1.6.tgz#57dda1df256307688124fff6f9d5d087eaca6182"
-  integrity sha512-3ar0TARm9Y7rQ6KIOH5N7tYneKzz6JQdK1pQMCYLM3EnNsEKWxGNiibvKe9B8tq0OJTxDVoRxUx4o4YA26fDzw==
+"@types/passport-github2@^1.2.5":
+  version "1.2.5"
+  resolved "https://registry.yarnpkg.com/@types/passport-github2/-/passport-github2-1.2.5.tgz#79064e213ff33ca0a9d21af3da09a3230fac8099"
+  integrity sha512-+WLyrd8JPsCxroK34EjegR0j3FMxp6wqB9cw/sRCFkWT9qic1dymAn021gr336EpyjzdhjUd2KKrqyxvdFSvOA==
   dependencies:
     "@types/express" "*"
     "@types/passport" "*"
@@ -1131,10 +1131,10 @@ parseurl@~1.3.3:
   resolved "https://registry.yarnpkg.com/parseurl/-/parseurl-1.3.3.tgz#9da19e7bee8d12dff0513ed5b76957793bc2e8d4"
   integrity sha512-CiyeOxFT/JZyN5m0z9PfXw4SCBJ6Sygz1Dpl0wqjlhDEGGBP1GnsUVEL0p63hoG1fcj3fHynXi9NYO4nWOL+qQ==
 
-passport-github@^1.1.0:
-  version "1.1.0"
-  resolved "https://registry.yarnpkg.com/passport-github/-/passport-github-1.1.0.tgz#8ce1e3fcd61ad7578eb1df595839e4aea12355d4"
-  integrity sha1-jOHj/NYa11eOsd9ZWDnkrqEjVdQ=
+passport-github2@^0.1.12:
+  version "0.1.12"
+  resolved "https://registry.yarnpkg.com/passport-github2/-/passport-github2-0.1.12.tgz#a72ebff4fa52a35bc2c71122dcf470d1116f772c"
+  integrity sha512-3nPUCc7ttF/3HSP/k9sAXjz3SkGv5Nki84I05kSQPo01Jqq1NzJACgMblCK0fGcv9pKCG/KXU3AJRDGLqHLoIw==
   dependencies:
     passport-oauth2 "1.x.x"
 

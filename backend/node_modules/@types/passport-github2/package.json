@@ -1,0 +1,44 @@
+{
+    "name": "@types/passport-github2",
+    "version": "1.2.5",
+    "description": "TypeScript definitions for passport-github2",
+    "homepage": "https://github.com/DefinitelyTyped/DefinitelyTyped/tree/master/types/passport-github2",
+    "license": "MIT",
+    "contributors": [
+        {
+            "name": "Yasunori Ohoka",
+            "url": "https://github.com/yasupeke",
+            "githubUsername": "yasupeke"
+        },
+        {
+            "name": "Maarten Mulders",
+            "url": "https://github.com/mthmulders",
+            "githubUsername": "mthmulders"
+        },
+        {
+            "name": "Christoph Werner",
+            "url": "https://github.com/codepunkt",
+            "githubUsername": "codepunkt"
+        },
+        {
+            "name": "Ivan Fernandes",
+            "url": "https://github.com/ivan94",
+            "githubUsername": "ivan94"
+        }
+    ],
+    "main": "",
+    "types": "index.d.ts",
+    "repository": {
+        "type": "git",
+        "url": "https://github.com/DefinitelyTyped/DefinitelyTyped.git",
+        "directory": "types/passport-github2"
+    },
+    "scripts": {},
+    "dependencies": {
+        "@types/express": "*",
+        "@types/passport": "*",
+        "@types/passport-oauth2": "*"
+    },
+    "typesPublisherContentHash": "8cc95d948ab56bea39d9f59f07a38fa9df0637f8890daeccfc9f01d8ff955aa4",
+    "typeScriptVersion": "3.6"
+}
