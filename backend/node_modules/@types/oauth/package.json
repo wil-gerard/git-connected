@@ -1,0 +1,30 @@
+{
+    "name": "@types/oauth",
+    "version": "0.9.1",
+    "description": "TypeScript definitions for oauth",
+    "license": "MIT",
+    "contributors": [
+        {
+            "name": "nonAlgebraic",
+            "url": "https://github.com/nonAlgebraic",
+            "githubUsername": "nonAlgebraic"
+        },
+        {
+            "name": "Eduardo AC",
+            "url": "https://github.com/EduardoAC",
+            "githubUsername": "EduardoAC"
+        }
+    ],
+    "main": "",
+    "types": "",
+    "repository": {
+        "type": "git",
+        "url": "https://github.com/DefinitelyTyped/DefinitelyTyped.git"
+    },
+    "scripts": {},
+    "dependencies": {
+        "@types/node": "*"
+    },
+    "typesPublisherContentHash": "e55c048157d9189d57ef032778b3177d108162b91527f6999341418cf542d255",
+    "typeScriptVersion": "2.0"
+}

@@ -4,7 +4,9 @@ import dotenv from "dotenv"
 import cors from "cors"
 import session from "express-session"
 import passport from "passport"
+
 const TwitterStrategy = require("passport-twitter").Strategy
+const GitHubStrategy = require("passport-github").Strategy
 
 dotenv.config()
 
@@ -47,26 +49,46 @@ passport.deserializeUser((user, done) => {
 // ID of OAuth
 
 passport.use(new TwitterStrategy({
-    consumerKey: `${process.env.TWITTER_API_KEY}`,
-    consumerSecret: `${process.env.TWITTER_API_KEY_SECRET}`,
+    consumerKey: `${process.env.TWITTER_CLIENT_ID}`,
+    consumerSecret: `${process.env.TWITTER_CLIENT_SECRET}`,
     callbackURL: "http://localhost:4000/auth/twitter/callback"
 },
-    function (accessToken: any, refreshToken: any, user: any, cb: any) {
-        console.log(user)
-        cb(null, user)
-    }));
+    function (accessToken: any, refreshToken: any, profile: any, cb: any) {
+        console.log(profile)
+        cb(null, profile)
+    }
+))
+
+passport.use(new GitHubStrategy({
+    clientID: `${process.env.GITHUB_CLIENT_ID}`,
+    clientSecret: `${process.env.GITHUB_CLIENT_SECRET}`,
+    callbackURL: "http://localhost:4000/auth/github/callback"
+},
+    function (accessToken: any, refreshToken: any, profile: any, cb: any) {
+        console.log(profile)
+        cb(null, profile)
+    }
+));
 
 
 app.get('/auth/twitter',
     passport.authenticate('twitter'));
 
 app.get('/auth/twitter/callback',
-    passport.authenticate('twitter', { failureRedirect: 'http://localhost:3000' }),
+    passport.authenticate('twitter', { failureRedirect: '/' }),
     function (req, res) {
         // Successful authentication, redirect home.
         res.redirect('http://localhost:3000/home');
     });
 
+app.get('/auth/github',
+    passport.authenticate('github'));
+
+app.get('/auth/github/callback',
+    passport.authenticate('github', { failureRedirect: '/' }),
+    function (req, res) {
+        res.redirect('http://localhost:3000/home');
+    });
 
 app.get("/", (req, res) => {
     res.send("hello world!")
