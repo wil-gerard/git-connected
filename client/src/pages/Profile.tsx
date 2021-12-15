@@ -47,7 +47,7 @@ export default function Profile() {
             <Navbar />
             <Container>
                 <Header>Hi, {user.username}!</Header>
-                <ProfilePic src="https://images.unsplash.com/photo-1491528323818-fdd1faba62cc?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80" alt="g2k logo" />
+                <ProfilePic src={user.photos[0].value} alt="profile photo" />
                 <Subhead>About</Subhead>
                 <textarea name="" id="" className="form-textarea text-black w-80 p-1" placeholder="All about you..." />
                 <Subhead>Connect Socials</Subhead>
