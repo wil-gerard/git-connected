@@ -1,0 +1,17 @@
+{
+    "compilerOptions": {
+        "esModuleInterop": true,
+        "allowSyntheticDefaultImports": true,
+        "baseUrl": ".",
+        "outDir": "build/dist",
+        "module": "commonjs",
+        "target": "es5",
+        "lib": ["es6", "dom"],
+        "sourceMap": true,
+        "allowJs": true,
+        "skipLibCheck": true,
+        "moduleResolution": "node",
+        "rootDir": "src",
+        "noImplicitAny": true,
+    },
+}
