@@ -6,6 +6,7 @@ import { css } from "styled-components/macro"; //eslint-disable-line
 import { ReactComponent as TwitterIcon } from "../assets/twitter-icon.svg";
 import { ReactComponent as GitHubIcon } from "../assets/github-icon.svg";
 import { ReactComponent as LinkedInIcon } from "../assets/linkedin-icon.svg";
+
 import { myContext } from "../hooks/Context"
 import React, { useContext } from "react";
 import { IUser } from "../types/maintypes"
@@ -45,7 +46,7 @@ const CardMetaFeature = styled.div`
 // const CardAction = tw(PrimaryButtonBase)`w-full mt-6`;
 
 export default function Home() {
-  const context = useContext(myContext) as IUser
+  const user = useContext(myContext) as IUser
   const cards = [
     {
       imageSrc:
@@ -111,6 +112,10 @@ export default function Home() {
       bio: "GitHub followers please!",
     },
   ];
+  console.log(user)
+  if (!user) {
+    return <p>loading...</p>
+  } 
   return (
     <>
       <Navbar />
@@ -124,7 +129,7 @@ export default function Home() {
                   <CardImage />
                   <CardText>
                     <CardHeader>
-                      <CardName>{context.username}</CardName>
+                      <CardName>{user.username}</CardName>
                       <CardTech>{card.tech}</CardTech>
                     </CardHeader>
                     <CardBio>{card.bio}</CardBio>
