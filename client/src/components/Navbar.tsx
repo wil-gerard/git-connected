@@ -7,7 +7,7 @@ import { Link } from 'react-router-dom'
 import axios, { AxiosResponse } from 'axios'
 
 const NavContainer = styled.div`
-    ${tw`flex bg-secondary-700 p-6 lg:p-10 w-full`}
+    ${tw`flex bg-secondary-700 p-6 lg:p-10 w-full mb-6 lg:mb-12`}
 `
 
 const Logo = tw(LogoBase)`mr-6 h-8 w-8`
