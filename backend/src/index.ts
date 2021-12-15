@@ -5,10 +5,10 @@ import cors from "cors"
 import session from "express-session"
 import passport from "passport"
 import User from "./User"
-import { IUser } from "./types"
+import { IMongoDBUser } from "./types"
 
 
-const TwitterStrategy = require("passport-twitter").Strategy
+// const TwitterStrategy = require("passport-twitter").Strategy
 const GitHubStrategy = require("passport-github2").Strategy
 
 dotenv.config()
@@ -39,12 +39,16 @@ app.use(
 app.use(passport.initialize())
 app.use(passport.session())
 
-passport.serializeUser((user: any, done: any) => {
-    return done(null, user)
+passport.serializeUser((user: IMongoDBUser, done: any) => {
+    return done(null, user._id)
 })
 
-passport.deserializeUser((user: any, done: any) => {
-    return done(null, user)
+passport.deserializeUser((id: string, done: any) => {
+
+    User.findById(id, (err: Error, doc: IMongoDBUser) => {
+
+        return done(null, doc)
+    })
 })
 
 // GitHub Passport Strategy
@@ -54,9 +58,11 @@ passport.use(new GitHubStrategy({
     clientSecret: `${process.env.GITHUB_CLIENT_SECRET}`,
     callbackURL: "http://localhost:4000/auth/github/callback"
 },
-    function (accessToken: any, refreshToken: any, profile: any, cb: any) {
+    function (_: any, __: any, profile: any, cb: any) {
         console.log(profile)
-        User.findOne({ githubId: profile.id }, async (err: Error, doc: IUser) => {
+
+        User.findOne({ githubId: profile.id }, async (err: Error, doc: IMongoDBUser) => {
+
             if (err) {
                 return cb(err, null)
             }
@@ -68,34 +74,35 @@ passport.use(new GitHubStrategy({
                 })
 
                 await newUser.save()
+                cb(null, newUser)
             }
+            cb(null, doc)
         })
 
-        cb(null, profile)
     }
 ))
 
 // Twitter Passport Strategy
 
-passport.use(new TwitterStrategy({
-    consumerKey: `${process.env.TWITTER_CLIENT_ID}`,
-    consumerSecret: `${process.env.TWITTER_CLIENT_SECRET}`,
-    callbackURL: "http://localhost:4000/auth/twitter/callback"
-},
-    function (accessToken: any, refreshToken: any, profile: any, cb: any) {
-        console.log(profile)
-        cb(null, profile)
-    }
-))
+// passport.use(new TwitterStrategy({
+//     consumerKey: `${process.env.TWITTER_CLIENT_ID}`,
+//     consumerSecret: `${process.env.TWITTER_CLIENT_SECRET}`,
+//     callbackURL: "http://localhost:4000/auth/twitter/callback"
+// },
+//     function (accessToken: any, refreshToken: any, profile: any, cb: any) {
+//         console.log(profile)
+//         cb(null, profile)
+//     }
+// ))
 
-app.get('/auth/twitter',
-    passport.authenticate('twitter'));
+// app.get('/auth/twitter',
+//     passport.authenticate('twitter'));
 
-app.get('/auth/twitter/callback',
-    passport.authenticate('twitter', { failureRedirect: '/' }),
-    function (req, res) {
-        res.redirect('http://localhost:3000/home');
-    });
+// app.get('/auth/twitter/callback',
+//     passport.authenticate('twitter', { failureRedirect: '/' }),
+//     function (req, res) {
+//         res.redirect('http://localhost:3000/home');
+//     });
 
 app.get('/auth/github',
     passport.authenticate('github'));
@@ -106,12 +113,15 @@ app.get('/auth/github/callback',
         res.redirect('http://localhost:3000/home');
     });
 
-app.get("/", (req, res) => {
-    res.send("hello world!")
-})
-
 app.get("/getuser", (req, res) => {
     res.send(req.user)
+})
+
+app.get("/auth/logout", (req, res) => {
+    if (req.user) {
+        req.logout();
+        res.send("done");
+    }
 })
 
 app.listen(4000, () => {

@@ -6,8 +6,10 @@ import Footer from '../components/Footer'
 import { ReactComponent as TwitterIcon } from "../assets/twitter-icon.svg";
 import { ReactComponent as GitHubIcon } from "../assets/github-icon.svg";
 import { ReactComponent as LinkedInIcon } from "../assets/linkedin-icon.svg";
+// import { myContext } from "../hooks/Context"
+// import React, { useContext } from "react";
+// import { IUser } from "../types/maintypes"
 
-let username = "Bob"
 
 const ButtonContainer = styled.div`
   ${tw`flex-col flex w-3/12`}
@@ -21,13 +23,16 @@ const ConnectButton = styled.a`
 `;
 
 export default function Profile() {
+
+    // const context = useContext(myContext) as IUser
+
     return (
         <>
             <Navbar />
             <div className="flex-col px-6  md:ml-auto lg:ml-8 xl:ml-64 container text-gray-100">
 
                 <div className="mb-6">
-                    <h1 className="flex items-center text-2xl mb-4 font-bold">Hi, {username}!</h1>
+                    <h1 className="flex items-center text-2xl mb-4 font-bold">Hi, !</h1>
                     <img className="flex h-40 w-40 rounded-full ring-2 ring-gray mb-4" src="https://images.unsplash.com/photo-1491528323818-fdd1faba62cc?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80" alt="g2k logo" />
                 </div>
 

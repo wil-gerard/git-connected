@@ -3,10 +3,12 @@ import styled from "styled-components";
 import Navbar from "../components/Navbar";
 import Footer from "../components/Footer";
 import { css } from "styled-components/macro"; //eslint-disable-line
-// import { PrimaryButton as PrimaryButtonBase } from "../components/Buttons";
 import { ReactComponent as TwitterIcon } from "../assets/twitter-icon.svg";
 import { ReactComponent as GitHubIcon } from "../assets/github-icon.svg";
 import { ReactComponent as LinkedInIcon } from "../assets/linkedin-icon.svg";
+// import { myContext } from "../hooks/Context"
+// import React, { useContext } from "react";
+// import { IUser } from "../types/maintypes"
 
 
 const Container = tw.div`relative`;
@@ -43,7 +45,7 @@ const CardMetaFeature = styled.div`
 // const CardAction = tw(PrimaryButtonBase)`w-full mt-6`;
 
 export default function Home() {
-  // const cardLinkText = "visit profile"
+  // const context = useContext(myContext) as IUser
   const cards = [
     {
       imageSrc:
@@ -112,6 +114,7 @@ export default function Home() {
   return (
     <>
       <Navbar />
+      
       <Container>
         <Content>
           <ThreeColumn>
@@ -121,7 +124,7 @@ export default function Home() {
                   <CardImage />
                   <CardText>
                     <CardHeader>
-                      <CardName>{card.name}</CardName>
+                      <CardName>name</CardName>
                       <CardTech>{card.tech}</CardTech>
                     </CardHeader>
                     <CardBio>{card.bio}</CardBio>

@@ -1,4 +1,4 @@
-export interface IMongoDBUser {
+export interface IUser {
     githubId?: string;
     username: string;
     __v: number;

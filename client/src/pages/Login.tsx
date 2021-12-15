@@ -1,4 +1,4 @@
-// import logo from "../images/logo.svg";
+import React from "react"
 import tw from "twin.macro";
 import styled from "styled-components";
 import { css } from "styled-components/macro"; //eslint-disable-line
@@ -29,7 +29,7 @@ const LoginButton = styled.a`
 export default function Login() {
 
   const twitterLogin = () => {
-    window.open("http://localhost:4000/auth/twitter", "_self")
+    // window.open("http://localhost:4000/auth/twitter", "_self")
   }
 
   const githubLogin = () => {

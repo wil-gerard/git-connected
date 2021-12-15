@@ -10,7 +10,8 @@ export default function Context(props: any) {
     useEffect(() => {
         Axios.get("http://localhost:4000/getuser", { withCredentials: true }).then((res: AxiosResponse) => {
             console.log(res)
-            if (res.data) {      
+            if (res.data) {
+                console.log(`this is the res data`)      
                 setUserObject(res.data)
             }
         })

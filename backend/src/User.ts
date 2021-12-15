@@ -5,14 +5,6 @@ const user = new mongoose.Schema({
         required: true,
         type: String
     },
-    twitterId: {
-        required: false,
-        type: String
-    },
-    linkedinId : {
-        required: false,
-        type: String
-    },
     username: {
         required: true,
         type: String
