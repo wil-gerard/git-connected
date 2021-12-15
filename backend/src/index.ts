@@ -59,7 +59,6 @@ passport.use(new GitHubStrategy({
     callbackURL: "/auth/github/callback"
 },
     function (_: any, __: any, profile: any, cb: any) {
-        console.log(profile)
 
         User.findOne({ githubId: profile.id }, async (err: Error, doc: IMongoDBUser) => {
 
@@ -70,48 +69,28 @@ passport.use(new GitHubStrategy({
             if (!doc) {
                 const newUser = new User({
                     githubId: profile.id,
-                    username: profile.displayName
+                    username: profile.displayName,
+                    photos: profile.photos
                 })
 
                 await newUser.save()
                 cb(null, newUser)
+            } else {
+                cb(null, doc)
             }
-            cb(null, doc)
         })
 
     }
 ))
 
-// Twitter Passport Strategy
-
-// passport.use(new TwitterStrategy({
-//     consumerKey: `${process.env.TWITTER_CLIENT_ID}`,
-//     consumerSecret: `${process.env.TWITTER_CLIENT_SECRET}`,
-//     callbackURL: "http://localhost:4000/auth/twitter/callback"
-// },
-//     function (accessToken: any, refreshToken: any, profile: any, cb: any) {
-//         console.log(profile)
-//         cb(null, profile)
-//     }
-// ))
-
-// app.get('/auth/twitter',
-//     passport.authenticate('twitter'));
-
-// app.get('/auth/twitter/callback',
-//     passport.authenticate('twitter', { failureRedirect: '/' }),
-//     function (req, res) {
-//         res.redirect('http://localhost:3000/home');
-//     });
-
 app.get('/auth/github',
-    passport.authenticate('github'));
+    passport.authenticate('github', { scope: [ 'user' ] }))
 
 app.get('/auth/github/callback',
     passport.authenticate('github', { failureRedirect: '/' }),
     function (req, res) {
-        res.redirect('http://localhost:3000/home');
-    });
+        res.redirect('http://localhost:3000/home')
+    })
 
 app.get("/getuser", (req, res) => {
     res.send(req.user)
