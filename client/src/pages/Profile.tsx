@@ -18,7 +18,7 @@ const Header = tw.h1`flex items-center text-2xl mb-2 font-bold`
 const Subhead = tw.h2`font-bold text-lg mb-2`
 
 const ProfilePic = styled.img`
-    ${tw`h-40 w-40 rounded-full shadow-xl mb-2`}
+    ${tw`h-1/6 w-1/6 rounded-full shadow-xl mb-2`}
 `
 
 const ButtonContainer = styled.div`

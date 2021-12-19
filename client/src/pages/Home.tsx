@@ -11,7 +11,6 @@ import { myContext } from "../hooks/Context"
 import React, { useContext } from "react";
 import { IUser } from "../types/maintypes"
 
-
 const Container = tw.div`relative`;
 const Content = tw.div`max-w-screen-xl mx-auto py-2 lg:py-24`;
 
@@ -49,7 +48,7 @@ export default function Home() {
   const cards = [
     {
       imageSrc:
-        "https://images.unsplash.com/photo-1563461660947-507ef49e9c47?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=768&q=80",
+        `{user.photos[0].value}`,
       name: "Steve Austin",
       tech: "Frontend",
       bio: "Hey folks! I'm looking for Twitter endorsments",
