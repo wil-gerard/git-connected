@@ -12,6 +12,10 @@ const user = new mongoose.Schema({
     photos: {
         required: false,
         type: Array
+    },
+    json: {
+        require: true,
+        type: Object
     }
 })
 

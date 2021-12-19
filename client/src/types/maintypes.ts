@@ -4,4 +4,5 @@ export interface IUser {
     __v: number;
     _id: string;
     photos: any;
+    json: object;
 }

@@ -71,7 +71,8 @@ passport.use(new GitHubStrategy({
                 const newUser = new User({
                     githubId: profile.id,
                     username: profile.displayName,
-                    photos: profile.photos
+                    photos: profile.photos,
+                    json: profile._json
                 })
 
                 await newUser.save()
