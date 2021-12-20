@@ -4,5 +4,5 @@ export interface IMongoDBUser {
     __v: number;
     _id: string;
     photos: any;
-    json: object;
+    json: any;
 }
