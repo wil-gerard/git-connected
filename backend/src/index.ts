@@ -1,24 +1,20 @@
+import dotenv from "dotenv"
+dotenv.config()
 import express from "express"
 import mongoose from "mongoose"
-import dotenv from "dotenv"
 import cors from "cors"
 import session from "express-session"
 import passport from "passport"
 import User from "./User"
 import { IMongoDBUser } from "./types"
 
-
-// const TwitterStrategy = require("passport-twitter").Strategy
 const GitHubStrategy = require("passport-github2").Strategy
-
-dotenv.config()
 
 const app = express()
 
-mongoose.connect(`${process.env.START_MONGODB}${process.env.MONGODB_USERNAME}:${process.env.MONGODB_PASSWORD}${process.env.END_MONGODB}`, {
-
-}, () => {
-    console.log("connected to mongoose succesfully")
+mongoose.connect(`${process.env.START_MONGODB}${process.env.MONGODB_USERNAME}:${process.env.MONGODB_PASSWORD}${process.env.END_MONGODB}`, (err) => {
+    if (err) throw err
+    console.log("connected to MongoDB succesfully")
 })
 
 // Middleware
@@ -54,8 +50,8 @@ passport.deserializeUser((id: string, done: any) => {
 // GitHub Passport Strategy
 
 passport.use(new GitHubStrategy({
-    clientID: `${process.env.GITHUB_CLIENT_ID}`,
-    clientSecret: `${process.env.GITHUB_CLIENT_SECRET}`,
+    clientID: `42babcc75442b0e4716f`,
+    clientSecret: `c5931e3b468bff139acf9cc4a16fa8cfadfdb557`,
     callbackURL: "/auth/github/callback"
 },
     function (_: any, __: any, profile: any, cb: any) {
