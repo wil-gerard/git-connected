@@ -6,7 +6,7 @@ import cors from "cors"
 import session from "express-session"
 import passport from "passport"
 import User from "./User"
-import { IMongoDBUser } from "./types"
+import { IDatabaseUser, IUser } from "./types"
 
 const GitHubStrategy = require("passport-github2").Strategy
 
@@ -35,13 +35,13 @@ app.use(
 app.use(passport.initialize())
 app.use(passport.session())
 
-passport.serializeUser((user: IMongoDBUser, done: any) => {
+passport.serializeUser((user: IDatabaseUser, done: any) => {
     return done(null, user._id)
 })
 
 passport.deserializeUser((id: string, done: any) => {
 
-    User.findById(id, (err: Error, doc: IMongoDBUser) => {
+    User.findById(id, (err: Error, doc: IDatabaseUser) => {
 
         return done(null, doc)
     })
@@ -50,13 +50,13 @@ passport.deserializeUser((id: string, done: any) => {
 // GitHub Passport Strategy
 
 passport.use(new GitHubStrategy({
-    clientID: `42babcc75442b0e4716f`,
-    clientSecret: `c5931e3b468bff139acf9cc4a16fa8cfadfdb557`,
+    clientID: `${process.env.GITHUB_CLIENT_ID}`,
+    clientSecret: `${process.env.GITHUB_CLIENT_SECRET}`,
     callbackURL: "/auth/github/callback"
 },
     function (_: any, __: any, profile: any, cb: any) {
 
-        User.findOne({ githubId: profile.id }, async (err: Error, doc: IMongoDBUser) => {
+        User.findOne({ githubId: profile.id }, async (err: Error, doc: IDatabaseUser) => {
             console.log(profile)
 
             if (err) {
@@ -66,7 +66,7 @@ passport.use(new GitHubStrategy({
             if (!doc) {
                 const newUser = new User({
                     githubId: profile.id,
-                    username: profile.displayName,
+                    displayName: profile.displayName,
                     photos: profile.photos,
                     json: profile._json
                 })
@@ -83,7 +83,7 @@ passport.use(new GitHubStrategy({
 ))
 
 app.get('/auth/github',
-    passport.authenticate('github', { scope: [ 'user' ] }))
+    passport.authenticate('github', { scope: [ 'read:user' ] }))
 
 app.get('/auth/github/callback',
     passport.authenticate('github', { failureRedirect: '/' }),
@@ -94,6 +94,20 @@ app.get('/auth/github/callback',
 app.get("/getuser", (req, res) => {
     res.send(req.user)
 })
+
+app.get("/getallusers", async (req, res) => {
+    await User.find({}, (err, data: IDatabaseUser[]) => {
+      if (err) throw err;
+      const filteredUsers: IUser[] = [];
+      data.forEach((item: IDatabaseUser) => {
+        const userInformation = {
+          
+        }
+        filteredUsers.push(userInformation);
+      });
+      res.send(filteredUsers);
+    })
+  });
 
 app.get("/auth/logout", (req, res) => {
     if (req.user) {
