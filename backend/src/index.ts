@@ -6,7 +6,7 @@ import cors from "cors"
 import session from "express-session"
 import passport from "passport"
 import User from "./User"
-import { IDatabaseUser, IUser } from "./types"
+import { IDatabaseUser, IUser } from "./interface"
 
 const GitHubStrategy = require("passport-github2").Strategy
 
@@ -35,15 +35,24 @@ app.use(
 app.use(passport.initialize())
 app.use(passport.session())
 
-passport.serializeUser((user: IDatabaseUser, done: any) => {
-    return done(null, user._id)
+passport.serializeUser((user: IDatabaseUser, cb) => {
+    cb(null, user._id)
 })
 
-passport.deserializeUser((id: string, done: any) => {
+passport.deserializeUser((id: string, cb) => {
 
-    User.findById(id, (err: Error, doc: IDatabaseUser) => {
-
-        return done(null, doc)
+    User.findOne({ _id: id }, (err: Error, user: IDatabaseUser) => {
+        const userInformation: IUser = {
+            id: user._id,
+            json: {
+                login: user.json.login,
+                avatar_url: user.json.avatar_url,
+                name: user.json.name,
+                location: user.json.location,
+                bio: user.json.bio,
+            }
+        }
+        cb(err, userInformation)
     })
 })
 
@@ -77,13 +86,13 @@ passport.use(new GitHubStrategy({
                 cb(null, doc)
             }
         })
-        
+
 
     }
 ))
 
 app.get('/auth/github',
-    passport.authenticate('github', { scope: [ 'read:user' ] }))
+    passport.authenticate('github', { scope: ['read:user'] }))
 
 app.get('/auth/github/callback',
     passport.authenticate('github', { failureRedirect: '/' }),
@@ -96,18 +105,31 @@ app.get("/getuser", (req, res) => {
 })
 
 app.get("/getallusers", async (req, res) => {
-    await User.find({}, (err, data: IDatabaseUser[]) => {
-      if (err) throw err;
-      const filteredUsers: IUser[] = [];
-      data.forEach((item: IDatabaseUser) => {
-        const userInformation = {
-          
-        }
-        filteredUsers.push(userInformation);
-      });
-      res.send(filteredUsers);
-    })
-  });
+    await User.find({}, (err: Error, data: IDatabaseUser[]) => {
+        if (err) throw err;
+        const filteredUsers: IUser[] = [];
+        data.forEach((user: IDatabaseUser) => {
+            const userInformation = {
+                id: user._id,
+                json: {
+                    login: user.json.login,
+                    avatar_url: user.json.avatar_url,
+                    followers_url: user.json.followers_url,
+                    following_url: user.json.following_url,
+                    name: user.json.name,
+                    blog: user.json.blog,
+                    location: user.json.location,
+                    bio: user.json.bio,
+                    twitter_username: user.json.twitter_username,
+                    followers: user.json.follers,
+                    following: user.json.following,
+                }
+            }
+            filteredUsers.push(userInformation);
+        })
+        res.send(filteredUsers);
+    }).clone().catch(function(err: Error) {console.log(err)});
+});
 
 app.get("/auth/logout", (req, res) => {
     if (req.user) {

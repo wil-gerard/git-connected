@@ -1,3 +1,4 @@
+import Axios, { AxiosResponse } from 'axios'
 import tw from "twin.macro";
 import styled from "styled-components";
 import Navbar from "../components/Navbar";
@@ -8,8 +9,8 @@ import { ReactComponent as GitHubIcon } from "../assets/github-icon.svg";
 import { ReactComponent as LinkedInIcon } from "../assets/linkedin-icon.svg";
 
 import { myContext } from "../hooks/Context"
-import React, { useContext } from "react"
-import { IUser } from "../types/maintypes"
+import React, { useEffect, useState, useContext } from "react"
+import { IUser } from "../interface"
 
 const Container = tw.div`flex flex-col px-6 text-gray-100`;
 const Content = tw.div`flex-row flex max-w-screen-xl mx-auto py-2 lg:py-24`;
@@ -43,10 +44,18 @@ const CardMetaFeature = styled.a`
 const Header = tw.h1`flex flex-col items-center text-5xl font-bold`
 
 export default function Home() {
-  const user = useContext(myContext) as IUser
+  const ctx = useContext(myContext)
 
-  console.log(user)
-  if (!user) {
+  const [users, setUsers] = useState<IUser[]>()
+  useEffect(() => {
+    Axios.get("http://localhost:4000/getallusers").then((res: AxiosResponse) => {
+      setUsers(res.data.filter((item: IUser) => {
+        return item
+      }))
+    })
+  }, [ctx]);
+  console.log(users)
+  if (!users) {
     return <p>loading...</p>
   }
   return (
@@ -54,21 +63,22 @@ export default function Home() {
       <Navbar />
 
       <Container>
-      <Header>Git to Know...</Header>
+        <Header>Git to Know...</Header>
         <Content>
-        
-          <Card>
+        {users.map((user: IUser) => {
+          return (
+            <Card key={user.id}>
             <CardImageContainer>
-                <CardImage src={user.photos[0].value}/>
+              <CardImage src={user.json.avatar_url} />
             </CardImageContainer>
             <CardText>
               <CardHeader>
-                <CardName>{user.username}</CardName>
-                <CardLocation>{user.json["location"]}</CardLocation>
+                <CardName>{user.json.name}</CardName>
+                <CardLocation>{user.json.location}</CardLocation>
               </CardHeader>
-              <CardBio>{user.json["bio"]}</CardBio>
+              <CardBio>{user.json.bio}</CardBio>
               <CardMeta>
-                <CardMetaFeature href={user.json["twitter_username"]}>
+                <CardMetaFeature href={user.json.twitter_username}>
                   <TwitterIcon />
                 </CardMetaFeature>
                 <CardMetaFeature>
@@ -80,6 +90,9 @@ export default function Home() {
               </CardMeta>
             </CardText>
           </Card>
+          )
+        })}
+    
         </Content>
       </Container>
       <Footer />

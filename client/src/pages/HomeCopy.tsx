@@ -9,7 +9,7 @@ import { ReactComponent as LinkedInIcon } from "../assets/linkedin-icon.svg";
 
 import { myContext } from "../hooks/Context"
 import React, { useContext } from "react";
-import { IUser } from "../types/maintypes"
+import { IUser } from "../interface"
 
 const Container = tw.div`relative`;
 const Content = tw.div`max-w-screen-xl mx-auto py-2 lg:py-24`;
@@ -127,7 +127,7 @@ export default function Home() {
                   <CardImage />
                   <CardText>
                     <CardHeader>
-                      <CardName>{user.username}</CardName>
+                      <CardName>{user.json.name}</CardName>
                       <CardTech>{card.tech}</CardTech>
                     </CardHeader>
                     <CardBio>{card.bio}</CardBio>

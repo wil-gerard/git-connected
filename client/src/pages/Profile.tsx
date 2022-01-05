@@ -8,7 +8,7 @@ import { ReactComponent as GitHubIcon } from "../assets/github-icon.svg";
 import { ReactComponent as LinkedInIcon } from "../assets/linkedin-icon.svg";
 import { myContext } from "../hooks/Context"
 import React, { useContext } from "react";
-import { IUser } from "../types/maintypes"
+import { IUser } from "../interface"
 
 
 const Container = tw.div`flex-col px-6 md:ml-auto lg:ml-8 xl:ml-64 text-gray-100`;
@@ -46,8 +46,8 @@ export default function Profile() {
         <>
             <Navbar />
             <Container>
-                <Header>Hi, {user.username}!</Header>
-                <ProfilePic src={user.photos[0].value} alt="profile photo" />
+                <Header>Hi, {user.json.name}!</Header>
+                <ProfilePic src={user.json.avatar_url} alt="profile photo" />
                 <Subhead>About</Subhead>
                 <textarea name="" id="" className="form-textarea text-black w-80 p-1" placeholder="All about you..." />
                 <Subhead>Connect Socials</Subhead>
