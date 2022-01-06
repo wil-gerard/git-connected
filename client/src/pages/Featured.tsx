@@ -53,11 +53,22 @@ export default function Home() {
         return item
       }))
     })
+
   }, [ctx]);
   console.log(users)
   if (!users) {
     return <p>loading...</p>
   }
+
+
+  const randomNumberGenerator = () => {
+    return Math.floor(Math.random() * users.length)
+  }
+
+  let randomNumber:number = randomNumberGenerator()
+  console.log(randomNumber)
+
+
   return (
     <>
       <Navbar />
@@ -65,20 +76,18 @@ export default function Home() {
       <Container>
         <Header>Git to Know...</Header>
         <Content>
-        {users.map((user: IUser) => {
-          return (
-            <Card key={user.id}>
+          <Card key={users[randomNumber].id}>
             <CardImageContainer>
-              <CardImage src={user.json.avatar_url} />
+              <CardImage src={users[randomNumber].json.avatar_url} />
             </CardImageContainer>
             <CardText>
               <CardHeader>
-                <CardName>{user.json.name}</CardName>
-                <CardLocation>{user.json.location}</CardLocation>
+                <CardName>{users[randomNumber].json.name}</CardName>
+                <CardLocation>{users[randomNumber].json.location}</CardLocation>
               </CardHeader>
-              <CardBio>{user.json.bio}</CardBio>
+              <CardBio>{users[randomNumber].json.bio}</CardBio>
               <CardMeta>
-                <CardMetaFeature href={user.json.twitter_username}>
+                <CardMetaFeature href={users[randomNumber].json.twitter_username}>
                   <TwitterIcon />
                 </CardMetaFeature>
                 <CardMetaFeature>
@@ -90,9 +99,7 @@ export default function Home() {
               </CardMeta>
             </CardText>
           </Card>
-          )
-        })}
-    
+
         </Content>
       </Container>
       <Footer />

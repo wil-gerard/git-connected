@@ -37,7 +37,7 @@ export default function Navbar() {
                 </NavLink>
                 <NavLink to="/profile">My Profile</NavLink>
                 <NavLink to="/">Profiles</NavLink>
-                <NavLink to="/">Featured</NavLink>
+                <NavLink to="/featured">Featured</NavLink>
                 <NavLink to="/login">Log In</NavLink>
                 <LogoutNavLink onClick={logout}>Logout</LogoutNavLink>
             </NavContainer>
