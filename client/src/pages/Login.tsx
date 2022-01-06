@@ -1,5 +1,7 @@
 import React from "react"
 import tw from "twin.macro";
+import Navbar from "../components/Navbar";
+import Footer from "../components/Footer";
 import styled from "styled-components";
 import { css } from "styled-components/macro"; //eslint-disable-line
 import { ReactComponent as TwitterIcon } from "../assets/twitter-icon.svg";
@@ -41,23 +43,27 @@ export default function Login() {
   }
 
   return (
-    <Container>
-      <LoginContainer>
-        <ButtonContainer>
-          <LoginButton onClick={twitterLogin}>
-            <TwitterIcon />
-            Sign in with Twitter
-          </LoginButton>
-          <LoginButton onClick={linkedinLogin}>
-            <LinkedInIcon />
-            Sign in with LinkedIn
-          </LoginButton>
-          <LoginButton onClick={githubLogin}>
-            <GitHubIcon />
-            Sign in with GitHub
-          </LoginButton>
-        </ButtonContainer>
-      </LoginContainer>
-    </Container >
+    <>
+      < Navbar />
+      <Container>
+        <LoginContainer>
+          <ButtonContainer>
+            <LoginButton onClick={twitterLogin}>
+              <TwitterIcon />
+              Sign in with Twitter
+            </LoginButton>
+            <LoginButton onClick={linkedinLogin}>
+              <LinkedInIcon />
+              Sign in with LinkedIn
+            </LoginButton>
+            <LoginButton onClick={githubLogin}>
+              <GitHubIcon />
+              Sign in with GitHub
+            </LoginButton>
+          </ButtonContainer>
+        </LoginContainer>
+      </Container >
+      < Footer />
+    </>
   );
 }

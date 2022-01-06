@@ -32,11 +32,13 @@ export default function Navbar() {
         <>
             <GradientBar />
             <NavContainer>
-                <NavLink to="/home">
+                <NavLink to="/">
                     <Logo />
                 </NavLink>
-                <NavLink to="/profile">Profile</NavLink>
-                <NavLink to="/home">Connect</NavLink>
+                <NavLink to="/profile">My Profile</NavLink>
+                <NavLink to="/">Profiles</NavLink>
+                <NavLink to="/">Featured</NavLink>
+                <NavLink to="/login">Log In</NavLink>
                 <LogoutNavLink onClick={logout}>Logout</LogoutNavLink>
             </NavContainer>
         </>
