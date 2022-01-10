@@ -66,7 +66,7 @@ const TableDataLocation = tw.div`font-medium text-gray-100 text-left`
 
 const TableDataMeta = tw.div`font-medium text-gray-100 text-left flex flex-row`
 
-const TableDataMetaFeature = tw.a`rounded shadow cursor-pointer bg-secondary-600 transition duration-300 hocus:bg-secondary-400 w-6 h-6 ml-1 p-0.5`
+const TableDataMetaFeature = tw.a`rounded shadow cursor-pointer bg-secondary-600 transition duration-300 hocus:bg-primary-500 w-6 h-6 ml-1 p-0.5`
 
 export default function Home() {
   const ctx = useContext(myContext)
