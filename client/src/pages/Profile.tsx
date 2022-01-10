@@ -11,26 +11,40 @@ import React, { useContext } from "react";
 import { IUser } from "../interface"
 
 
-const Container = tw.div`flex-col px-6 md:ml-auto lg:ml-8 xl:ml-64 text-gray-100`;
+const Container = tw.div`flex flex-col px-6 text-gray-100`
 
-const Header = tw.h1`flex items-center text-2xl mb-2 font-bold`
+const Content = tw.div`max-w-screen-xl mx-auto py-2 lg:py-24`
 
-const Subhead = tw.h2`font-bold text-lg mb-2`
+const Card = tw.div`mx-auto xl:mx-0 xl:ml-auto max-w-sm md:max-w-xs lg:max-w-sm xl:max-w-xs`
 
-const ProfilePic = styled.img`
-    ${tw`h-1/6 w-1/6 rounded-full shadow-xl mb-2`}
+const CardImageContainer = styled.div`
+    ${tw`flex justify-center`}
+`
+const CardImage = styled.img`
+    ${tw`h-4/6 w-4/6 rounded-full shadow-xl mb-2`}
+`
+const CardText = tw.div`mt-4`
+
+const CardLocation = tw.div`font-semibold text-sm text-gray-600`
+
+const CardBio = tw.h5`text-lg mt-4 font-bold text-gray-100 text-center`
+
+const CardHeader = tw.div`flex justify-center items-center flex-col`
+
+const CardName = tw.div`text-primary-500 font-bold text-xl`
+
+const CardMeta = styled.div`
+  ${tw`flex flex-row flex-wrap justify-center sm:items-center font-semibold tracking-wide text-gray-600 uppercase text-xs`}
 `
 
-const ButtonContainer = styled.div`
-  ${tw`flex-col flex w-3/12`}
-`
-
-const ConnectButton = styled.a`
-  ${tw`cursor-pointer py-2 pl-2 pr-8 rounded-full bg-primary-600 text-gray-100 hocus:bg-primary-800 transition duration-300 m-2 text-sm`}
+const CardMetaFeature = styled.a`
+  ${tw`flex items-center mt-4 mr-4 last:mr-0`}
   svg {
-    ${tw`inline-block w-8 h-8 mx-2`}
+    ${tw`w-5 h-5 mr-1`}
   }
-`;
+`
+
+const Button = tw.button`focus:outline-none text-gray-100 text-sm py-2 px-4 rounded-full bg-primary-600 hocus:bg-primary-800 transition duration-300 hover:shadow-lg`
 
 
 
@@ -46,25 +60,32 @@ export default function Profile() {
         <>
             <Navbar />
             <Container>
-                <Header>Hi, {user.json.name}!</Header>
-                <ProfilePic src={user.json.avatar_url} alt="profile photo" />
-                <Subhead>About</Subhead>
-                <textarea name="" id="" className="form-textarea text-black w-80 p-1" placeholder="All about you..." />
-                <Subhead>Connect Socials</Subhead>
-                <ButtonContainer>
-                    <ConnectButton>
-                        <TwitterIcon />
-                        Connect your Twitter
-                    </ConnectButton>
-                    <ConnectButton>
-                        <GitHubIcon />
-                        Connect your GitHub
-                    </ConnectButton>
-                    <ConnectButton>
-                        <LinkedInIcon />
-                        Connect your LinkedIn
-                    </ConnectButton>
-                </ButtonContainer>
+                <Content>
+                    <Button>Edit profile</Button>
+                    <Card>
+                        <CardImageContainer>
+                            <CardImage src={user.json.avatar_url} />
+                        </CardImageContainer>
+                        <CardText>
+                            <CardHeader>
+                                <CardName>{user.json.name}</CardName>
+                                <CardLocation>{user.json.location}</CardLocation>
+                            </CardHeader>
+                            <CardBio>{user.json.bio}</CardBio>
+                            <CardMeta>
+                                <CardMetaFeature href={user.json.twitter_username}>
+                                    <TwitterIcon />
+                                </CardMetaFeature>
+                                <CardMetaFeature>
+                                    <GitHubIcon />
+                                </CardMetaFeature>
+                                <CardMetaFeature>
+                                    <LinkedInIcon />
+                                </CardMetaFeature>
+                            </CardMeta>
+                        </CardText>
+                    </Card>
+                </Content>
             </Container>
             <Footer />
         </>

@@ -19,27 +19,6 @@ const Header = tw.header`px-5 py-4 border-b border-gray-100`
 
 const H2 = tw.h2`font-semibold text-gray-300`
 
-const Card = tw.div`flex rounded shadow max-w-lg text-gray-600 mb-5 bg-white`
-
-const CardImageContainer = tw.div`self-center p-2 pr-1`
-
-const CardImage = tw.img`h-10 w-10 border p-0.5 rounded-full`
-
-const CardTextContainer = tw.div`self-center p-2 w-64`
-
-const CardName = tw.div`text-sm`
-
-const CardLocation = tw.div`text-xs text-gray-400 -mt-1`
-
-const CardMeta = tw.div`self-center p-2 w-2/6`
-
-const CardMetaFeature = styled.a`
-    ${tw`flex items-center mt-4 mr-4 text-xs text-gray-600`}
-    svg {
-        ${tw`w-5 h-5 mr-1`}
-    }
-`;
-
 const TableContainer = tw.div`w-full max-w-2xl mx-auto shadow-lg rounded bg-secondary-800`
 
 const Table = tw.table`table-auto w-full`
@@ -130,10 +109,10 @@ export default function Home() {
                       </TableDataCell>
                       <TableDataCell>
                         <TableDataMeta>
-                          <TableDataMetaFeature href={'bob'}>
+                          <TableDataMetaFeature href={'bob'} target="blank" rel="noopener noreferrer">
                             <TwitterIcon />
                           </TableDataMetaFeature>   
-                          <TableDataMetaFeature href={user.json.html_url}>
+                          <TableDataMetaFeature href={user.json.html_url} target="blank" rel="noopener noreferrer">
                             <GitHubIcon />
                           </TableDataMetaFeature>   
                           <TableDataMetaFeature>
