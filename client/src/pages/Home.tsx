@@ -13,7 +13,8 @@ import React, { useEffect, useState, useContext } from "react"
 import { IUser } from "../interface"
 
 
-const Content = tw.div`flex flex-col justify-center h-full px-6 text-gray-100`
+const Content = tw.div`flex flex-col justify-center min-h-full px-6 text-gray-100`
+
 const Header = tw.header`px-5 py-4 border-b border-gray-100`
 
 const H2 = tw.h2`font-semibold text-gray-300`
@@ -45,7 +46,7 @@ const Table = tw.table`table-auto w-full`
 
 const TablePadding = tw.div`p-3`
 
-const TableThead = tw.thead`text-xs font-semibold uppercase text-gray-300`
+const TableThead = tw.thead`text-xs font-semibold uppercase text-gray-300 bg-secondary-700`
 
 const TableRow = tw.tr``
 
@@ -63,7 +64,9 @@ const TableDataName = tw.div`font-medium text-gray-100`
 
 const TableDataLocation = tw.div`font-medium text-gray-100 text-left`
 
-const TableDataMeta = tw.div`font-medium text-gray-100 text-left`
+const TableDataMeta = tw.div`font-medium text-gray-100 text-left flex flex-row`
+
+const TableDataMetaFeature = tw.a`rounded shadow cursor-pointer bg-secondary-600 transition duration-300 hocus:bg-secondary-400 w-6 h-6 ml-1 p-0.5`
 
 export default function Home() {
   const ctx = useContext(myContext)
@@ -100,13 +103,10 @@ export default function Home() {
                     Name
                   </TableHeader>
                   <TableHeader>
-                    Email
+                    Location
                   </TableHeader>
                   <TableHeader>
-                    Spent
-                  </TableHeader>
-                  <TableHeader>
-                    Country
+                    Socials
                   </TableHeader>
                 </TableRow>
               </TableThead>
@@ -130,7 +130,15 @@ export default function Home() {
                       </TableDataCell>
                       <TableDataCell>
                         <TableDataMeta>
-                          {user.json.name}
+                          <TableDataMetaFeature>
+                            <TwitterIcon />
+                          </TableDataMetaFeature>   
+                          <TableDataMetaFeature>
+                            <GitHubIcon />
+                          </TableDataMetaFeature>   
+                          <TableDataMetaFeature>
+                            <LinkedInIcon />
+                          </TableDataMetaFeature>   
                         </TableDataMeta>
                       </TableDataCell>
                     </TableRow>
