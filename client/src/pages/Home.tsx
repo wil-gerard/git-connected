@@ -106,14 +106,14 @@ export default function Home() {
                     Location
                   </TableHeader>
                   <TableHeader>
-                    Socials
+                    Links
                   </TableHeader>
                 </TableRow>
               </TableThead>
               <TableBody>
                 {users.map((user: IUser) => {
+                  console.log(user.json.html_url)
                   return (
-
                     <TableRow key={user.id}>
                       <TableDataCell>
                         <TableDataNameContainer>
@@ -130,10 +130,10 @@ export default function Home() {
                       </TableDataCell>
                       <TableDataCell>
                         <TableDataMeta>
-                          <TableDataMetaFeature>
+                          <TableDataMetaFeature href={'bob'}>
                             <TwitterIcon />
                           </TableDataMetaFeature>   
-                          <TableDataMetaFeature>
+                          <TableDataMetaFeature href={user.json.html_url}>
                             <GitHubIcon />
                           </TableDataMetaFeature>   
                           <TableDataMetaFeature>

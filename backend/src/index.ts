@@ -47,9 +47,16 @@ passport.deserializeUser((id: string, cb) => {
             json: {
                 login: user.json.login,
                 avatar_url: user.json.avatar_url,
+                html_url: user.json.html_url,
+                followers_url: user.json.followers_url,
+                following_url: user.json.following_url,
                 name: user.json.name,
+                blog: user.json.blog,
                 location: user.json.location,
                 bio: user.json.bio,
+                twitter_username: user.json.twitter_username,
+                followers: user.json.followers,
+                following: user.json.following,
             }
         }
         cb(err, userInformation)
@@ -118,6 +125,7 @@ app.get("/getallusers", async (req, res) => {
                 json: {
                     login: user.json.login,
                     avatar_url: user.json.avatar_url,
+                    html_url: user.json.html_url,
                     followers_url: user.json.followers_url,
                     following_url: user.json.following_url,
                     name: user.json.name,
@@ -125,7 +133,7 @@ app.get("/getallusers", async (req, res) => {
                     location: user.json.location,
                     bio: user.json.bio,
                     twitter_username: user.json.twitter_username,
-                    followers: user.json.follers,
+                    followers: user.json.followers,
                     following: user.json.following,
                 }
             }
