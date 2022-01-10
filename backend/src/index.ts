@@ -104,6 +104,10 @@ app.get("/getuser", (req, res) => {
     res.send(req.user)
 })
 
+// app.post("/getuser", (req, res) => {
+//     res.
+// })
+
 app.get("/getallusers", async (req, res) => {
     await User.find({}, (err: Error, data: IDatabaseUser[]) => {
         if (err) throw err;

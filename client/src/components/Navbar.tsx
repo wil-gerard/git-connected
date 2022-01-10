@@ -6,7 +6,7 @@ import { GradientBar } from "./GradiantBar"
 import { Link } from 'react-router-dom'
 import axios, { AxiosResponse } from 'axios'
 
-const NavContainer = styled.div`
+const NavContainer = styled.nav`
     ${tw`flex bg-secondary-700 p-6 lg:p-10 w-full mb-6 lg:mb-12`}
 `
 

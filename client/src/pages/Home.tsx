@@ -12,36 +12,58 @@ import { myContext } from "../hooks/Context"
 import React, { useEffect, useState, useContext } from "react"
 import { IUser } from "../interface"
 
-const Container = tw.div`flex flex-col px-6 text-gray-100`;
-const Content = tw.div`flex-row flex max-w-screen-xl mx-auto py-2 lg:py-24`;
 
+const Content = tw.div`flex flex-col justify-center h-full px-6 text-gray-100`
+const Header = tw.header`px-5 py-4 border-b border-gray-100`
 
-const Card = tw.div`mx-auto xl:mx-0 xl:ml-auto max-w-sm md:max-w-xs lg:max-w-sm xl:max-w-xs`;
-const CardImageContainer = styled.div`
-    ${tw`flex justify-center`}
-`
-const CardImage = styled.img`
-    ${tw`h-4/6 w-4/6 rounded-full shadow-xl mb-2`}
-`
+const H2 = tw.h2`font-semibold text-gray-300`
 
-const CardText = tw.div`mt-4`;
-const CardLocation = tw.div`font-semibold text-sm text-gray-600`;
-const CardBio = tw.h5`text-lg mt-4 font-bold text-gray-100 text-center`;
-const CardHeader = tw.div`flex justify-center items-center flex-col`;
-const CardName = tw.div`text-primary-500 font-bold text-xl`;
+const Card = tw.div`flex rounded shadow max-w-lg text-gray-600 mb-5 bg-white`
 
-const CardMeta = styled.div`
-  ${tw`flex flex-row flex-wrap justify-center sm:items-center font-semibold tracking-wide text-gray-600 uppercase text-xs`}
-`;
+const CardImageContainer = tw.div`self-center p-2 pr-1`
+
+const CardImage = tw.img`h-10 w-10 border p-0.5 rounded-full`
+
+const CardTextContainer = tw.div`self-center p-2 w-64`
+
+const CardName = tw.div`text-sm`
+
+const CardLocation = tw.div`text-xs text-gray-400 -mt-1`
+
+const CardMeta = tw.div`self-center p-2 w-2/6`
 
 const CardMetaFeature = styled.a`
-  ${tw`flex items-center mt-4 mr-4 last:mr-0`}
-  svg {
-    ${tw`w-5 h-5 mr-1`}
-  }
+    ${tw`flex items-center mt-4 mr-4 text-xs text-gray-600`}
+    svg {
+        ${tw`w-5 h-5 mr-1`}
+    }
 `;
 
-const Header = tw.h1`flex flex-col items-center text-5xl font-bold`
+const TableContainer = tw.div`w-full max-w-2xl mx-auto shadow-lg rounded bg-secondary-800`
+
+const Table = tw.table`table-auto w-full`
+
+const TablePadding = tw.div`p-3`
+
+const TableThead = tw.thead`text-xs font-semibold uppercase text-gray-300`
+
+const TableRow = tw.tr``
+
+const TableHeader = tw.th`p-2 whitespace-nowrap font-semibold text-left`
+
+const TableBody = tw.tbody`text-sm divide-y divide-gray-100`
+
+const TableDataCell = tw.td`p-2 whitespace-nowrap`
+
+const TableDataNameContainer = tw.div`flex items-center`
+
+const TableDataImage = tw.img`w-10 h-10 flex-shrink-0 mr-2 sm:mr-3 rounded-full`
+
+const TableDataName = tw.div`font-medium text-gray-100`
+
+const TableDataLocation = tw.div`font-medium text-gray-100 text-left`
+
+const TableDataMeta = tw.div`font-medium text-gray-100 text-left`
 
 export default function Home() {
   const ctx = useContext(myContext)
@@ -62,39 +84,65 @@ export default function Home() {
     <>
       <Navbar />
 
-      <Container>
-        <Header>Git to Know...</Header>
-        <Content>
-        {users.map((user: IUser) => {
-          return (
-            <Card key={user.id}>
-            <CardImageContainer>
-              <CardImage src={user.json.avatar_url} />
-            </CardImageContainer>
-            <CardText>
-              <CardHeader>
-                <CardName>{user.json.name}</CardName>
-                <CardLocation>{user.json.location}</CardLocation>
-              </CardHeader>
-              <CardBio>{user.json.bio}</CardBio>
-              <CardMeta>
-                <CardMetaFeature href={user.json.twitter_username}>
-                  <TwitterIcon />
-                </CardMetaFeature>
-                <CardMetaFeature>
-                  <GitHubIcon />
-                </CardMetaFeature>
-                <CardMetaFeature>
-                  <LinkedInIcon />
-                </CardMetaFeature>
-              </CardMeta>
-            </CardText>
-          </Card>
-          )
-        })}
-    
-        </Content>
-      </Container>
+
+      <Content>
+        <TableContainer>
+          <Header>
+            <H2>
+              Showing all users
+            </H2>
+          </Header>
+          <TablePadding>
+            <Table>
+              <TableThead>
+                <TableRow>
+                  <TableHeader>
+                    Name
+                  </TableHeader>
+                  <TableHeader>
+                    Email
+                  </TableHeader>
+                  <TableHeader>
+                    Spent
+                  </TableHeader>
+                  <TableHeader>
+                    Country
+                  </TableHeader>
+                </TableRow>
+              </TableThead>
+              <TableBody>
+                {users.map((user: IUser) => {
+                  return (
+
+                    <TableRow key={user.id}>
+                      <TableDataCell>
+                        <TableDataNameContainer>
+                          <TableDataImage src={user.json.avatar_url} />
+                          <TableDataName>
+                            {user.json.name}
+                          </TableDataName>
+                        </TableDataNameContainer>
+                      </TableDataCell>
+                      <TableDataCell>
+                        <TableDataLocation>
+                          {user.json.location}
+                        </TableDataLocation>
+                      </TableDataCell>
+                      <TableDataCell>
+                        <TableDataMeta>
+                          {user.json.name}
+                        </TableDataMeta>
+                      </TableDataCell>
+                    </TableRow>
+                  )
+                })}
+              </TableBody>
+            </Table>
+          </TablePadding>
+        </TableContainer>
+
+      </Content>
+
       <Footer />
     </>
   );

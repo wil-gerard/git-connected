@@ -60,7 +60,6 @@ export default function Home() {
     return <p>loading...</p>
   }
 
-
   const randomNumberGenerator = () => {
     return Math.floor(Math.random() * users.length)
   }
