@@ -104,7 +104,7 @@ app.get('/auth/github',
 app.get('/auth/github/callback',
     passport.authenticate('github', { failureRedirect: '/' }),
     function (req, res) {
-        res.redirect('http://localhost:3000')
+        res.redirect('http://localhost:3000/profile')
     })
 
 app.get("/getuser", (req, res) => {
