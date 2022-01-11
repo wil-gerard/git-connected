@@ -29,7 +29,9 @@ const ModalContainer = tw.div`justify-center items-center flex overflow-x-hidden
 
 const ModalContent = tw.div`relative w-auto my-6 mx-auto max-w-sm rounded shadow-lg bg-secondary-800 p-2`
 
-const CloseButton = tw.button`flex items-center justify-center bg-transparent font-semibold hocus:bg-secondary-600 h-10 w-10 text-2xl rounded-full`
+const CloseButtonContainer = tw.div`flex flex-col items-end`
+
+const CloseButton = tw.button`flex items-center justify-center bg-transparent font-semibold hocus:bg-secondary-600 h-10 w-10 text-2xl rounded-full text-gray-100`
 
 const BgOpacity = tw.div`opacity-25 fixed inset-0 z-40 bg-black`
 
@@ -68,9 +70,11 @@ export default function Navbar() {
                 <>
                     <ModalContainer>
                         <ModalContent>
-                            <CloseButton onClick={() => setShowModal(false)}>
-                                x
-                            </CloseButton>
+                            <CloseButtonContainer>
+                                <CloseButton onClick={() => setShowModal(false)}>
+                                    x
+                                </CloseButton>
+                            </CloseButtonContainer>
                             <LoginContainer>
                                 <LoginButton onClick={login}>
                                     <GitHubIcon />
