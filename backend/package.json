@@ -4,6 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
+    "heroku-prebuild": "yarn install",
     "start": "node build/dist/index.js",
     "build": "tsc -p .",
     "dev": "nodemon --exec ts-node src/index.ts"
@@ -31,6 +32,7 @@
     "@types/passport-github2": "^1.2.5",
     "nodemon": "^2.0.15",
     "ts-node": "^10.4.0",
+    "tsc": "^2.0.3",
     "typescript": "^4.5.2"
   }
 }
