@@ -78,7 +78,6 @@ passport.use(new GitHubStrategy({
     function (_: any, __: any, profile: any, cb: any) {
 
         User.findOne({ githubId: profile.id }, async (err: Error, doc: IDatabaseUser) => {
-            console.log(profile)
 
             if (err) {
                 return cb(err, null)

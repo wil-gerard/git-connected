@@ -10,7 +10,6 @@ export default function Context(props: any) {
     useEffect(() => {
         Axios.get("https://git-connected.herokuapp.com/getuser", { withCredentials: true }).then((res: AxiosResponse) => {
             if (res.data) {
-                console.log(res.data)      
                 setUserObject(res.data)
             }
         })

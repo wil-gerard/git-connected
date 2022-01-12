@@ -57,7 +57,7 @@ export default function Home() {
       }))
     })
   }, [ctx]);
-  console.log(users)
+
   if (!users) {
     return <p>loading...</p>
   }
@@ -90,7 +90,7 @@ export default function Home() {
               </TableThead>
               <TableBody>
                 {users.map((user: IUser) => {
-                  console.log(user.json.html_url)
+                  
                   return (
                     <TableRow key={user.id}>
                       <TableDataCell>
