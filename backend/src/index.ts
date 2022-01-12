@@ -109,7 +109,7 @@ app.get('/auth/github',
 app.get('/auth/github/callback',
     passport.authenticate('github', { failureRedirect: 'https://gitconnected.netlify.app', session: true }),
     function (req, res) {
-        res.redirect('https://gitconnected.netlify.app/profile')
+        res.redirect('https://gitconnected.netlify.app')
     })
 
 app.get("/getuser", (req, res) => {
