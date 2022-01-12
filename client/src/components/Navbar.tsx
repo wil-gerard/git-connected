@@ -51,11 +51,11 @@ export default function Navbar() {
     const [showModal, setShowModal] = useState(false)
 
     const login = () => {
-        window.open("http://localhost:4000/auth/github", "_self")
+        window.open("https://git-connected.herokuapp.com/auth/github", "_self")
     }
 
     const logout = () => {
-        axios.get("http://localhost:4000/auth/logout", {
+        axios.get("https://git-connected.herokuapp.com/auth/logout", {
             withCredentials: true
         }).then((res: AxiosResponse) => {
             if (res.data === "done") {
