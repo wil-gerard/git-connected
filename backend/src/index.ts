@@ -20,7 +20,7 @@ mongoose.connect(`${process.env.START_MONGODB}${process.env.MONGODB_USERNAME}:${
 // Middleware
 
 app.use(express.json())
-app.use(cors({ origin: "https://gitconnected.netlify.app/", credentials: true }))
+app.use(cors({ origin: "https://gitconnected.netlify.app", credentials: true }))
 
 app.set("trust proxy", 1)
 
