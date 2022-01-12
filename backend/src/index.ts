@@ -20,7 +20,7 @@ mongoose.connect(`${process.env.START_MONGODB}${process.env.MONGODB_USERNAME}:${
 // Middleware
 
 app.use(express.json())
-app.use(cors({ origin: "https://gitconnected.netlify.app", credentials: true }))
+app.use(cors({ origin: "https://www.gitconnected.dev", credentials: true }))
 
 app.set("trust proxy", 1)
 
@@ -107,9 +107,9 @@ app.get('/auth/github',
     passport.authenticate('github', { scope: ['read:user'] }))
 
 app.get('/auth/github/callback',
-    passport.authenticate('github', { failureRedirect: 'https://gitconnected.netlify.app', session: true }),
+    passport.authenticate('github', { failureRedirect: 'https://www.gitconnected.dev', session: true }),
     function (req, res) {
-        res.redirect('https://gitconnected.netlify.app')
+        res.redirect('https://www.gitconnected.dev')
     })
 
 app.get("/getuser", (req, res) => {
