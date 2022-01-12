@@ -90,14 +90,14 @@ export default function Home() {
               </TableThead>
               <TableBody>
                 {users.map((user: IUser) => {
-                  
+
                   return (
                     <TableRow key={user.id}>
                       <TableDataCell>
                         <TableDataNameContainer>
                           <TableDataImage src={user.json.avatar_url} />
                           <TableDataName>
-                            {user.json.name}
+                            {user.json.name ? user.json.name : user.json.login}
                           </TableDataName>
                         </TableDataNameContainer>
                       </TableDataCell>
