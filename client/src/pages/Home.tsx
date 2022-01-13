@@ -1,18 +1,15 @@
 import Axios, { AxiosResponse } from 'axios'
-import tw from "twin.macro";
-import Navbar from "../components/Navbar";
-import Footer from "../components/Footer";
+import tw from "twin.macro"
 import { css } from "styled-components/macro"; //eslint-disable-line
-import { ReactComponent as TwitterIcon } from "../assets/twitter-icon.svg";
-import { ReactComponent as GitHubIcon } from "../assets/github-icon.svg";
-import { ReactComponent as LinkedInIcon } from "../assets/linkedin-icon.svg";
-
+import { ReactComponent as TwitterIcon } from "../assets/twitter-icon.svg"
+import { ReactComponent as GitHubIcon } from "../assets/github-icon.svg"
+import { ReactComponent as LinkedInIcon } from "../assets/linkedin-icon.svg"
 import { myContext } from "../hooks/Context"
 import React, { useEffect, useState, useContext } from "react"
 import { IUser } from "../interface"
 
 
-const Content = tw.div`flex flex-col justify-center min-h-full px-6 text-gray-100`
+const Content = tw.div`flex flex-col justify-center px-6 text-gray-100`
 
 const Header = tw.header`px-5 py-4 border-b border-gray-100`
 
@@ -63,9 +60,6 @@ export default function Home() {
   }
   return (
     <>
-      <Navbar />
-
-
       <Content>
         <TableContainer>
           <Header>
@@ -126,10 +120,7 @@ export default function Home() {
             </Table>
           </TablePadding>
         </TableContainer>
-
       </Content>
-
-      <Footer />
     </>
   );
 };

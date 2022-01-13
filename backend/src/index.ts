@@ -20,7 +20,7 @@ mongoose.connect(`${process.env.START_MONGODB}${process.env.MONGODB_USERNAME}:${
 // Middleware
 
 app.use(express.json())
-app.use(cors({ origin: "http://localhost:3000", credentials: true }))
+app.use(cors({ origin: `${process.env.FRONTEND_DEV_URL}`, credentials: true }))
 
 app.set("trust proxy", 1)
 
@@ -109,7 +109,7 @@ app.get('/auth/github/callback',
         session: true
      }),
     function (req, res) {
-        res.redirect('http://localhost:3000/profile')
+        res.redirect(`${process.env.FRONTEND_DEV_URL}/profile`)
     })
 
 app.get("/getuser", (req, res) => {

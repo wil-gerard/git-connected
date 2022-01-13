@@ -1,8 +1,6 @@
 import tw from "twin.macro";
 import styled from "styled-components";
 import { css } from "styled-components/macro"; //eslint-disable-line
-import Navbar from '../components/Navbar'
-import Footer from '../components/Footer'
 import { ReactComponent as TwitterIcon } from "../assets/twitter-icon.svg";
 import { ReactComponent as GitHubIcon } from "../assets/github-icon.svg";
 import { ReactComponent as LinkedInIcon } from "../assets/linkedin-icon.svg";
@@ -79,7 +77,7 @@ export default function Profile() {
 
     return (
         <>
-            <Navbar />
+
             <Container>
                 <Content>
                     <Button type="button" onClick={() => setShowModal(true)}>Edit profile</Button>
@@ -160,7 +158,6 @@ export default function Profile() {
                     </Card>
                 </Content>
             </Container>
-            <Footer />
         </>
     )
 }
