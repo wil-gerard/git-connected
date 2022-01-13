@@ -7,8 +7,8 @@ import session from "express-session"
 import passport from "passport"
 import User from "./User"
 import { IDatabaseUser, IUser } from "./interface"
-
 const GitHubStrategy = require("passport-github2").Strategy
+import mongoStore from 'connect-mongo'
 
 const app = express()
 
@@ -27,8 +27,11 @@ app.set("trust proxy", 1)
 app.use(
     session({
         secret: process.env.SESSION_SECRET,
-        resave: true,
-        saveUninitialized: true,
+        resave: false,
+        saveUninitialized: false,
+        store: mongoStore.create({
+            mongoUrl: `${process.env.START_MONGODB}${process.env.MONGODB_USERNAME}:${process.env.MONGODB_PASSWORD}${process.env.END_MONGODB}`
+        })
     })
 )
 
@@ -101,7 +104,10 @@ app.get('/auth/github',
     passport.authenticate('github', { scope: ['read:user'] }))
 
 app.get('/auth/github/callback',
-    passport.authenticate('github', { failureRedirect: '/' }),
+    passport.authenticate('github', { 
+        failureRedirect: '/',
+        session: true
+     }),
     function (req, res) {
         res.redirect('http://localhost:3000/profile')
     })
