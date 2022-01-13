@@ -26,7 +26,7 @@ app.set("trust proxy", 1)
 
 app.use(
     session({
-        secret: "secretcode",
+        secret: process.env.SESSION_SECRET,
         resave: true,
         saveUninitialized: true,
     })
@@ -70,10 +70,9 @@ passport.use(new GitHubStrategy({
     clientSecret: `${process.env.GITHUB_CLIENT_SECRET}`,
     callbackURL: "/auth/github/callback"
 },
-    function (_: any, __: any, profile: any, cb: any) {
+    function (accessToken: any, refreshToken: any, profile: any, cb: any) {
 
         User.findOne({ githubId: profile.id }, async (err: Error, doc: IDatabaseUser) => {
-            console.log(profile)
 
             if (err) {
                 return cb(err, null)
@@ -153,5 +152,5 @@ app.get("/auth/logout", (req, res) => {
 const PORT = process.env.PORT || 4000
 
 app.listen(PORT, () => {
-    console.log("server started")
+    console.log(`server started on port ${PORT}`)
 })

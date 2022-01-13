@@ -55,7 +55,7 @@ export default function Home() {
     })
 
   }, [ctx]);
-  console.log(users)
+
   if (!users) {
     return <p>loading...</p>
   }
@@ -65,7 +65,7 @@ export default function Home() {
   }
 
   let randomNumber:number = randomNumberGenerator()
-  console.log(randomNumber)
+
 
 
   return (

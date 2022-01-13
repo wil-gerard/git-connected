@@ -57,7 +57,7 @@ export default function Home() {
       }))
     })
   }, [ctx]);
-  console.log(users)
+
   if (!users) {
     return <p>loading...</p>
   }
@@ -90,14 +90,14 @@ export default function Home() {
               </TableThead>
               <TableBody>
                 {users.map((user: IUser) => {
-                  console.log(user.json.html_url)
+
                   return (
                     <TableRow key={user.id}>
                       <TableDataCell>
                         <TableDataNameContainer>
                           <TableDataImage src={user.json.avatar_url} />
                           <TableDataName>
-                            {user.json.name}
+                            {user.json.name ? user.json.name : user.json.login}
                           </TableDataName>
                         </TableDataNameContainer>
                       </TableDataCell>
@@ -110,13 +110,13 @@ export default function Home() {
                         <TableDataMeta>
                           <TableDataMetaFeature href={'bob'} target="blank" rel="noopener noreferrer">
                             <TwitterIcon />
-                          </TableDataMetaFeature>   
+                          </TableDataMetaFeature>
                           <TableDataMetaFeature href={user.json.html_url} target="blank" rel="noopener noreferrer">
                             <GitHubIcon />
-                          </TableDataMetaFeature>   
+                          </TableDataMetaFeature>
                           <TableDataMetaFeature>
                             <LinkedInIcon />
-                          </TableDataMetaFeature>   
+                          </TableDataMetaFeature>
                         </TableDataMeta>
                       </TableDataCell>
                     </TableRow>

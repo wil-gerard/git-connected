@@ -1,6 +1,6 @@
 export interface IDatabaseUser {
     githubId: string
-    displayName: string
+    displayName?: string
     __v: number
     _id: string
     photos?: any
@@ -15,7 +15,7 @@ export interface IUser {
         html_url: string
         followers_url?: string
         following_url?: string
-        name: string
+        name?: string
         blog?: string
         location?: string
         bio?: string
