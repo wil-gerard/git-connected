@@ -112,7 +112,7 @@ export default function Profile() {
                                         <ModalInputContainer>
                                             <ModalInputLabel>About me</ModalInputLabel>
                                             <ModalBioInput rows={2}>
-                                                {user.json.bio}
+                                                {user.githubInfo.json.bio}
                                             </ModalBioInput>
                                         </ModalInputContainer>
 
@@ -135,16 +135,16 @@ export default function Profile() {
                     ) : null}
                     <Card>
                         <CardImageContainer>
-                            <CardImage src={user.json.avatar_url} />
+                            <CardImage src={user.githubInfo.json.avatar_url} />
                         </CardImageContainer>
                         <CardText>
                             <CardHeader>
-                                <CardName>{user.json.name}</CardName>
-                                <CardLocation>{user.json.location}</CardLocation>
+                                <CardName>{user.githubInfo.json.name}</CardName>
+                                <CardLocation>{user.githubInfo.json.location}</CardLocation>
                             </CardHeader>
-                            <CardBio>{user.json.bio}</CardBio>
+                            <CardBio>{user.githubInfo.json.bio}</CardBio>
                             <CardMeta>
-                                <CardMetaFeature href={user.json.twitter_username}>
+                                <CardMetaFeature href={user.githubInfo.json.twitter_username}>
                                     <TwitterIcon />
                                 </CardMetaFeature>
                                 <CardMetaFeature>

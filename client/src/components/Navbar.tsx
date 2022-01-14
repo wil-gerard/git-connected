@@ -8,6 +8,7 @@ import { myContext } from "../hooks/Context"
 import React, { useContext, useState } from "react";
 import { IUser } from "../interface"
 import { ReactComponent as GitHubIcon } from "../assets/github-icon.svg";
+import { ReactComponent as DiscordIcon } from "../assets/discord-icon.svg";
 
 const NavContainer = styled.nav`
     ${tw`flex items-center justify-start bg-secondary-700 p-6 lg:p-10 w-full mb-6 lg:mb-12`}
@@ -50,8 +51,12 @@ export default function Navbar() {
 
     const [showModal, setShowModal] = useState(false)
 
-    const login = () => {
+    const githubLogin = () => {
         window.open("http://localhost:4000/auth/github", "_self")
+    }
+
+    const discordLogin = () => {
+        window.open("http://localhost:4000/auth/discord", "_self")
     }
 
     const logout = () => {
@@ -76,10 +81,13 @@ export default function Navbar() {
                                 </CloseButton>
                             </CloseButtonContainer>
                             <LoginContainer>
-                                <LoginButton onClick={login}>
+                                <LoginButton onClick={githubLogin}>
                                     <GitHubIcon />
                                     Sign in with GitHub
-
+                                </LoginButton>
+                                <LoginButton onClick={discordLogin}>
+                                    <DiscordIcon />
+                                    Sign in with Discord
                                 </LoginButton>
                             </LoginContainer>
                         </ModalContent>

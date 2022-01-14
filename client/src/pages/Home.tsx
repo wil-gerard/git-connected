@@ -89,15 +89,15 @@ export default function Home() {
                     <TableRow key={user.id}>
                       <TableDataCell>
                         <TableDataNameContainer>
-                          <TableDataImage src={user.json.avatar_url} />
+                          <TableDataImage src={user.githubInfo.json.avatar_url} />
                           <TableDataName>
-                            {user.json.name ? user.json.name : user.json.login}
+                            {user.githubInfo.json.name ? user.githubInfo.json.name : user.githubInfo.json.login}
                           </TableDataName>
                         </TableDataNameContainer>
                       </TableDataCell>
                       <TableDataCell>
                         <TableDataLocation>
-                          {user.json.location}
+                          {user.githubInfo.json.location}
                         </TableDataLocation>
                       </TableDataCell>
                       <TableDataCell>
@@ -105,7 +105,7 @@ export default function Home() {
                           <TableDataMetaFeature href={'bob'} target="blank" rel="noopener noreferrer">
                             <TwitterIcon />
                           </TableDataMetaFeature>
-                          <TableDataMetaFeature href={user.json.html_url} target="blank" rel="noopener noreferrer">
+                          <TableDataMetaFeature href={user.githubInfo.json.html_url} target="blank" rel="noopener noreferrer">
                             <GitHubIcon />
                           </TableDataMetaFeature>
                           <TableDataMetaFeature>

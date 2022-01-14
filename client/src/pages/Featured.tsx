@@ -73,16 +73,16 @@ export default function Home() {
         <Content>
           <Card key={users[randomNumber].id}>
             <CardImageContainer>
-              <CardImage src={users[randomNumber].json.avatar_url} />
+              <CardImage src={users[randomNumber].githubInfo.json.avatar_url} />
             </CardImageContainer>
             <CardText>
               <CardHeader>
-                <CardName>{users[randomNumber].json.name}</CardName>
-                <CardLocation>{users[randomNumber].json.location}</CardLocation>
+                <CardName>{users[randomNumber].githubInfo.json.name}</CardName>
+                <CardLocation>{users[randomNumber].githubInfo.json.location}</CardLocation>
               </CardHeader>
-              <CardBio>{users[randomNumber].json.bio}</CardBio>
+              <CardBio>{users[randomNumber].githubInfo.json.bio}</CardBio>
               <CardMeta>
-                <CardMetaFeature href={users[randomNumber].json.twitter_username}>
+                <CardMetaFeature href={users[randomNumber].githubInfo.json.twitter_username}>
                   <TwitterIcon />
                 </CardMetaFeature>
                 <CardMetaFeature>
