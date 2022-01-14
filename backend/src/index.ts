@@ -161,8 +161,8 @@ passport.use(new GitHubStrategy({
 // Twitter Passport Strategy
 
 passport.use(new TwitterStrategy({
-    clientID: `${process.env.TWITTER_CLIENT_ID}`,
-    clientSecret: `${process.env.TWITTER_CLIENT_SECRET}`,
+    consumerKey: `${process.env.TWITTER_CLIENT_ID}`,
+    consumerSecret: `${process.env.TWITTER_CLIENT_SECRET}`,
     callbackURL: "/auth/twitter/callback"
 },
     function (accessToken: any, refreshToken: any, profile: any, cb: any) {
@@ -221,10 +221,10 @@ app.get('/auth/github/callback',
     })
 
 app.get('/auth/twitter',
-    passport.authenticate('github', { scope: ['read:user'] }))
+    passport.authenticate('twitter'))
 
 app.get('/auth/twitter/callback',
-    passport.authenticate('github', {
+    passport.authenticate('twitter', {
         failureRedirect: '/',
         session: true
     }),

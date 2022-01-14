@@ -9,6 +9,7 @@ import React, { useContext, useState } from "react";
 import { IUser } from "../interface"
 import { ReactComponent as GitHubIcon } from "../assets/github-icon.svg";
 import { ReactComponent as DiscordIcon } from "../assets/discord-icon.svg";
+import { ReactComponent as TwitterIcon } from "../assets/twitter-icon.svg";
 
 const NavContainer = styled.nav`
     ${tw`flex items-center justify-start bg-secondary-700 p-6 lg:p-10 w-full mb-6 lg:mb-12`}
@@ -59,6 +60,10 @@ export default function Navbar() {
         window.open("http://localhost:4000/auth/discord", "_self")
     }
 
+    const twitterLogin = () => {
+        window.open("http://localhost:4000/auth/twitter", "_self")
+    }
+
     const logout = () => {
         axios.get("http://localhost:4000/auth/logout", {
             withCredentials: true
@@ -88,6 +93,10 @@ export default function Navbar() {
                                 <LoginButton onClick={discordLogin}>
                                     <DiscordIcon />
                                     Sign in with Discord
+                                </LoginButton>
+                                <LoginButton onClick={twitterLogin}>
+                                    <TwitterIcon />
+                                    Sign in with Twitter
                                 </LoginButton>
                             </LoginContainer>
                         </ModalContent>
