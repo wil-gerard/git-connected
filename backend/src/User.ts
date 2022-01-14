@@ -1,6 +1,10 @@
 import mongoose from 'mongoose'
 
 const user = new mongoose.Schema({
+    refreshToken: {
+        required:false,
+        type: String
+    },
     githubInfo: {
         githubId: {
             required: false,

@@ -1,12 +1,12 @@
 export interface IDatabaseUser {
-    _id?: string
-    __v?: number
+    _id?: string,
+    __v?: number,
     githubInfo?: {
         githubId?: string
         displayName?: string
         photos?: any
         json?: any
-    }
+    },
     discordInfo?: {
         discordId?: string,
         username?: string,
@@ -17,7 +17,7 @@ export interface IDatabaseUser {
 }
 
 export interface IUser {
-    id?: string
+    id?: string,
     githubInfo?: {
         json?: {
             login?: string

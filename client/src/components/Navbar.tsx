@@ -114,14 +114,22 @@ export default function Navbar() {
                     <NavLink to="/featured">Featured</NavLink>
                 </MainLinks>
                 <UserContextLinks>
-                    {user ? (
+                    {/* {user ? (
                         <>
                             <NavLink to="/profile">My Profile</NavLink>
                             <LogoutNavLink onClick={logout}>Logout</LogoutNavLink>
                         </>
                     ) : (
                         <LoginNavLink onClick={() => setShowModal(true)}>Log In</LoginNavLink>
-                    )}
+                    )} */}
+
+
+                            <NavLink to="/profile">My Profile</NavLink>
+                            <LogoutNavLink onClick={logout}>Logout</LogoutNavLink>
+
+
+                        <LoginNavLink onClick={() => setShowModal(true)}>Log In</LoginNavLink>
+
                 </UserContextLinks>
             </NavContainer>
         </>

@@ -91,15 +91,23 @@ passport.use(new DiscordStrategy({
 },
     function (accessToken: any, refreshToken: any, profile: any, cb: any) {
 
+        profile.refreshToken = refreshToken
+
         if (profile.guilds.some((guild: any) => guild.id === '735923219315425401')) {
             User.findOne({ discordId: profile.id }, async (err: Error, doc: IDatabaseUser) => {
-
+                
                 if (err) {
                     return cb(err, null)
                 }
 
                 if (!doc) {
                     const newUser = new User({
+                        githubInfo: {
+                            githubId: '',
+                            displayName: '',
+                            photos: '',
+                            json: ''
+                        },
                         discordInfo: {
                             discordId: profile.id,
                             username: profile.username,
@@ -131,30 +139,31 @@ passport.use(new GitHubStrategy({
 },
     function (accessToken: any, refreshToken: any, profile: any, cb: any) {
 
-        User.findOneAndUpdate({ discordId: profile.id }, async (err: Error, doc: IDatabaseUser) => {
+        let searchQuery = {
+            refreshToken: true
+        }
+
+        let updates = {
+            githubInfo: {
+                githubId: profile.id,
+                displayName: profile.displayName,
+                photos: profile.photos,
+                json: profile._json
+            }
+        }
+
+        let options = {
+            upsert: true
+        }
+
+        User.findOneAndUpdate(searchQuery, updates, options, async (err: Error, doc: IDatabaseUser) => {
 
             if (err) {
                 return cb(err, null)
-            }
-
-            if (!err) {
-                const newUser = new User({
-                    githubInfo: {
-                        githubId: profile.id,
-                        displayName: profile.displayName,
-                        photos: profile.photos,
-                        json: profile._json
-                    }
-                })
-
-                await newUser.save()
-                cb(null, newUser)
             } else {
                 cb(null, doc)
             }
         })
-
-
     }
 ))
 
@@ -272,7 +281,6 @@ app.get("/getallusers", async (req, res) => {
         res.send(filteredUsers);
     }).clone().catch(function (err: Error) { console.log(err) });
 })
-
 
 app.get("/auth/logout", (req, res) => {
     if (req.user) {
