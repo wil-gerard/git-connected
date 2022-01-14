@@ -89,15 +89,15 @@ export default function Home() {
                     <TableRow key={user.id}>
                       <TableDataCell>
                         <TableDataNameContainer>
-                          <TableDataImage src={user.githubInfo.json.avatar_url} />
+                          <TableDataImage src={`https://cdn.discordapp.com/avatars/${user.discordInfo.discordId}/${user.discordInfo.avatar}.png`} />
                           <TableDataName>
-                            {user.githubInfo.json.name ? user.githubInfo.json.name : user.githubInfo.json.login}
+                            {user.discordInfo.username}
                           </TableDataName>
                         </TableDataNameContainer>
                       </TableDataCell>
                       <TableDataCell>
                         <TableDataLocation>
-                          {user.githubInfo.json.location}
+                        {user.discordInfo.username}
                         </TableDataLocation>
                       </TableDataCell>
                       <TableDataCell>
@@ -105,7 +105,7 @@ export default function Home() {
                           <TableDataMetaFeature href={'bob'} target="blank" rel="noopener noreferrer">
                             <TwitterIcon />
                           </TableDataMetaFeature>
-                          <TableDataMetaFeature href={user.githubInfo.json.html_url} target="blank" rel="noopener noreferrer">
+                          <TableDataMetaFeature href={user.discordInfo.username} target="blank" rel="noopener noreferrer">
                             <GitHubIcon />
                           </TableDataMetaFeature>
                           <TableDataMetaFeature>

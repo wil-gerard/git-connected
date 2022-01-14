@@ -24,6 +24,20 @@ const user = new mongoose.Schema({
             required: false,
             type: String
         },
+        username: {
+            required: false,
+            type: String
+        },
+        avatar: {
+            required: false,
+            type: String
+        }, discriminator: {
+            required: false,
+            type: String
+        }, accent_color: {
+            required: false,
+            type: Number
+        }
     }
 })
 

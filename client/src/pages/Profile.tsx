@@ -112,7 +112,7 @@ export default function Profile() {
                                         <ModalInputContainer>
                                             <ModalInputLabel>About me</ModalInputLabel>
                                             <ModalBioInput rows={2}>
-                                                {user.githubInfo.json.bio}
+                                                bio...
                                             </ModalBioInput>
                                         </ModalInputContainer>
 
@@ -135,16 +135,16 @@ export default function Profile() {
                     ) : null}
                     <Card>
                         <CardImageContainer>
-                            <CardImage src={user.githubInfo.json.avatar_url} />
+                            <CardImage src={`https://cdn.discordapp.com/avatars/${user.discordInfo.discordId}/${user.discordInfo.avatar}.png`} />
                         </CardImageContainer>
                         <CardText>
                             <CardHeader>
-                                <CardName>{user.githubInfo.json.name}</CardName>
-                                <CardLocation>{user.githubInfo.json.location}</CardLocation>
+                                <CardName>{user.discordInfo.username}</CardName>
+                                <CardLocation>{user.discordInfo.username}</CardLocation>
                             </CardHeader>
-                            <CardBio>{user.githubInfo.json.bio}</CardBio>
+                            <CardBio>{user.discordInfo.username}</CardBio>
                             <CardMeta>
-                                <CardMetaFeature href={user.githubInfo.json.twitter_username}>
+                                <CardMetaFeature href={user.discordInfo.username}>
                                     <TwitterIcon />
                                 </CardMetaFeature>
                                 <CardMetaFeature>

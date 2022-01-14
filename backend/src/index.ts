@@ -50,29 +50,76 @@ passport.deserializeUser((id: string, cb) => {
     User.findOne({ _id: id }, (err: Error, user: IDatabaseUser) => {
         const userInformation: IUser = {
             id: user._id,
-            githubInfo: {
-                json: {
-                    login: user.githubInfo.json.login,
-                    avatar_url: user.githubInfo.json.avatar_url,
-                    html_url: user.githubInfo.json.html_url,
-                    followers_url: user.githubInfo.json.followers_url,
-                    following_url: user.githubInfo.json.following_url,
-                    name: user.githubInfo.json.name,
-                    blog: user.githubInfo.json.blog,
-                    location: user.githubInfo.json.location,
-                    bio: user.githubInfo.json.bio,
-                    twitter_username: user.githubInfo.json.twitter_username,
-                    followers: user.githubInfo.json.followers,
-                    following: user.githubInfo.json.following,
-                }
-            },
+            // githubInfo: {
+            //     json: {
+            //         login: user.githubInfo.json.login,
+            //         avatar_url: user.githubInfo.json.avatar_url,
+            //         html_url: user.githubInfo.json.html_url,
+            //         followers_url: user.githubInfo.json.followers_url,
+            //         following_url: user.githubInfo.json.following_url,
+            //         name: user.githubInfo.json.name,
+            //         blog: user.githubInfo.json.blog,
+            //         location: user.githubInfo.json.location,
+            //         bio: user.githubInfo.json.bio,
+            //         twitter_username: user.githubInfo.json.twitter_username,
+            //         followers: user.githubInfo.json.followers,
+            //         following: user.githubInfo.json.following,
+            //     }
+            // },
             discordInfo: {
-                discordId: user.discordInfo.discordId
+                discordId: user.discordInfo.discordId,
+                username: user.discordInfo.username,
+                avatar: user.discordInfo.avatar,
+                discriminator: user.discordInfo.discriminator,
+                accent_color: user.discordInfo.accent_color
             }
         }
         cb(err, userInformation)
     })
 })
+
+// Discord Passport Strategy
+
+const discordScopes = ['identify', 'guilds', 'guilds.join', 'guilds.members.read']
+
+passport.use(new DiscordStrategy({
+    clientID: `${process.env.DISCORD_CLIENT_ID}`,
+    clientSecret: `${process.env.DISCORD_CLIENT_SECRET}`,
+    callbackURL: "/auth/discord/callback",
+    scope: discordScopes
+},
+    function (accessToken: any, refreshToken: any, profile: any, cb: any) {
+
+        if (profile.guilds.some((guild: any) => guild.id === '735923219315425401')) {
+            User.findOne({ discordId: profile.id }, async (err: Error, doc: IDatabaseUser) => {
+
+                if (err) {
+                    return cb(err, null)
+                }
+
+                if (!doc) {
+                    const newUser = new User({
+                        discordInfo: {
+                            discordId: profile.id,
+                            username: profile.username,
+                            avatar: profile.avatar,
+                            discriminator: profile.discriminator,
+                            accent_color: profile.accent_color,
+                        }
+                    })
+
+                    await newUser.save()
+                    cb(null, newUser)
+                } else {
+                    cb(null, doc)
+                }
+            })
+        } else {
+            return
+        }
+    }
+))
+
 
 // GitHub Passport Strategy
 
@@ -83,18 +130,20 @@ passport.use(new GitHubStrategy({
 },
     function (accessToken: any, refreshToken: any, profile: any, cb: any) {
 
-        User.findOne({ githubId: profile.id }, async (err: Error, doc: IDatabaseUser) => {
+        User.findOneAndUpdate({ discordId: profile.id }, async (err: Error, doc: IDatabaseUser) => {
 
             if (err) {
                 return cb(err, null)
             }
 
-            if (!doc) {
+            if (!err) {
                 const newUser = new User({
-                    githubId: profile.id,
-                    displayName: profile.displayName,
-                    photos: profile.photos,
-                    json: profile._json
+                    githubInfo: {
+                        githubId: profile.id,
+                        displayName: profile.displayName,
+                        photos: profile.photos,
+                        json: profile._json
+                    }
                 })
 
                 await newUser.save()
@@ -108,61 +157,27 @@ passport.use(new GitHubStrategy({
     }
 ))
 
-// Discord Passport Strategy
-
-const discordScopes = ['identify', 'guilds', 'guilds.join']
-
-passport.use(new DiscordStrategy({
-    clientID: `${process.env.DISCORD_CLIENT_ID}`,
-    clientSecret: `${process.env.DISCORD_CLIENT_SECRET}`,
-    callbackURL: "/auth/discord/callback",
-    scope: discordScopes
-},
-    function (accessToken: any, refreshToken: any, profile: any, cb: any) {
-        console.log(profile)
-
-        User.findOne({ discordId: profile.id }, async (err: Error, doc: IDatabaseUser) => {
-
-            if (err) {
-                return cb(err, null)
-            }
-
-            if (!doc) {
-                const newUser = new User({
-                    discordId: profile.id,
-                })
-
-                await newUser.save()
-                cb(null, newUser)
-            } else {
-                cb(null, doc)
-            }
-        })
-
-
-    }
-))
 
 app.get('/auth/discord',
     passport.authenticate('discord'))
 
 app.get('/auth/discord/callback',
-    passport.authenticate('discord', { 
+    passport.authenticate('discord', {
         failureRedirect: '/',
         session: true
-     }),
+    }),
     function (req, res) {
         res.redirect(`${process.env.FRONTEND_DEV_URL}/profile`)
     })
-    
+
 app.get('/auth/github',
     passport.authenticate('github', { scope: ['read:user'] }))
 
 app.get('/auth/github/callback',
-    passport.authenticate('github', { 
+    passport.authenticate('github', {
         failureRedirect: '/',
         session: true
-     }),
+    }),
     function (req, res) {
         res.redirect(`${process.env.FRONTEND_DEV_URL}/profile`)
     })
@@ -171,10 +186,6 @@ app.get("/getuser", (req, res) => {
     res.send(req.user)
 })
 
-// app.post("/getuser", (req, res) => {
-//     res.
-// })
-
 app.get("/getallusers", async (req, res) => {
     await User.find({}, (err: Error, data: IDatabaseUser[]) => {
         if (err) throw err;
@@ -182,31 +193,36 @@ app.get("/getallusers", async (req, res) => {
         data.forEach((user: IDatabaseUser) => {
             const userInformation = {
                 id: user._id,
-                githubInfo: {
-                    json: {
-                        login: user.githubInfo.json.login,
-                        avatar_url: user.githubInfo.json.avatar_url,
-                        html_url: user.githubInfo.json.html_url,
-                        followers_url: user.githubInfo.json.followers_url,
-                        following_url: user.githubInfo.json.following_url,
-                        name: user.githubInfo.json.name,
-                        blog: user.githubInfo.json.blog,
-                        location: user.githubInfo.json.location,
-                        bio: user.githubInfo.json.bio,
-                        twitter_username: user.githubInfo.json.twitter_username,
-                        followers: user.githubInfo.json.followers,
-                        following: user.githubInfo.json.following,
-                    }
-                },
+                // githubInfo: {
+                //     json: {
+                //         login: user.githubInfo.json.login,
+                //         avatar_url: user.githubInfo.json.avatar_url,
+                //         html_url: user.githubInfo.json.html_url,
+                //         followers_url: user.githubInfo.json.followers_url,
+                //         following_url: user.githubInfo.json.following_url,
+                //         name: user.githubInfo.json.name,
+                //         blog: user.githubInfo.json.blog,
+                //         location: user.githubInfo.json.location,
+                //         bio: user.githubInfo.json.bio,
+                //         twitter_username: user.githubInfo.json.twitter_username,
+                //         followers: user.githubInfo.json.followers,
+                //         following: user.githubInfo.json.following,
+                //     }
+                // },
                 discordInfo: {
-                    discordId: user.discordInfo.discordId
+                    discordId: user.discordInfo.discordId,
+                    username: user.discordInfo.username,
+                    avatar: user.discordInfo.avatar,
+                    discriminator: user.discordInfo.discriminator,
+                    accent_color: user.discordInfo.accent_color
                 }
             }
             filteredUsers.push(userInformation);
         })
         res.send(filteredUsers);
-    }).clone().catch(function(err: Error) {console.log(err)});
-});
+    }).clone().catch(function (err: Error) { console.log(err) });
+})
+
 
 app.get("/auth/logout", (req, res) => {
     if (req.user) {

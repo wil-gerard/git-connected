@@ -1,21 +1,25 @@
 export interface IDatabaseUser {
-    githubInfo: {
+    _id?: string
+    __v?: number
+    githubInfo?: {
         githubId?: string
         displayName?: string
         photos?: any
         json?: any
     }
-    discordInfo: {
-        discordId?: string
+    discordInfo?: {
+        discordId?: string,
+        username?: string,
+        avatar?: string,
+        discriminator?: string,
+        accent_color?: number
     }
-    __v: number
-    _id: string
 }
 
 export interface IUser {
     id?: string
-    githubInfo: {
-        json: {
+    githubInfo?: {
+        json?: {
             login?: string
             avatar_url?: string
             html_url?: string
@@ -30,7 +34,11 @@ export interface IUser {
             following?: number
         }
     },
-    discordInfo: {
-        discordId?: string
+    discordInfo?: {
+        discordId?: string,
+        username?: string,
+        avatar?: string,
+        discriminator?: string,
+        accent_color?: number
     }
 }
