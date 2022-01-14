@@ -12,6 +12,7 @@ import mongoStore from 'connect-mongo'
 
 const GitHubStrategy = require("passport-github2").Strategy
 const DiscordStrategy = require("passport-discord").Strategy
+const TwitterStrategy = require("passport-twitter").Strategy
 
 const app = express()
 
@@ -157,6 +158,43 @@ passport.use(new GitHubStrategy({
     }
 ))
 
+// Twitter Passport Strategy
+
+passport.use(new TwitterStrategy({
+    clientID: `${process.env.TWITTER_CLIENT_ID}`,
+    clientSecret: `${process.env.TWITTER_CLIENT_SECRET}`,
+    callbackURL: "/auth/twitter/callback"
+},
+    function (accessToken: any, refreshToken: any, profile: any, cb: any) {
+        console.log(profile)
+
+        // User.findOneAndUpdate({ discordId: profile.id }, async (err: Error, doc: IDatabaseUser) => {
+
+        //     if (err) {
+        //         return cb(err, null)
+        //     }
+
+        //     if (!err) {
+        //         const newUser = new User({
+        //             githubInfo: {
+        //                 githubId: profile.id,
+        //                 displayName: profile.displayName,
+        //                 photos: profile.photos,
+        //                 json: profile._json
+        //             }
+        //         })
+
+        //         await newUser.save()
+        //         cb(null, newUser)
+        //     } else {
+        //         cb(null, doc)
+        //     }
+        // })
+
+
+    }
+))
+
 
 app.get('/auth/discord',
     passport.authenticate('discord'))
@@ -174,6 +212,18 @@ app.get('/auth/github',
     passport.authenticate('github', { scope: ['read:user'] }))
 
 app.get('/auth/github/callback',
+    passport.authenticate('github', {
+        failureRedirect: '/',
+        session: true
+    }),
+    function (req, res) {
+        res.redirect(`${process.env.FRONTEND_DEV_URL}/profile`)
+    })
+
+app.get('/auth/twitter',
+    passport.authenticate('github', { scope: ['read:user'] }))
+
+app.get('/auth/twitter/callback',
     passport.authenticate('github', {
         failureRedirect: '/',
         session: true
