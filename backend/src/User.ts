@@ -1,21 +1,59 @@
 import mongoose from 'mongoose'
 
 const user = new mongoose.Schema({
-    githubId: {
-        required: true,
-        type: String
+    discord: {
+        id: {
+            required: false,
+            type: String
+        },
+        token: {
+            required: false,
+            type: String
+        },
+        username: {
+            required: false,
+            type: String
+        },
+        avatar: {
+            required: false,
+            type: String
+        },
+        discriminator: {
+            required: false,
+            type: String
+        },
+        accent_color: {
+            required: false,
+            type: Number
+        }
     },
-    displayName: {
-        required: false,
-        type: String
+    github: {
+        id: {
+            required: false,
+            type: String
+        },
+        token: {
+            required: false,
+            type: String
+        },
+        json: {
+            require: false,
+            type: Object
+        }
     },
-    photos: {
-        required: false,
-        type: Array
-    },
-    json: {
-        require: true,
-        type: Object
+    twitter: {
+        id: {
+            required: false,
+            type: String
+        },
+        token: {
+            required: false,
+            type: String
+        },
+        username: {
+            required: false,
+            type: String
+        }
     }
 })
 

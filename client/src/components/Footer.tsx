@@ -8,7 +8,7 @@ export default function Footer() {
                     <div className="flex flex-col">
                         <span className="font-bold text-gray-300 uppercase mb-2">Content</span>
                         <span className="my-2"><a href="/" className="text-gray-300 text-md hover:text-primary-500 transition duration-300">Profiles</a></span>
-                        <span className="my-2"><a href="/featured" className="text-gray-300 text-md hover:text-primary-500 transition duration-300">Featured Profile</a></span>
+                        <span className="my-2"><a href="/featured" className="text-gray-300 text-md hover:text-primary-500 transition duration-300">Featured</a></span>
                     </div>
                     <div className="flex flex-col">
                         <span className="font-bold text-gray-300 uppercase mt-4 md:mt-0 mb-2">100devs</span>

@@ -72,18 +72,18 @@ export default function Home() {
       <Container>
         <Header>Git to Know...</Header>
         <Content>
-          <Card key={users[randomNumber].id}>
+          <Card key={users[randomNumber].github.id}>
             <CardImageContainer>
-              <CardImage src={users[randomNumber].json.avatar_url} />
+              <CardImage src={users[randomNumber].github.json.avatar_url} />
             </CardImageContainer>
             <CardText>
               <CardHeader>
-                <CardName>{users[randomNumber].json.name}</CardName>
-                <CardLocation>{users[randomNumber].json.location}</CardLocation>
+                <CardName>{users[randomNumber].github.json.name}</CardName>
+                <CardLocation>{users[randomNumber].github.json.location}</CardLocation>
               </CardHeader>
-              <CardBio>{users[randomNumber].json.bio}</CardBio>
+              <CardBio>{users[randomNumber].github.json.bio}</CardBio>
               <CardMeta>
-                <CardMetaFeature href={users[randomNumber].json.twitter_username}>
+                <CardMetaFeature href={users[randomNumber].github.json.twitter_username}>
                   <TwitterIcon />
                 </CardMetaFeature>
                 <CardMetaFeature>
