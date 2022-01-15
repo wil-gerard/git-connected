@@ -50,7 +50,6 @@ passport.deserializeUser((id: string, cb) => {
 
     User.findOne({ _id: id }, (err: Error, user: IDatabaseUser) => {
         const userInformation: IUser = {
-            id: user._id,
             // githubInfo: {
             //     json: {
             //         login: user.githubInfo.json.login,
@@ -67,12 +66,13 @@ passport.deserializeUser((id: string, cb) => {
             //         following: user.githubInfo.json.following,
             //     }
             // },
-            discordInfo: {
-                discordId: user.discordInfo.discordId,
-                username: user.discordInfo.username,
-                avatar: user.discordInfo.avatar,
-                discriminator: user.discordInfo.discriminator,
-                accent_color: user.discordInfo.accent_color
+            discord: {
+                id: user.discord.id,
+                token: user.discord.id,
+                username: user.discord.username,
+                avatar: user.discord.avatar,
+                discriminator: user.discord.discriminator,
+                accent_color: user.discord.accent_color
             }
         }
         cb(err, userInformation)
@@ -102,18 +102,20 @@ passport.use(new DiscordStrategy({
 
                 if (!doc) {
                     const newUser = new User({
-                        githubInfo: {
-                            githubId: '',
-                            displayName: '',
-                            photos: '',
-                            json: ''
-                        },
-                        discordInfo: {
-                            discordId: profile.id,
+                        discord: {
+                            id: profile.id,
+                            token: profile.accessToken,
                             username: profile.username,
                             avatar: profile.avatar,
                             discriminator: profile.discriminator,
                             accent_color: profile.accent_color,
+                        },
+                        github: {
+                            id: '',
+                            token: '',
+                            displayName: '',
+                            photos: '',
+                            json: ''
                         }
                     })
 
@@ -140,12 +142,13 @@ passport.use(new GitHubStrategy({
     function (accessToken: any, refreshToken: any, profile: any, cb: any) {
 
         let searchQuery = {
-            refreshToken: true
+            discordId: profile.id
         }
 
         let updates = {
-            githubInfo: {
-                githubId: profile.id,
+            github: {
+                id: profile.id,
+                token: profile.accessToken,
                 displayName: profile.displayName,
                 photos: profile.photos,
                 json: profile._json
@@ -205,8 +208,10 @@ passport.use(new TwitterStrategy({
 ))
 
 
-app.get('/auth/discord',
-    passport.authenticate('discord'))
+app.get('/auth/discord', (req,res,next) => {
+    console.log(req.query)
+    passport.authenticate('discord')(req,res,next)
+})
 
 app.get('/auth/discord/callback',
     passport.authenticate('discord', {
@@ -268,12 +273,13 @@ app.get("/getallusers", async (req, res) => {
                 //         following: user.githubInfo.json.following,
                 //     }
                 // },
-                discordInfo: {
-                    discordId: user.discordInfo.discordId,
-                    username: user.discordInfo.username,
-                    avatar: user.discordInfo.avatar,
-                    discriminator: user.discordInfo.discriminator,
-                    accent_color: user.discordInfo.accent_color
+                discord: {
+                    id: user.discord.id,
+                    token: user.discord.id,
+                    username: user.discord.username,
+                    avatar: user.discord.avatar,
+                    discriminator: user.discord.discriminator,
+                    accent_color: user.discord.accent_color
                 }
             }
             filteredUsers.push(userInformation);
@@ -283,9 +289,9 @@ app.get("/getallusers", async (req, res) => {
 })
 
 app.get("/auth/logout", (req, res) => {
-    if (req.user) {
-        req.logout();
-        res.send("done");
+    if (req.user){
+        req.logout()
+        res.send("done")
     }
 })
 

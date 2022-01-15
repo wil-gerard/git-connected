@@ -1,12 +1,38 @@
 import mongoose from 'mongoose'
 
 const user = new mongoose.Schema({
-    refreshToken: {
-        required:false,
-        type: String
+    discord: {
+        id: {
+            required: false,
+            type: String
+        },
+        token: {
+            required: false,
+            type: String
+        },
+        username: {
+            required: false,
+            type: String
+        },
+        avatar: {
+            required: false,
+            type: String
+        },
+        discriminator: {
+            required: false,
+            type: String
+        },
+        accent_color: {
+            required: false,
+            type: Number
+        }
     },
-    githubInfo: {
-        githubId: {
+    github: {
+        id: {
+            required: false,
+            type: String
+        },
+        token: {
             required: false,
             type: String
         },
@@ -21,26 +47,6 @@ const user = new mongoose.Schema({
         json: {
             require: false,
             type: Object
-        }
-    },
-    discordInfo: {
-        discordId: {
-            required: false,
-            type: String
-        },
-        username: {
-            required: false,
-            type: String
-        },
-        avatar: {
-            required: false,
-            type: String
-        }, discriminator: {
-            required: false,
-            type: String
-        }, accent_color: {
-            required: false,
-            type: Number
         }
     }
 })

@@ -8,8 +8,8 @@ import { myContext } from "../hooks/Context"
 import React, { useContext, useState } from "react";
 import { IUser } from "../interface"
 import { ReactComponent as DiscordIcon } from "../assets/discord-icon.svg";
-// import { ReactComponent as GitHubIcon } from "../assets/github-icon.svg";
-// import { ReactComponent as TwitterIcon } from "../assets/twitter-icon.svg";
+import { ReactComponent as GitHubIcon } from "../assets/github-icon.svg";
+import { ReactComponent as TwitterIcon } from "../assets/twitter-icon.svg";
 
 const NavContainer = styled.nav`
     ${tw`flex items-center justify-start bg-secondary-700 p-6 lg:p-10 w-full mb-6 lg:mb-12`}
@@ -54,16 +54,16 @@ export default function Navbar() {
 
     
     const discordLogin = () => {
-        window.open("http://localhost:4000/auth/discord", "_self")
+        window.open("http://localhost:4000/auth/discord?testworking=true&happiness=high", "_self")
     }
     
-    // const githubLogin = () => {
-    //     window.open("http://localhost:4000/auth/github", "_self")
-    // }
+    const githubLogin = () => {
+        window.open("http://localhost:4000/auth/github", "_self")
+    }
 
-    // const twitterLogin = () => {
-    //     window.open("http://localhost:4000/auth/twitter", "_self")
-    // }
+    const twitterLogin = () => {
+        window.open("http://localhost:4000/auth/twitter", "_self")
+    }
 
     const logout = () => {
         axios.get("http://localhost:4000/auth/logout", {
@@ -87,18 +87,18 @@ export default function Navbar() {
                                 </CloseButton>
                             </CloseButtonContainer>
                             <LoginContainer>
-                                {/* <LoginButton onClick={githubLogin}>
+                                <LoginButton onClick={githubLogin}>
                                     <GitHubIcon />
                                     Sign in with GitHub
-                                </LoginButton> */}
+                                </LoginButton>
                                 <LoginButton onClick={discordLogin}>
                                     <DiscordIcon />
                                     Sign in with Discord
                                 </LoginButton>
-                                {/* <LoginButton onClick={twitterLogin}>
+                                <LoginButton onClick={twitterLogin}>
                                     <TwitterIcon />
                                     Sign in with Twitter
-                                </LoginButton> */}
+                                </LoginButton>
                             </LoginContainer>
                         </ModalContent>
                     </ModalContainer>

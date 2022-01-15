@@ -17,10 +17,10 @@ export interface IUser {
         }
     },
     discordInfo: {
-        discordId?: string,
-        username?: string,
-        avatar?: string,
-        discriminator?: string,
+        discordId?: string
+        username?: string
+        avatar?: string
+        discriminator?: string
         accent_color?: number
     }
 }
