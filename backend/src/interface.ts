@@ -7,13 +7,12 @@ export interface IDatabaseUser {
         username?: string
         avatar?: string
         discriminator?: string
-        accent_color?: number
+        banner?: string
+        banner_color?: string
     }
     github?: {
         id: string
         token: string
-        displayName?: string
-        photos?: any
         json?: any
     }
 }
@@ -30,8 +29,6 @@ export interface IUser {
     github?: {
         id: string
         token: string
-        displayName?: string
-        photos?: string
         json?: {
             login?: string
             avatar_url?: string
@@ -39,6 +36,8 @@ export interface IUser {
             followers_url?: string
             following_url?: string
             name?: string
+            company? : string
+            hireable?: string
             blog?: string
             location?: string
             bio?: string

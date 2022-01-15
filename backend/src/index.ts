@@ -47,35 +47,8 @@ passport.serializeUser((user: IDatabaseUser, cb) => {
 })
 
 passport.deserializeUser((id: string, cb) => {
-
-    User.findOne({ _id: id }, (err: Error, user: IDatabaseUser) => {
-        const userInformation: IUser = {
-            // githubInfo: {
-            //     json: {
-            //         login: user.githubInfo.json.login,
-            //         avatar_url: user.githubInfo.json.avatar_url,
-            //         html_url: user.githubInfo.json.html_url,
-            //         followers_url: user.githubInfo.json.followers_url,
-            //         following_url: user.githubInfo.json.following_url,
-            //         name: user.githubInfo.json.name,
-            //         blog: user.githubInfo.json.blog,
-            //         location: user.githubInfo.json.location,
-            //         bio: user.githubInfo.json.bio,
-            //         twitter_username: user.githubInfo.json.twitter_username,
-            //         followers: user.githubInfo.json.followers,
-            //         following: user.githubInfo.json.following,
-            //     }
-            // },
-            discord: {
-                id: user.discord.id,
-                token: user.discord.id,
-                username: user.discord.username,
-                avatar: user.discord.avatar,
-                discriminator: user.discord.discriminator,
-                accent_color: user.discord.accent_color
-            }
-        }
-        cb(err, userInformation)
+    User.findById({ _id: id }, (err: Error, user: IDatabaseUser) => {
+        cb(err, user)
     })
 })
 
@@ -90,34 +63,26 @@ passport.use(new DiscordStrategy({
     scope: discordScopes
 },
     function (accessToken: any, refreshToken: any, profile: any, cb: any) {
-
-        profile.refreshToken = refreshToken
+        console.log(profile)
 
         if (profile.guilds.some((guild: any) => guild.id === '735923219315425401')) {
-            User.findOne({ discordId: profile.id }, async (err: Error, doc: IDatabaseUser) => {
-                
+            User.findOne({ 'discord.id': profile.id }, async (err: Error, doc: IDatabaseUser) => {
+
                 if (err) {
                     return cb(err, null)
                 }
 
                 if (!doc) {
-                    const newUser = new User({
-                        discord: {
-                            id: profile.id,
-                            token: profile.accessToken,
-                            username: profile.username,
-                            avatar: profile.avatar,
-                            discriminator: profile.discriminator,
-                            accent_color: profile.accent_color,
-                        },
-                        github: {
-                            id: '',
-                            token: '',
-                            displayName: '',
-                            photos: '',
-                            json: ''
-                        }
-                    })
+
+                    const newUser = new User()
+
+                    newUser.discord.id = profile.id
+                    newUser.discord.token = accessToken
+                    newUser.discord.username = profile.username
+                    newUser.discord.avatar = profile.avatar
+                    newUser.discord.discriminator = profile.discriminator
+                    newUser.discord.banner = profile.banner
+                    newUser.discord.banner_color = profile.banner_color
 
                     await newUser.save()
                     cb(null, newUser)
@@ -126,7 +91,7 @@ passport.use(new DiscordStrategy({
                 }
             })
         } else {
-            return
+            console.log('not a member of the 100devs discord server')
         }
     }
 ))
@@ -137,36 +102,51 @@ passport.use(new DiscordStrategy({
 passport.use(new GitHubStrategy({
     clientID: `${process.env.GITHUB_CLIENT_ID}`,
     clientSecret: `${process.env.GITHUB_CLIENT_SECRET}`,
-    callbackURL: "/auth/github/callback"
+    callbackURL: "/auth/github/callback",
+    passReqToCallback: true
 },
-    function (accessToken: any, refreshToken: any, profile: any, cb: any) {
+    function (req: any, accessToken: any, refreshToken: any, profile: any, cb: any) {
 
-        let searchQuery = {
-            discordId: profile.id
-        }
+        console.log(profile)
 
-        let updates = {
-            github: {
-                id: profile.id,
-                token: profile.accessToken,
-                displayName: profile.displayName,
-                photos: profile.photos,
-                json: profile._json
-            }
-        }
+        process.nextTick(() => {
+            if (req.user) {
+                let user = req.user
+                console.log(`github oauth working -- this is req.user obj ${user}`)
 
-        let options = {
-            upsert: true
-        }
+                user.github.id = profile.id
+                user.github.token = accessToken
+                user.github.displayName = profile.displayName
+                user.github.json = profile._json
 
-        User.findOneAndUpdate(searchQuery, updates, options, async (err: Error, doc: IDatabaseUser) => {
-
-            if (err) {
-                return cb(err, null)
-            } else {
-                cb(null, doc)
+                user.save((err: Error) => {
+                    if (err)
+                        throw err
+                        return cb(null, user)
+                }) 
             }
         })
+
+        // if (req.user) {
+
+        //     let user = req.user
+        //     console.log(`github oauth working -- this is req.user obj ${user}`)
+
+        //     User.findOne({ 'discord.id': user.discord.id }, async (err: Error, doc: IDatabaseUser) => {
+        //         console.log(`user found on mongodb`)
+
+
+        //         user.github.id = profile.id
+        //         user.github.token = accessToken
+        //         user.github.displayName = profile.displayName
+        //         user.github.photos = profile.photos
+        //         user.github.json = profile.json
+
+        //         await user.save()
+        //         cb(null, user)
+
+        //     })
+        // }
     }
 ))
 
@@ -208,9 +188,9 @@ passport.use(new TwitterStrategy({
 ))
 
 
-app.get('/auth/discord', (req,res,next) => {
+app.get('/auth/discord', (req, res, next) => {
     console.log(req.query)
-    passport.authenticate('discord')(req,res,next)
+    passport.authenticate('discord')(req, res, next)
 })
 
 app.get('/auth/discord/callback',
@@ -256,30 +236,30 @@ app.get("/getallusers", async (req, res) => {
         const filteredUsers: IUser[] = [];
         data.forEach((user: IDatabaseUser) => {
             const userInformation = {
-                id: user._id,
-                // githubInfo: {
-                //     json: {
-                //         login: user.githubInfo.json.login,
-                //         avatar_url: user.githubInfo.json.avatar_url,
-                //         html_url: user.githubInfo.json.html_url,
-                //         followers_url: user.githubInfo.json.followers_url,
-                //         following_url: user.githubInfo.json.following_url,
-                //         name: user.githubInfo.json.name,
-                //         blog: user.githubInfo.json.blog,
-                //         location: user.githubInfo.json.location,
-                //         bio: user.githubInfo.json.bio,
-                //         twitter_username: user.githubInfo.json.twitter_username,
-                //         followers: user.githubInfo.json.followers,
-                //         following: user.githubInfo.json.following,
-                //     }
-                // },
+                githubInfo: {
+                    json: {
+                        login: user.github.json.login,
+                        avatar_url: user.github.json.avatar_url,
+                        html_url: user.github.json.html_url,
+                        followers_url: user.github.json.followers_url,
+                        following_url: user.github.json.following_url,
+                        name: user.github.json.name,
+                        blog: user.github.json.blog,
+                        location: user.github.json.location,
+                        bio: user.github.json.bio,
+                        twitter_username: user.github.json.twitter_username,
+                        followers: user.github.json.followers,
+                        following: user.github.json.following,
+                    }
+                },
                 discord: {
                     id: user.discord.id,
                     token: user.discord.id,
                     username: user.discord.username,
                     avatar: user.discord.avatar,
                     discriminator: user.discord.discriminator,
-                    accent_color: user.discord.accent_color
+                    banner: user.discord.banner,
+                    banner_color: user.discord.banner_color
                 }
             }
             filteredUsers.push(userInformation);
@@ -289,7 +269,7 @@ app.get("/getallusers", async (req, res) => {
 })
 
 app.get("/auth/logout", (req, res) => {
-    if (req.user){
+    if (req.user) {
         req.logout()
         res.send("done")
     }

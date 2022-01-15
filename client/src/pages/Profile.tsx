@@ -135,16 +135,16 @@ export default function Profile() {
                     ) : null}
                     <Card>
                         <CardImageContainer>
-                            <CardImage src={`https://cdn.discordapp.com/avatars/${user.discordInfo.discordId}/${user.discordInfo.avatar}.png`} />
+                            <CardImage src={`https://cdn.discordapp.com/avatars/${user.discord.id}/${user.discord.avatar}.png`} />
                         </CardImageContainer>
                         <CardText>
                             <CardHeader>
-                                <CardName>{user.discordInfo.username}</CardName>
-                                <CardLocation>{user.discordInfo.username}</CardLocation>
+                                <CardName>{user.discord.username}</CardName>
+                                <CardLocation>{user.discord.username}</CardLocation>
                             </CardHeader>
-                            <CardBio>{user.discordInfo.username}</CardBio>
+                            <CardBio>{user.discord.username}</CardBio>
                             <CardMeta>
-                                <CardMetaFeature href={user.discordInfo.username}>
+                                <CardMetaFeature href={user.discord.username}>
                                     <TwitterIcon />
                                 </CardMetaFeature>
                                 <CardMetaFeature>

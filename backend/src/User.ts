@@ -36,14 +36,6 @@ const user = new mongoose.Schema({
             required: false,
             type: String
         },
-        displayName: {
-            required: false,
-            type: String
-        },
-        photos: {
-            required: false,
-            type: Array
-        },
         json: {
             require: false,
             type: Object

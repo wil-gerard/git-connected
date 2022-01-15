@@ -86,18 +86,18 @@ export default function Home() {
                 {users.map((user: IUser) => {
 
                   return (
-                    <TableRow key={user.id}>
+                    <TableRow key={user.discord.id}>
                       <TableDataCell>
                         <TableDataNameContainer>
-                          <TableDataImage src={`https://cdn.discordapp.com/avatars/${user.discordInfo.discordId}/${user.discordInfo.avatar}.png`} />
+                          <TableDataImage src={`https://cdn.discordapp.com/avatars/${user.discord.id}/${user.discord.avatar}.png`} />
                           <TableDataName>
-                            {user.discordInfo.username}
+                            {user.discord.username}
                           </TableDataName>
                         </TableDataNameContainer>
                       </TableDataCell>
                       <TableDataCell>
                         <TableDataLocation>
-                        {user.discordInfo.username}
+                        {user.discord.username}
                         </TableDataLocation>
                       </TableDataCell>
                       <TableDataCell>
@@ -105,7 +105,7 @@ export default function Home() {
                           <TableDataMetaFeature href={'bob'} target="blank" rel="noopener noreferrer">
                             <TwitterIcon />
                           </TableDataMetaFeature>
-                          <TableDataMetaFeature href={user.discordInfo.username} target="blank" rel="noopener noreferrer">
+                          <TableDataMetaFeature href={user.discord.username} target="blank" rel="noopener noreferrer">
                             <GitHubIcon />
                           </TableDataMetaFeature>
                           <TableDataMetaFeature>
