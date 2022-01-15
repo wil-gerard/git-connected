@@ -15,6 +15,11 @@ export interface IDatabaseUser {
         token: string
         json?: any
     }
+    twitter?: {
+        id: string
+        token: string
+        username: string
+    }
 }
 
 export interface IUser {
@@ -45,5 +50,10 @@ export interface IUser {
             followers?: number
             following?: number
         }
+    }
+    twitter?: {
+        id: string
+        token: string
+        username: string
     }
 }

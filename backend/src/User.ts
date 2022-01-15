@@ -40,6 +40,20 @@ const user = new mongoose.Schema({
             require: false,
             type: Object
         }
+    },
+    twitter: {
+        id: {
+            required: false,
+            type: String
+        },
+        token: {
+            required: false,
+            type: String
+        },
+        username: {
+            required: false,
+            type: String
+        }
     }
 })
 

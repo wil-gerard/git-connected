@@ -155,35 +155,29 @@ passport.use(new GitHubStrategy({
 passport.use(new TwitterStrategy({
     consumerKey: `${process.env.TWITTER_CLIENT_ID}`,
     consumerSecret: `${process.env.TWITTER_CLIENT_SECRET}`,
-    callbackURL: "/auth/twitter/callback"
+    callbackURL: "/auth/twitter/callback",
+    skipExtendedUserProfile: true,
+    passReqToCallback: true
 },
-    function (accessToken: any, refreshToken: any, profile: any, cb: any) {
+    function (req:any , token: any, tokenSecret: any, profile: any, cb: any) {
         console.log(profile)
 
-        // User.findOneAndUpdate({ discordId: profile.id }, async (err: Error, doc: IDatabaseUser) => {
+        process.nextTick(() => {
+            if (req.user) {
+                let user = req.user
+                console.log(`github oauth working -- this is req.user obj ${user}`)
 
-        //     if (err) {
-        //         return cb(err, null)
-        //     }
+                user.twitter.id = profile.id
+                user.twitter.username = profile.username
+                user.twitter.token = token
 
-        //     if (!err) {
-        //         const newUser = new User({
-        //             githubInfo: {
-        //                 githubId: profile.id,
-        //                 displayName: profile.displayName,
-        //                 photos: profile.photos,
-        //                 json: profile._json
-        //             }
-        //         })
-
-        //         await newUser.save()
-        //         cb(null, newUser)
-        //     } else {
-        //         cb(null, doc)
-        //     }
-        // })
-
-
+                user.save((err: Error) => {
+                    if (err)
+                        throw err
+                        return cb(null, user)
+                }) 
+            }
+        })
     }
 ))
 
@@ -260,6 +254,11 @@ app.get("/getallusers", async (req, res) => {
                     discriminator: user.discord.discriminator,
                     banner: user.discord.banner,
                     banner_color: user.discord.banner_color
+                },
+                twitter: {
+                    id: user.twitter.id,
+                    token: user.twitter.id,
+                    username: user.twitter.username,
                 }
             }
             filteredUsers.push(userInformation);

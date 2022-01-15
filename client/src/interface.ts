@@ -28,4 +28,9 @@ export interface IUser {
             following?: number
         }
     }
+    twitter?: {
+        id: string
+        token: string
+        username: string
+    }
 }
