@@ -7,8 +7,8 @@ import session from "express-session"
 import passport from "passport"
 import User from "./User"
 import { IDatabaseUser, IUser } from "./interface"
-
 const GitHubStrategy = require("passport-github2").Strategy
+import mongoStore from 'connect-mongo'
 
 const app = express()
 
@@ -20,20 +20,18 @@ mongoose.connect(`${process.env.START_MONGODB}${process.env.MONGODB_USERNAME}:${
 // Middleware
 
 app.use(express.json())
-app.use(cors({ origin: "https://www.gitconnected.dev", credentials: true }))
+app.use(cors({ origin: `${process.env.FRONTEND_DEV_URL}`, credentials: true }))
 
 app.set("trust proxy", 1)
 
 app.use(
     session({
-        secret: "secretcode",
-        resave: true,
-        saveUninitialized: true,
-        cookie: {
-           sameSite: "none",
-           secure: true,
-           maxAge: 1000 * 60 * 60 * 24 * 7 // one week
-        }
+        secret: process.env.SESSION_SECRET,
+        resave: false,
+        saveUninitialized: false,
+        store: mongoStore.create({
+            mongoUrl: `${process.env.START_MONGODB}${process.env.MONGODB_USERNAME}:${process.env.MONGODB_PASSWORD}${process.env.END_MONGODB}`
+        })
     })
 )
 
@@ -75,7 +73,7 @@ passport.use(new GitHubStrategy({
     clientSecret: `${process.env.GITHUB_CLIENT_SECRET}`,
     callbackURL: "/auth/github/callback"
 },
-    function (_: any, __: any, profile: any, cb: any) {
+    function (accessToken: any, refreshToken: any, profile: any, cb: any) {
 
         User.findOne({ githubId: profile.id }, async (err: Error, doc: IDatabaseUser) => {
 
@@ -106,9 +104,12 @@ app.get('/auth/github',
     passport.authenticate('github', { scope: ['read:user'] }))
 
 app.get('/auth/github/callback',
-    passport.authenticate('github', { failureRedirect: 'https://www.gitconnected.dev', session: true }),
+    passport.authenticate('github', { 
+        failureRedirect: '/',
+        session: true
+     }),
     function (req, res) {
-        res.redirect('https://www.gitconnected.dev')
+        res.redirect(`${process.env.FRONTEND_DEV_URL}/profile`)
     })
 
 app.get("/getuser", (req, res) => {
@@ -157,5 +158,5 @@ app.get("/auth/logout", (req, res) => {
 const PORT = process.env.PORT || 4000
 
 app.listen(PORT, () => {
-    console.log("server started")
+    console.log(`server started on port ${PORT}`)
 })

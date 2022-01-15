@@ -15,7 +15,7 @@ export interface IUser {
         html_url: string
         followers_url?: string
         following_url?: string
-        name: string
+        name?: string
         blog?: string
         location?: string
         bio?: string
