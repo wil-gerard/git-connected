@@ -1,5 +1,5 @@
 import React from "react"
-import { BrowserRouter, Redirect, Route, Switch } from "react-router-dom"
+import { BrowserRouter, Route, Routes } from "react-router-dom"
 import Profile from "./pages/Profile"
 import Home from "./pages/Home"
 import Featured from "./pages/Featured"
@@ -13,12 +13,11 @@ function App() {
       <BrowserRouter>
         <Navbar />
         <div className="flex-grow">
-          <Switch>
-            <Route path="/" exact component={Home} />
-            <Route path="/featured" exact component={Featured} />
-            <Route path="/profile" exact component={Profile} />
-            <Redirect to="/" />
-          </Switch >
+          <Routes>
+            <Route path="/" element={<Home />} />
+            <Route path="/featured" element={<Featured />} />
+            <Route path="/profile" element={<Profile />} />
+          </Routes >
         </div>
         <Footer />
       </BrowserRouter>
