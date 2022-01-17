@@ -1,18 +1,15 @@
 import Axios, { AxiosResponse } from 'axios'
-import tw from "twin.macro";
-import Navbar from "../components/Navbar";
-import Footer from "../components/Footer";
+import tw from "twin.macro"
 import { css } from "styled-components/macro"; //eslint-disable-line
-import { ReactComponent as TwitterIcon } from "../assets/twitter-icon.svg";
-import { ReactComponent as GitHubIcon } from "../assets/github-icon.svg";
-import { ReactComponent as LinkedInIcon } from "../assets/linkedin-icon.svg";
-
+import { ReactComponent as TwitterIcon } from "../assets/twitter-icon.svg"
+import { ReactComponent as GitHubIcon } from "../assets/github-icon.svg"
+import { ReactComponent as LinkedInIcon } from "../assets/linkedin-icon.svg"
 import { myContext } from "../hooks/Context"
 import React, { useEffect, useState, useContext } from "react"
 import { IUser } from "../interface"
 
 
-const Content = tw.div`flex flex-col justify-center min-h-full px-6 text-gray-100`
+const Content = tw.div`flex flex-col justify-center px-6 text-gray-100`
 
 const Header = tw.header`px-5 py-4 border-b border-gray-100`
 
@@ -51,7 +48,7 @@ export default function Home() {
 
   const [users, setUsers] = useState<IUser[]>()
   useEffect(() => {
-    Axios.get("https://git-connected.herokuapp.com/getallusers").then((res: AxiosResponse) => {
+    Axios.get("http://localhost:4000/getallusers").then((res: AxiosResponse) => {
       setUsers(res.data.filter((item: IUser) => {
         return item
       }))
@@ -63,9 +60,6 @@ export default function Home() {
   }
   return (
     <>
-      <Navbar />
-
-
       <Content>
         <TableContainer>
           <Header>
@@ -92,31 +86,31 @@ export default function Home() {
                 {users.map((user: IUser) => {
 
                   return (
-                    <TableRow key={user.id}>
+                    <TableRow key={user.discord.id}>
                       <TableDataCell>
                         <TableDataNameContainer>
-                          <TableDataImage src={user.json.avatar_url} />
+                          <TableDataImage src={`https://cdn.discordapp.com/avatars/${user.discord.id}/${user.discord.avatar}.png`} />
                           <TableDataName>
-                            {user.json.name ? user.json.name : user.json.login}
+                            {user.discord.username}
                           </TableDataName>
                         </TableDataNameContainer>
                       </TableDataCell>
                       <TableDataCell>
                         <TableDataLocation>
-                          {user.json.location}
+                        {user.discord.username}
                         </TableDataLocation>
                       </TableDataCell>
                       <TableDataCell>
                         <TableDataMeta>
                           <TableDataMetaFeature href={'bob'} target="blank" rel="noopener noreferrer">
                             <TwitterIcon />
-                          </TableDataMetaFeature>   
-                          <TableDataMetaFeature href={user.json.html_url} target="blank" rel="noopener noreferrer">
+                          </TableDataMetaFeature>
+                          <TableDataMetaFeature href={user.discord.username} target="blank" rel="noopener noreferrer">
                             <GitHubIcon />
-                          </TableDataMetaFeature>   
+                          </TableDataMetaFeature>
                           <TableDataMetaFeature>
                             <LinkedInIcon />
-                          </TableDataMetaFeature>   
+                          </TableDataMetaFeature>
                         </TableDataMeta>
                       </TableDataCell>
                     </TableRow>
@@ -126,10 +120,7 @@ export default function Home() {
             </Table>
           </TablePadding>
         </TableContainer>
-
       </Content>
-
-      <Footer />
     </>
   );
 };

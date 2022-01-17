@@ -1,8 +1,6 @@
 import tw from "twin.macro";
 import styled from "styled-components";
 import { css } from "styled-components/macro"; //eslint-disable-line
-import Navbar from '../components/Navbar'
-import Footer from '../components/Footer'
 import { ReactComponent as TwitterIcon } from "../assets/twitter-icon.svg";
 import { ReactComponent as GitHubIcon } from "../assets/github-icon.svg";
 import { ReactComponent as LinkedInIcon } from "../assets/linkedin-icon.svg";
@@ -79,7 +77,7 @@ export default function Profile() {
 
     return (
         <>
-            <Navbar />
+
             <Container>
                 <Content>
                     <Button type="button" onClick={() => setShowModal(true)}>Edit profile</Button>
@@ -114,7 +112,7 @@ export default function Profile() {
                                         <ModalInputContainer>
                                             <ModalInputLabel>About me</ModalInputLabel>
                                             <ModalBioInput rows={2}>
-                                                {user.json.bio}
+                                                bio...
                                             </ModalBioInput>
                                         </ModalInputContainer>
 
@@ -137,16 +135,16 @@ export default function Profile() {
                     ) : null}
                     <Card>
                         <CardImageContainer>
-                            <CardImage src={user.json.avatar_url} />
+                            <CardImage src={`https://cdn.discordapp.com/avatars/${user.discord.id}/${user.discord.avatar}.png`} />
                         </CardImageContainer>
                         <CardText>
                             <CardHeader>
-                                <CardName>{user.json.name}</CardName>
-                                <CardLocation>{user.json.location}</CardLocation>
+                                <CardName>{user.discord.username}</CardName>
+                                <CardLocation>{user.discord.username}</CardLocation>
                             </CardHeader>
-                            <CardBio>{user.json.bio}</CardBio>
+                            <CardBio>{user.discord.username}</CardBio>
                             <CardMeta>
-                                <CardMetaFeature href={user.json.twitter_username}>
+                                <CardMetaFeature href={user.discord.username}>
                                     <TwitterIcon />
                                 </CardMetaFeature>
                                 <CardMetaFeature>
@@ -160,7 +158,6 @@ export default function Profile() {
                     </Card>
                 </Content>
             </Container>
-            <Footer />
         </>
     )
 }
