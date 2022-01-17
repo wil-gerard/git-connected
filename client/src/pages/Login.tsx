@@ -35,7 +35,7 @@ export default function Login() {
   }
 
   const githubLogin = () => {
-    window.open("http://localhost:4000/auth/github", "_self")
+    window.open("https://git-connected.herokuapp.com/auth/github", "_self")
   }
 
   const linkedinLogin = () => {
