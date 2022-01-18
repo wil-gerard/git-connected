@@ -3,7 +3,7 @@ import tw from "twin.macro"
 import { css } from "styled-components/macro"; //eslint-disable-line
 import { ReactComponent as TwitterIcon } from "../assets/twitter-icon.svg"
 import { ReactComponent as GitHubIcon } from "../assets/github-icon.svg"
-import { ReactComponent as LinkedInIcon } from "../assets/linkedin-icon.svg"
+import { ReactComponent as DiscordIcon } from "../assets/discord-icon.svg"
 import { myContext } from "../hooks/Context"
 import React, { useEffect, useState, useContext } from "react"
 import { IUser } from "../interface"
@@ -41,7 +41,9 @@ const TableDataLocation = tw.div`font-medium text-gray-100 text-left`
 
 const TableDataMeta = tw.div`font-medium text-gray-100 text-left flex flex-row`
 
-const TableDataMetaFeature = tw.a`rounded shadow cursor-pointer bg-secondary-600 transition duration-300 hocus:bg-primary-500 w-6 h-6 ml-1 p-0.5`
+const TableDataMetaLink = tw.a`flex items-center justify-center rounded shadow cursor-pointer bg-secondary-600 transition duration-300 hocus:bg-primary-500 w-6 h-6 ml-1 p-0.5`
+
+const TableDataMetaFollow = tw.a`flex items-center justify-center rounded shadow cursor-pointer bg-secondary-600 transition duration-300 hocus:bg-primary-500  ml-1 py-0.5 px-2`
 
 export default function Home() {
   const ctx = useContext(myContext)
@@ -97,20 +99,24 @@ export default function Home() {
                       </TableDataCell>
                       <TableDataCell>
                         <TableDataLocation>
-                        {user.discord.username}
+                          {user.github.json.location}
                         </TableDataLocation>
                       </TableDataCell>
                       <TableDataCell>
                         <TableDataMeta>
-                          <TableDataMetaFeature href={'bob'} target="blank" rel="noopener noreferrer">
+                          <TableDataMetaFollow href={`https://www.twitter.com/${user.twitter.username}`} target="blank" rel="noopener noreferrer">
+                            Follow on Twitter
                             <TwitterIcon />
-                          </TableDataMetaFeature>
-                          <TableDataMetaFeature href={user.discord.username} target="blank" rel="noopener noreferrer">
+                          </TableDataMetaFollow>
+                          <TableDataMetaLink href={`https://www.twitter.com/${user.twitter.username}`} target="blank" rel="noopener noreferrer">
+                            <TwitterIcon />
+                          </TableDataMetaLink>
+                          <TableDataMetaLink href={user.github.json.html_url} target="blank" rel="noopener noreferrer">
                             <GitHubIcon />
-                          </TableDataMetaFeature>
-                          <TableDataMetaFeature>
-                            <LinkedInIcon />
-                          </TableDataMetaFeature>
+                          </TableDataMetaLink>
+                          <TableDataMetaLink href={`https://discordapp.com/channels/@me/${user.discord.username}#${user.discord.discriminator}`} target="blank" rel="noopener noreferrer">
+                            <DiscordIcon />
+                          </TableDataMetaLink>
                         </TableDataMeta>
                       </TableDataCell>
                     </TableRow>
