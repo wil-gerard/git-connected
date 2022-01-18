@@ -41,59 +41,62 @@ const CardMetaFeature = styled.a`
 
 const Header = tw.h1`flex flex-col items-center text-5xl font-bold`
 
-export default function Home() {
+export default function Featured() {
   const ctx = useContext(myContext)
 
-  const [users, setUsers] = useState<IUser[]>()
+  const [user, setUsers] = useState<IUser[]>()
   useEffect(() => {
     Axios.get("http://localhost:4000/getallusers").then((res: AxiosResponse) => {
-      setUsers(res.data.filter((item: IUser) => {
-        return item
-      }))
+
+      setUsers(res.data)
     })
 
   }, [ctx]);
 
-  if (!users) {
+  if (!user) {
     return <p>loading...</p>
   }
 
-  const randomNumberGenerator = () => {
-    return Math.floor(Math.random() * users.length)
-  }
+  // const randomNumberGenerator = () => {
+  //   return Math.floor(Math.random() * user.length)
+  // }
 
-  let randomNumber:number = randomNumberGenerator()
-
-
+  // let randomNumber: number = randomNumberGenerator()
 
   return (
     <>
       <Container>
         <Header>Git to Know...</Header>
         <Content>
-          <Card key={users[randomNumber].github.id}>
-            <CardImageContainer>
-              <CardImage src={users[randomNumber].github.json.avatar_url} />
-            </CardImageContainer>
-            <CardText>
-              <CardHeader>
-                <CardName>{users[randomNumber].github.json.name}</CardName>
-                <CardLocation>{users[randomNumber].github.json.location}</CardLocation>
-              </CardHeader>
-              <CardBio>{users[randomNumber].github.json.bio}</CardBio>
-              <CardMeta>
-                <CardMetaFeature href={users[randomNumber].github.json.twitter_username}>
-                  <TwitterIcon />
-                </CardMetaFeature>
-                <CardMetaFeature>
-                  <GitHubIcon />
-                </CardMetaFeature>
-                <CardMetaFeature>
-                  <LinkedInIcon />
-                </CardMetaFeature>
-              </CardMeta>
-            </CardText>
-          </Card>
+          {user.map((user: IUser, index, array) => {
+            
+            return (
+              <Card key={user.github.id}>
+                <CardImageContainer>
+                  <CardImage src={user.github.json.avatar_url} />
+                </CardImageContainer>
+                <CardText>
+                  <CardHeader>
+                    <CardName>{user.github.json.name}</CardName>
+                    <CardLocation>{user.github.json.location}</CardLocation>
+                  </CardHeader>
+                  <CardBio>{user.github.json.bio}</CardBio>
+                  <CardMeta>
+                    <CardMetaFeature href={user.github.json.twitter_username}>
+                      <TwitterIcon />
+                    </CardMetaFeature>
+                    <CardMetaFeature>
+                      <GitHubIcon />
+                    </CardMetaFeature>
+                    <CardMetaFeature>
+                      <LinkedInIcon />
+                    </CardMetaFeature>
+                  </CardMeta>
+                </CardText>
+              </Card>
+            )
+          })}
+
 
         </Content>
       </Container>

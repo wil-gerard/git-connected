@@ -2,16 +2,16 @@ export interface IUser {
     discord: {
         id: string
         token: string
-        username?: string
+        username: string
         avatar?: string
-        discriminator?: string
+        discriminator: string
         banner?: string
         banner_color?: string
     }
-    github?: {
+    github: {
         id: string
         token: string
-        json?: {
+        json: {
             login?: string
             avatar_url?: string
             html_url?: string
@@ -28,7 +28,7 @@ export interface IUser {
             following?: number
         }
     }
-    twitter?: {
+    twitter: {
         id: string
         token: string
         username: string
