@@ -66,7 +66,7 @@ export default function Navbar() {
     }
 
     const logout = () => {
-        axios.get("https://git-connected.herokuapp.com/auth/logout", {
+        axios.get("http://localhost:4000/auth/logout", {
             withCredentials: true
         }).then((res: AxiosResponse) => {
             if (res.data === "done") {

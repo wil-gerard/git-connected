@@ -48,7 +48,7 @@ export default function Home() {
 
   const [users, setUsers] = useState<IUser[]>()
   useEffect(() => {
-    Axios.get("https://git-connected.herokuapp.com/getallusers").then((res: AxiosResponse) => {
+    Axios.get("http://localhost:4000/getallusers").then((res: AxiosResponse) => {
       setUsers(res.data.filter((item: IUser) => {
         return item
       }))
