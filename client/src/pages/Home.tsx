@@ -57,6 +57,8 @@ export default function Home() {
     })
   }, [ctx]);
 
+
+
   if (!users) {
     return <p>loading...</p>
   }
@@ -87,6 +89,8 @@ export default function Home() {
               <TableBody>
                 {users.map((user: IUser) => {
 
+                  // let twitterFollow:any = Axios.post(`http://localhost:4000/twitterfollow/KenAKAFrosty`)
+
                   return (
                     <TableRow key={user.discord.id}>
                       <TableDataCell>
@@ -104,7 +108,7 @@ export default function Home() {
                       </TableDataCell>
                       <TableDataCell>
                         <TableDataMeta>
-                          <TableDataMetaFollow href={`https://www.twitter.com/${user.twitter.username}`} target="blank" rel="noopener noreferrer">
+                          <TableDataMetaFollow href={`http://localhost:4000/twitterfollow?screen_name=${user.twitter.username}`} >
                             Follow on Twitter
                             <TwitterIcon />
                           </TableDataMetaFollow>

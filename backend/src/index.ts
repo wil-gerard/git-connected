@@ -9,7 +9,7 @@ import passport from "passport"
 import User from "./User"
 import { IDatabaseUser, IReqAuth, IUser } from "./interface"
 import mongoStore from 'connect-mongo'
-import Twitter from 'twitter-lite'
+import Twitter from 'twit'
 
 const GitHubStrategy = require("passport-github2").Strategy
 const DiscordStrategy = require("passport-discord").Strategy
@@ -113,8 +113,8 @@ passport.use(new GitHubStrategy({
                 user.save((err: Error) => {
                     if (err)
                         throw err
-                        return cb(null, user)
-                }) 
+                    return cb(null, user)
+                })
             }
         })
 
@@ -150,7 +150,7 @@ passport.use(new TwitterStrategy({
     skipExtendedUserProfile: true,
     passReqToCallback: true
 },
-    function (req:any , token: any, tokenSecret: any, profile: any, cb: any) {
+    function (req: any, token: any, tokenSecret: any, profile: any, cb: any) {
         console.log(profile)
 
         process.nextTick(() => {
@@ -167,8 +167,8 @@ passport.use(new TwitterStrategy({
                 user.save((err: Error) => {
                     if (err)
                         throw err
-                        return cb(null, user)
-                }) 
+                    return cb(null, user)
+                })
             }
         })
     }
@@ -185,32 +185,25 @@ passport.deserializeUser((id: string, cb) => {
     })
 })
 
-app.post('/twitterfollow', (req: IReqAuth, res) => {
-    const { followUser } = req.body;
-    // const params = { status: message };
-  
-    console.log(`User '${req.user.twitter.username}' is a about to post the following:`);
-  
-    // FIXME: Is this how am I supposed to do this? It feels inefficient. Maybe you
-    // can create a twitter client and reuse it across users? I'm not sure, the docs suck.
-    const twitter = new Twitter({
-      consumer_key: process.env.TWITTER_CONSUMER_KEY,
-      consumer_secret: process.env.TWITTER_CONSUMER_SECRET,
-      access_token_key: req.user.twitter.token,
-      access_token_secret: req.user.twitter.tokenSecret,
-    });
-  
-    twitter.post('statuses/update.json', (error: Error, tweets: any) => {
-      if (!error) {
-        if (tweets.created_at !== '') {
-          res.end('Successfully posted!');
-        }
-      } else {
-        const twitterError = `Twitter error: ${error.message}`;
-        res.end(twitterError);
-      }
-    });
-  });
+app.get('/twitterfollow', async (req: IReqAuth, res) => {
+    try {
+        console.log(req.query)
+
+        console.log(`User '${req.user.twitter.username}' is a about to follow someone`)
+
+        const twitter = new Twitter({
+            consumer_key: process.env.TWITTER_CONSUMER_KEY,
+            consumer_secret: process.env.TWITTER_CONSUMER_SECRET,
+            access_token: req.user.twitter.token,
+            access_token_secret: req.user.twitter.tokenSecret,
+        });
+
+        await twitter.post('friendships/create', req.query)
+
+    } catch (e) {
+        console.log(e)
+    }
+});
 
 app.get('/auth/discord', (req, res, next) => {
     console.log(req.query)

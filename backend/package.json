@@ -26,7 +26,7 @@
     "passport-discord": "^0.1.4",
     "passport-github2": "^0.1.12",
     "passport-twitter": "^1.0.4",
-    "twitter-lite": "^1.1.0"
+    "twit": "^2.2.11"
   },
   "devDependencies": {
     "@types/cors": "^2.8.12",
@@ -36,6 +36,7 @@
     "@types/node": "^12.0.0",
     "@types/passport": "^1.0.7",
     "@types/passport-github2": "^1.2.5",
+    "@types/twit": "^2.2.30",
     "nodemon": "^2.0.15",
     "ts-node": "^10.4.0",
     "tsc": "^2.0.3",
