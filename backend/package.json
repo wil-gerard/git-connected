@@ -7,7 +7,8 @@
     "heroku-prebuild": "yarn install",
     "start": "node build/dist/index.js",
     "build": "tsc -p .",
-    "dev": "nodemon --exec ts-node src/index.ts"
+    "dev": "nodemon --exec ts-node src/index.ts",
+    "test": "jest"
   },
   "keywords": [],
   "author": "",
@@ -18,11 +19,14 @@
     "dotenv": "^10.0.0",
     "express": "^4.17.1",
     "express-session": "^1.17.2",
+    "jest": "^27.4.7",
+    "kill-port": "^1.6.1",
     "mongoose": "^6.1.0",
     "passport": "^0.5.0",
     "passport-discord": "^0.1.4",
     "passport-github2": "^0.1.12",
-    "passport-twitter": "^1.0.4"
+    "passport-twitter": "^1.0.4",
+    "twitter-lite": "^1.1.0"
   },
   "devDependencies": {
     "@types/cors": "^2.8.12",

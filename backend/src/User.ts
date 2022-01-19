@@ -1,6 +1,6 @@
 import mongoose from 'mongoose'
 
-const user = new mongoose.Schema({
+const User = new mongoose.Schema({
     discord: {
         id: {
             required: false,
@@ -50,6 +50,10 @@ const user = new mongoose.Schema({
             required: false,
             type: String
         },
+        tokenSecret: {
+            required: false,
+            type: String
+        },
         username: {
             required: false,
             type: String
@@ -57,4 +61,4 @@ const user = new mongoose.Schema({
     }
 })
 
-export default mongoose.model("User", user)
+export default mongoose.model("User", User)

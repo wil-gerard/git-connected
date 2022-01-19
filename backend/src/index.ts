@@ -7,8 +7,9 @@ import cors from "cors"
 import session from "express-session"
 import passport from "passport"
 import User from "./User"
-import { IDatabaseUser, IUser } from "./interface"
+import { IDatabaseUser, IReqAuth, IUser } from "./interface"
 import mongoStore from 'connect-mongo'
+import Twitter from 'twitter-lite'
 
 const GitHubStrategy = require("passport-github2").Strategy
 const DiscordStrategy = require("passport-discord").Strategy
@@ -41,16 +42,6 @@ app.use(
 
 app.use(passport.initialize())
 app.use(passport.session())
-
-passport.serializeUser((user: IDatabaseUser, cb) => {
-    cb(null, user._id)
-})
-
-passport.deserializeUser((id: string, cb) => {
-    User.findById({ _id: id }, (err: Error, user: IDatabaseUser) => {
-        cb(err, user)
-    })
-})
 
 // Discord Passport Strategy
 
@@ -164,12 +155,14 @@ passport.use(new TwitterStrategy({
 
         process.nextTick(() => {
             if (req.user) {
+
                 let user = req.user
                 console.log(`github oauth working -- this is req.user obj ${user}`)
 
                 user.twitter.id = profile.id
                 user.twitter.username = profile.username
                 user.twitter.token = token
+                user.twitter.tokenSecret = tokenSecret
 
                 user.save((err: Error) => {
                     if (err)
@@ -181,6 +174,43 @@ passport.use(new TwitterStrategy({
     }
 ))
 
+passport.serializeUser((user: IDatabaseUser, cb) => {
+    cb(null, user._id)
+})
+
+passport.deserializeUser((id: string, cb) => {
+    User.findById({ _id: id }, (err: Error, user: IDatabaseUser) => {
+        console.log(`this is the desirialized user ${user}`)
+        cb(err, user)
+    })
+})
+
+app.post('/twitterfollow', (req: IReqAuth, res) => {
+    const { followUser } = req.body;
+    // const params = { status: message };
+  
+    console.log(`User '${req.user.twitter.username}' is a about to post the following:`);
+  
+    // FIXME: Is this how am I supposed to do this? It feels inefficient. Maybe you
+    // can create a twitter client and reuse it across users? I'm not sure, the docs suck.
+    const twitter = new Twitter({
+      consumer_key: process.env.TWITTER_CONSUMER_KEY,
+      consumer_secret: process.env.TWITTER_CONSUMER_SECRET,
+      access_token_key: req.user.twitter.token,
+      access_token_secret: req.user.twitter.tokenSecret,
+    });
+  
+    twitter.post('statuses/update.json', (error: Error, tweets: any) => {
+      if (!error) {
+        if (tweets.created_at !== '') {
+          res.end('Successfully posted!');
+        }
+      } else {
+        const twitterError = `Twitter error: ${error.message}`;
+        res.end(twitterError);
+      }
+    });
+  });
 
 app.get('/auth/discord', (req, res, next) => {
     console.log(req.query)
@@ -230,22 +260,6 @@ app.get("/getallusers", async (req, res) => {
         const filteredUsers: IUser[] = [];
         data.forEach((user: IDatabaseUser) => {
             const userInformation = {
-                githubInfo: {
-                    json: {
-                        login: user.github.json.login,
-                        avatar_url: user.github.json.avatar_url,
-                        html_url: user.github.json.html_url,
-                        followers_url: user.github.json.followers_url,
-                        following_url: user.github.json.following_url,
-                        name: user.github.json.name,
-                        blog: user.github.json.blog,
-                        location: user.github.json.location,
-                        bio: user.github.json.bio,
-                        twitter_username: user.github.json.twitter_username,
-                        followers: user.github.json.followers,
-                        following: user.github.json.following,
-                    }
-                },
                 discord: {
                     id: user.discord.id,
                     token: user.discord.id,
@@ -255,9 +269,30 @@ app.get("/getallusers", async (req, res) => {
                     banner: user.discord.banner,
                     banner_color: user.discord.banner_color
                 },
+                github: {
+                    id: user.github.id,
+                    token: user.github.token,
+                    json: {
+                        login: user.github.json.login,
+                        avatar_url: user.github.json.avatar_url,
+                        html_url: user.github.json.html_url,
+                        followers_url: user.github.json.followers_url,
+                        following_url: user.github.json.following_url,
+                        name: user.github.json.name,
+                        company: user.github.json.company,
+                        hireable: user.github.json.hireable,
+                        blog: user.github.json.blog,
+                        location: user.github.json.location,
+                        bio: user.github.json.bio,
+                        twitter_username: user.github.json.twitter_username,
+                        followers: user.github.json.followers,
+                        following: user.github.json.following,
+                    }
+                },
                 twitter: {
                     id: user.twitter.id,
-                    token: user.twitter.id,
+                    token: user.twitter.token,
+                    tokenSecret: user.twitter.tokenSecret,
                     username: user.twitter.username,
                 }
             }

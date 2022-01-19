@@ -1,23 +1,26 @@
+import { Request } from 'express'
+
 export interface IDatabaseUser {
     _id: string
     __v: number
     discord: {
         id: string
         token: string
-        username?: string
+        username: string
         avatar?: string
-        discriminator?: string
+        discriminator: string
         banner?: string
         banner_color?: string
     }
-    github?: {
+    github: {
         id: string
         token: string
         json?: any
     }
-    twitter?: {
+    twitter: {
         id: string
         token: string
+        tokenSecret: string
         username: string
     }
 }
@@ -54,6 +57,11 @@ export interface IUser {
     twitter?: {
         id: string
         token: string
+        tokenSecret: string
         username: string
     }
+}
+
+export interface IReqAuth extends Request {
+    user?: IUser
 }
