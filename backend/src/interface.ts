@@ -36,6 +36,7 @@ export interface IUser {
     }
     github?: {
         id: string
+        connected: boolean
         json?: {
             login?: string
             avatar_url?: string
@@ -55,6 +56,7 @@ export interface IUser {
     }
     twitter?: {
         id: string
+        connected: boolean
         username: string
     }
 }

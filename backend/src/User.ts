@@ -28,10 +28,14 @@ const User = new mongoose.Schema({
         },
         banner_color: {
             required: false,
-            type: Number
+            type: String
         }
     },
     github: {
+        connected:{
+            required: false,
+            type: Boolean
+        },
         id: {
             required: false,
             type: String
@@ -46,6 +50,10 @@ const User = new mongoose.Schema({
         }
     },
     twitter: {
+        connected:{
+            required: false,
+            type: Boolean
+        },
         id: {
             required: false,
             type: String
