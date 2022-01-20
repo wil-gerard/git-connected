@@ -1,11 +1,9 @@
-# ** *(The following readme is currently a WIP)* **
+# ** *(The application and following readme is currently a WIP)* **
 # GitConnected
 
 GitConnected is a networking application that allows software engineers to reciprocate connections, follows, and endorsements - built by and for the [100Devs](https://leonnoel.com/100devs/) community.
 
-# (Instructions for using the live site and its features coming soon)
-
-# Development Contributors:
+## Development Contributors:
 
 These instructions will give you a copy of the project up and running on
 your local machine for development and testing purposes.
@@ -38,16 +36,16 @@ Expects a .env file in the root directory of **backend** with environment variab
 
 ## Style, Design, And Architecture
 
-## Built With
+### Built With
 
-### Frontend
+#### Frontend
 
   - TypeScript
   - React
   - Axios
   - Tailwind CSS
 
-### Backend
+#### Backend
 
   - TypeScript
   - Node
