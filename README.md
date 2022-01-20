@@ -16,8 +16,8 @@ your local machine for development and testing purposes.
 ### Installing
 * Clone repo
 `git clone https://github.com/wil-gerard/GitConnected`
-* Install NPM modules for **backend** `cd backend` and `yarn install`
-* Install NPM modules for **client** `cd client` and `yarn install`
+* Install NPM modules for **backend** `cd backend` and then `yarn install`
+* Install NPM modules for **client** `cd client` and then `yarn install`
 * Create an .env file with your own environment variables:
 
 ### .env
@@ -26,13 +26,11 @@ Expects a .env file in the root directory of **backend** with environment variab
 ### Running locally
 
 #### Frontend
-* Navigate to root directory of **client** in your terminal
-* `yarn start`
+* Navigate to root directory of **client** in your terminal `cd client` and then `yarn start`
 
 
 #### Backend
-* Navigate to root directory of **client** in your terminal
-* `yarn dev`
+* Navigate to root directory of **backend** in your terminal `cd backend` and then `yarn dev`
 
 ## Style, Design, And Architecture
 
