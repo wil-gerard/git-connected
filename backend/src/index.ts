@@ -54,7 +54,6 @@ passport.use(new DiscordStrategy({
     scope: discordScopes
 },
     function (accessToken: any, refreshToken: any, profile: any, cb: any) {
-        console.log(profile)
 
         if (profile.guilds.some((guild: any) => guild.id === '735923219315425401')) {
             User.findOne({ 'discord.id': profile.id }, async (err: Error, doc: IDatabaseUser) => {
@@ -98,12 +97,9 @@ passport.use(new GitHubStrategy({
 },
     function (req: any, accessToken: any, refreshToken: any, profile: any, cb: any) {
 
-        console.log(profile)
-
         process.nextTick(() => {
             if (req.user) {
                 let user = req.user
-                console.log(`github oauth working -- this is req.user obj ${user}`)
 
                 user.github.id = profile.id
                 user.github.token = accessToken
@@ -117,27 +113,6 @@ passport.use(new GitHubStrategy({
                 })
             }
         })
-
-        // if (req.user) {
-
-        //     let user = req.user
-        //     console.log(`github oauth working -- this is req.user obj ${user}`)
-
-        //     User.findOne({ 'discord.id': user.discord.id }, async (err: Error, doc: IDatabaseUser) => {
-        //         console.log(`user found on mongodb`)
-
-
-        //         user.github.id = profile.id
-        //         user.github.token = accessToken
-        //         user.github.displayName = profile.displayName
-        //         user.github.photos = profile.photos
-        //         user.github.json = profile.json
-
-        //         await user.save()
-        //         cb(null, user)
-
-        //     })
-        // }
     }
 ))
 
@@ -151,13 +126,11 @@ passport.use(new TwitterStrategy({
     passReqToCallback: true
 },
     function (req: any, token: any, tokenSecret: any, profile: any, cb: any) {
-        console.log(profile)
 
         process.nextTick(() => {
             if (req.user) {
 
                 let user = req.user
-                console.log(`github oauth working -- this is req.user obj ${user}`)
 
                 user.twitter.id = profile.id
                 user.twitter.username = profile.username
@@ -180,15 +153,12 @@ passport.serializeUser((user: IDatabaseUser, cb) => {
 
 passport.deserializeUser((id: string, cb) => {
     User.findById({ _id: id }, (err: Error, user: IDatabaseUser) => {
-        console.log(`this is the desirialized user ${user}`)
         cb(err, user)
     })
 })
 
 app.get('/twitterfollow', async (req: IReqAuth, res) => {
     try {
-        console.log(req.query)
-
         console.log(`User '${req.user.twitter.username}' is a about to follow someone`)
 
         const twitter = new Twitter({
@@ -206,7 +176,6 @@ app.get('/twitterfollow', async (req: IReqAuth, res) => {
 });
 
 app.get('/auth/discord', (req, res, next) => {
-    console.log(req.query)
     passport.authenticate('discord')(req, res, next)
 })
 
