@@ -52,11 +52,11 @@ export default function Navbar() {
 
     const [showModal, setShowModal] = useState(false)
 
-    
+
     const discordLogin = () => {
         window.open("http://localhost:4000/auth/discord?testworking=true&happiness=high", "_self")
     }
-    
+
     const githubLogin = () => {
         window.open("http://localhost:4000/auth/github", "_self")
     }
@@ -115,22 +115,14 @@ export default function Navbar() {
                     <NavLink to="/featured">Featured</NavLink>
                 </MainLinks>
                 <UserContextLinks>
-                    {/* {user ? (
+                    {user ? (
                         <>
                             <NavLink to="/profile">My Profile</NavLink>
                             <LogoutNavLink onClick={logout}>Logout</LogoutNavLink>
                         </>
                     ) : (
                         <LoginNavLink onClick={() => setShowModal(true)}>Log In</LoginNavLink>
-                    )} */}
-
-                        <>
-                            <NavLink to="/profile">My Profile</NavLink>
-                            <LogoutNavLink onClick={logout}>Logout</LogoutNavLink>
-                        </>
-
-                        <LoginNavLink onClick={() => setShowModal(true)}>Log In</LoginNavLink>
-
+                    )}
                 </UserContextLinks>
             </NavContainer>
         </>
