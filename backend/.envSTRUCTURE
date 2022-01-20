@@ -1,5 +1,0 @@
-(this is a sample to demonstrate the proper .env variables and structure)
-START_MONGODB = mongodb+srv://
-MONGODB_USERNAME = UsernameGoesHere
-MONGODB_PASSWORD = PasswordGoesHere
-END_MONGODB = @clusterNumberHere.GarbledCharactersHere.mongodb.net/params?paramsGoHere=values

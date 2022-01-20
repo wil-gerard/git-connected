@@ -271,7 +271,7 @@ app.get("/auth/logout", (req, res) => {
     }
 })
 
-const PORT = process.env.PORT || 4000
+const PORT = process.env.PORT || process.env.BACKEND_DEV_PORT
 
 app.listen(PORT, () => {
     console.log(`server started on port ${PORT}`)

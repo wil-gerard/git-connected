@@ -1,0 +1,24 @@
+(this is a sample to demonstrate the proper .env variables and structure)
+START_MONGODB = mongodb+srv://
+MONGODB_USERNAME = UsernameGoesHere
+MONGODB_PASSWORD = PasswordGoesHere
+END_MONGODB = @clusterNumberHere.GarbledCharactersHere.mongodb.net/params?paramsGoHere=values
+
+FRONTEND_DEV_URL = http://localhost:3000
+
+BACKEND_DEV_URL = http://localhost:4000
+
+HOSTED_URL = YourHostedURLGoesHere
+
+AUTH_CALLBACK_URL = HerokuHostedCallbackURLGoesHere
+
+SESSION_SECRET = YourSessionSecretGoesHere
+
+TWITTER_CONSUMER_KEY = YourTwitterConsumerKeyGoesHere
+TWITTER_CONSUMER_SECRET = YourTwitterConsumerSecretKeyGoesHere
+
+GITHUB_CLIENT_ID = YourGitHubClientIDGoesHere
+GITHUB_CLIENT_SECRET = YourGitHubClientSecretGoesHere
+
+DISCORD_CLIENT_ID = YourDiscordClientIDGoesHere
+DISCORD_CLIENT_SECRET = YourDiscordClientSecretGoesHere
