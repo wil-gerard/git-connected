@@ -22,7 +22,11 @@ const User = new mongoose.Schema({
             required: false,
             type: String
         },
-        accent_color: {
+        banner: {
+            required: false,
+            type: String
+        },
+        banner_color: {
             required: false,
             type: Number
         }

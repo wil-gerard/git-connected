@@ -220,11 +220,10 @@ app.get("/getallusers", async (req, res) => {
     await User.find({}, (err: Error, data: IDatabaseUser[]) => {
         if (err) throw err;
         const filteredUsers: IUser[] = [];
-        data.forEach((user: IDatabaseUser) => {
+        data.forEach((user: IUser) => {
             const userInformation = {
                 discord: {
                     id: user.discord.id,
-                    token: user.discord.id,
                     username: user.discord.username,
                     avatar: user.discord.avatar,
                     discriminator: user.discord.discriminator,
@@ -233,7 +232,6 @@ app.get("/getallusers", async (req, res) => {
                 },
                 github: {
                     id: user.github.id,
-                    token: user.github.token,
                     json: {
                         login: user.github.json.login,
                         avatar_url: user.github.json.avatar_url,
@@ -253,8 +251,6 @@ app.get("/getallusers", async (req, res) => {
                 },
                 twitter: {
                     id: user.twitter.id,
-                    token: user.twitter.token,
-                    tokenSecret: user.twitter.tokenSecret,
                     username: user.twitter.username,
                 }
             }
