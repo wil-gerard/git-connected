@@ -95,9 +95,10 @@ export default function Home() {
                     <TableRow key={user.discord.id}>
                       <TableDataCell>
                         <TableDataNameContainer>
-                          <TableDataImage src={`https://cdn.discordapp.com/avatars/${user.discord.id}/${user.discord.avatar}.png`} />
+                          {/* <TableDataImage src={`https://cdn.discordapp.com/avatars/${user.discord.id}/${user.discord.avatar}.png`} /> */}
+                          <TableDataImage src={`${user.github.json.avatar_url}`} />
                           <TableDataName>
-                            {user.discord.username}
+                            {user.github.json.name}
                           </TableDataName>
                         </TableDataNameContainer>
                       </TableDataCell>

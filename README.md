@@ -36,6 +36,10 @@ Expects a .env file in the root directory of **backend** with environment variab
 
 ## Style, Design, And Architecture
 
+### Preview
+
+![gitconnected-preview](https://user-images.githubusercontent.com/74286884/150421227-2662285d-11bf-421f-b9d8-f094a8b449d0.png)
+
 ### Built With
 
 #### Frontend
