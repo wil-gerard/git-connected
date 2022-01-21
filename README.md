@@ -21,7 +21,7 @@ your local machine for development and testing purposes.
 * Create an .env file with your own environment variables:
 
 ### .env
-Expects a .env file in the root directory of **backend** with environment variables. If you're unsure what that means, locate our template **.envSTRUCTURE**, delete "TEMPLATE" from the filename, plug in your environment variables, and save.
+Expects a .env file in the root directory of **backend** with environment variables. If you're unsure what that means, locate our template **.envTEMPLATE**, delete "TEMPLATE" from the filename, plug in your environment variables, and save.
 
 ### Running locally
 
