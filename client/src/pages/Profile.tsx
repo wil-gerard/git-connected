@@ -1,5 +1,4 @@
-import tw from "twin.macro";
-import styled from "styled-components";
+import tw, { styled } from "twin.macro"
 import { css } from "styled-components/macro"; //eslint-disable-line
 import { ReactComponent as TwitterIcon } from "../assets/twitter-icon.svg";
 import { ReactComponent as GitHubIcon } from "../assets/github-icon.svg";
@@ -66,7 +65,25 @@ const CloseButton = tw.button`flex items-center justify-center bg-transparent fo
 
 const BgOpacity = tw.div`opacity-25 fixed inset-0 z-40 bg-black`
 
+const LoginButton = styled.a`
+  ${tw`cursor-pointer py-2 pl-2 pr-8 rounded-full bg-primary-600 text-gray-100 hocus:bg-primary-800 transition duration-300 m-2 text-sm`}
+  svg {
+    ${tw`inline-block w-8 h-8 mx-2`}
+  }
+`;
+
+const LoginContainer = tw.div`px-10 py-5 flex-col flex`
+
 export default function Profile() {
+
+    const githubLogin = () => {
+        window.open("http://localhost:4000/auth/github", "_self")
+    }
+
+    const twitterLogin = () => {
+        window.open("http://localhost:4000/auth/twitter", "_self")
+    }
+
     const [showModal, setShowModal] = useState(false)
 
     const user = useContext(myContext) as IUser
@@ -85,9 +102,7 @@ export default function Profile() {
                         <>
                             <ModalContainer>
                                 <ModalContentContainer>
-
                                     <ModalContent>
-                                        {/*header*/}
                                         <ModalHeader>
                                             <H3>
                                                 Edit profile
@@ -97,7 +112,6 @@ export default function Profile() {
                                                 x
                                             </CloseButton>
                                         </ModalHeader>
-                                        {/*body*/}
                                         <ModalInputContainer>
                                             <ModalInputLabel>Twitter</ModalInputLabel>
                                             <ModalInput>
@@ -115,11 +129,9 @@ export default function Profile() {
                                                 bio...
                                             </ModalBioInput>
                                         </ModalInputContainer>
-
-                                        {/*footer*/}
-                                        <div className="flex items-center justify-end p-6 border-t border-solid border-blueGray-200 rounded-b">
+                                        <div className="flex items-center justify-center p-6 border-t border-solid rounded-b">
                                             <button
-                                                className="bg-emerald-500 text-white active:bg-emerald-600 font-bold uppercase text-sm px-6 py-3 rounded shadow hover:shadow-lg outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150"
+                                                className="bg-green-600 text-white hover:bg-green-800 font-bold uppercase text-sm px-6 py-3 rounded shadow hover:shadow-lg outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150"
                                                 type="button"
                                                 onClick={() => setShowModal(false)}
                                             >
@@ -156,6 +168,16 @@ export default function Profile() {
                             </CardMeta>
                         </CardText>
                     </Card>
+                    <LoginContainer>
+                        <LoginButton onClick={githubLogin}>
+                            <GitHubIcon />
+                            Link account to GitHub
+                        </LoginButton>
+                        <LoginButton onClick={twitterLogin}>
+                            <TwitterIcon />
+                            Link account to Twitter
+                        </LoginButton>
+                    </LoginContainer>
                 </Content>
             </Container>
         </>
