@@ -17,7 +17,7 @@ export interface IUser {
             html_url?: string
             followers_url?: string
             following_url?: string
-            name?: string
+            name: string
             company? : string
             hireable?: string
             blog?: string

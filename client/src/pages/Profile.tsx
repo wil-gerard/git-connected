@@ -66,15 +66,17 @@ const CloseButton = tw.button`flex items-center justify-center bg-transparent fo
 const BgOpacity = tw.div`opacity-25 fixed inset-0 z-40 bg-black`
 
 const ConnectAccountButton = styled.button`
-  ${tw`cursor-pointer py-2 pl-2 pr-8 rounded-full bg-red-600 text-gray-100 hocus:bg-red-800 transition duration-300 m-2 text-sm`}
+  ${tw`cursor-pointer py-2 pl-2 pr-8 rounded-full bg-primary-600 text-gray-100 hocus:bg-primary-800 transition duration-300 m-2 text-sm flex justify-start items-center`}
   svg {
-    ${tw`inline-block w-8 h-8 mx-2`}
+    ${tw`w-8 h-8 mx-2`}
   }
 `
 
+
+
 const ConnectedAccountButton = tw(ConnectAccountButton)`bg-green-800 disabled:hocus:bg-green-800 disabled:cursor-auto`
 
-const LoginContainer = tw.div`px-10 py-5 flex-col flex justify-center items-center`
+const LoginContainer = tw.div`px-10 py-5 flex-col flex`
 
 export default function Profile() {
 
@@ -149,14 +151,14 @@ export default function Profile() {
                     ) : null}
                     <Card>
                         <CardImageContainer>
-                            <CardImage src={`https://cdn.discordapp.com/avatars/${user.discord.id}/${user.discord.avatar}.png`} />
+                            <CardImage src={ user.gitHubConnected ? user.github.json.avatar_url : `https://cdn.discordapp.com/avatars/${user.discord.id}/${user.discord.avatar}.png`} />
                         </CardImageContainer>
                         <CardText>
                             <CardHeader>
-                                <CardName>{user.discord.username}</CardName>
-                                <CardLocation>{user.discord.username}</CardLocation>
+                                <CardName>{ user.gitHubConnected ? user.github.json.name || user.github.json.login : user.discord.username }</CardName>
+                                <CardLocation>{ user.gitHubConnected ? user.github.json.location : null }</CardLocation>
                             </CardHeader>
-                            <CardBio>{user.discord.username}</CardBio>
+                            <CardBio>{ user.gitHubConnected ? user.github.json.bio : null}</CardBio>
                             <CardMeta>
                                 <CardMetaFeature href={user.discord.username}>
                                     <TwitterIcon />
@@ -174,23 +176,23 @@ export default function Profile() {
                         {user.gitHubConnected ?
                             <ConnectedAccountButton disabled>
                                 <GitHubIcon />
-                                Account is linked to GitHub ✔
+                                Connected to GitHub ✔
                             </ConnectedAccountButton>
                             :
                             <ConnectAccountButton onClick={gitHubConnect}>
                                 <GitHubIcon />
-                                Link account to GitHub
+                                Connect to GitHub
                             </ConnectAccountButton>
                         }
                         {user.twitterConnected ?
                             <ConnectedAccountButton disabled>
                                 <TwitterIcon />
-                                Account is linked to Twitter ✔
+                                Connected to Twitter ✔
                             </ConnectedAccountButton>
                             :
                             <ConnectAccountButton onClick={twitterConnect}>
                                 <TwitterIcon />
-                                Link account to Twitter
+                                Connect to Twitter
                             </ConnectAccountButton>
                         }
                     </LoginContainer>
