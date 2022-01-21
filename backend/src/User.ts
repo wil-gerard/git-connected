@@ -1,6 +1,14 @@
 import mongoose from 'mongoose'
 
 const User = new mongoose.Schema({
+    gitHubConnected:{
+        required: true,
+        type: Boolean
+    },
+    twitterConnected:{
+        required: true,
+        type: Boolean
+    },
     discord: {
         id: {
             required: false,
@@ -32,10 +40,6 @@ const User = new mongoose.Schema({
         }
     },
     github: {
-        connected:{
-            required: false,
-            type: Boolean
-        },
         id: {
             required: false,
             type: String
@@ -50,10 +54,6 @@ const User = new mongoose.Schema({
         }
     },
     twitter: {
-        connected:{
-            required: false,
-            type: Boolean
-        },
         id: {
             required: false,
             type: String

@@ -10,9 +10,9 @@ import { IUser } from "../interface"
 
 const Container = tw.div`flex flex-col px-6 text-gray-100`
 
-const Content = tw.div`max-w-screen-xl mx-auto py-2 lg:py-24`
+const Content = tw.div`max-w-screen-xl mx-auto py-2 lg:py-24 justify-center `
 
-const Card = tw.div`mx-auto xl:mx-0 xl:ml-auto max-w-sm md:max-w-xs lg:max-w-sm xl:max-w-xs`
+const Card = tw.div`mx-auto ml-auto max-w-sm md:max-w-xs lg:max-w-sm xl:max-w-xs`
 
 const CardImageContainer = styled.div`
     ${tw`flex justify-center`}
@@ -65,22 +65,24 @@ const CloseButton = tw.button`flex items-center justify-center bg-transparent fo
 
 const BgOpacity = tw.div`opacity-25 fixed inset-0 z-40 bg-black`
 
-const LoginButton = styled.a`
-  ${tw`cursor-pointer py-2 pl-2 pr-8 rounded-full bg-primary-600 text-gray-100 hocus:bg-primary-800 transition duration-300 m-2 text-sm`}
+const ConnectAccountButton = styled.button`
+  ${tw`cursor-pointer py-2 pl-2 pr-8 rounded-full bg-red-600 text-gray-100 hocus:bg-red-800 transition duration-300 m-2 text-sm`}
   svg {
     ${tw`inline-block w-8 h-8 mx-2`}
   }
-`;
+`
 
-const LoginContainer = tw.div`px-10 py-5 flex-col flex`
+const ConnectedAccountButton = tw(ConnectAccountButton)`bg-green-800 disabled:hocus:bg-green-800 disabled:cursor-auto`
+
+const LoginContainer = tw.div`px-10 py-5 flex-col flex justify-center items-center`
 
 export default function Profile() {
 
-    const githubLogin = () => {
+    const gitHubConnect = () => {
         window.open("http://localhost:4000/auth/github", "_self")
     }
 
-    const twitterLogin = () => {
+    const twitterConnect = () => {
         window.open("http://localhost:4000/auth/twitter", "_self")
     }
 
@@ -93,8 +95,8 @@ export default function Profile() {
     }
 
     return (
-        <>
 
+        <>
             <Container>
                 <Content>
                     <Button type="button" onClick={() => setShowModal(true)}>Edit profile</Button>
@@ -169,14 +171,28 @@ export default function Profile() {
                         </CardText>
                     </Card>
                     <LoginContainer>
-                        <LoginButton onClick={githubLogin}>
-                            <GitHubIcon />
-                            Link account to GitHub
-                        </LoginButton>
-                        <LoginButton onClick={twitterLogin}>
-                            <TwitterIcon />
-                            Link account to Twitter
-                        </LoginButton>
+                        {user.gitHubConnected ?
+                            <ConnectedAccountButton disabled>
+                                <GitHubIcon />
+                                Account is linked to GitHub ✔
+                            </ConnectedAccountButton>
+                            :
+                            <ConnectAccountButton onClick={gitHubConnect}>
+                                <GitHubIcon />
+                                Link account to GitHub
+                            </ConnectAccountButton>
+                        }
+                        {user.twitterConnected ?
+                            <ConnectedAccountButton disabled>
+                                <TwitterIcon />
+                                Account is linked to Twitter ✔
+                            </ConnectedAccountButton>
+                            :
+                            <ConnectAccountButton onClick={twitterConnect}>
+                                <TwitterIcon />
+                                Link account to Twitter
+                            </ConnectAccountButton>
+                        }
                     </LoginContainer>
                 </Content>
             </Container>

@@ -3,6 +3,8 @@ import { Request } from 'express'
 export interface IDatabaseUser {
     _id: string
     __v: number
+    twitterConnected: boolean
+    gitHubConnected: boolean
     discord: {
         id: string
         token: string
@@ -26,6 +28,8 @@ export interface IDatabaseUser {
 }
 
 export interface IUser {
+    twitterConnected: boolean
+    gitHubConnected: boolean
     discord: {
         id: string
         username: string
@@ -36,7 +40,6 @@ export interface IUser {
     }
     github?: {
         id: string
-        connected: boolean
         json?: {
             login?: string
             avatar_url?: string
@@ -56,7 +59,6 @@ export interface IUser {
     }
     twitter?: {
         id: string
-        connected: boolean
         username: string
     }
 }

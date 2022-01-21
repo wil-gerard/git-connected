@@ -65,7 +65,8 @@ passport.use(new DiscordStrategy({
                 if (!doc) {
 
                     const newUser = new User()
-
+                    newUser.gitHubConnected = false
+                    newUser.twitterConnected = false
                     newUser.discord.id = profile.id
                     newUser.discord.token = accessToken
                     newUser.discord.username = profile.username
@@ -101,7 +102,7 @@ passport.use(new GitHubStrategy({
             if (req.user) {
                 let user = req.user
 
-                user.github.connected = true
+                user.gitHubConnected = true
                 user.github.id = profile.id
                 user.github.token = accessToken
                 user.github.displayName = profile.displayName
@@ -120,8 +121,8 @@ passport.use(new GitHubStrategy({
 // Twitter Passport Strategy
 
 passport.use(new TwitterStrategy({
-    consumerKey: `${process.env.TWITTER_CLIENT_ID}`,
-    consumerSecret: `${process.env.TWITTER_CLIENT_SECRET}`,
+    consumerKey: `${process.env.TWITTER_CONSUMER_KEY}`,
+    consumerSecret: `${process.env.TWITTER_CONSUMER_SECRET}`,
     callbackURL: "/auth/twitter/callback",
     skipExtendedUserProfile: true,
     passReqToCallback: true
@@ -133,7 +134,7 @@ passport.use(new TwitterStrategy({
 
                 let user = req.user
 
-                user.twitter.connected = true
+                user.twitterConnected = true
                 user.twitter.id = profile.id
                 user.twitter.username = profile.username
                 user.twitter.token = token
@@ -219,11 +220,13 @@ app.get("/getuser", (req, res) => {
 })
 
 app.get("/getallusers", async (req, res) => {
-    await User.find({ github: { connected: true }, discord: { connected: true }}, (err: Error, data: IUser[]) => {
+    await User.find({ gitHubConnected: true, twitterConnected: true }, (err: Error, data: IUser[]) => {
         if (err) throw err;
         const filteredUsers: IUser[] = [];
         data.forEach((user: IUser) => {
             const userInformation = {
+                gitHubConnected: user.gitHubConnected,
+                twitterConnected: user.twitterConnected,
                 discord: {
                     id: user.discord.id,
                     username: user.discord.username,
@@ -234,7 +237,6 @@ app.get("/getallusers", async (req, res) => {
                 },
                 github: {
                     id: user.github.id,
-                    connected: user.github.connected,
                     json: {
                         login: user.github.json.login,
                         avatar_url: user.github.json.avatar_url,
@@ -254,7 +256,6 @@ app.get("/getallusers", async (req, res) => {
                 },
                 twitter: {
                     id: user.twitter.id,
-                    connected: user.github.connected,
                     username: user.twitter.username,
                 }
             }
