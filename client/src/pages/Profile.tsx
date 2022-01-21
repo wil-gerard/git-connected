@@ -1,45 +1,15 @@
-import tw, { styled } from "twin.macro"
-import { css } from "styled-components/macro"; //eslint-disable-line
-import { ReactComponent as TwitterIcon } from "../assets/twitter-icon.svg";
-import { ReactComponent as GitHubIcon } from "../assets/github-icon.svg";
-import { ReactComponent as LinkedInIcon } from "../assets/linkedin-icon.svg";
-import { myContext } from "../hooks/Context"
-import React, { useContext, useState } from "react";
-import { IUser } from "../interface"
+import tw, { styled } from 'twin.macro'
+import { ReactComponent as TwitterIcon } from '../assets/twitter-icon.svg'
+import { ReactComponent as GitHubIcon } from '../assets/github-icon.svg'
+import { myContext } from '../hooks/Context'
+import React, { useContext, useState } from 'react'
+import { IUser } from '../interface'
+import  { UserCard } from '../components/UserCard'
 
 
 const Container = tw.div`flex flex-col px-6 text-gray-100`
 
 const Content = tw.div`max-w-screen-xl mx-auto py-2 lg:py-24 justify-center `
-
-const Card = tw.div`mx-auto ml-auto max-w-sm md:max-w-xs lg:max-w-sm xl:max-w-xs`
-
-const CardImageContainer = styled.div`
-    ${tw`flex justify-center`}
-`
-const CardImage = styled.img`
-    ${tw`h-4/6 w-4/6 rounded-full shadow-xl mb-2`}
-`
-const CardText = tw.div`mt-4`
-
-const CardLocation = tw.div`font-semibold text-sm text-gray-600`
-
-const CardBio = tw.h5`text-lg mt-4 font-bold text-gray-100 text-center`
-
-const CardHeader = tw.div`flex justify-center items-center flex-col`
-
-const CardName = tw.div`text-primary-500 font-bold text-xl`
-
-const CardMeta = styled.div`
-  ${tw`flex flex-row flex-wrap justify-center sm:items-center font-semibold tracking-wide text-gray-600 uppercase text-xs`}
-`
-
-const CardMetaFeature = styled.a`
-  ${tw`flex items-center mt-4 mr-4 last:mr-0`}
-  svg {
-    ${tw`w-5 h-5 mr-1`}
-  }
-`
 
 const Button = tw.button`focus:outline-none text-gray-100 text-sm py-2 px-4 rounded-full bg-primary-600 hocus:bg-primary-800 transition duration-300 hover:shadow-lg`
 
@@ -71,8 +41,6 @@ const ConnectAccountButton = styled.button`
     ${tw`w-8 h-8 mx-2`}
   }
 `
-
-
 
 const ConnectedAccountButton = tw(ConnectAccountButton)`bg-green-800 disabled:hocus:bg-green-800 disabled:cursor-auto`
 
@@ -149,29 +117,7 @@ export default function Profile() {
                             <BgOpacity />
                         </>
                     ) : null}
-                    <Card>
-                        <CardImageContainer>
-                            <CardImage src={ user.gitHubConnected ? user.github.json.avatar_url : `https://cdn.discordapp.com/avatars/${user.discord.id}/${user.discord.avatar}.png`} />
-                        </CardImageContainer>
-                        <CardText>
-                            <CardHeader>
-                                <CardName>{ user.gitHubConnected ? user.github.json.name || user.github.json.login : user.discord.username }</CardName>
-                                <CardLocation>{ user.gitHubConnected ? user.github.json.location : null }</CardLocation>
-                            </CardHeader>
-                            <CardBio>{ user.gitHubConnected ? user.github.json.bio : null}</CardBio>
-                            <CardMeta>
-                                <CardMetaFeature href={user.discord.username}>
-                                    <TwitterIcon />
-                                </CardMetaFeature>
-                                <CardMetaFeature>
-                                    <GitHubIcon />
-                                </CardMetaFeature>
-                                <CardMetaFeature>
-                                    <LinkedInIcon />
-                                </CardMetaFeature>
-                            </CardMeta>
-                        </CardText>
-                    </Card>
+                    <UserCard {...user} />
                     <LoginContainer>
                         {user.gitHubConnected ?
                             <ConnectedAccountButton disabled>
