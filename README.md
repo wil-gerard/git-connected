@@ -1,7 +1,7 @@
 # ** *(The application and following readme is currently a WIP)* **
 # GitConnected
 
-GitConnected is a networking application that allows software engineers to reciprocate connections, follows, and endorsements - built by and for the [100Devs](https://leonnoel.com/100devs/) community.
+GitConnected is a social networking application that allows software engineers to reciprocate connections, follows, and endorsements - built by and for the [100Devs](https://leonnoel.com/100devs/) community.
 
 ## Development Contributors:
 
