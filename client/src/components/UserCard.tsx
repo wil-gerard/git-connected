@@ -5,19 +5,19 @@ import { ReactComponent as TwitterIcon } from '../assets/twitter-icon.svg'
 import { ReactComponent as GitHubIcon } from '../assets/github-icon.svg'
 import { ReactComponent as LinkedInIcon } from '../assets/linkedin-icon.svg'
 
-const Card = tw.div`mx-auto ml-auto max-w-sm md:max-w-xs lg:max-w-sm xl:max-w-xs`
+const Card = tw.div`mx-auto ml-auto max-w-sm md:max-w-xs lg:max-w-sm xl:max-w-xs bg-secondary-800 p-4 rounded shadow-lg`
 
 const CardImageContainer = styled.div`
     ${tw`flex justify-center`}
 `
 const CardImage = styled.img`
-    ${tw`h-4/6 w-4/6 rounded-full shadow-xl mb-2`}
+    ${tw`h-4/6 w-4/6 rounded-full shadow-md mb-2`}
 `
 const CardText = tw.div`mt-4`
 
 const CardLocation = tw.div`font-semibold text-sm text-gray-600`
 
-const CardBio = tw.h5`text-lg mt-4 font-bold text-gray-100 text-center`
+const CardBio = tw.h5`text-base mt-2 font-bold text-gray-100 text-center`
 
 const CardHeader = tw.div`flex justify-center items-center flex-col`
 
@@ -30,7 +30,7 @@ const CardMeta = styled.div`
 const CardMetaFeature = styled.a`
   ${tw`flex items-center mt-4 mr-4 last:mr-0`}
   svg {
-    ${tw`w-5 h-5 mr-1`}
+    ${tw`w-6 h-6 mr-1 text-secondary-100 hocus:text-primary-600 transition duration-300`}
   }
 `
 

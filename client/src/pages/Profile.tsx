@@ -9,9 +9,9 @@ import  { UserCard } from '../components/UserCard'
 
 const Container = tw.div`flex flex-col px-6 text-gray-100`
 
-const Content = tw.div`max-w-screen-xl mx-auto py-2 lg:py-24 justify-center `
+const Content = tw.div`mx-auto justify-center `
 
-const Button = tw.button`focus:outline-none text-gray-100 text-sm py-2 px-4 rounded-full bg-primary-600 hocus:bg-primary-800 transition duration-300 hover:shadow-lg`
+const Button = tw.button`focus:outline-none text-gray-100 text-sm py-2 px-4 rounded-full bg-primary-600 hocus:bg-primary-800 transition duration-300 hover:shadow-lg mb-4`
 
 const ModalContainer = tw.div`justify-center items-center flex overflow-x-hidden overflow-y-auto fixed inset-0 z-50 outline-none focus:outline-none w-full`
 
@@ -44,7 +44,7 @@ const ConnectAccountButton = styled.button`
 
 const ConnectedAccountButton = tw(ConnectAccountButton)`bg-green-800 disabled:hocus:bg-green-800 disabled:cursor-auto`
 
-const LoginContainer = tw.div`px-10 py-5 flex-col flex`
+const LoginContainer = tw.div`px-10 py-2 flex-col flex`
 
 export default function Profile() {
 
