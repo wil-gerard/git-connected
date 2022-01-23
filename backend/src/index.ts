@@ -11,10 +11,9 @@ import { IDatabaseUser, IReqAuth, IUser } from "./interface"
 import mongoStore from 'connect-mongo'
 import Twitter from 'twit'
 
-const GitHubStrategy = require("passport-github2").Strategy
-//const DiscordStrategy = require("passport-discord").Strategy
-import { discordStrategy } from "./strategies/discord"
-const TwitterStrategy = require("passport-twitter").Strategy
+import { discordStrategy } from "./strategies/discord";
+import { gitHubStrategy } from "./strategies/github";
+import { twitterStrategy } from "./strategies/twitter";
 
 const app = express()
 
@@ -43,71 +42,10 @@ app.use(
 
 app.use(passport.initialize())
 app.use(passport.session())
+
 passport.use(discordStrategy)
-
-
-
-// GitHub Passport Strategy
-
-passport.use(new GitHubStrategy({
-    clientID: `${process.env.GITHUB_CLIENT_ID}`,
-    clientSecret: `${process.env.GITHUB_CLIENT_SECRET}`,
-    callbackURL: "/auth/github/callback",
-    passReqToCallback: true
-},
-    function (req: any, accessToken: any, refreshToken: any, profile: any, cb: any) {
-
-        process.nextTick(() => {
-            if (req.user) {
-                let user = req.user
-
-                user.gitHubConnected = true
-                user.github.id = profile.id
-                user.github.token = accessToken
-                user.github.displayName = profile.displayName
-                user.github.json = profile._json
-
-                user.save((err: Error) => {
-                    if (err)
-                        throw err
-                    return cb(null, user)
-                })
-            }
-        })
-    }
-))
-
-// Twitter Passport Strategy
-
-passport.use(new TwitterStrategy({
-    consumerKey: `${process.env.TWITTER_CONSUMER_KEY}`,
-    consumerSecret: `${process.env.TWITTER_CONSUMER_SECRET}`,
-    callbackURL: "/auth/twitter/callback",
-    skipExtendedUserProfile: true,
-    passReqToCallback: true
-},
-    function (req: any, token: any, tokenSecret: any, profile: any, cb: any) {
-
-        process.nextTick(() => {
-            if (req.user) {
-
-                let user = req.user
-
-                user.twitterConnected = true
-                user.twitter.id = profile.id
-                user.twitter.username = profile.username
-                user.twitter.token = token
-                user.twitter.tokenSecret = tokenSecret
-
-                user.save((err: Error) => {
-                    if (err)
-                        throw err
-                    return cb(null, user)
-                })
-            }
-        })
-    }
-))
+passport.use(gitHubStrategy);
+passport.use(twitterStrategy)
 
 passport.serializeUser((user: IDatabaseUser, cb) => {
     cb(null, user._id)
