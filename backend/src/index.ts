@@ -12,7 +12,8 @@ import mongoStore from 'connect-mongo'
 import Twitter from 'twit'
 
 const GitHubStrategy = require("passport-github2").Strategy
-const DiscordStrategy = require("passport-discord").Strategy
+//const DiscordStrategy = require("passport-discord").Strategy
+import { discordStrategy } from "./strategies/discord"
 const TwitterStrategy = require("passport-twitter").Strategy
 
 const app = express()
@@ -42,50 +43,8 @@ app.use(
 
 app.use(passport.initialize())
 app.use(passport.session())
+passport.use(discordStrategy)
 
-// Discord Passport Strategy
-
-const discordScopes = ['identify', 'guilds', 'guilds.join', 'guilds.members.read']
-
-passport.use(new DiscordStrategy({
-    clientID: `${process.env.DISCORD_CLIENT_ID}`,
-    clientSecret: `${process.env.DISCORD_CLIENT_SECRET}`,
-    callbackURL: "/auth/discord/callback",
-    scope: discordScopes
-},
-    function (accessToken: any, refreshToken: any, profile: any, cb: any) {
-
-        if (profile.guilds.some((guild: any) => guild.id === '735923219315425401')) {
-            User.findOne({ 'discord.id': profile.id }, async (err: Error, doc: IDatabaseUser) => {
-
-                if (err) {
-                    return cb(err, null)
-                }
-
-                if (!doc) {
-
-                    const newUser = new User()
-                    newUser.gitHubConnected = false
-                    newUser.twitterConnected = false
-                    newUser.discord.id = profile.id
-                    newUser.discord.token = accessToken
-                    newUser.discord.username = profile.username
-                    newUser.discord.avatar = profile.avatar
-                    newUser.discord.discriminator = profile.discriminator
-                    newUser.discord.banner = profile.banner
-                    newUser.discord.banner_color = profile.banner_color
-
-                    await newUser.save()
-                    cb(null, newUser)
-                } else {
-                    cb(null, doc)
-                }
-            })
-        } else {
-            console.log('not a member of the 100devs discord server')
-        }
-    }
-))
 
 
 // GitHub Passport Strategy
