@@ -1,6 +1,14 @@
 import mongoose from 'mongoose'
 
 const User = new mongoose.Schema({
+    gitHubConnected:{
+        required: true,
+        type: Boolean
+    },
+    twitterConnected:{
+        required: true,
+        type: Boolean
+    },
     discord: {
         id: {
             required: false,
@@ -22,9 +30,13 @@ const User = new mongoose.Schema({
             required: false,
             type: String
         },
-        accent_color: {
+        banner: {
             required: false,
-            type: Number
+            type: String
+        },
+        banner_color: {
+            required: false,
+            type: String
         }
     },
     github: {

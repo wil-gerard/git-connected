@@ -9,7 +9,7 @@ import passport from "passport"
 import User from "./User"
 import { IDatabaseUser, IReqAuth, IUser } from "./interface"
 import mongoStore from 'connect-mongo'
-import Twitter from 'twitter-lite'
+import Twitter from 'twit'
 
 const GitHubStrategy = require("passport-github2").Strategy
 const DiscordStrategy = require("passport-discord").Strategy
@@ -54,7 +54,6 @@ passport.use(new DiscordStrategy({
     scope: discordScopes
 },
     function (accessToken: any, refreshToken: any, profile: any, cb: any) {
-        console.log(profile)
 
         if (profile.guilds.some((guild: any) => guild.id === '735923219315425401')) {
             User.findOne({ 'discord.id': profile.id }, async (err: Error, doc: IDatabaseUser) => {
@@ -66,7 +65,8 @@ passport.use(new DiscordStrategy({
                 if (!doc) {
 
                     const newUser = new User()
-
+                    newUser.gitHubConnected = false
+                    newUser.twitterConnected = false
                     newUser.discord.id = profile.id
                     newUser.discord.token = accessToken
                     newUser.discord.username = profile.username
@@ -98,13 +98,11 @@ passport.use(new GitHubStrategy({
 },
     function (req: any, accessToken: any, refreshToken: any, profile: any, cb: any) {
 
-        console.log(profile)
-
         process.nextTick(() => {
             if (req.user) {
                 let user = req.user
-                console.log(`github oauth working -- this is req.user obj ${user}`)
 
+                user.gitHubConnected = true
                 user.github.id = profile.id
                 user.github.token = accessToken
                 user.github.displayName = profile.displayName
@@ -113,52 +111,30 @@ passport.use(new GitHubStrategy({
                 user.save((err: Error) => {
                     if (err)
                         throw err
-                        return cb(null, user)
-                }) 
+                    return cb(null, user)
+                })
             }
         })
-
-        // if (req.user) {
-
-        //     let user = req.user
-        //     console.log(`github oauth working -- this is req.user obj ${user}`)
-
-        //     User.findOne({ 'discord.id': user.discord.id }, async (err: Error, doc: IDatabaseUser) => {
-        //         console.log(`user found on mongodb`)
-
-
-        //         user.github.id = profile.id
-        //         user.github.token = accessToken
-        //         user.github.displayName = profile.displayName
-        //         user.github.photos = profile.photos
-        //         user.github.json = profile.json
-
-        //         await user.save()
-        //         cb(null, user)
-
-        //     })
-        // }
     }
 ))
 
 // Twitter Passport Strategy
 
 passport.use(new TwitterStrategy({
-    consumerKey: `${process.env.TWITTER_CLIENT_ID}`,
-    consumerSecret: `${process.env.TWITTER_CLIENT_SECRET}`,
+    consumerKey: `${process.env.TWITTER_CONSUMER_KEY}`,
+    consumerSecret: `${process.env.TWITTER_CONSUMER_SECRET}`,
     callbackURL: "/auth/twitter/callback",
     skipExtendedUserProfile: true,
     passReqToCallback: true
 },
-    function (req:any , token: any, tokenSecret: any, profile: any, cb: any) {
-        console.log(profile)
+    function (req: any, token: any, tokenSecret: any, profile: any, cb: any) {
 
         process.nextTick(() => {
             if (req.user) {
 
                 let user = req.user
-                console.log(`github oauth working -- this is req.user obj ${user}`)
 
+                user.twitterConnected = true
                 user.twitter.id = profile.id
                 user.twitter.username = profile.username
                 user.twitter.token = token
@@ -167,8 +143,8 @@ passport.use(new TwitterStrategy({
                 user.save((err: Error) => {
                     if (err)
                         throw err
-                        return cb(null, user)
-                }) 
+                    return cb(null, user)
+                })
             }
         })
     }
@@ -180,40 +156,29 @@ passport.serializeUser((user: IDatabaseUser, cb) => {
 
 passport.deserializeUser((id: string, cb) => {
     User.findById({ _id: id }, (err: Error, user: IDatabaseUser) => {
-        console.log(`this is the desirialized user ${user}`)
         cb(err, user)
     })
 })
 
-app.post('/twitterfollow', (req: IReqAuth, res) => {
-    const { followUser } = req.body;
-    // const params = { status: message };
-  
-    console.log(`User '${req.user.twitter.username}' is a about to post the following:`);
-  
-    // FIXME: Is this how am I supposed to do this? It feels inefficient. Maybe you
-    // can create a twitter client and reuse it across users? I'm not sure, the docs suck.
-    const twitter = new Twitter({
-      consumer_key: process.env.TWITTER_CONSUMER_KEY,
-      consumer_secret: process.env.TWITTER_CONSUMER_SECRET,
-      access_token_key: req.user.twitter.token,
-      access_token_secret: req.user.twitter.tokenSecret,
-    });
-  
-    twitter.post('statuses/update.json', (error: Error, tweets: any) => {
-      if (!error) {
-        if (tweets.created_at !== '') {
-          res.end('Successfully posted!');
-        }
-      } else {
-        const twitterError = `Twitter error: ${error.message}`;
-        res.end(twitterError);
-      }
-    });
-  });
+app.get('/twitterfollow', async (req: IReqAuth, res) => {
+    try {
+        console.log(`User '${req.user.twitter.username}' is a about to follow someone`)
+
+        const twitter = new Twitter({
+            consumer_key: process.env.TWITTER_CONSUMER_KEY,
+            consumer_secret: process.env.TWITTER_CONSUMER_SECRET,
+            access_token: req.user.twitter.token,
+            access_token_secret: req.user.twitter.tokenSecret,
+        });
+
+        await twitter.post('friendships/create', req.query)
+
+    } catch (e) {
+        console.log(e)
+    }
+});
 
 app.get('/auth/discord', (req, res, next) => {
-    console.log(req.query)
     passport.authenticate('discord')(req, res, next)
 })
 
@@ -255,14 +220,15 @@ app.get("/getuser", (req, res) => {
 })
 
 app.get("/getallusers", async (req, res) => {
-    await User.find({}, (err: Error, data: IDatabaseUser[]) => {
+    await User.find({ gitHubConnected: true, twitterConnected: true }, (err: Error, data: IUser[]) => {
         if (err) throw err;
         const filteredUsers: IUser[] = [];
-        data.forEach((user: IDatabaseUser) => {
+        data.forEach((user: IUser) => {
             const userInformation = {
+                gitHubConnected: user.gitHubConnected,
+                twitterConnected: user.twitterConnected,
                 discord: {
                     id: user.discord.id,
-                    token: user.discord.id,
                     username: user.discord.username,
                     avatar: user.discord.avatar,
                     discriminator: user.discord.discriminator,
@@ -271,7 +237,6 @@ app.get("/getallusers", async (req, res) => {
                 },
                 github: {
                     id: user.github.id,
-                    token: user.github.token,
                     json: {
                         login: user.github.json.login,
                         avatar_url: user.github.json.avatar_url,
@@ -291,8 +256,6 @@ app.get("/getallusers", async (req, res) => {
                 },
                 twitter: {
                     id: user.twitter.id,
-                    token: user.twitter.token,
-                    tokenSecret: user.twitter.tokenSecret,
                     username: user.twitter.username,
                 }
             }
@@ -309,7 +272,7 @@ app.get("/auth/logout", (req, res) => {
     }
 })
 
-const PORT = process.env.PORT || 4000
+const PORT = process.env.PORT || process.env.BACKEND_DEV_PORT
 
 app.listen(PORT, () => {
     console.log(`server started on port ${PORT}`)

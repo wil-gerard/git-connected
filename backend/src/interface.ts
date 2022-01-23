@@ -3,6 +3,8 @@ import { Request } from 'express'
 export interface IDatabaseUser {
     _id: string
     __v: number
+    twitterConnected: boolean
+    gitHubConnected: boolean
     discord: {
         id: string
         token: string
@@ -26,17 +28,18 @@ export interface IDatabaseUser {
 }
 
 export interface IUser {
+    twitterConnected: boolean
+    gitHubConnected: boolean
     discord: {
         id: string
-        token: string
-        username?: string
+        username: string
         avatar?: string
-        discriminator?: string
-        accent_color?: number
+        discriminator: string
+        banner?: string
+        banner_color?: string
     }
     github?: {
         id: string
-        token: string
         json?: {
             login?: string
             avatar_url?: string
@@ -56,12 +59,10 @@ export interface IUser {
     }
     twitter?: {
         id: string
-        token: string
-        tokenSecret: string
         username: string
     }
 }
 
 export interface IReqAuth extends Request {
-    user?: IUser
+    user?: IDatabaseUser
 }

@@ -1,48 +1,17 @@
-import tw from "twin.macro";
-import styled from "styled-components";
-import { css } from "styled-components/macro"; //eslint-disable-line
-import { ReactComponent as TwitterIcon } from "../assets/twitter-icon.svg";
-import { ReactComponent as GitHubIcon } from "../assets/github-icon.svg";
-import { ReactComponent as LinkedInIcon } from "../assets/linkedin-icon.svg";
-import { myContext } from "../hooks/Context"
-import React, { useContext, useState } from "react";
-import { IUser } from "../interface"
+import tw, { styled } from 'twin.macro'
+import { ReactComponent as TwitterIcon } from '../assets/twitter-icon.svg'
+import { ReactComponent as GitHubIcon } from '../assets/github-icon.svg'
+import { myContext } from '../hooks/Context'
+import React, { useContext, useState } from 'react'
+import { IUser } from '../interface'
+import  { UserCard } from '../components/UserCard'
 
 
 const Container = tw.div`flex flex-col px-6 text-gray-100`
 
-const Content = tw.div`max-w-screen-xl mx-auto py-2 lg:py-24`
+const Content = tw.div`mx-auto justify-center `
 
-const Card = tw.div`mx-auto xl:mx-0 xl:ml-auto max-w-sm md:max-w-xs lg:max-w-sm xl:max-w-xs`
-
-const CardImageContainer = styled.div`
-    ${tw`flex justify-center`}
-`
-const CardImage = styled.img`
-    ${tw`h-4/6 w-4/6 rounded-full shadow-xl mb-2`}
-`
-const CardText = tw.div`mt-4`
-
-const CardLocation = tw.div`font-semibold text-sm text-gray-600`
-
-const CardBio = tw.h5`text-lg mt-4 font-bold text-gray-100 text-center`
-
-const CardHeader = tw.div`flex justify-center items-center flex-col`
-
-const CardName = tw.div`text-primary-500 font-bold text-xl`
-
-const CardMeta = styled.div`
-  ${tw`flex flex-row flex-wrap justify-center sm:items-center font-semibold tracking-wide text-gray-600 uppercase text-xs`}
-`
-
-const CardMetaFeature = styled.a`
-  ${tw`flex items-center mt-4 mr-4 last:mr-0`}
-  svg {
-    ${tw`w-5 h-5 mr-1`}
-  }
-`
-
-const Button = tw.button`focus:outline-none text-gray-100 text-sm py-2 px-4 rounded-full bg-primary-600 hocus:bg-primary-800 transition duration-300 hover:shadow-lg`
+const Button = tw.button`focus:outline-none text-gray-100 text-sm py-2 px-4 rounded-full bg-primary-600 hocus:bg-primary-800 transition duration-300 hover:shadow-lg mb-4`
 
 const ModalContainer = tw.div`justify-center items-center flex overflow-x-hidden overflow-y-auto fixed inset-0 z-50 outline-none focus:outline-none w-full`
 
@@ -66,7 +35,27 @@ const CloseButton = tw.button`flex items-center justify-center bg-transparent fo
 
 const BgOpacity = tw.div`opacity-25 fixed inset-0 z-40 bg-black`
 
+const ConnectAccountButton = styled.button`
+  ${tw`cursor-pointer py-2 pl-2 pr-8 rounded-full bg-primary-600 text-gray-100 hocus:bg-primary-800 transition duration-300 m-2 text-sm flex justify-start items-center`}
+  svg {
+    ${tw`w-8 h-8 mx-2`}
+  }
+`
+
+const ConnectedAccountButton = tw(ConnectAccountButton)`bg-green-800 disabled:hocus:bg-green-800 disabled:cursor-auto`
+
+const LoginContainer = tw.div`px-10 py-2 flex-col flex`
+
 export default function Profile() {
+
+    const gitHubConnect = () => {
+        window.open("http://localhost:4000/auth/github", "_self")
+    }
+
+    const twitterConnect = () => {
+        window.open("http://localhost:4000/auth/twitter", "_self")
+    }
+
     const [showModal, setShowModal] = useState(false)
 
     const user = useContext(myContext) as IUser
@@ -76,8 +65,8 @@ export default function Profile() {
     }
 
     return (
-        <>
 
+        <>
             <Container>
                 <Content>
                     <Button type="button" onClick={() => setShowModal(true)}>Edit profile</Button>
@@ -85,9 +74,7 @@ export default function Profile() {
                         <>
                             <ModalContainer>
                                 <ModalContentContainer>
-
                                     <ModalContent>
-                                        {/*header*/}
                                         <ModalHeader>
                                             <H3>
                                                 Edit profile
@@ -97,7 +84,6 @@ export default function Profile() {
                                                 x
                                             </CloseButton>
                                         </ModalHeader>
-                                        {/*body*/}
                                         <ModalInputContainer>
                                             <ModalInputLabel>Twitter</ModalInputLabel>
                                             <ModalInput>
@@ -115,11 +101,9 @@ export default function Profile() {
                                                 bio...
                                             </ModalBioInput>
                                         </ModalInputContainer>
-
-                                        {/*footer*/}
-                                        <div className="flex items-center justify-end p-6 border-t border-solid border-blueGray-200 rounded-b">
+                                        <div className="flex items-center justify-center p-6 border-t border-solid rounded-b">
                                             <button
-                                                className="bg-emerald-500 text-white active:bg-emerald-600 font-bold uppercase text-sm px-6 py-3 rounded shadow hover:shadow-lg outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150"
+                                                className="bg-green-600 text-white hover:bg-green-800 font-bold uppercase text-sm px-6 py-3 rounded shadow hover:shadow-lg outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150"
                                                 type="button"
                                                 onClick={() => setShowModal(false)}
                                             >
@@ -133,29 +117,31 @@ export default function Profile() {
                             <BgOpacity />
                         </>
                     ) : null}
-                    <Card>
-                        <CardImageContainer>
-                            <CardImage src={`https://cdn.discordapp.com/avatars/${user.discord.id}/${user.discord.avatar}.png`} />
-                        </CardImageContainer>
-                        <CardText>
-                            <CardHeader>
-                                <CardName>{user.discord.username}</CardName>
-                                <CardLocation>{user.discord.username}</CardLocation>
-                            </CardHeader>
-                            <CardBio>{user.discord.username}</CardBio>
-                            <CardMeta>
-                                <CardMetaFeature href={user.discord.username}>
-                                    <TwitterIcon />
-                                </CardMetaFeature>
-                                <CardMetaFeature>
-                                    <GitHubIcon />
-                                </CardMetaFeature>
-                                <CardMetaFeature>
-                                    <LinkedInIcon />
-                                </CardMetaFeature>
-                            </CardMeta>
-                        </CardText>
-                    </Card>
+                    <UserCard {...user} />
+                    <LoginContainer>
+                        {user.gitHubConnected ?
+                            <ConnectedAccountButton disabled>
+                                <GitHubIcon />
+                                Connected to GitHub ✔
+                            </ConnectedAccountButton>
+                            :
+                            <ConnectAccountButton onClick={gitHubConnect}>
+                                <GitHubIcon />
+                                Connect to GitHub
+                            </ConnectAccountButton>
+                        }
+                        {user.twitterConnected ?
+                            <ConnectedAccountButton disabled>
+                                <TwitterIcon />
+                                Connected to Twitter ✔
+                            </ConnectedAccountButton>
+                            :
+                            <ConnectAccountButton onClick={twitterConnect}>
+                                <TwitterIcon />
+                                Connect to Twitter
+                            </ConnectAccountButton>
+                        }
+                    </LoginContainer>
                 </Content>
             </Container>
         </>
