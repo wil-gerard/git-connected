@@ -1,33 +1,32 @@
-import dotenv from "dotenv"
+import dotenv from 'dotenv'
 dotenv.config()
 
-import express from "express"
-import mongoose from "mongoose"
-import cors from "cors"
-import session from "express-session"
-import passport from "passport"
-import User from "./User"
-import { IDatabaseUser, IReqAuth, IUser } from "./interface"
+import express from 'express'
+import mongoose from 'mongoose'
+import cors from 'cors'
+import session from 'express-session'
+import passport from 'passport'
+import User from './User'
+import routes from './routes/index'
+import { IDatabaseUser, IReqAuth, IUser } from './interface'
 import mongoStore from 'connect-mongo'
 import Twitter from 'twit'
 
-import { discordStrategy } from "./strategies/discord";
-import { gitHubStrategy } from "./strategies/github";
-import { twitterStrategy } from "./strategies/twitter";
+import { discordStrategy } from './strategies/discord';
+import { gitHubStrategy } from './strategies/github';
+import { twitterStrategy } from './strategies/twitter';
 
 const app = express()
 
 mongoose.connect(`${process.env.START_MONGODB}${process.env.MONGODB_USERNAME}:${process.env.MONGODB_PASSWORD}${process.env.END_MONGODB}`, (err) => {
     if (err) throw err
-    console.log("connected to MongoDB succesfully")
+    console.log('connected to MongoDB succesfully')
 })
-
-// Middleware
 
 app.use(express.json())
 app.use(cors({ origin: `${process.env.FRONTEND_DEV_URL}`, credentials: true }))
 
-app.set("trust proxy", 1)
+app.set('trust proxy', 1)
 
 app.use(
     session({
@@ -44,7 +43,7 @@ app.use(passport.initialize())
 app.use(passport.session())
 
 passport.use(discordStrategy)
-passport.use(gitHubStrategy);
+passport.use(gitHubStrategy)
 passport.use(twitterStrategy)
 
 passport.serializeUser((user: IDatabaseUser, cb) => {
@@ -75,48 +74,11 @@ app.get('/twitterfollow', async (req: IReqAuth, res) => {
     }
 });
 
-app.get('/auth/discord', (req, res, next) => {
-    passport.authenticate('discord')(req, res, next)
-})
-
-app.get('/auth/discord/callback',
-    passport.authenticate('discord', {
-        failureRedirect: '/',
-        session: true
-    }),
-    function (req, res) {
-        res.redirect(`${process.env.FRONTEND_DEV_URL}/profile`)
-    })
-
-app.get('/auth/github',
-    passport.authenticate('github', { scope: ['read:user'] }))
-
-app.get('/auth/github/callback',
-    passport.authenticate('github', {
-        failureRedirect: '/',
-        session: true
-    }),
-    function (req, res) {
-        res.redirect(`${process.env.FRONTEND_DEV_URL}/profile`)
-    })
-
-app.get('/auth/twitter',
-    passport.authenticate('twitter'))
-
-app.get('/auth/twitter/callback',
-    passport.authenticate('twitter', {
-        failureRedirect: '/',
-        session: true
-    }),
-    function (req, res) {
-        res.redirect(`${process.env.FRONTEND_DEV_URL}/profile`)
-    })
-
-app.get("/getuser", (req, res) => {
+app.get('/getuser', (req, res) => {
     res.send(req.user)
 })
 
-app.get("/getallusers", async (req, res) => {
+app.get('/getallusers', async (req, res) => {
     await User.find({ gitHubConnected: true, twitterConnected: true }, (err: Error, data: IUser[]) => {
         if (err) throw err;
         const filteredUsers: IUser[] = [];
@@ -162,12 +124,7 @@ app.get("/getallusers", async (req, res) => {
     }).clone().catch(function (err: Error) { console.log(err) });
 })
 
-app.get("/auth/logout", (req, res) => {
-    if (req.user) {
-        req.logout()
-        res.send("done")
-    }
-})
+app.use('/api', routes)
 
 const PORT = process.env.PORT || process.env.BACKEND_DEV_PORT
 

@@ -51,11 +51,11 @@ export default function Navbar() {
     const [showModal, setShowModal] = useState(false)
 
     const discordLogin = () => {
-        window.open("http://localhost:4000/auth/discord?testworking=true&happiness=high", "_self")
+        window.open("http://localhost:4000/api/auth/discord")
     }
 
     const logout = () => {
-        axios.get("http://localhost:4000/auth/logout", {
+        axios.get("http://localhost:4000/api/auth/logout", {
             withCredentials: true
         }).then((res: AxiosResponse) => {
             if (res.data === "done") {
