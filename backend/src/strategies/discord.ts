@@ -1,13 +1,13 @@
 
-const DiscordStrategy = require("passport-discord").Strategy;
-import User from "../User";
-import { IDatabaseUser } from "../interface"
+const DiscordStrategy = require('passport-discord').Strategy;
+import User from '../User';
+import { IDatabaseUser } from '../interface'
 
 const discordScopes = ['identify', 'guilds', 'guilds.join', 'guilds.members.read']
 const discordStrategySettings: any = {
     clientID: `${process.env.DISCORD_CLIENT_ID}`,
     clientSecret: `${process.env.DISCORD_CLIENT_SECRET}`,
-    callbackURL: "/auth/discord/callback",
+    callbackURL: '/api/auth/discord/callback',
     scope: discordScopes
 }
 export const discordStrategy: any = new DiscordStrategy(discordStrategySettings, handleDiscordLogin);

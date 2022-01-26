@@ -49,11 +49,11 @@ const LoginContainer = tw.div`px-10 py-2 flex-col flex`
 export default function Profile() {
 
     const gitHubConnect = () => {
-        window.open("http://localhost:4000/auth/github", "_self")
+        window.open("http://localhost:4000/api/auth/github", "_self")
     }
 
     const twitterConnect = () => {
-        window.open("http://localhost:4000/auth/twitter", "_self")
+        window.open("http://localhost:4000/api/auth/twitter", "_self")
     }
 
     const [showModal, setShowModal] = useState(false)
