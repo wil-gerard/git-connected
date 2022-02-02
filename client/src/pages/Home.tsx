@@ -39,11 +39,11 @@ const TableDataName = tw.div`font-medium text-gray-100`
 
 const TableDataLocation = tw.div`font-medium text-gray-100 text-left`
 
-const TableDataMeta = tw.div`font-medium text-gray-100 text-left flex flex-row`
+const TableActions = tw.div`font-medium text-gray-100 text-left flex flex-row`
 
-const TableDataMetaLink = tw.a`flex items-center justify-center rounded shadow cursor-pointer bg-secondary-600 transition duration-300 hocus:bg-primary-500 w-6 h-6 ml-1 p-0.5`
+const TableLink = tw.a`flex items-center justify-center rounded shadow cursor-pointer bg-secondary-600 transition duration-300 hocus:bg-primary-500 w-6 h-6 ml-1 p-0.5`
 
-const TableDataMetaFollow = tw.a`flex items-center justify-center rounded shadow cursor-pointer bg-secondary-600 transition duration-300 hocus:bg-primary-500  ml-1 py-0.5 px-2`
+const TableFollow = tw.a`flex items-center justify-center rounded shadow cursor-pointer bg-secondary-600 transition duration-300 hocus:bg-primary-500  ml-1 py-0.5 px-2`
 
 export default function Home() {
   const ctx = useContext(myContext)
@@ -56,8 +56,6 @@ export default function Home() {
       }))
     })
   }, [ctx]);
-
-
 
   if (!users) {
     return <p>loading...</p>
@@ -112,21 +110,21 @@ export default function Home() {
                         </TableDataLocation>
                       </TableDataCell>
                       <TableDataCell>
-                        <TableDataMeta>
-                          <TableDataMetaFollow onClick={handleFollowSubmit} >
+                        <TableActions>
+                          <TableFollow onClick={handleFollowSubmit} >
                             Follow on Twitter
                             <TwitterIcon />
-                          </TableDataMetaFollow>
-                          <TableDataMetaLink href={`https://www.twitter.com/${user.twitter.username}`} target="blank" rel="noopener noreferrer">
+                          </TableFollow>
+                          <TableLink href={`https://www.twitter.com/${user.twitter.username}`} target="blank" rel="noopener noreferrer">
                             <TwitterIcon />
-                          </TableDataMetaLink>
-                          <TableDataMetaLink href={user.github.json.html_url} target="blank" rel="noopener noreferrer">
+                          </TableLink>
+                          <TableLink href={user.github.json.html_url} target="blank" rel="noopener noreferrer">
                             <GitHubIcon />
-                          </TableDataMetaLink>
-                          <TableDataMetaLink href={`https://discordapp.com/channels/@me/${user.discord.username}#${user.discord.discriminator}`} target="blank" rel="noopener noreferrer">
+                          </TableLink>
+                          <TableLink href={`https://discordapp.com/channels/@me/${user.discord.username}#${user.discord.discriminator}`} target="blank" rel="noopener noreferrer">
                             <DiscordIcon />
-                          </TableDataMetaLink>
-                        </TableDataMeta>
+                          </TableLink>
+                        </TableActions>
                       </TableDataCell>
                     </TableRow>
                   )
