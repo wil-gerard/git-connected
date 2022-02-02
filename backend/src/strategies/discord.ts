@@ -26,7 +26,6 @@ async function handleDiscordLogin(discordAccessToken: String, refreshToken: Stri
     })
 }
 
-
 function getNewUser(discordProfile: any, discordAccessToken: String) {
     const newUser = new User()
     newUser.gitHubConnected = false

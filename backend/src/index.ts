@@ -56,9 +56,9 @@ passport.deserializeUser((id: string, cb) => {
     })
 })
 
-app.get('/twitterfollow', async (req: IReqAuth, res) => {
+app.post('/twitterfollow', async (req: IReqAuth, res) => {
     try {
-        console.log(`User '${req.user.twitter.username}' is a about to follow someone`)
+        console.log(`User '${req.query['username']}' is  to follow someone`)
 
         const twitter = new Twitter({
             consumer_key: process.env.TWITTER_CONSUMER_KEY,
@@ -66,7 +66,7 @@ app.get('/twitterfollow', async (req: IReqAuth, res) => {
             access_token: req.user.twitter.token,
             access_token_secret: req.user.twitter.tokenSecret,
         });
-
+        
         await twitter.post('friendships/create', req.query)
 
     } catch (e) {

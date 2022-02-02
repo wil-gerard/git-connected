@@ -1,12 +1,12 @@
 import Axios, { AxiosResponse } from 'axios'
-import tw from "twin.macro"
-import { css } from "styled-components/macro"; //eslint-disable-line
-import { ReactComponent as TwitterIcon } from "../assets/twitter-icon.svg"
-import { ReactComponent as GitHubIcon } from "../assets/github-icon.svg"
-import { ReactComponent as DiscordIcon } from "../assets/discord-icon.svg"
-import { myContext } from "../hooks/Context"
-import React, { useEffect, useState, useContext } from "react"
-import { IUser } from "../interface"
+import tw from 'twin.macro'
+import { css } from 'styled-components/macro'; //eslint-disable-line
+import { ReactComponent as TwitterIcon } from '../assets/twitter-icon.svg'
+import { ReactComponent as GitHubIcon } from '../assets/github-icon.svg'
+import { ReactComponent as DiscordIcon } from '../assets/discord-icon.svg'
+import { myContext } from '../hooks/Context'
+import React, { useEffect, useState, useContext } from 'react'
+import { IUser } from '../interface'
 
 
 const Content = tw.div`flex flex-col justify-center px-6 text-gray-100`
@@ -62,6 +62,7 @@ export default function Home() {
   if (!users) {
     return <p>loading...</p>
   }
+  localStorage.setItem("username","bob")
   return (
     <>
       <Content>
@@ -89,13 +90,16 @@ export default function Home() {
               <TableBody>
                 {users.map((user: IUser) => {
 
-                  // let twitterFollow:any = Axios.post(`http://localhost:4000/twitterfollow/KenAKAFrosty`)
-
+                  
+                  function handleFollowSubmit() {
+                    console.log(user)
+                    Axios.post(`http://localhost:4000/twitterfollow?username=${user.twitter.username}`)
+                  }
+                
                   return (
                     <TableRow key={user.discord.id}>
                       <TableDataCell>
                         <TableDataNameContainer>
-                          {/* <TableDataImage src={`https://cdn.discordapp.com/avatars/${user.discord.id}/${user.discord.avatar}.png`} /> */}
                           <TableDataImage src={`${user.github.json.avatar_url}`} />
                           <TableDataName>
                             {user.github.json.name}
@@ -109,7 +113,7 @@ export default function Home() {
                       </TableDataCell>
                       <TableDataCell>
                         <TableDataMeta>
-                          <TableDataMetaFollow href={`http://localhost:4000/twitterfollow?screen_name=${user.twitter.username}`} >
+                          <TableDataMetaFollow onClick={handleFollowSubmit} >
                             Follow on Twitter
                             <TwitterIcon />
                           </TableDataMetaFollow>
