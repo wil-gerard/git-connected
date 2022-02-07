@@ -1,13 +1,35 @@
 import mongoose from 'mongoose'
 
 const User = new mongoose.Schema({
-    gitHubConnected:{
+    gitHubConnected: {
         required: true,
         type: Boolean
     },
-    twitterConnected:{
+    twitterConnected: {
         required: true,
         type: Boolean
+    },
+    customMessage: {
+        required: false,
+        type: String
+    },
+    customLocation: {
+        required: false,
+        type: String
+    },
+    customName: {
+        required: false,
+        type: String
+    },
+    tags: {
+        lookingForCoffeeChats:{
+            required: true,
+            type: Boolean
+        },
+        openToCoffeeChats:{
+            required: true,
+            type: Boolean
+        }
     },
     discord: {
         id: {

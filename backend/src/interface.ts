@@ -5,6 +5,13 @@ export interface IDatabaseUser {
     __v: number
     twitterConnected: boolean
     gitHubConnected: boolean
+    customMessage: string
+    customLocation: string
+    customName: string
+    tags: {
+        lookingForCoffeeChats: boolean
+        openToCoffeeChats: boolean
+    }
     discord: {
         id: string
         token: string
@@ -30,6 +37,13 @@ export interface IDatabaseUser {
 export interface IUser {
     twitterConnected: boolean
     gitHubConnected: boolean
+    customMessage: string
+    customLocation: string
+    customName: string
+    tags: {
+        lookingForCoffeeChats: boolean
+        openToCoffeeChats: boolean
+    }
     discord: {
         id: string
         username: string

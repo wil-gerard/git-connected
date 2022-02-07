@@ -4,10 +4,17 @@ dotenv.config()
 import express from 'express'
 import { Request, Response } from 'express'
 import Twitter from 'twit'
-import User from '../User'
+import User from '../models/User'
 import { IDatabaseUser, IReqAuth, IUser } from '../interface'
+import isLoggedIn from '../middleware/isLoggedIn'
 
 const router = express.Router()
+
+router.put('/user/update', isLoggedIn, async(req: IReqAuth, res) => {
+    try {
+        const user = await User.findOne({ user: req.user._id })
+    }
+})
 
 router.post('/user/twitterfollow', async (req: IReqAuth, res) => {
     try {

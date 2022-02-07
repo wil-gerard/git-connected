@@ -1,6 +1,6 @@
 
 const DiscordStrategy = require('passport-discord').Strategy;
-import User from '../User';
+import User from '../models/User';
 import { IDatabaseUser } from '../interface'
 
 const discordScopes = ['identify', 'guilds', 'guilds.join', 'guilds.members.read']
