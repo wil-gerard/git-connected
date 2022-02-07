@@ -10,11 +10,11 @@ import isLoggedIn from '../middleware/isLoggedIn'
 
 const router = express.Router()
 
-router.put('/user/update', isLoggedIn, async(req: IReqAuth, res) => {
-    try {
-        const user = await User.findOne({ user: req.user._id })
-    }
-})
+// router.put('/user/update', isLoggedIn, async(req: IReqAuth, res) => {
+//     try {
+//         const user = await User.findOne({ user: req.user._id })
+//     }
+// })
 
 router.post('/user/twitterfollow', async (req: IReqAuth, res) => {
     try {
@@ -48,49 +48,10 @@ router.get('/user/getuser', (req, res) => {
     res.send(req.user)
 })
 
-router.get('/user/getallusers', async (req, res) => {
-    await User.find({ gitHubConnected: true, twitterConnected: true }, (err: Error, data: IUser[]) => {
+router.get('/user/getall', async (req, res) => {
+    await User.find({ gitHubConnected: true, twitterConnected: true }, (err: Error, data: IUser[])  => {
         if (err) throw err;
-        const filteredUsers: IUser[] = [];
-        data.forEach((user: IUser) => {
-            const userInformation = {
-                gitHubConnected: user.gitHubConnected,
-                twitterConnected: user.twitterConnected,
-                discord: {
-                    id: user.discord.id,
-                    username: user.discord.username,
-                    avatar: user.discord.avatar,
-                    discriminator: user.discord.discriminator,
-                    banner: user.discord.banner,
-                    banner_color: user.discord.banner_color
-                },
-                github: {
-                    id: user.github.id,
-                    json: {
-                        login: user.github.json.login,
-                        avatar_url: user.github.json.avatar_url,
-                        html_url: user.github.json.html_url,
-                        followers_url: user.github.json.followers_url,
-                        following_url: user.github.json.following_url,
-                        name: user.github.json.name,
-                        company: user.github.json.company,
-                        hireable: user.github.json.hireable,
-                        blog: user.github.json.blog,
-                        location: user.github.json.location,
-                        bio: user.github.json.bio,
-                        twitter_username: user.github.json.twitter_username,
-                        followers: user.github.json.followers,
-                        following: user.github.json.following,
-                    }
-                },
-                twitter: {
-                    id: user.twitter.id,
-                    username: user.twitter.username,
-                }
-            }
-            filteredUsers.push(userInformation);
-        })
-        res.send(filteredUsers);
+        res.send([...data]);
     }).clone().catch(function (err: Error) { console.log(err) });
 })
 

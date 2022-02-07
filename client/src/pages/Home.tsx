@@ -49,10 +49,9 @@ export default function Home() {
 
   const [users, setUsers] = useState<IUser[]>()
   useEffect(() => {
-    Axios.get("http://localhost:4000/api/user/getallusers").then((res: AxiosResponse) => {
-      setUsers(res.data.filter((item: IUser) => {
-        return item
-      }))
+    Axios.get("http://localhost:4000/api/user/getall").then((res: AxiosResponse) => {
+      console.log(res.data)
+      setUsers(res.data)
     })
   }, [ctx]);
 
