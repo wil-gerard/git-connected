@@ -3,6 +3,7 @@ export interface IUser {
     gitHubConnected: boolean
     discord: {
         id: string
+        token: string
         username: string
         avatar?: string
         discriminator: string
@@ -11,6 +12,7 @@ export interface IUser {
     }
     github: {
         id: string
+        token: string
         json: {
             login?: string
             avatar_url?: string
@@ -30,6 +32,8 @@ export interface IUser {
     }
     twitter: {
         id: string
+        token: string
+        tokenSecret: string
         username: string
     }
 }

@@ -8,7 +8,6 @@ import { myContext } from '../hooks/Context'
 import React, { useEffect, useState, useContext } from 'react'
 import { IUser } from '../interface'
 
-
 const Content = tw.div`flex flex-col justify-center px-6 text-gray-100`
 
 const Header = tw.header`px-5 py-4 border-b border-gray-100`
@@ -50,7 +49,7 @@ export default function Home() {
 
   const [users, setUsers] = useState<IUser[]>()
   useEffect(() => {
-    Axios.get("http://localhost:4000/getallusers").then((res: AxiosResponse) => {
+    Axios.get("http://localhost:4000/api/user/getallusers").then((res: AxiosResponse) => {
       setUsers(res.data.filter((item: IUser) => {
         return item
       }))
@@ -90,9 +89,10 @@ export default function Home() {
 
                   
                   function handleFollowSubmit() {
-                    console.log(user)
-                    Axios.post(`http://localhost:4000/twitterfollow?username=${user.twitter.username}`)
+                    Axios.post(`http://localhost:4000/api/user/twitterfollow?username=${user.twitter.username}`, { withCredentials: true })
                   }
+
+                  // href={`http://localhost:4000/api/user/twitterfollow?username=${user.twitter.username}`}
                 
                   return (
                     <TableRow key={user.discord.id}>
@@ -111,7 +111,7 @@ export default function Home() {
                       </TableDataCell>
                       <TableDataCell>
                         <TableActions>
-                          <TableFollow onClick={handleFollowSubmit} >
+                          <TableFollow onClick={handleFollowSubmit}>
                             Follow on Twitter
                             <TwitterIcon />
                           </TableFollow>

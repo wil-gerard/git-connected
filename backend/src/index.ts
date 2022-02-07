@@ -4,12 +4,15 @@ dotenv.config()
 import express from 'express'
 import mongoose from 'mongoose'
 import cors from 'cors'
+import cookieParser from 'cookie-parser'
+import morgan from 'morgan'
 import session from 'express-session'
 import passport from 'passport'
 import User from './User'
 import routes from './routes/index'
 import { IDatabaseUser, IReqAuth, IUser } from './interface'
 import mongoStore from 'connect-mongo'
+
 import Twitter from 'twit'
 
 import { discordStrategy } from './strategies/discord';
@@ -24,7 +27,10 @@ mongoose.connect(`${process.env.START_MONGODB}${process.env.MONGODB_USERNAME}:${
 })
 
 app.use(express.json())
+app.use(express.urlencoded({ extended: true }))
 app.use(cors({ origin: `${process.env.FRONTEND_DEV_URL}`, credentials: true }))
+app.use(morgan('dev'))
+app.use(cookieParser())
 
 app.set('trust proxy', 1)
 
@@ -54,74 +60,6 @@ passport.deserializeUser((id: string, cb) => {
     User.findById({ _id: id }, (err: Error, user: IDatabaseUser) => {
         cb(err, user)
     })
-})
-
-app.post('/twitterfollow', async (req: IReqAuth, res) => {
-    try {
-        console.log(`User '${req.query['username']}' is  to follow someone`)
-
-        const twitter = new Twitter({
-            consumer_key: process.env.TWITTER_CONSUMER_KEY,
-            consumer_secret: process.env.TWITTER_CONSUMER_SECRET,
-            access_token: req.user.twitter.token,
-            access_token_secret: req.user.twitter.tokenSecret,
-        });
-        
-        await twitter.post('friendships/create', req.query)
-
-    } catch (e) {
-        console.log(e)
-    }
-});
-
-app.get('/getuser', (req, res) => {
-    res.send(req.user)
-})
-
-app.get('/getallusers', async (req, res) => {
-    await User.find({ gitHubConnected: true, twitterConnected: true }, (err: Error, data: IUser[]) => {
-        if (err) throw err;
-        const filteredUsers: IUser[] = [];
-        data.forEach((user: IUser) => {
-            const userInformation = {
-                gitHubConnected: user.gitHubConnected,
-                twitterConnected: user.twitterConnected,
-                discord: {
-                    id: user.discord.id,
-                    username: user.discord.username,
-                    avatar: user.discord.avatar,
-                    discriminator: user.discord.discriminator,
-                    banner: user.discord.banner,
-                    banner_color: user.discord.banner_color
-                },
-                github: {
-                    id: user.github.id,
-                    json: {
-                        login: user.github.json.login,
-                        avatar_url: user.github.json.avatar_url,
-                        html_url: user.github.json.html_url,
-                        followers_url: user.github.json.followers_url,
-                        following_url: user.github.json.following_url,
-                        name: user.github.json.name,
-                        company: user.github.json.company,
-                        hireable: user.github.json.hireable,
-                        blog: user.github.json.blog,
-                        location: user.github.json.location,
-                        bio: user.github.json.bio,
-                        twitter_username: user.github.json.twitter_username,
-                        followers: user.github.json.followers,
-                        following: user.github.json.following,
-                    }
-                },
-                twitter: {
-                    id: user.twitter.id,
-                    username: user.twitter.username,
-                }
-            }
-            filteredUsers.push(userInformation);
-        })
-        res.send(filteredUsers);
-    }).clone().catch(function (err: Error) { console.log(err) });
 })
 
 app.use('/api', routes)

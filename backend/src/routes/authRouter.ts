@@ -2,7 +2,7 @@ import dotenv from 'dotenv'
 dotenv.config()
 
 import express from 'express'
-import auth from '../middleware/auth'
+import isLoggedIn from '../middleware/isLoggedIn'
 import { Request, Response } from 'express'
 import { IReqAuth } from '../interface'
 import passport from 'passport'
@@ -25,10 +25,10 @@ router.get('/auth/discord/callback',
 
 // --- Twitter ---
 router.get('/auth/twitter',
-    passport.authenticate('twitter'))
+    passport.authorize('twitter'))
 
 router.get('/auth/twitter/callback',
-    passport.authenticate('twitter', {
+    passport.authorize('twitter', {
         failureRedirect: '/',
         session: true
     }),
@@ -38,10 +38,10 @@ router.get('/auth/twitter/callback',
 
 // --- GitHub ---
 router.get('/auth/github',
-    passport.authenticate('github', { scope: ['read:user'] }))
+    passport.authorize('github', { scope: ['read:user'] }))
 
 router.get('/auth/github/callback',
-    passport.authenticate('github', {
+    passport.authorize('github', {
         failureRedirect: '/',
         session: true
     }),
@@ -49,7 +49,7 @@ router.get('/auth/github/callback',
         res.redirect(`${process.env.FRONTEND_DEV_URL}/profile`)
     })
 
-router.get('/auth/logout', auth, (req: IReqAuth, res: Response) => {
+router.get('/auth/logout', isLoggedIn, (req: IReqAuth, res: Response) => {
     if (req.user) {
         req.logout()
         res.send('done')

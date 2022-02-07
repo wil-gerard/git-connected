@@ -1,4 +1,5 @@
-import tw, { styled } from 'twin.macro'
+import tw from 'twin.macro'
+import styled from "styled-components";
 import { ReactComponent as TwitterIcon } from '../assets/twitter-icon.svg'
 import { ReactComponent as GitHubIcon } from '../assets/github-icon.svg'
 import { myContext } from '../hooks/Context'

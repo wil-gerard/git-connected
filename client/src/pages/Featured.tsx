@@ -46,7 +46,7 @@ export default function Featured() {
 
   const [user, setUsers] = useState<IUser[]>()
   useEffect(() => {
-    Axios.get("http://localhost:4000/getallusers").then((res: AxiosResponse) => {
+    Axios.get("http://localhost:4000/api/user/getallusers").then((res: AxiosResponse) => {
 
       setUsers(res.data)
     })
