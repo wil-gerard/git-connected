@@ -7,14 +7,29 @@ import Twitter from 'twit'
 import User from '../models/User'
 import { IDatabaseUser, IReqAuth, IUser } from '../interface'
 import isLoggedIn from '../middleware/isLoggedIn'
+import { profile } from 'console'
 
 const router = express.Router()
 
-// router.put('/user/update', isLoggedIn, async(req: IReqAuth, res) => {
-//     try {
-//         const user = await User.findOne({ user: req.user._id })
-//     }
-// })
+router.put('/user/update', isLoggedIn, async(req: IReqAuth, res) => {
+    try {
+        const user = await User.findOne({ user: req.user._id });
+        
+        user.customMessage = req.body.message;
+        user.customLocation = req.body.location;
+        user.customName = req.body.name;
+        user.tags.lookingForCoffeeChats = req.body.lookingForCoffeeChats;
+        user.tags.openToCoffeeChats = req.body.openToCoffeeChats;
+
+        await user.save();
+
+        res.json(user)
+
+    } catch(err) {
+        console.error(err.message);
+        res.status(500).send('Server Error');
+    }
+})
 
 router.post('/user/twitterfollow', async (req: IReqAuth, res) => {
     try {

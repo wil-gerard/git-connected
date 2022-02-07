@@ -30,7 +30,7 @@ const ModalBioInput = tw.textarea`w-full border-0 px-3 py-3 placeholder-gray-600
 
 const ModalInputLabel = tw.label`block uppercase text-gray-300 text-xs font-bold mb-2`
 
-const H3 = tw.div`text-xl font-semibold`
+const ModalHeaderText = tw.h3`text-xl font-semibold`
 
 const CloseButton = tw.button`flex items-center justify-center bg-transparent font-semibold hocus:bg-secondary-600 h-10 w-10 text-2xl rounded-full`
 
@@ -77,9 +77,9 @@ export default function Profile() {
                                 <ModalContentContainer>
                                     <ModalContent>
                                         <ModalHeader>
-                                            <H3>
+                                            <ModalHeaderText>
                                                 Edit profile
-                                            </H3>
+                                            </ModalHeaderText>
 
                                             <CloseButton onClick={() => setShowModal(false)}>
                                                 x
@@ -93,7 +93,6 @@ export default function Profile() {
                                         <ModalInputContainer>
                                             <ModalInputLabel>LinkedIn</ModalInputLabel>
                                             <ModalInput>
-
                                             </ModalInput>
                                         </ModalInputContainer>
                                         <ModalInputContainer>
