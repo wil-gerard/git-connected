@@ -1,4 +1,4 @@
-import Axios, { AxiosResponse } from 'axios'
+import axios, { AxiosResponse } from 'axios'
 import tw from 'twin.macro'
 import { css } from 'styled-components/macro'; //eslint-disable-line
 import { ReactComponent as TwitterIcon } from '../assets/twitter-icon.svg'
@@ -49,7 +49,7 @@ export default function Home() {
 
   const [users, setUsers] = useState<IUser[]>()
   useEffect(() => {
-    Axios.get("http://localhost:4000/api/user/getall").then((res: AxiosResponse) => {
+    axios.get("http://localhost:4000/api/user/getall").then((res: AxiosResponse) => {
       console.log(res.data)
       setUsers(res.data)
     })
@@ -58,7 +58,7 @@ export default function Home() {
   if (!users) {
     return <p>loading...</p>
   }
-  localStorage.setItem("username","bob")
+  localStorage.setItem("username", "bob")
   return (
     <>
       <Content>
@@ -86,13 +86,20 @@ export default function Home() {
               <TableBody>
                 {users.map((user: IUser) => {
 
-                  
-                  function handleFollowSubmit() {
-                    Axios.post(`http://localhost:4000/api/user/twitterfollow?username=${user.twitter.username}`, { withCredentials: true })
+
+                  const handleFollowSubmit = async () => {
+                    try {
+                      const res = await axios({
+                        method: 'post',
+                        url: `http://localhost:4000/api/user/twitterfollow?username=${user.twitter.username}`,
+                        withCredentials: true
+                      })
+                      console.log(res.data)
+                    } catch (err: any) {
+                      console.error(err.message)
+                    }
                   }
 
-                  // href={`http://localhost:4000/api/user/twitterfollow?username=${user.twitter.username}`}
-                
                   return (
                     <TableRow key={user.discord.id}>
                       <TableDataCell>

@@ -11,7 +11,6 @@ import auth from '../middleware/auth'
 const router = express.Router()
 
 router.put('/user/update', auth, async(req: IReqAuth, res) => {
-    console.log(req.user)
     try {
         const user = await User.findOne({ user: req.user._id });
 
@@ -32,11 +31,9 @@ router.put('/user/update', auth, async(req: IReqAuth, res) => {
     }
 })
 
-router.post('/user/twitterfollow', async (req: IReqAuth, res) => {
+router.post('/user/twitterfollow', auth, async (req: IReqAuth, res) => {
     try {
-        console.log(req.isAuthenticated()) 
-        console.log(req.user)
-        console.log(`User is about to follow'${req.query['username']}'`)
+        console.log(`User is about to follow '${req.query['username']}'`)
 
         let username = req.query['username'] as string
 
@@ -47,13 +44,16 @@ router.post('/user/twitterfollow', async (req: IReqAuth, res) => {
             access_token_secret: req.user.twitter.tokenSecret,
         });
     
-        twitter.post('friendships/create', { screen_name: username }, function(err, data, response){
+        let twitterPost = twitter.post('friendships/create', { screen_name: username }, function(err, data, response){
             if (err){
                 console.log(err)
             } else {
-                
+                console.log(response)
             }
         })
+
+        res.json(twitterPost)
+        
 
     } catch (e) {
         console.log(e)
