@@ -2,7 +2,7 @@ import dotenv from 'dotenv'
 dotenv.config()
 
 import express from 'express'
-import isLoggedIn from '../middleware/isLoggedIn'
+import auth from '../middleware/auth'
 import { Request, Response } from 'express'
 import { IReqAuth } from '../interface'
 import passport from 'passport'
@@ -49,7 +49,7 @@ router.get('/auth/github/callback',
         res.redirect(`${process.env.FRONTEND_DEV_URL}/profile`)
     })
 
-router.get('/auth/logout', isLoggedIn, (req: IReqAuth, res: Response) => {
+router.get('/auth/logout', auth, (req: IReqAuth, res: Response) => {
     if (req.user) {
         req.logout()
         res.send('done')

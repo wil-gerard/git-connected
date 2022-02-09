@@ -4,7 +4,6 @@ dotenv.config()
 import express from 'express'
 import mongoose from 'mongoose'
 import cors from 'cors'
-import cookieParser from 'cookie-parser'
 import morgan from 'morgan'
 import session from 'express-session'
 import passport from 'passport'
@@ -28,9 +27,13 @@ mongoose.connect(`${process.env.START_MONGODB}${process.env.MONGODB_USERNAME}:${
 
 app.use(express.json())
 app.use(express.urlencoded({ extended: true }))
-app.use(cors({ origin: `${process.env.FRONTEND_DEV_URL}`, credentials: true }))
+app.use(cors({
+    origin: `${process.env.FRONTEND_DEV_URL}`,
+    methods: 'GET,HEAD,PUT,PATCH,POST,DELETE',
+    credentials: true
+}));
+
 app.use(morgan('dev'))
-app.use(cookieParser())
 
 app.set('trust proxy', 1)
 
@@ -57,7 +60,7 @@ passport.serializeUser((user: IDatabaseUser, cb) => {
 })
 
 passport.deserializeUser((id: string, cb) => {
-    User.findById({ _id: id }, (err: Error, user: IDatabaseUser) => {
+    User.findById({_id: id}, (err: Error, user: IDatabaseUser) => {
         cb(err, user)
     })
 })

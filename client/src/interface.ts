@@ -1,7 +1,7 @@
 export interface IUser {
     twitterConnected: boolean
     gitHubConnected: boolean
-    customMessage: string
+    customBio: string
     customLocation: string
     customName: string
     tags: {

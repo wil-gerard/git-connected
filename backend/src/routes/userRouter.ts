@@ -6,16 +6,16 @@ import { Request, Response } from 'express'
 import Twitter from 'twit'
 import User from '../models/User'
 import { IDatabaseUser, IReqAuth, IUser } from '../interface'
-import isLoggedIn from '../middleware/isLoggedIn'
-import { profile } from 'console'
+import auth from '../middleware/auth'
 
 const router = express.Router()
 
-router.put('/user/update', isLoggedIn, async(req: IReqAuth, res) => {
+router.put('/user/update', auth, async(req: IReqAuth, res) => {
+    console.log(req.user)
     try {
         const user = await User.findOne({ user: req.user._id });
-        
-        user.customMessage = req.body.message;
+
+        user.customBio = req.body.bio;
         user.customLocation = req.body.location;
         user.customName = req.body.name;
         user.tags.lookingForCoffeeChats = req.body.lookingForCoffeeChats;
@@ -24,6 +24,7 @@ router.put('/user/update', isLoggedIn, async(req: IReqAuth, res) => {
         await user.save();
 
         res.json(user)
+        console.log('success!!')
 
     } catch(err) {
         console.error(err.message);

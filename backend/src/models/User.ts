@@ -9,7 +9,7 @@ const User = new mongoose.Schema({
         required: true,
         type: Boolean
     },
-    customMessage: {
+    customBio: {
         required: false,
         type: String
     },

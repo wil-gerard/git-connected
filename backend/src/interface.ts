@@ -5,7 +5,7 @@ export interface IDatabaseUser {
     __v: number
     twitterConnected: boolean
     gitHubConnected: boolean
-    customMessage: string
+    customBio: string
     customLocation: string
     customName: string
     tags: {
@@ -37,7 +37,7 @@ export interface IDatabaseUser {
 export interface IUser {
     twitterConnected: boolean
     gitHubConnected: boolean
-    customMessage: string
+    customBio: string
     customLocation: string
     customName: string
     tags: {
