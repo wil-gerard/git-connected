@@ -29,7 +29,7 @@ app.use(express.json())
 app.use(express.urlencoded({ extended: true }))
 app.use(cors({
     origin: `${process.env.FRONTEND_DEV_URL}`,
-    methods: 'GET,HEAD,PUT,PATCH,POST,DELETE',
+    methods: 'GET,PUT,POST,DELETE',
     credentials: true
 }));
 

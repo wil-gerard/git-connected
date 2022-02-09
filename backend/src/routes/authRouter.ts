@@ -10,9 +10,9 @@ import passport from 'passport'
 const router = express.Router()
 
 // --- Discord ---
-router.get('/auth/discord', (req, res, next) => {
-    passport.authenticate('discord')(req, res, next)
-})
+router.get('/auth/discord', 
+    passport.authenticate('discord')
+)
 
 router.get('/auth/discord/callback',
     passport.authenticate('discord', {

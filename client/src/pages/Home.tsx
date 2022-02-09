@@ -58,7 +58,7 @@ export default function Home() {
   if (!users) {
     return <p>loading...</p>
   }
-  localStorage.setItem("username", "bob")
+  
   return (
     <>
       <Content>
