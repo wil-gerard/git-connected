@@ -1,5 +1,6 @@
 import React from 'react'
-import tw, { styled } from 'twin.macro'
+import tw from 'twin.macro'
+import styled from "styled-components";
 import { IUser } from '../interface'
 import { ReactComponent as TwitterIcon } from '../assets/twitter-icon.svg'
 import { ReactComponent as GitHubIcon } from '../assets/github-icon.svg'

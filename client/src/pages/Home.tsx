@@ -1,13 +1,12 @@
-import Axios, { AxiosResponse } from 'axios'
-import tw from "twin.macro"
-import { css } from "styled-components/macro"; //eslint-disable-line
-import { ReactComponent as TwitterIcon } from "../assets/twitter-icon.svg"
-import { ReactComponent as GitHubIcon } from "../assets/github-icon.svg"
-import { ReactComponent as DiscordIcon } from "../assets/discord-icon.svg"
-import { myContext } from "../hooks/Context"
-import React, { useEffect, useState, useContext } from "react"
-import { IUser } from "../interface"
-
+import axios, { AxiosResponse } from 'axios'
+import tw from 'twin.macro'
+import { css } from 'styled-components/macro'; //eslint-disable-line
+import { ReactComponent as TwitterIcon } from '../assets/twitter-icon.svg'
+import { ReactComponent as GitHubIcon } from '../assets/github-icon.svg'
+import { ReactComponent as DiscordIcon } from '../assets/discord-icon.svg'
+import { myContext } from '../hooks/Context'
+import React, { useEffect, useState, useContext } from 'react'
+import { IUser } from '../interface'
 
 const Content = tw.div`flex flex-col justify-center px-6 text-gray-100`
 
@@ -39,29 +38,27 @@ const TableDataName = tw.div`font-medium text-gray-100`
 
 const TableDataLocation = tw.div`font-medium text-gray-100 text-left`
 
-const TableDataMeta = tw.div`font-medium text-gray-100 text-left flex flex-row`
+const TableActions = tw.div`font-medium text-gray-100 text-left flex flex-row`
 
-const TableDataMetaLink = tw.a`flex items-center justify-center rounded shadow cursor-pointer bg-secondary-600 transition duration-300 hocus:bg-primary-500 w-6 h-6 ml-1 p-0.5`
+const TableLink = tw.a`flex items-center justify-center rounded shadow cursor-pointer bg-secondary-600 transition duration-300 hocus:bg-primary-500 w-6 h-6 ml-1 p-0.5`
 
-const TableDataMetaFollow = tw.a`flex items-center justify-center rounded shadow cursor-pointer bg-secondary-600 transition duration-300 hocus:bg-primary-500  ml-1 py-0.5 px-2`
+const TableFollow = tw.a`flex items-center justify-center rounded shadow cursor-pointer bg-secondary-600 transition duration-300 hocus:bg-primary-500  ml-1 py-0.5 px-2`
 
 export default function Home() {
   const ctx = useContext(myContext)
 
   const [users, setUsers] = useState<IUser[]>()
   useEffect(() => {
-    Axios.get("http://localhost:4000/getallusers").then((res: AxiosResponse) => {
-      setUsers(res.data.filter((item: IUser) => {
-        return item
-      }))
+    axios.get("http://localhost:4000/api/user/getall").then((res: AxiosResponse) => {
+      console.log(res.data)
+      setUsers(res.data)
     })
   }, [ctx]);
-
-
 
   if (!users) {
     return <p>loading...</p>
   }
+  localStorage.setItem("username", "bob")
   return (
     <>
       <Content>
@@ -89,13 +86,24 @@ export default function Home() {
               <TableBody>
                 {users.map((user: IUser) => {
 
-                  // let twitterFollow:any = Axios.post(`http://localhost:4000/twitterfollow/KenAKAFrosty`)
+
+                  const handleFollowSubmit = async () => {
+                    try {
+                      const res = await axios({
+                        method: 'post',
+                        url: `http://localhost:4000/api/user/twitterfollow?username=${user.twitter.username}`,
+                        withCredentials: true
+                      })
+                      console.log(res.data)
+                    } catch (err: any) {
+                      console.error(err.message)
+                    }
+                  }
 
                   return (
                     <TableRow key={user.discord.id}>
                       <TableDataCell>
                         <TableDataNameContainer>
-                          {/* <TableDataImage src={`https://cdn.discordapp.com/avatars/${user.discord.id}/${user.discord.avatar}.png`} /> */}
                           <TableDataImage src={`${user.github.json.avatar_url}`} />
                           <TableDataName>
                             {user.github.json.name}
@@ -108,21 +116,21 @@ export default function Home() {
                         </TableDataLocation>
                       </TableDataCell>
                       <TableDataCell>
-                        <TableDataMeta>
-                          <TableDataMetaFollow href={`http://localhost:4000/twitterfollow?screen_name=${user.twitter.username}`} >
+                        <TableActions>
+                          <TableFollow onClick={handleFollowSubmit}>
                             Follow on Twitter
                             <TwitterIcon />
-                          </TableDataMetaFollow>
-                          <TableDataMetaLink href={`https://www.twitter.com/${user.twitter.username}`} target="blank" rel="noopener noreferrer">
+                          </TableFollow>
+                          <TableLink href={`https://www.twitter.com/${user.twitter.username}`} target="blank" rel="noopener noreferrer">
                             <TwitterIcon />
-                          </TableDataMetaLink>
-                          <TableDataMetaLink href={user.github.json.html_url} target="blank" rel="noopener noreferrer">
+                          </TableLink>
+                          <TableLink href={user.github.json.html_url} target="blank" rel="noopener noreferrer">
                             <GitHubIcon />
-                          </TableDataMetaLink>
-                          <TableDataMetaLink href={`https://discordapp.com/channels/@me/${user.discord.username}#${user.discord.discriminator}`} target="blank" rel="noopener noreferrer">
+                          </TableLink>
+                          <TableLink href={`https://discordapp.com/channels/@me/${user.discord.username}#${user.discord.discriminator}`} target="blank" rel="noopener noreferrer">
                             <DiscordIcon />
-                          </TableDataMetaLink>
-                        </TableDataMeta>
+                          </TableLink>
+                        </TableActions>
                       </TableDataCell>
                     </TableRow>
                   )

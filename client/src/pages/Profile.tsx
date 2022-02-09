@@ -1,10 +1,12 @@
-import tw, { styled } from 'twin.macro'
+import tw from 'twin.macro'
+import styled from "styled-components";
 import { ReactComponent as TwitterIcon } from '../assets/twitter-icon.svg'
 import { ReactComponent as GitHubIcon } from '../assets/github-icon.svg'
 import { myContext } from '../hooks/Context'
 import React, { useContext, useState } from 'react'
 import { IUser } from '../interface'
-import  { UserCard } from '../components/UserCard'
+import { UserCard } from '../components/UserCard'
+import axios from 'axios';
 
 
 const Container = tw.div`flex flex-col px-6 text-gray-100`
@@ -21,17 +23,25 @@ const ModalContent = tw.div`border-0 rounded-lg shadow-lg relative flex flex-col
 
 const ModalHeader = tw.div`flex items-start justify-between p-5 border-b border-solid`
 
-const ModalInputContainer = tw.div`relative p-4 flex-auto w-full`
+const ProfileForm = tw.form``
 
-const ModalInput = tw.input`border-0 px-3 py-3 placeholder-gray-600 text-gray-100 bg-secondary-700 rounded text-sm shadow focus:outline-none focus:ring hocus:w-full ease-linear transition-all duration-150`
+const FormInputContainer = tw.div`relative p-4 flex-auto w-full`
 
-const ModalBioInput = tw.textarea`w-full border-0 px-3 py-3 placeholder-gray-600 text-gray-100 bg-secondary-700 rounded text-sm shadow focus:outline-none focus:ring ease-linear transition-all duration-150`
+const FormTextInput = tw.input`border-0 px-3 py-3 placeholder-gray-600 text-gray-100 bg-secondary-700 rounded text-sm shadow focus:outline-none focus:ring hocus:w-full ease-linear transition-all duration-150`
 
-const ModalInputLabel = tw.label`block uppercase text-gray-300 text-xs font-bold mb-2`
+const FormTextArea = tw.textarea`w-full border-0 px-3 py-3 placeholder-gray-600 text-gray-100 bg-secondary-700 rounded text-sm shadow focus:outline-none focus:ring ease-linear transition-all duration-150`
 
-const H3 = tw.div`text-xl font-semibold`
+const FormCheckbox = tw.input`h-4 w-4 focus:ring border-gray-300 border-0 px-3 py-3 text-gray-100 bg-secondary-700 rounded text-sm shadow focus:outline-none ease-linear transition-all duration-150`
 
-const CloseButton = tw.button`flex items-center justify-center bg-transparent font-semibold hocus:bg-secondary-600 h-10 w-10 text-2xl rounded-full`
+const FormLabel = tw.label`block uppercase text-gray-300 text-xs font-bold mb-2`
+
+const ModalHeaderText = tw.h3`text-xl font-semibold`
+
+const ModalCloseButton = tw.button`flex items-center justify-center bg-transparent font-semibold hocus:bg-secondary-600 h-10 w-10 text-2xl rounded-full`
+
+const ModalFooter = tw.div`flex items-center justify-center p-6 border-t border-solid rounded-b`
+
+const FormSubmitButton = tw.button`bg-green-600 text-white hover:bg-green-800 font-bold uppercase text-sm px-6 py-3 rounded shadow hover:shadow-lg outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150`
 
 const BgOpacity = tw.div`opacity-25 fixed inset-0 z-40 bg-black`
 
@@ -60,6 +70,41 @@ export default function Profile() {
 
     const user = useContext(myContext) as IUser
 
+    const [formData, setFormData] = useState({
+        bio: '',
+        location: '',
+        name: '',
+        lookingForCoffeeChats: false,
+        openToCoffeeChats: false,
+    });
+
+    const { bio, location, name, lookingForCoffeeChats, openToCoffeeChats } = formData;
+
+    const handleInputChange = (e: any) =>
+        setFormData({ ...formData, [e.target.name]: e.target.type === 'checkbox' ? e.target.checked : e.target.value });
+
+    const handleProfileFormSubmit = async () => {
+        setShowModal(false)
+
+        const profileFormData = new FormData();
+        profileFormData.append('data', JSON.stringify({ ...formData }));
+
+        try {
+            const res = await axios({
+                method: 'put',
+                url: 'http://localhost:4000/api/user/update',
+                data: formData,
+                withCredentials: true,
+                responseType: 'json'
+            })
+
+            console.log(res.data)
+
+        } catch (err: any) {
+            console.error(err.message)
+        }
+    }
+
     if (!user) {
         return <p>loading...</p>
     }
@@ -76,41 +121,73 @@ export default function Profile() {
                                 <ModalContentContainer>
                                     <ModalContent>
                                         <ModalHeader>
-                                            <H3>
+                                            <ModalHeaderText>
                                                 Edit profile
-                                            </H3>
+                                            </ModalHeaderText>
 
-                                            <CloseButton onClick={() => setShowModal(false)}>
+                                            <ModalCloseButton onClick={() => setShowModal(false)}>
                                                 x
-                                            </CloseButton>
+                                            </ModalCloseButton>
                                         </ModalHeader>
-                                        <ModalInputContainer>
-                                            <ModalInputLabel>Twitter</ModalInputLabel>
-                                            <ModalInput>
-                                            </ModalInput>
-                                        </ModalInputContainer>
-                                        <ModalInputContainer>
-                                            <ModalInputLabel>LinkedIn</ModalInputLabel>
-                                            <ModalInput>
+                                        <ProfileForm
+                                            onSubmit={(e) => {
+                                                e.preventDefault();
+                                                handleProfileFormSubmit();
+                                            }}
+                                        >
+                                            <FormInputContainer>
+                                                <FormLabel>Name</FormLabel>
+                                                <FormTextInput
+                                                    type="text"
+                                                    name="name"
+                                                    value={name}
+                                                    onChange={handleInputChange}
+                                                />
 
-                                            </ModalInput>
-                                        </ModalInputContainer>
-                                        <ModalInputContainer>
-                                            <ModalInputLabel>About me</ModalInputLabel>
-                                            <ModalBioInput rows={2}>
-                                                bio...
-                                            </ModalBioInput>
-                                        </ModalInputContainer>
-                                        <div className="flex items-center justify-center p-6 border-t border-solid rounded-b">
-                                            <button
-                                                className="bg-green-600 text-white hover:bg-green-800 font-bold uppercase text-sm px-6 py-3 rounded shadow hover:shadow-lg outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150"
-                                                type="button"
-                                                onClick={() => setShowModal(false)}
-                                            >
-                                                Save Changes
-                                            </button>
-                                        </div>
+                                            </FormInputContainer>
+                                            <FormInputContainer>
+                                                <FormLabel>Location</FormLabel>
+                                                <FormTextInput
+                                                    type="text"
+                                                    name="location"
+                                                    value={location}
+                                                    onChange={handleInputChange}
+                                                />
 
+                                            </FormInputContainer>
+                                            <FormInputContainer>
+                                                <FormLabel>Bio</FormLabel>
+                                                <FormTextArea rows={2}
+                                                    name="bio"
+                                                    value={bio}
+                                                    onChange={handleInputChange}
+                                                />
+
+                                            </FormInputContainer>
+                                            <FormInputContainer>
+                                                <FormLabel htmlFor="lookingForCoffeeChats">Looking for coffee chat</FormLabel>
+                                                <FormCheckbox
+                                                    name="lookingForCoffeeChats"
+                                                    type="checkbox"
+                                                    checked={lookingForCoffeeChats}
+                                                    onChange={handleInputChange}
+                                                />
+                                                <FormLabel htmlFor="openToCoffeeChats">Open to cofee chat</FormLabel>
+                                                <FormCheckbox
+                                                    name="openToCoffeeChats"
+                                                    type="checkbox"
+                                                    checked={openToCoffeeChats}
+                                                    onChange={handleInputChange}
+                                                />
+                                            </FormInputContainer>
+                                            <ModalFooter>
+                                                <FormSubmitButton
+                                                    type="submit"
+                                                >
+                                                    Save Changes
+                                                </FormSubmitButton>
+                                            </ModalFooter>
+                                        </ProfileForm>
                                     </ModalContent>
                                 </ModalContentContainer>
                             </ModalContainer>

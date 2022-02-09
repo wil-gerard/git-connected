@@ -25,10 +25,10 @@ router.get('/auth/discord/callback',
 
 // --- Twitter ---
 router.get('/auth/twitter',
-    passport.authenticate('twitter'))
+    passport.authorize('twitter'))
 
 router.get('/auth/twitter/callback',
-    passport.authenticate('twitter', {
+    passport.authorize('twitter', {
         failureRedirect: '/',
         session: true
     }),
@@ -38,10 +38,10 @@ router.get('/auth/twitter/callback',
 
 // --- GitHub ---
 router.get('/auth/github',
-    passport.authenticate('github', { scope: ['read:user'] }))
+    passport.authorize('github', { scope: ['read:user'] }))
 
 router.get('/auth/github/callback',
-    passport.authenticate('github', {
+    passport.authorize('github', {
         failureRedirect: '/',
         session: true
     }),

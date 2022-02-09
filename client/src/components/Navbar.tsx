@@ -1,4 +1,5 @@
-import tw, { styled } from "twin.macro"
+import tw from "twin.macro"
+import styled from "styled-components";
 import { ReactComponent as LogoBase } from "../assets/logo.svg"
 import { GradientBar } from "./GradiantBar"
 import { Link } from 'react-router-dom'
