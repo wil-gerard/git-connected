@@ -44,16 +44,9 @@ router.post('/user/twitterfollow', auth, async (req: IReqAuth, res) => {
             access_token_secret: req.user.twitter.tokenSecret,
         });
     
-        let twitterPost = twitter.post('friendships/create', { screen_name: username }, function(err, data, response){
-            if (err){
-                console.log(err)
-            } else {
-                console.log(response)
-            }
-        })
-
-        res.json(twitterPost)
+        const doTwitterFollow = await twitter.post('friendships/create', { screen_name: username })
         
+        res.json(doTwitterFollow.resp.statusCode)
 
     } catch (e) {
         console.log(e)

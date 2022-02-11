@@ -44,8 +44,13 @@ const TableLink = tw.a`flex items-center justify-center rounded shadow cursor-po
 
 const TableFollow = tw.a`flex items-center justify-center rounded shadow cursor-pointer bg-secondary-600 transition duration-300 hocus:bg-primary-500  ml-1 py-0.5 px-2`
 
+
 export default function Home() {
   const ctx = useContext(myContext)
+  const [twitterFollowStatus, setTwitterFollowStatus] = useState({
+    user: '',
+    status: 0
+  })
 
   const [users, setUsers] = useState<IUser[]>()
   useEffect(() => {
@@ -58,7 +63,7 @@ export default function Home() {
   if (!users) {
     return <p>loading...</p>
   }
-  
+
   return (
     <>
       <Content>
@@ -86,7 +91,6 @@ export default function Home() {
               <TableBody>
                 {users.map((user: IUser) => {
 
-
                   const handleFollowSubmit = async () => {
                     try {
                       const res = await axios({
@@ -94,6 +98,11 @@ export default function Home() {
                         url: `http://localhost:4000/api/user/twitterfollow?username=${user.twitter.username}`,
                         withCredentials: true
                       })
+                      setTwitterFollowStatus({...twitterFollowStatus, 
+                        user: `${user.twitter.username}`,
+                        status: res.status
+                      })
+                      console.log(twitterFollowStatus)
                       console.log(res.data)
                     } catch (err: any) {
                       console.error(err.message)
@@ -101,7 +110,7 @@ export default function Home() {
                   }
 
                   return (
-                    <TableRow key={user.discord.id}>
+                    <TableRow key={user.twitter.username} id={user.twitter.username} >
                       <TableDataCell>
                         <TableDataNameContainer>
                           <TableDataImage src={`${user.github.json.avatar_url}`} />
@@ -118,7 +127,7 @@ export default function Home() {
                       <TableDataCell>
                         <TableActions>
                           <TableFollow onClick={handleFollowSubmit}>
-                            Follow on Twitter
+                            {user.twitter.username === twitterFollowStatus.user && twitterFollowStatus.status === 200 ? `Follow on Twitter ✓` : `Follow on Twitter`}
                             <TwitterIcon />
                           </TableFollow>
                           <TableLink href={`https://www.twitter.com/${user.twitter.username}`} target="blank" rel="noopener noreferrer">
