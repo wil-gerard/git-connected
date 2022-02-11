@@ -4,15 +4,14 @@ import { css } from 'styled-components/macro'; //eslint-disable-line
 import { ReactComponent as TwitterIcon } from '../assets/twitter-icon.svg'
 import { ReactComponent as GitHubIcon } from '../assets/github-icon.svg'
 import { ReactComponent as DiscordIcon } from '../assets/discord-icon.svg'
-import { myContext } from '../hooks/Context'
-import React, { useEffect, useState, useContext } from 'react'
+import React, { useEffect, useState } from 'react'
 import { IUser } from '../interface'
 
 const Content = tw.div`flex flex-col justify-center px-6 text-gray-100`
 
 const Header = tw.header`px-5 py-4 border-b border-gray-100`
 
-const H2 = tw.h2`font-semibold text-gray-300`
+const HeaderText = tw.h2`font-semibold text-gray-300`
 
 const TableContainer = tw.div`w-full max-w-2xl mx-auto shadow-lg rounded bg-secondary-800`
 
@@ -40,17 +39,18 @@ const TableDataLocation = tw.div`font-medium text-gray-100 text-left`
 
 const TableActions = tw.div`font-medium text-gray-100 text-left flex flex-row`
 
-const TableLink = tw.a`flex items-center justify-center rounded shadow cursor-pointer bg-secondary-600 transition duration-300 hocus:bg-primary-500 w-6 h-6 ml-1 p-0.5`
+const TableLink = tw.a`flex rounded shadow cursor-pointer bg-secondary-600 transition duration-300 hocus:bg-primary-500 w-6 h-6 ml-1 p-0.5`
 
-const TableFollow = tw.a`flex items-center justify-center rounded shadow cursor-pointer bg-secondary-600 transition duration-300 hocus:bg-primary-500  ml-1 py-0.5 px-2`
+const TableFollow = tw.a`flex items-center rounded shadow cursor-pointer bg-secondary-600 transition duration-300 hocus:bg-primary-500  ml-1 py-0.5 px-2 w-32`
 
+const TableFollowed = tw.a`flex items-center justify-center rounded shadow cursor-default bg-secondary-600 transition duration-300  ml-1 py-0.5 px-2 w-32`
 
 export default function Home() {
-  const ctx = useContext(myContext)
+
   const [twitterFollowStatus, setTwitterFollowStatus] = useState({
     user: '',
     status: 0
-  })
+  });
 
   const [users, setUsers] = useState<IUser[]>()
   useEffect(() => {
@@ -58,7 +58,7 @@ export default function Home() {
       console.log(res.data)
       setUsers(res.data)
     })
-  }, [ctx]);
+  }, []);
 
   if (!users) {
     return <p>loading...</p>
@@ -69,9 +69,9 @@ export default function Home() {
       <Content>
         <TableContainer>
           <Header>
-            <H2>
+            <HeaderText>
               Showing all users
-            </H2>
+            </HeaderText>
           </Header>
           <TablePadding>
             <Table>
@@ -98,12 +98,11 @@ export default function Home() {
                         url: `http://localhost:4000/api/user/twitterfollow?username=${user.twitter.username}`,
                         withCredentials: true
                       })
-                      setTwitterFollowStatus({...twitterFollowStatus, 
+                      setTwitterFollowStatus({
+                        ...twitterFollowStatus,
                         user: `${user.twitter.username}`,
                         status: res.status
                       })
-                      console.log(twitterFollowStatus)
-                      console.log(res.data)
                     } catch (err: any) {
                       console.error(err.message)
                     }
@@ -126,10 +125,17 @@ export default function Home() {
                       </TableDataCell>
                       <TableDataCell>
                         <TableActions>
-                          <TableFollow onClick={handleFollowSubmit}>
-                            {user.twitter.username === twitterFollowStatus.user && twitterFollowStatus.status === 200 ? `Follow on Twitter ✓` : `Follow on Twitter`}
-                            <TwitterIcon />
-                          </TableFollow>
+                          
+                          {user.twitter.username === twitterFollowStatus.user && twitterFollowStatus.status === 200 ?
+                            <TableFollowed>
+                              Following ✓
+                            </TableFollowed>
+                            :
+                            <TableFollow onClick={handleFollowSubmit}>
+                              Follow on Twitter
+                            </TableFollow>
+
+                          }
                           <TableLink href={`https://www.twitter.com/${user.twitter.username}`} target="blank" rel="noopener noreferrer">
                             <TwitterIcon />
                           </TableLink>
