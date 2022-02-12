@@ -12,7 +12,10 @@ declare module 'express-session' {
 
 const auth = async (req: IReqAuth, res: Response, next: NextFunction) => {
     try {
-        if (req.isAuthenticated()) {
+        if (req.isAuthenticated() && req.user) {
+            console.log('already a req.user')
+            next()
+        } else if(req.isAuthenticated() && !req.user){
             const user = await User.findById(req.session.passport.user)
             req.user = user
             next()

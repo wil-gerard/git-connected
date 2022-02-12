@@ -52,7 +52,7 @@ export default function Navbar() {
     const [showModal, setShowModal] = useState(false)
 
     const discordLogin = () => {
-        window.open("http://localhost:4000/api/auth/discord")
+        window.open("http://localhost:4000/api/auth/discord", "_self")
     }
 
     const logout = () => {
