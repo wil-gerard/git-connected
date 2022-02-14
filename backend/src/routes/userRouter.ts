@@ -54,14 +54,7 @@ router.post('/user/twitterfollow', auth, async (req: IReqAuth, res) => {
 });
 
 router.get('/user/getuser', auth, async (req, res) => {
-    // const currentUser = req.user
-    // const newUserMap = new Map<string, string>(currentUser)
-    // const removedTokens = newUserMap.delete('token')
-    // console.log(removedTokens)
-    // const newUser = filteredUser.map((userInfo) => {
-
-    // })
-
+    console.log(req.user)
     res.send(req.user)
 })
 
