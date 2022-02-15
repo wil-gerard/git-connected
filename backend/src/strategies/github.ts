@@ -15,10 +15,10 @@ function handleConnectGitHubAccount(req: any, gitHubAccessToken: String, refresh
             let user = req.user
 
             user.gitHubConnected = true
-            user.github.id = gitHubProfile.id
-            user.github.token = gitHubAccessToken
-            user.github.displayName = gitHubProfile.displayName
-            user.github.json = gitHubProfile._json
+            user.gitHub.id = gitHubProfile.id
+            user.gitHubToken = gitHubAccessToken
+            user.gitHub.displayName = gitHubProfile.displayName
+            user.gitHub.json = gitHubProfile._json
 
             user.save((err: Error) => {
                 if (err)

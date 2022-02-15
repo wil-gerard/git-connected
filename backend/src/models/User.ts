@@ -21,6 +21,22 @@ const User = new mongoose.Schema({
         required: false,
         type: String
     },
+    discordToken: {
+        required: true,
+        type: String
+    },
+    gitHubToken: {
+        required: false,
+        type: String
+    },
+    twitterToken: {
+        required: false,
+        type: String
+    },
+    twitterTokenSecret: {
+        required: false,
+        type: String
+    },
     tags: {
         lookingForCoffeeChats:{
             required: true,
@@ -33,10 +49,6 @@ const User = new mongoose.Schema({
     },
     discord: {
         id: {
-            required: false,
-            type: String
-        },
-        token: {
             required: false,
             type: String
         },
@@ -61,12 +73,8 @@ const User = new mongoose.Schema({
             type: String
         }
     },
-    github: {
+    gitHub: {
         id: {
-            required: false,
-            type: String
-        },
-        token: {
             required: false,
             type: String
         },
@@ -77,14 +85,6 @@ const User = new mongoose.Schema({
     },
     twitter: {
         id: {
-            required: false,
-            type: String
-        },
-        token: {
-            required: false,
-            type: String
-        },
-        tokenSecret: {
             required: false,
             type: String
         },

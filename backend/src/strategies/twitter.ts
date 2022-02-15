@@ -19,8 +19,8 @@ function handleConnectTwitterAccount(req: any, twitterToken: any, twitterTokenSe
             user.twitterConnected = true
             user.twitter.id = twitterProfile.id
             user.twitter.username = twitterProfile.username
-            user.twitter.token = twitterToken
-            user.twitter.tokenSecret = twitterTokenSecret
+            user.twitterToken = twitterToken
+            user.twitterTokenSecret = twitterTokenSecret
 
             user.save((err: Error) => {
                 if (err)

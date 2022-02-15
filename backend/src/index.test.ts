@@ -1,28 +1,34 @@
-const { testSum, testMult, testNoUserTokens } = require('./testFunctions.ts')
+const { testSum, testMult, returnProperties } = require('./testFunctions.ts')
 
-describe('testSuite', () => {
-    test('testAddingTwoNum', () => {
+describe('testTestSuite', () => {
+    it('returns the sum of two numbers', () => {
         const result = testSum(2, 7)
         expect(result).toEqual(9)
     })
-    test('testMult', () => {
+    it('returns the product of two numbers', () => {
         const result = testMult(2, 4)
         expect(result).toEqual(8)
         expect(testMult(10, 10)).toEqual(100)
     })
-    test('should return no user tokens', () => {
-        const input =
+})
+
+describe('userTests', () => {
+    it('only returns the requested properties', () => {
+        const obj =
         {
             tags: { lookingForCoffeeChats: true, openToCoffeeChats: false },
+            discordToken: '462397689447841794',
+            gitHubToken: 'dzfbvagfdag',
+            twitterToken: '213r98uaefds',
+            twitterTokenSecret: '134fasdlkj321',
             discord: {
                 id: '462397689447841794',
-                token: 'sdfgsergadefgdah',
                 username: 'Wil Gerard',
                 avatar: '88b13371bd56386a43505c67dd936e3e',
                 discriminator: '8370',
                 banner_color: '#2886e7'
             },
-            github: {
+            gitHub: {
                 id: '74286884',
                 json: {
                     login: 'wil-gerard',
@@ -63,24 +69,38 @@ describe('testSuite', () => {
                     two_factor_authentication: false,
                     plan: [Object]
                 },
-                token: 'dzfbvagfdag'
             },
             twitter: {
                 id: '251922066',
-                token: 'gfhbnfghsfgh',
-                tokenSecret: 'xcvFCasdf',
                 username: 'wil_gerard'
             },
             gitHubConnected: true,
             twitterConnected: true,
-            customBio: '',
-            customLocation: '',
-            customName: '',
+            customBio: 'Hello! I am new to tech Twitter and looking for followers',
+            customLocation: 'Des Moines, IA',
+            customName: 'Ricky Rubio',
             __v: 0
         }
 
-        const output = {
+        const properties = ['tags', 'gitHubConnected', 'twitterConnected', 'customBio', 'customLocation','customName']
+
+        expect(returnProperties(obj, properties)).toEqual({
             tags: { lookingForCoffeeChats: true, openToCoffeeChats: false },
+            gitHubConnected: true,
+            twitterConnected: true,
+            customBio: 'Hello! I am new to tech Twitter and looking for followers',
+            customLocation: 'Des Moines, IA',
+            customName: 'Ricky Rubio',
+        })
+    })
+    it('does not include requested properties that do not exist on the object', () => {
+        const obj =
+        {
+            tags: { lookingForCoffeeChats: true, openToCoffeeChats: false },
+            discordToken: '462397689447841794',
+            gitHubToken: 'dzfbvagfdag',
+            twitterToken: '213r98uaefds',
+            twitterTokenSecret: '134fasdlkj321',
             discord: {
                 id: '462397689447841794',
                 username: 'Wil Gerard',
@@ -88,7 +108,7 @@ describe('testSuite', () => {
                 discriminator: '8370',
                 banner_color: '#2886e7'
             },
-            github: {
+            gitHub: {
                 id: '74286884',
                 json: {
                     login: 'wil-gerard',
@@ -136,11 +156,24 @@ describe('testSuite', () => {
             },
             gitHubConnected: true,
             twitterConnected: true,
-            customBio: '',
-            customLocation: '',
-            customName: '',
+            customBio: 'Hello! I am new to tech Twitter and looking for followers',
+            customLocation: 'Des Moines, IA',
+            customName: 'Ricky Rubio',
             __v: 0
         }
-        expect(testNoUserTokens(input)).toEqual(output)
+
+        const properties = ['customLastName', 'customBio', 'customLocation','customName',]
+
+        const result = returnProperties(obj, properties)
+
+        console.log(result)
+
+        expect(result).toEqual({
+            customBio: 'Hello! I am new to tech Twitter and looking for followers',
+            customLocation: 'Des Moines, IA',
+            customName: 'Ricky Rubio',
+        })
+
+        expect(result).not.toHaveProperty('customLastName')
     })
 })

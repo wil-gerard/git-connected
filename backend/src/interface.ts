@@ -8,28 +8,28 @@ export interface IDatabaseUser {
     customBio: string
     customLocation: string
     customName: string
+    discordToken: string
+    gitHubToken?: string
+    twitterToken?: string
+    twitterTokenSecret?: string
     tags: {
         lookingForCoffeeChats: boolean
         openToCoffeeChats: boolean
     }
     discord: {
         id: string
-        token: string
         username: string
         avatar?: string
         discriminator: string
         banner?: string
         banner_color?: string
     }
-    github: {
+    gitHub: {
         id: string
-        token: string
         json?: any
     }
     twitter: {
         id: string
-        token: string
-        tokenSecret: string
         username: string
     }
 }

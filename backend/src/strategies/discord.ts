@@ -37,7 +37,7 @@ function getNewUser(discordProfile: any, discordAccessToken: String) {
     newUser.tags.lookingForCoffeeChats = false
     newUser.tags.openToCoffeeChats = false
     newUser.discord.id = discordProfile.id
-    newUser.discord.token = discordAccessToken
+    newUser.discordToken = discordAccessToken
     newUser.discord.username = discordProfile.username
     newUser.discord.avatar = discordProfile.avatar
     newUser.discord.discriminator = discordProfile.discriminator
