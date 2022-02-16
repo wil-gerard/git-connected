@@ -39,14 +39,14 @@ export const UserCard: React.FC<IUser> = (user) => {
     return (
         <Card>
             <CardImageContainer>
-                <CardImage src={user.gitHubConnected ? user.github.json.avatar_url : `https://cdn.discordapp.com/avatars/${user.discord.id}/${user.discord.avatar}.png`} />
+                <CardImage src={user.gitHubConnected ? user.gitHub.json.avatar_url : `https://cdn.discordapp.com/avatars/${user.discord.id}/${user.discord.avatar}.png`} />
             </CardImageContainer>
             <CardText>
                 <CardHeader>
-                    <CardName>{user.gitHubConnected ? user.github.json.name || user.github.json.login : user.discord.username}</CardName>
-                    <CardLocation>{user.gitHubConnected ? user.github.json.location : null}</CardLocation>
+                    <CardName>{user.gitHubConnected ? user.gitHub.json.name || user.gitHub.json.login : user.discord.username}</CardName>
+                    <CardLocation>{user.gitHubConnected ? user.gitHub.json.location : null}</CardLocation>
                 </CardHeader>
-                <CardBio>{user.gitHubConnected ? user.github.json.bio : null}</CardBio>
+                <CardBio>{user.gitHubConnected ? user.gitHub.json.bio : null}</CardBio>
                 <CardMeta>
                     <CardMetaFeature href={user.discord.username}>
                         <TwitterIcon />

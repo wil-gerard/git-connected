@@ -16,7 +16,7 @@ export interface IUser {
         banner: string
         banner_color: string
     }
-    github: {
+    gitHub: {
         id: string
         json: {
             login: string

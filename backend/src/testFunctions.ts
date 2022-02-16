@@ -9,11 +9,16 @@ function testMult(a: number, b: number) {
     return a * b
 }
 
-function returnProperties(obj: any, properties: any) {
-    return properties.reduce((accumulator : any, property: any) => {
-        accumulator[property] = obj[property]
-        return accumulator
-    }, {});
+function returnProperties(obj: { [key: string]: string | boolean | object }, properties: string[]) {
+    const result: { [key: string]: string | boolean | object } = {}
+
+    properties.map(property => {
+        if (obj.hasOwnProperty(property)) {
+            result[property] = obj[property]
+        }
+    })
+
+    return result
 }
 
-module.exports = {testSum, testMult, returnProperties}
+export {testSum, testMult, returnProperties}

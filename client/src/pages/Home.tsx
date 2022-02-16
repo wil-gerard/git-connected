@@ -112,15 +112,15 @@ export default function Home() {
                     <TableRow key={user.twitter.username} id={user.twitter.username} >
                       <TableDataCell>
                         <TableDataNameContainer>
-                          <TableDataImage src={`${user.github.json.avatar_url}`} />
+                          <TableDataImage src={`${user.gitHub.json.avatar_url}`} />
                           <TableDataName>
-                            {user.github.json.name}
+                            {user.gitHub.json.name}
                           </TableDataName>
                         </TableDataNameContainer>
                       </TableDataCell>
                       <TableDataCell>
                         <TableDataLocation>
-                          {user.github.json.location}
+                          {user.gitHub.json.location}
                         </TableDataLocation>
                       </TableDataCell>
                       <TableDataCell>
@@ -139,7 +139,7 @@ export default function Home() {
                           <TableLink href={`https://www.twitter.com/${user.twitter.username}`} target="blank" rel="noopener noreferrer">
                             <TwitterIcon />
                           </TableLink>
-                          <TableLink href={user.github.json.html_url} target="blank" rel="noopener noreferrer">
+                          <TableLink href={user.gitHub.json.html_url} target="blank" rel="noopener noreferrer">
                             <GitHubIcon />
                           </TableLink>
                           <TableLink href={`https://discordapp.com/channels/@me/${user.discord.username}#${user.discord.discriminator}`} target="blank" rel="noopener noreferrer">

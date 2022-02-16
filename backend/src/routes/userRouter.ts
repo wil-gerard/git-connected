@@ -2,7 +2,6 @@ import dotenv from 'dotenv'
 dotenv.config()
 
 import express from 'express'
-import { Request, Response } from 'express'
 import Twitter from 'twit'
 import User from '../models/User'
 import { IDatabaseUser, IReqAuth, IUser } from '../interface'
@@ -40,8 +39,8 @@ router.post('/user/twitterfollow', auth, async (req: IReqAuth, res) => {
         const twitter = new Twitter({
             consumer_key: process.env.TWITTER_CONSUMER_KEY,
             consumer_secret: process.env.TWITTER_CONSUMER_SECRET,
-            access_token: req.user.twitter.token,
-            access_token_secret: req.user.twitter.tokenSecret,
+            access_token: req.user.twitterToken,
+            access_token_secret: req.user.twitterTokenSecret,
         });
 
         const doTwitterFollow = await twitter.post('friendships/create', { screen_name: username })
@@ -54,7 +53,6 @@ router.post('/user/twitterfollow', auth, async (req: IReqAuth, res) => {
 });
 
 router.get('/user/getuser', auth, async (req, res) => {
-    console.log(req.user)
     res.send(req.user)
 })
 
@@ -81,23 +79,23 @@ router.get('/user/getall', async (req, res) => {
                     banner: user.discord.banner,
                     banner_color: user.discord.banner_color,
                 },
-                github: {
-                    id: user.github.id,
+                gitHub: {
+                    id: user.gitHub.id,
                     json: {
-                        login: user.github.json.login,
-                        avatar_url: user.github.json.avatar_url,
-                        html_url: user.github.json.html_url,
-                        followers_url: user.github.json.followers_url,
-                        following_url: user.github.json.following_url,
-                        name: user.github.json.name,
-                        company: user.github.json.company,
-                        hireable: user.github.json.hireable,
-                        blog: user.github.json.blog,
-                        location: user.github.json.location,
-                        bio: user.github.json.bio,
-                        twitter_username: user.github.json.twitter_username,
-                        followers: user.github.json.followers,
-                        following: user.github.json.following,
+                        login: user.gitHub.json.login,
+                        avatar_url: user.gitHub.json.avatar_url,
+                        html_url: user.gitHub.json.html_url,
+                        followers_url: user.gitHub.json.followers_url,
+                        following_url: user.gitHub.json.following_url,
+                        name: user.gitHub.json.name,
+                        company: user.gitHub.json.company,
+                        hireable: user.gitHub.json.hireable,
+                        blog: user.gitHub.json.blog,
+                        location: user.gitHub.json.location,
+                        bio: user.gitHub.json.bio,
+                        twitter_username: user.gitHub.json.twitter_username,
+                        followers: user.gitHub.json.followers,
+                        following: user.gitHub.json.following,
                     }
                 },
                 twitter: {
