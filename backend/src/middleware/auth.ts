@@ -1,5 +1,5 @@
 import { Response, NextFunction } from 'express'
-import { IReqAuth, IUser } from '../interface'
+import { IReqAuth } from '../interface'
 import User from '../models/User'
 
 declare module 'express-session' {
@@ -13,18 +13,17 @@ declare module 'express-session' {
 const auth = async (req: IReqAuth, res: Response, next: NextFunction) => {
     try {
         if (req.isAuthenticated() && req.user) {
-            console.log('already a req.user')
-            next()
-        } else if(req.isAuthenticated() && !req.user){
-            const user = await User.findById(req.session.passport.user)
-            req.user = user
-            next()
-        } else {
-            console.log('user is not authenticated')
-        }
-    } catch (err: any) {
-        return res.status(500).json({ msg: err.message })
-    }
-}
+            next();
+        } else if (req.isAuthenticated() && !req.user)  {
+            const user = await User.findById(req.session.passport.user);
+            req.user = user;
+            next();
+        } else if (!req.isAuthenticated()) {
+            return res.status(401).send('Invalid Authentication')
+        };
+    } catch (err) {
+        return res.status(500).send(err.message)
+    };
+};
 
 export default auth

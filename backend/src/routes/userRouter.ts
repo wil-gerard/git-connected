@@ -6,14 +6,15 @@ import Twitter from 'twit'
 import User from '../models/User'
 import { IDatabaseUser, IReqAuth, IUser, IUserUpdateForm } from '../interface'
 import auth from '../middleware/auth'
+import validate from '../middleware/validateRequest'
+import updateUserSchema from '../dto/updateUser.schema'
 
 const router = express.Router()
 
-router.put('/user/update', auth, async (req: IReqAuth, res) => {
+router.put('/user/update', auth, validate(updateUserSchema), async (req: IReqAuth, res: any) => {
     if (!req.user) return res.status(401).send('Invalid Authentication');
  
     try {
-
         const { customBio, customLocation, customName, lookingForCoffeeChats, openToCoffeeChats }: IUserUpdateForm = req.body;
 
         await User.findOneAndUpdate({ user: req.user._id }, {
@@ -25,10 +26,9 @@ router.put('/user/update', auth, async (req: IReqAuth, res) => {
         });
 
     } catch (err) {
-        console.error(err.message);
         res.status(500).send('Server Error');
     }
-})
+});
 
 router.post('/user/twitterfollow', auth, async (req: IReqAuth, res) => {
     try {

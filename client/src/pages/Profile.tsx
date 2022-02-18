@@ -79,29 +79,17 @@ export default function Profile() {
 
     const { customBio, customLocation, customName, lookingForCoffeeChats, openToCoffeeChats } = formData;
 
-    const formDataTest = {
-        customBio: '',
-        customLocation: '',
-        customName: 'noob',
-        lookingForCoffeeChats: false,
-        openToCoffeeChats: 'true',
-        starWars: 'goood',
-    }
-
     const handleInputChange = (e: any) =>
         setFormData({ ...formData, [e.target.name]: e.target.type === 'checkbox' ? e.target.checked : e.target.value });
 
     const handleProfileFormSubmit = async () => {
         setShowModal(false)
 
-        const profileFormData = new FormData();
-        profileFormData.append('data', JSON.stringify({ ...formDataTest }));
-
         try {
             const res = await axios({
                 method: 'put',
                 url: 'http://localhost:4000/api/user/update',
-                data: formDataTest,
+                data: formData,
                 withCredentials: true,
                 responseType: 'json'
             })
