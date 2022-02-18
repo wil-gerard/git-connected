@@ -4,25 +4,25 @@ dotenv.config()
 import express from 'express'
 import Twitter from 'twit'
 import User from '../models/User'
-import { IDatabaseUser, IReqAuth, IUser } from '../interface'
+import { IDatabaseUser, IReqAuth, IUser, IUserUpdateForm } from '../interface'
 import auth from '../middleware/auth'
 
 const router = express.Router()
 
 router.put('/user/update', auth, async (req: IReqAuth, res) => {
+    if (!req.user) return res.status(401).send('Invalid Authentication');
+ 
     try {
-        const user = await User.findOne({ user: req.user._id });
 
-        user.customBio = req.body.bio;
-        user.customLocation = req.body.location;
-        user.customName = req.body.name;
-        user.tags.lookingForCoffeeChats = req.body.lookingForCoffeeChats;
-        user.tags.openToCoffeeChats = req.body.openToCoffeeChats;
+        const { customBio, customLocation, customName, lookingForCoffeeChats, openToCoffeeChats }: IUserUpdateForm = req.body;
 
-        await user.save();
-
-        res.json(user)
-        console.log('success!!')
+        await User.findOneAndUpdate({ user: req.user._id }, {
+            customBio,
+            customLocation,
+            customName,
+            lookingForCoffeeChats,
+            openToCoffeeChats
+        });
 
     } catch (err) {
         console.error(err.message);
@@ -67,10 +67,8 @@ router.get('/user/getall', async (req, res) => {
                 customBio: user.customBio,
                 customLocation: user.customLocation,
                 customName: user.customName,
-                tags: {
-                    lookingForCoffeeChats: user.tags.lookingForCoffeeChats,
-                    openToCoffeeChats: user.tags.openToCoffeeChats
-                },
+                lookingForCoffeeChats: user.lookingForCoffeeChats,
+                openToCoffeeChats: user.openToCoffeeChats,
                 discord: {
                     id: user.discord.id,
                     username: user.discord.username,

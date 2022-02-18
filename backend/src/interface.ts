@@ -12,10 +12,8 @@ export interface IDatabaseUser {
     gitHubToken?: string
     twitterToken?: string
     twitterTokenSecret?: string
-    tags: {
-        lookingForCoffeeChats: boolean
-        openToCoffeeChats: boolean
-    }
+    lookingForCoffeeChats: boolean
+    openToCoffeeChats: boolean
     discord: {
         id: string
         username: string
@@ -40,10 +38,8 @@ export interface IUser {
     customBio: string
     customLocation: string
     customName: string
-    tags: {
-        lookingForCoffeeChats: boolean
-        openToCoffeeChats: boolean
-    }
+    lookingForCoffeeChats: boolean
+    openToCoffeeChats: boolean
     discord: {
         id: string
         username: string
@@ -61,7 +57,7 @@ export interface IUser {
             followers_url?: string
             following_url?: string
             name?: string
-            company? : string
+            company?: string
             hireable?: string
             blog?: string
             location?: string
@@ -75,6 +71,14 @@ export interface IUser {
         id: string
         username: string
     }
+}
+
+export interface IUserUpdateForm {
+    customBio: string
+    customLocation: string
+    customName: string
+    lookingForCoffeeChats: boolean
+    openToCoffeeChats: boolean
 }
 
 export interface IReqAuth extends Request {

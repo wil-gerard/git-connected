@@ -37,15 +37,13 @@ const User = new mongoose.Schema({
         required: false,
         type: String
     },
-    tags: {
-        lookingForCoffeeChats:{
-            required: true,
-            type: Boolean
-        },
-        openToCoffeeChats:{
-            required: true,
-            type: Boolean
-        }
+    lookingForCoffeeChats: {
+        required: true,
+        type: Boolean
+    },
+    openToCoffeeChats: {
+        required: true,
+        type: Boolean
     },
     discord: {
         id: {

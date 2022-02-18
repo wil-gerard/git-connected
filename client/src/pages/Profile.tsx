@@ -8,7 +8,6 @@ import { IUser } from '../interface'
 import { UserCard } from '../components/UserCard'
 import axios from 'axios';
 
-
 const Container = tw.div`flex flex-col px-6 text-gray-100`
 
 const Content = tw.div`mx-auto justify-center `
@@ -71,14 +70,23 @@ export default function Profile() {
     const user = useContext(myContext) as IUser
 
     const [formData, setFormData] = useState({
-        bio: '',
-        location: '',
-        name: '',
+        customBio: '',
+        customLocation: '',
+        customName: '',
         lookingForCoffeeChats: false,
         openToCoffeeChats: false,
     });
 
-    const { bio, location, name, lookingForCoffeeChats, openToCoffeeChats } = formData;
+    const { customBio, customLocation, customName, lookingForCoffeeChats, openToCoffeeChats } = formData;
+
+    const formDataTest = {
+        customBio: '',
+        customLocation: '',
+        customName: 'noob',
+        lookingForCoffeeChats: false,
+        openToCoffeeChats: 'true',
+        starWars: 'goood',
+    }
 
     const handleInputChange = (e: any) =>
         setFormData({ ...formData, [e.target.name]: e.target.type === 'checkbox' ? e.target.checked : e.target.value });
@@ -87,13 +95,13 @@ export default function Profile() {
         setShowModal(false)
 
         const profileFormData = new FormData();
-        profileFormData.append('data', JSON.stringify({ ...formData }));
+        profileFormData.append('data', JSON.stringify({ ...formDataTest }));
 
         try {
             const res = await axios({
                 method: 'put',
                 url: 'http://localhost:4000/api/user/update',
-                data: formData,
+                data: formDataTest,
                 withCredentials: true,
                 responseType: 'json'
             })
@@ -139,8 +147,8 @@ export default function Profile() {
                                                 <FormLabel>Name</FormLabel>
                                                 <FormTextInput
                                                     type="text"
-                                                    name="name"
-                                                    value={name}
+                                                    name="customName"
+                                                    value={customName}
                                                     onChange={handleInputChange}
                                                 />
 
@@ -149,8 +157,8 @@ export default function Profile() {
                                                 <FormLabel>Location</FormLabel>
                                                 <FormTextInput
                                                     type="text"
-                                                    name="location"
-                                                    value={location}
+                                                    name="customLocation"
+                                                    value={customLocation}
                                                     onChange={handleInputChange}
                                                 />
 
@@ -158,8 +166,8 @@ export default function Profile() {
                                             <FormInputContainer>
                                                 <FormLabel>Bio</FormLabel>
                                                 <FormTextArea rows={2}
-                                                    name="bio"
-                                                    value={bio}
+                                                    name="customBio"
+                                                    value={customBio}
                                                     onChange={handleInputChange}
                                                 />
 

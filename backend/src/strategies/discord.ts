@@ -34,8 +34,8 @@ function getNewUser(discordProfile: any, discordAccessToken: String) {
     newUser.customBio = ''
     newUser.customLocation = ''
     newUser.customName = ''
-    newUser.tags.lookingForCoffeeChats = false
-    newUser.tags.openToCoffeeChats = false
+    newUser.lookingForCoffeeChats = false
+    newUser.openToCoffeeChats = false
     newUser.discord.id = discordProfile.id
     newUser.discordToken = discordAccessToken
     newUser.discord.username = discordProfile.username
