@@ -56,10 +56,10 @@ export default function Navbar() {
     }
 
     const logout = () => {
-        axios.get("http://localhost:4000/api/auth/logout", {
+        axios.delete("http://localhost:4000/api/auth/logout", {
             withCredentials: true
         }).then((res: AxiosResponse) => {
-            if (res.data === "done") {
+            if (res.data === "Succesful Logout") {
                 window.location.href = "/"
             }
         })

@@ -20,7 +20,6 @@
         "skipLibCheck": true,
         "moduleResolution": "node",
         "noFallthroughCasesInSwitch": true,
-        "rootDir": "src",
         "noImplicitAny": true,
     }
 }

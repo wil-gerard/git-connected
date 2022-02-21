@@ -1,5 +1,3 @@
-import { IUser } from './interface'
-
 function testSum(a: number, b: number) {
     if (!a) throw Error("a cannot be empty")
     return a + b

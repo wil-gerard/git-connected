@@ -49,10 +49,11 @@ router.get('/auth/github/callback', auth,
         res.redirect(`${process.env.FRONTEND_DEV_URL}/profile`)
     })
 
-router.get('/auth/logout', auth, (req: IReqAuth, res: Response) => {
+router.delete('/auth/logout', auth, (req: IReqAuth, res: Response) => {
+
     if (req.user) {
         req.logout()
-        res.send('done')
+        res.send('Succesful Logout')
     }
 })
 
