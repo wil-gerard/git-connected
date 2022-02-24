@@ -67,6 +67,15 @@ passport.deserializeUser((id: string, cb) => {
 
 app.use('/api', routes)
 
+app.use((err: any, req: any, res: any, next: any) => {
+  if (!err.status) err.status = 500;
+
+  console.log(err.toString())
+  return res
+    .status(err.status)
+    .json({ error: err.toString() });
+});
+
 const PORT = process.env.PORT || process.env.BACKEND_DEV_PORT
 
 app.listen(PORT, () => {

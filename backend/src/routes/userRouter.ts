@@ -7,10 +7,11 @@ import Twitter from 'twit'
 import User from '../models/User'
 import { IDatabaseUser, IReqAuth, IUser, IUserUpdateForm } from '../interface'
 import auth from '../middleware/auth'
+import { nextTick } from 'process'
 
 const router = express.Router()
 
-router.put('/user/update', auth, async (req: IReqAuth, res: Response) => {
+router.put('/user/update', auth, async (req: IReqAuth, res: Response, next) => {
 
     const { ...userUpdateProps }: IUserUpdateForm = req.body;
     const query = req.user._id
@@ -32,7 +33,10 @@ router.put('/user/update', auth, async (req: IReqAuth, res: Response) => {
             }
         })
         .clone()
-        .catch(err => res.status(400).send(err))
+        .catch(err => {
+            err.status = 422
+            next(err)
+        })
 
 });
 

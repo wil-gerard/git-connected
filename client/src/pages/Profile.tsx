@@ -86,18 +86,20 @@ export default function Profile() {
         setShowModal(false)
 
         try {
-            const res = await axios({
+            axios({
                 method: 'put',
                 url: 'http://localhost:4000/api/user/update',
                 data: formData,
                 withCredentials: true,
                 responseType: 'json'
+            }).then((res) => {
+                if (res) {
+                    console.log(res)
+                }
             })
 
-            console.log(res.data)
-
         } catch (err: any) {
-            console.error(err.message)
+            console.error(err)
         }
     }
 
