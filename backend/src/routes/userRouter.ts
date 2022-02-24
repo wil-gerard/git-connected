@@ -1,33 +1,39 @@
 import dotenv from 'dotenv'
 dotenv.config()
 
+import { Response } from 'express'
 import express from 'express'
 import Twitter from 'twit'
 import User from '../models/User'
 import { IDatabaseUser, IReqAuth, IUser, IUserUpdateForm } from '../interface'
 import auth from '../middleware/auth'
-import validate from '../middleware/validateRequest'
-import updateUserSchema from '../dto/updateUser.schema'
 
 const router = express.Router()
 
-router.put('/user/update', auth, validate(updateUserSchema), async (req: IReqAuth, res: any) => {
-    if (!req.user) return res.status(401).send('Invalid Authentication');
- 
-    try {
-        const { customBio, customLocation, customName, lookingForCoffeeChats, openToCoffeeChats }: IUserUpdateForm = req.body;
+router.put('/user/update', auth, async (req: IReqAuth, res: Response) => {
 
-        await User.findOneAndUpdate({ user: req.user._id }, {
-            customBio,
-            customLocation,
-            customName,
-            lookingForCoffeeChats,
-            openToCoffeeChats
-        });
-
-    } catch (err) {
-        res.status(500).send('Server Error');
+    const { ...userUpdateProps }: IUserUpdateForm = req.body;
+    const query = req.user._id
+    const update = { ...userUpdateProps }
+    const options = {
+        new: true,
+        runValidators: true,
+        context: 'query',
+        upsert: true,
     }
+
+    await User.findByIdAndUpdate(
+        query,
+        update,
+        options,
+        (err, doc) => {
+            if (!err) {
+                res.status(201).send(doc)
+            }
+        })
+        .clone()
+        .catch(err => res.status(400).send(err))
+
 });
 
 router.post('/user/twitterfollow', auth, async (req: IReqAuth, res) => {

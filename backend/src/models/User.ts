@@ -11,15 +11,21 @@ const User = new mongoose.Schema({
     },
     customBio: {
         required: false,
-        type: String
+        type: String,
+        maxlength: [40, 'Bio must be less than 40 characters.'],
+        trim: true
     },
     customLocation: {
         required: false,
-        type: String
+        type: String,
+        maxlength: [20, 'Location must be less than 20 characters.'],
+        trim: true
     },
     customName: {
         required: false,
-        type: String
+        type: String,
+        maxlength: [20, 'Name must be less than 20 characters.'],
+        trim: true
     },
     discordToken: {
         required: true,
