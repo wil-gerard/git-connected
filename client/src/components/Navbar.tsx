@@ -11,10 +11,10 @@ import { ReactComponent as DiscordIcon } from "../assets/discord-icon.svg";
 
 
 const NavContainer = styled.nav`
-    ${tw`flex items-center justify-start bg-secondary-700 p-6 lg:p-10 w-full mb-6 lg:mb-12`}
+    ${tw`flex items-center justify-between bg-secondary-700 py-6 px-6 lg:px-10 lg:py-8 w-full mb-6 lg:mb-12`}
 `
 
-const Logo = tw(LogoBase)`mr-6 h-8 w-8`
+const Logo = tw(LogoBase)`mr-6 h-10 w-10`
 
 const NavLink = tw(Link)`cursor-pointer mr-6 hover:text-primary-500 transition duration-300 text-base font-semibold text-gray-300`
 
@@ -22,7 +22,7 @@ const LoginNavLink = tw.div`cursor-pointer mr-6 hover:text-primary-500 transitio
 
 const LogoutNavLink = tw.div`cursor-pointer mr-6 hover:text-primary-500 transition duration-300 text-base font-semibold text-gray-300`
 
-const UserContextLinks = tw.div`absolute right-0 flex items-center justify-center pr-2 `
+const UserContextLinks = tw.div`flex items-center`
 
 const MainLinks = tw.div`flex items-center`
 
