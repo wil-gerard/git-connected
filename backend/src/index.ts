@@ -29,7 +29,7 @@ app.use(express.json())
 app.use(express.urlencoded({ extended: true }))
 app.use(cors({
     origin: `${process.env.FRONTEND_DEV_URL}`,
-    methods: 'GET,HEAD,PUT,PATCH,POST,DELETE',
+    methods: 'GET,PUT,POST,DELETE',
     credentials: true
 }));
 
@@ -66,6 +66,14 @@ passport.deserializeUser((id: string, cb) => {
 })
 
 app.use('/api', routes)
+
+app.use((err: any, req: any, res: any, next: any) => {
+  if (!err.status) err.status = 500;
+
+  return res
+    .status(err.status)
+    .json({ error: err.toString() });
+});
 
 const PORT = process.env.PORT || process.env.BACKEND_DEV_PORT
 

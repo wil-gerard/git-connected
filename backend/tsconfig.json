@@ -1,17 +1,25 @@
 {
     "compilerOptions": {
         "esModuleInterop": true,
+        "types": [
+            "node",
+            "jest"
+        ],
+        "forceConsistentCasingInFileNames": true,
         "allowSyntheticDefaultImports": true,
         "baseUrl": ".",
-        "outDir": "build/dist",
+        "outDir": "dist",
         "module": "commonjs",
         "target": "es5",
-        "lib": ["es6", "dom"],
+        "lib": [
+            "es6",
+            "dom"
+        ],
         "sourceMap": true,
-        "allowJs": true,
+        "allowJs": false,
         "skipLibCheck": true,
         "moduleResolution": "node",
-        "rootDir": "src",
+        "noFallthroughCasesInSwitch": true,
         "noImplicitAny": true,
-    },
+    }
 }

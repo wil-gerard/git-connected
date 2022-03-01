@@ -10,9 +10,9 @@ import passport from 'passport'
 const router = express.Router()
 
 // --- Discord ---
-router.get('/auth/discord', (req, res, next) => {
-    passport.authenticate('discord')(req, res, next)
-})
+router.get('/auth/discord', 
+    passport.authenticate('discord')
+)
 
 router.get('/auth/discord/callback',
     passport.authenticate('discord', {
@@ -24,10 +24,10 @@ router.get('/auth/discord/callback',
     })
 
 // --- Twitter ---
-router.get('/auth/twitter',
+router.get('/auth/twitter', auth,
     passport.authorize('twitter'))
 
-router.get('/auth/twitter/callback',
+router.get('/auth/twitter/callback', auth,
     passport.authorize('twitter', {
         failureRedirect: '/',
         session: true
@@ -37,10 +37,10 @@ router.get('/auth/twitter/callback',
     })
 
 // --- GitHub ---
-router.get('/auth/github',
+router.get('/auth/github', auth,
     passport.authorize('github', { scope: ['read:user'] }))
 
-router.get('/auth/github/callback',
+router.get('/auth/github/callback', auth,
     passport.authorize('github', {
         failureRedirect: '/',
         session: true
@@ -49,10 +49,11 @@ router.get('/auth/github/callback',
         res.redirect(`${process.env.FRONTEND_DEV_URL}/profile`)
     })
 
-router.get('/auth/logout', auth, (req: IReqAuth, res: Response) => {
+router.delete('/auth/logout', auth, (req: IReqAuth, res: Response) => {
+
     if (req.user) {
         req.logout()
-        res.send('done')
+        res.send('Succesful Logout')
     }
 })
 

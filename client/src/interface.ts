@@ -4,10 +4,8 @@ export interface IUser {
     customBio: string
     customLocation: string
     customName: string
-    tags: {
-        lookingForCoffeeChats: boolean
-        openToCoffeeChats: boolean
-    }
+    lookingForCoffeeChats: boolean
+    openToCoffeeChats: boolean
     discord: {
         id: string
         username: string
@@ -16,7 +14,7 @@ export interface IUser {
         banner: string
         banner_color: string
     }
-    github: {
+    gitHub: {
         id: string
         json: {
             login: string

@@ -71,18 +71,18 @@ export default function Featured() {
           {user.map((user: IUser, index, array) => {
             
             return (
-              <Card key={user.github.id}>
+              <Card key={user.gitHub.id}>
                 <CardImageContainer>
-                  <CardImage src={user.github.json.avatar_url} />
+                  <CardImage src={user.gitHub.json.avatar_url} />
                 </CardImageContainer>
                 <CardText>
                   <CardHeader>
-                    <CardName>{user.github.json.name}</CardName>
-                    <CardLocation>{user.github.json.location}</CardLocation>
+                    <CardName>{user.gitHub.json.name}</CardName>
+                    <CardLocation>{user.gitHub.json.location}</CardLocation>
                   </CardHeader>
-                  <CardBio>{user.github.json.bio}</CardBio>
+                  <CardBio>{user.gitHub.json.bio}</CardBio>
                   <CardMeta>
-                    <CardMetaFeature href={user.github.json.twitter_username}>
+                    <CardMetaFeature href={user.gitHub.json.twitter_username}>
                       <TwitterIcon />
                     </CardMetaFeature>
                     <CardMetaFeature>

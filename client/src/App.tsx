@@ -1,7 +1,7 @@
 import React from "react"
 import { BrowserRouter, Route, Routes } from "react-router-dom"
 import Profile from "./pages/Profile"
-import Home from "./pages/Home"
+import UserList from "./pages/UserList"
 import Featured from "./pages/Featured"
 import Navbar from "./components/Navbar"
 import Footer from "./components/Footer"
@@ -14,7 +14,7 @@ function App() {
         <Navbar />
         <div className="flex-grow">
           <Routes>
-            <Route path="/" element={<Home />} />
+            <Route path="/" element={<UserList />} />
             <Route path="/featured" element={<Featured />} />
             <Route path="/profile" element={<Profile />} />
           </Routes >

@@ -2,12 +2,12 @@ import tw from 'twin.macro'
 import styled from "styled-components";
 import { ReactComponent as TwitterIcon } from '../assets/twitter-icon.svg'
 import { ReactComponent as GitHubIcon } from '../assets/github-icon.svg'
+import { ReactComponent as LinkedInIcon } from '../assets/linkedin-icon.svg'
 import { myContext } from '../hooks/Context'
 import React, { useContext, useState } from 'react'
 import { IUser } from '../interface'
 import { UserCard } from '../components/UserCard'
 import axios from 'axios';
-
 
 const Container = tw.div`flex flex-col px-6 text-gray-100`
 
@@ -71,14 +71,14 @@ export default function Profile() {
     const user = useContext(myContext) as IUser
 
     const [formData, setFormData] = useState({
-        bio: '',
-        location: '',
-        name: '',
+        customBio: '',
+        customLocation: '',
+        customName: '',
         lookingForCoffeeChats: false,
         openToCoffeeChats: false,
     });
 
-    const { bio, location, name, lookingForCoffeeChats, openToCoffeeChats } = formData;
+    const { customBio, customLocation, customName, lookingForCoffeeChats, openToCoffeeChats } = formData;
 
     const handleInputChange = (e: any) =>
         setFormData({ ...formData, [e.target.name]: e.target.type === 'checkbox' ? e.target.checked : e.target.value });
@@ -86,22 +86,21 @@ export default function Profile() {
     const handleProfileFormSubmit = async () => {
         setShowModal(false)
 
-        const profileFormData = new FormData();
-        profileFormData.append('data', JSON.stringify({ ...formData }));
-
         try {
-            const res = await axios({
+            axios({
                 method: 'put',
                 url: 'http://localhost:4000/api/user/update',
                 data: formData,
                 withCredentials: true,
                 responseType: 'json'
+            }).then((res) => {
+                if (res) {
+                    console.log(res)
+                }
             })
 
-            console.log(res.data)
-
         } catch (err: any) {
-            console.error(err.message)
+            console.error(err)
         }
     }
 
@@ -139,8 +138,8 @@ export default function Profile() {
                                                 <FormLabel>Name</FormLabel>
                                                 <FormTextInput
                                                     type="text"
-                                                    name="name"
-                                                    value={name}
+                                                    name="customName"
+                                                    value={customName}
                                                     onChange={handleInputChange}
                                                 />
 
@@ -149,8 +148,8 @@ export default function Profile() {
                                                 <FormLabel>Location</FormLabel>
                                                 <FormTextInput
                                                     type="text"
-                                                    name="location"
-                                                    value={location}
+                                                    name="customLocation"
+                                                    value={customLocation}
                                                     onChange={handleInputChange}
                                                 />
 
@@ -158,8 +157,8 @@ export default function Profile() {
                                             <FormInputContainer>
                                                 <FormLabel>Bio</FormLabel>
                                                 <FormTextArea rows={2}
-                                                    name="bio"
-                                                    value={bio}
+                                                    name="customBio"
+                                                    value={customBio}
                                                     onChange={handleInputChange}
                                                 />
 
@@ -216,6 +215,17 @@ export default function Profile() {
                             <ConnectAccountButton onClick={twitterConnect}>
                                 <TwitterIcon />
                                 Connect to Twitter
+                            </ConnectAccountButton>
+                        }
+                        {user.twitterConnected ?
+                            <ConnectedAccountButton disabled>
+                                <LinkedInIcon />
+                                Connected to LinkedIn ✔
+                            </ConnectedAccountButton>
+                            :
+                            <ConnectAccountButton onClick={twitterConnect}>
+                                <LinkedInIcon />
+                                Connect to LinkedIn
                             </ConnectAccountButton>
                         }
                     </LoginContainer>

@@ -11,32 +11,48 @@ const User = new mongoose.Schema({
     },
     customBio: {
         required: false,
-        type: String
+        type: String,
+        maxlength: [40, 'Bio must be less than 40 characters.'],
+        trim: true
     },
     customLocation: {
         required: false,
-        type: String
+        type: String,
+        maxlength: [20, 'Location must be less than 20 characters.'],
+        trim: true
     },
     customName: {
         required: false,
+        type: String,
+        maxlength: [20, 'Name must be less than 20 characters.'],
+        trim: true
+    },
+    discordToken: {
+        required: true,
         type: String
     },
-    tags: {
-        lookingForCoffeeChats:{
-            required: true,
-            type: Boolean
-        },
-        openToCoffeeChats:{
-            required: true,
-            type: Boolean
-        }
+    gitHubToken: {
+        required: false,
+        type: String
+    },
+    twitterToken: {
+        required: false,
+        type: String
+    },
+    twitterTokenSecret: {
+        required: false,
+        type: String
+    },
+    lookingForCoffeeChats: {
+        required: true,
+        type: Boolean
+    },
+    openToCoffeeChats: {
+        required: true,
+        type: Boolean
     },
     discord: {
         id: {
-            required: false,
-            type: String
-        },
-        token: {
             required: false,
             type: String
         },
@@ -61,12 +77,8 @@ const User = new mongoose.Schema({
             type: String
         }
     },
-    github: {
+    gitHub: {
         id: {
-            required: false,
-            type: String
-        },
-        token: {
             required: false,
             type: String
         },
@@ -77,14 +89,6 @@ const User = new mongoose.Schema({
     },
     twitter: {
         id: {
-            required: false,
-            type: String
-        },
-        token: {
-            required: false,
-            type: String
-        },
-        tokenSecret: {
             required: false,
             type: String
         },

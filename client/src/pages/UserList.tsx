@@ -3,16 +3,15 @@ import tw from 'twin.macro'
 import { css } from 'styled-components/macro'; //eslint-disable-line
 import { ReactComponent as TwitterIcon } from '../assets/twitter-icon.svg'
 import { ReactComponent as GitHubIcon } from '../assets/github-icon.svg'
-import { ReactComponent as DiscordIcon } from '../assets/discord-icon.svg'
-import { myContext } from '../hooks/Context'
-import React, { useEffect, useState, useContext } from 'react'
+import { ReactComponent as LinkedInIcon } from '../assets/linkedin-icon.svg'
+import React, { useEffect, useState } from 'react'
 import { IUser } from '../interface'
 
 const Content = tw.div`flex flex-col justify-center px-6 text-gray-100`
 
 const Header = tw.header`px-5 py-4 border-b border-gray-100`
 
-const H2 = tw.h2`font-semibold text-gray-300`
+const HeaderText = tw.h2`font-semibold text-gray-300`
 
 const TableContainer = tw.div`w-full max-w-2xl mx-auto shadow-lg rounded bg-secondary-800`
 
@@ -40,12 +39,18 @@ const TableDataLocation = tw.div`font-medium text-gray-100 text-left`
 
 const TableActions = tw.div`font-medium text-gray-100 text-left flex flex-row`
 
-const TableLink = tw.a`flex items-center justify-center rounded shadow cursor-pointer bg-secondary-600 transition duration-300 hocus:bg-primary-500 w-6 h-6 ml-1 p-0.5`
+const TableLink = tw.a`flex rounded shadow cursor-pointer bg-secondary-600 transition duration-300 hocus:bg-primary-500 w-6 h-6 ml-1 p-0.5`
 
-const TableFollow = tw.a`flex items-center justify-center rounded shadow cursor-pointer bg-secondary-600 transition duration-300 hocus:bg-primary-500  ml-1 py-0.5 px-2`
+const TableFollow = tw.a`flex items-center rounded shadow cursor-pointer bg-secondary-600 transition duration-300 hocus:bg-primary-500  ml-1 py-0.5 px-2`
+
+const TableFollowed = tw.a`flex items-center justify-center rounded shadow cursor-default bg-green-600 transition duration-300  ml-1 py-0.5 px-2`
 
 export default function Home() {
-  const ctx = useContext(myContext)
+
+  const [twitterFollowStatus, setTwitterFollowStatus] = useState({
+    user: '',
+    status: 0
+  });
 
   const [users, setUsers] = useState<IUser[]>()
   useEffect(() => {
@@ -53,20 +58,20 @@ export default function Home() {
       console.log(res.data)
       setUsers(res.data)
     })
-  }, [ctx]);
+  }, []);
 
   if (!users) {
     return <p>loading...</p>
   }
-  localStorage.setItem("username", "bob")
+
   return (
     <>
       <Content>
         <TableContainer>
           <Header>
-            <H2>
+            <HeaderText>
               Showing all users
-            </H2>
+            </HeaderText>
           </Header>
           <TablePadding>
             <Table>
@@ -86,7 +91,6 @@ export default function Home() {
               <TableBody>
                 {users.map((user: IUser) => {
 
-
                   const handleFollowSubmit = async () => {
                     try {
                       const res = await axios({
@@ -94,42 +98,51 @@ export default function Home() {
                         url: `http://localhost:4000/api/user/twitterfollow?username=${user.twitter.username}`,
                         withCredentials: true
                       })
-                      console.log(res.data)
+                      setTwitterFollowStatus({
+                        ...twitterFollowStatus,
+                        user: `${user.twitter.username}`,
+                        status: res.status
+                      })
                     } catch (err: any) {
                       console.error(err.message)
                     }
                   }
 
                   return (
-                    <TableRow key={user.discord.id}>
+                    <TableRow key={user.twitter.username} id={user.twitter.username} >
                       <TableDataCell>
                         <TableDataNameContainer>
-                          <TableDataImage src={`${user.github.json.avatar_url}`} />
+                          <TableDataImage src={`${user.gitHub.json.avatar_url}`} />
                           <TableDataName>
-                            {user.github.json.name}
+                            {user.gitHub.json.name}
                           </TableDataName>
                         </TableDataNameContainer>
                       </TableDataCell>
                       <TableDataCell>
                         <TableDataLocation>
-                          {user.github.json.location}
+                          {user.gitHub.json.location}
                         </TableDataLocation>
                       </TableDataCell>
                       <TableDataCell>
                         <TableActions>
-                          <TableFollow onClick={handleFollowSubmit}>
-                            Follow on Twitter
-                            <TwitterIcon />
-                          </TableFollow>
                           <TableLink href={`https://www.twitter.com/${user.twitter.username}`} target="blank" rel="noopener noreferrer">
                             <TwitterIcon />
                           </TableLink>
-                          <TableLink href={user.github.json.html_url} target="blank" rel="noopener noreferrer">
+                          <TableLink href={user.gitHub.json.html_url} target="blank" rel="noopener noreferrer">
                             <GitHubIcon />
                           </TableLink>
                           <TableLink href={`https://discordapp.com/channels/@me/${user.discord.username}#${user.discord.discriminator}`} target="blank" rel="noopener noreferrer">
-                            <DiscordIcon />
+                            <LinkedInIcon />
                           </TableLink>
+                          {user.twitter.username === twitterFollowStatus.user && twitterFollowStatus.status === 200 ?
+                            <TableFollowed>
+                              Following
+                            </TableFollowed>
+                            :
+                            <TableFollow onClick={handleFollowSubmit}>
+                              Follow All
+                            </TableFollow>
+                          }
                         </TableActions>
                       </TableDataCell>
                     </TableRow>
