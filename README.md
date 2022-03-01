@@ -25,9 +25,11 @@ GitConnected is a social networking application that allows software engineers t
 ### Features
 
 User login that only allows members of the 100devs Discord server. Connect your GitHub, Twitter, and LinkedIn accounts.
+
 ![sign-in](https://user-images.githubusercontent.com/74286884/156219311-52e31316-2435-4e19-bbf0-981c30d9233d.gif)
 
 Users can then follow other 100devs and be followed on all platforms, directly in-app.
+
 ![follow](https://user-images.githubusercontent.com/74286884/156219385-920d9663-a2cd-4e8a-9e6f-f17cefcfb3f5.gif)
 
 Future improvements:
