@@ -2,6 +2,7 @@ import tw from 'twin.macro'
 import styled from "styled-components";
 import { ReactComponent as TwitterIcon } from '../assets/twitter-icon.svg'
 import { ReactComponent as GitHubIcon } from '../assets/github-icon.svg'
+import { ReactComponent as LinkedInIcon } from '../assets/linkedin-icon.svg'
 import { myContext } from '../hooks/Context'
 import React, { useContext, useState } from 'react'
 import { IUser } from '../interface'
@@ -214,6 +215,17 @@ export default function Profile() {
                             <ConnectAccountButton onClick={twitterConnect}>
                                 <TwitterIcon />
                                 Connect to Twitter
+                            </ConnectAccountButton>
+                        }
+                        {user.twitterConnected ?
+                            <ConnectedAccountButton disabled>
+                                <LinkedInIcon />
+                                Connected to LinkedIn ✔
+                            </ConnectedAccountButton>
+                            :
+                            <ConnectAccountButton onClick={twitterConnect}>
+                                <LinkedInIcon />
+                                Connect to LinkedIn
                             </ConnectAccountButton>
                         }
                     </LoginContainer>

@@ -3,7 +3,7 @@ import tw from 'twin.macro'
 import { css } from 'styled-components/macro'; //eslint-disable-line
 import { ReactComponent as TwitterIcon } from '../assets/twitter-icon.svg'
 import { ReactComponent as GitHubIcon } from '../assets/github-icon.svg'
-import { ReactComponent as DiscordIcon } from '../assets/discord-icon.svg'
+import { ReactComponent as LinkedInIcon } from '../assets/linkedin-icon.svg'
 import React, { useEffect, useState } from 'react'
 import { IUser } from '../interface'
 
@@ -41,9 +41,9 @@ const TableActions = tw.div`font-medium text-gray-100 text-left flex flex-row`
 
 const TableLink = tw.a`flex rounded shadow cursor-pointer bg-secondary-600 transition duration-300 hocus:bg-primary-500 w-6 h-6 ml-1 p-0.5`
 
-const TableFollow = tw.a`flex items-center rounded shadow cursor-pointer bg-secondary-600 transition duration-300 hocus:bg-primary-500  ml-1 py-0.5 px-2 w-32`
+const TableFollow = tw.a`flex items-center rounded shadow cursor-pointer bg-secondary-600 transition duration-300 hocus:bg-primary-500  ml-1 py-0.5 px-2`
 
-const TableFollowed = tw.a`flex items-center justify-center rounded shadow cursor-default bg-secondary-600 transition duration-300  ml-1 py-0.5 px-2 w-32`
+const TableFollowed = tw.a`flex items-center justify-center rounded shadow cursor-default bg-green-600 transition duration-300  ml-1 py-0.5 px-2`
 
 export default function Home() {
 
@@ -125,17 +125,6 @@ export default function Home() {
                       </TableDataCell>
                       <TableDataCell>
                         <TableActions>
-                          
-                          {user.twitter.username === twitterFollowStatus.user && twitterFollowStatus.status === 200 ?
-                            <TableFollowed>
-                              Following ✓
-                            </TableFollowed>
-                            :
-                            <TableFollow onClick={handleFollowSubmit}>
-                              Follow on Twitter
-                            </TableFollow>
-
-                          }
                           <TableLink href={`https://www.twitter.com/${user.twitter.username}`} target="blank" rel="noopener noreferrer">
                             <TwitterIcon />
                           </TableLink>
@@ -143,8 +132,17 @@ export default function Home() {
                             <GitHubIcon />
                           </TableLink>
                           <TableLink href={`https://discordapp.com/channels/@me/${user.discord.username}#${user.discord.discriminator}`} target="blank" rel="noopener noreferrer">
-                            <DiscordIcon />
+                            <LinkedInIcon />
                           </TableLink>
+                          {user.twitter.username === twitterFollowStatus.user && twitterFollowStatus.status === 200 ?
+                            <TableFollowed>
+                              Following
+                            </TableFollowed>
+                            :
+                            <TableFollow onClick={handleFollowSubmit}>
+                              Follow All
+                            </TableFollow>
+                          }
                         </TableActions>
                       </TableDataCell>
                     </TableRow>
