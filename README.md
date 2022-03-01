@@ -1,12 +1,43 @@
-# ** *(The application and following readme is currently a WIP)* **
 # GitConnected
 
 GitConnected is a social networking application that allows software engineers to reciprocate connections, follows, and endorsements - built by and for the [100Devs](https://leonnoel.com/100devs/) community.
 
+### Architecture
+
+#### Frontend
+
+  - TypeScript
+  - React
+  - Axios
+  - Tailwind CSS
+
+#### Backend
+
+  - TypeScript
+  - Node
+  - Express
+  - MongoDB
+  - Passport
+  - Discord OAuth
+  - GitHub OAuth
+  - Twitter OAuth
+
+### Features
+
+User login that only allows members of the 100devs Discord server. Connect your GitHub, Twitter, and LinkedIn accounts.
+![sign-in](https://user-images.githubusercontent.com/74286884/156219311-52e31316-2435-4e19-bbf0-981c30d9233d.gif)
+
+Users can then follow other 100devs and be followed on all platforms, directly in-app.
+![follow](https://user-images.githubusercontent.com/74286884/156219385-920d9663-a2cd-4e8a-9e6f-f17cefcfb3f5.gif)
+
+Future improvements:
+- Users can add tags to their profiles (coffee chat, currently employed, looking for work, group project, etc.)
+- User search by location and tags
+- Group project forum where users can pin GitHub repos
+
 ## Development Contributors:
 
-These instructions will give you a copy of the project up and running on
-your local machine for development and testing purposes.
+These instructions will get a copy of the project on your local machine for development and testing purposes. If you have any further questions, feel free to reach out to [Wil Gerard.](https://github.com/wil-gerard)
 
 ### Prerequisites
 
@@ -28,35 +59,8 @@ Expects a .env file in the root directory of **backend** with environment variab
 #### Frontend
 * Navigate to root directory of **client** in your terminal `cd client` and then `yarn start`
 
-
 #### Backend
 * Navigate to root directory of **backend** in your terminal `cd backend` and then `yarn dev`
-
-## Style, Design, And Architecture
-
-### Preview
-
-![gitconnected-preview](https://user-images.githubusercontent.com/74286884/150421227-2662285d-11bf-421f-b9d8-f094a8b449d0.png)
-
-### Built With
-
-#### Frontend
-
-  - TypeScript
-  - React
-  - Axios
-  - Tailwind CSS
-
-#### Backend
-
-  - TypeScript
-  - Node
-  - Express
-  - MongoDB
-  - Passport
-  - Discord OAuth
-  - GitHub OAuth
-  - Twitter OAuth
 
 ## Code of Conduct
 
