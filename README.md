@@ -1,3 +1,6 @@
+![banner](https://user-images.githubusercontent.com/74286884/156848307-b77026a3-36f3-4e82-bc90-4721ddd1d996.svg)
+
+
 # GitConnected
 
 GitConnected is a social networking application that allows software engineers to reciprocate connections, follows, and endorsements - built by and for the [100Devs](https://leonnoel.com/100devs/) community.
