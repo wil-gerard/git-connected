@@ -1,4 +1,4 @@
-import Axios, { AxiosResponse } from 'axios'
+import Axios, { AxiosResponse } from "axios";
 import tw from "twin.macro";
 import styled from "styled-components";
 import { css } from "styled-components/macro"; //eslint-disable-line
@@ -6,21 +6,20 @@ import { ReactComponent as TwitterIcon } from "../assets/twitter-icon.svg";
 import { ReactComponent as GitHubIcon } from "../assets/github-icon.svg";
 import { ReactComponent as LinkedInIcon } from "../assets/linkedin-icon.svg";
 
-import { myContext } from "../hooks/Context"
-import React, { useEffect, useState, useContext } from "react"
-import { IUser } from "../interface"
+import { myContext } from "../hooks/Context";
+import React, { useEffect, useState, useContext } from "react";
+import { IUser } from "../interface";
 
-const Container = tw.div`flex flex-col px-6 text-gray-100`
-const Content = tw.div`flex-row flex max-w-screen-xl mx-auto py-2 lg:py-24`
-
+const Container = tw.div`flex flex-col px-6 text-gray-100`;
+const Content = tw.div`flex-row flex max-w-screen-xl mx-auto py-2 lg:py-24`;
 
 const Card = tw.div`mx-auto xl:mx-0 xl:ml-auto max-w-sm md:max-w-xs lg:max-w-sm xl:max-w-xs`;
 const CardImageContainer = styled.div`
-    ${tw`flex justify-center`}
-`
+  ${tw`flex justify-center`}
+`;
 const CardImage = styled.img`
-    ${tw`h-4/6 w-4/6 rounded-full shadow-xl mb-2`}
-`
+  ${tw`h-4/6 w-4/6 rounded-full shadow-xl mb-2`}
+`;
 
 const CardText = tw.div`mt-4`;
 const CardLocation = tw.div`font-semibold text-sm text-gray-600`;
@@ -39,22 +38,22 @@ const CardMetaFeature = styled.a`
   }
 `;
 
-const Header = tw.h1`flex flex-col items-center text-5xl font-bold`
+const Header = tw.h1`flex flex-col items-center text-5xl font-bold`;
 
 export default function Featured() {
-  const ctx = useContext(myContext)
+  const ctx = useContext(myContext);
 
-  const [user, setUsers] = useState<IUser[]>()
+  const [user, setUsers] = useState<IUser[]>();
   useEffect(() => {
-    Axios.get("http://localhost:4000/api/user/getallusers").then((res: AxiosResponse) => {
-
-      setUsers(res.data)
-    })
-
+    Axios.get("http://localhost:4000/api/user/getallusers").then(
+      (res: AxiosResponse) => {
+        setUsers(res.data);
+      }
+    );
   }, [ctx]);
 
   if (!user) {
-    return <p>loading...</p>
+    return <p>loading...</p>;
   }
 
   // const randomNumberGenerator = () => {
@@ -69,7 +68,6 @@ export default function Featured() {
         <Header>Git to Know...</Header>
         <Content>
           {user.map((user: IUser, index, array) => {
-            
             return (
               <Card key={user.gitHub.id}>
                 <CardImageContainer>
@@ -94,12 +92,10 @@ export default function Featured() {
                   </CardMeta>
                 </CardText>
               </Card>
-            )
+            );
           })}
-
-
         </Content>
       </Container>
     </>
   );
-};
+}
