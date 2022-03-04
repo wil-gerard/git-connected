@@ -4,7 +4,7 @@ dotenv.config();
 import express from 'express';
 import auth from '../middleware/auth';
 import { Request, Response } from 'express';
-import { IReqAuth } from '../interface';
+import { IReqAuth } from '../config/interface';
 import passport from 'passport';
 
 const router = express.Router();

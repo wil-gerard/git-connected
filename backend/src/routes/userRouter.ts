@@ -1,13 +1,9 @@
-import dotenv from 'dotenv';
-dotenv.config();
-
 import { Response } from 'express';
 import express from 'express';
 import Twitter from 'twit';
 import User from '../models/User';
-import { IDatabaseUser, IReqAuth, IUser, IUserUpdateForm } from '../interface';
+import { IReqAuth, IUserUpdateForm } from '../config/interface';
 import auth from '../middleware/auth';
-import { nextTick } from 'process';
 
 const router = express.Router();
 

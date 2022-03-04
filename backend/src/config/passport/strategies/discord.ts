@@ -1,6 +1,6 @@
 const DiscordStrategy = require('passport-discord').Strategy;
-import User from '../models/User';
-import { IDatabaseUser, IReqAuth } from '../interface';
+import User from '../../../models/User';
+import { IDatabaseUser, IReqAuth } from '../../interface';
 
 const discordScopes = [
   'identify',

@@ -1,5 +1,5 @@
 import { Response, NextFunction } from 'express';
-import { IReqAuth } from '../interface';
+import { IReqAuth } from '../config/interface';
 import User from '../models/User';
 
 declare module 'express-session' {
