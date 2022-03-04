@@ -217,7 +217,7 @@ export default function Profile() {
                                 Connect to Twitter
                             </ConnectAccountButton>
                         }
-                        {user.twitterConnected ?
+                        {user.lookingForCoffeeChats ?
                             <ConnectedAccountButton disabled>
                                 <LinkedInIcon />
                                 Connected to LinkedIn ✔
