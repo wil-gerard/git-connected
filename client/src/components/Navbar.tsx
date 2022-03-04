@@ -1,13 +1,13 @@
-import tw from "twin.macro";
-import styled from "styled-components";
-import { ReactComponent as LogoBase } from "../assets/logo.svg";
-import { GradientBar } from "./GradiantBar";
-import { Link } from "react-router-dom";
-import axios, { AxiosResponse } from "axios";
-import { myContext } from "../hooks/Context";
-import React, { useContext, useState } from "react";
-import { IUser } from "../interface";
-import { ReactComponent as DiscordIcon } from "../assets/discord-icon.svg";
+import tw from 'twin.macro';
+import styled from 'styled-components';
+import { ReactComponent as LogoBase } from '../assets/logo.svg';
+import { GradientBar } from './GradiantBar';
+import { Link } from 'react-router-dom';
+import axios, { AxiosResponse } from 'axios';
+import { myContext } from '../hooks/Context';
+import React, { useContext, useState } from 'react';
+import { IUser } from '../interface';
+import { ReactComponent as DiscordIcon } from '../assets/discord-icon.svg';
 
 const NavContainer = styled.nav`
   ${tw`flex items-center justify-between bg-secondary-700 py-6 px-6 lg:px-10 lg:py-8 w-full mb-6 lg:mb-12`}
@@ -54,17 +54,17 @@ export default function Navbar() {
   const [showModal, setShowModal] = useState(false);
 
   const discordLogin = () => {
-    window.open("http://localhost:4000/api/auth/discord", "_self");
+    window.open('http://localhost:4000/api/auth/discord', '_self');
   };
 
   const logout = () => {
     axios
-      .delete("http://localhost:4000/api/auth/logout", {
+      .delete('http://localhost:4000/api/auth/logout', {
         withCredentials: true,
       })
       .then((res: AxiosResponse) => {
-        if (res.data === "Succesful Logout") {
-          window.location.href = "/";
+        if (res.data === 'Succesful Logout') {
+          window.location.href = '/';
         }
       });
   };

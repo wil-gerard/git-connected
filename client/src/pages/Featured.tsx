@@ -1,14 +1,14 @@
-import Axios, { AxiosResponse } from "axios";
-import tw from "twin.macro";
-import styled from "styled-components";
-import { css } from "styled-components/macro"; //eslint-disable-line
-import { ReactComponent as TwitterIcon } from "../assets/twitter-icon.svg";
-import { ReactComponent as GitHubIcon } from "../assets/github-icon.svg";
-import { ReactComponent as LinkedInIcon } from "../assets/linkedin-icon.svg";
+import Axios, { AxiosResponse } from 'axios';
+import tw from 'twin.macro';
+import styled from 'styled-components';
+import { css } from 'styled-components/macro'; //eslint-disable-line
+import { ReactComponent as TwitterIcon } from '../assets/twitter-icon.svg';
+import { ReactComponent as GitHubIcon } from '../assets/github-icon.svg';
+import { ReactComponent as LinkedInIcon } from '../assets/linkedin-icon.svg';
 
-import { myContext } from "../hooks/Context";
-import React, { useEffect, useState, useContext } from "react";
-import { IUser } from "../interface";
+import { myContext } from '../hooks/Context';
+import React, { useEffect, useState, useContext } from 'react';
+import { IUser } from '../interface';
 
 const Container = tw.div`flex flex-col px-6 text-gray-100`;
 const Content = tw.div`flex-row flex max-w-screen-xl mx-auto py-2 lg:py-24`;
@@ -45,7 +45,7 @@ export default function Featured() {
 
   const [user, setUsers] = useState<IUser[]>();
   useEffect(() => {
-    Axios.get("http://localhost:4000/api/user/getallusers").then(
+    Axios.get('http://localhost:4000/api/user/getallusers').then(
       (res: AxiosResponse) => {
         setUsers(res.data);
       }

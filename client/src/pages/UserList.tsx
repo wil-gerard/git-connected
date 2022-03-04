@@ -1,11 +1,11 @@
-import axios, { AxiosResponse } from "axios";
-import tw from "twin.macro";
-import { css } from "styled-components/macro"; //eslint-disable-line
-import { ReactComponent as TwitterIcon } from "../assets/twitter-icon.svg";
-import { ReactComponent as GitHubIcon } from "../assets/github-icon.svg";
-import { ReactComponent as LinkedInIcon } from "../assets/linkedin-icon.svg";
-import React, { useEffect, useState } from "react";
-import { IUser } from "../interface";
+import axios, { AxiosResponse } from 'axios';
+import tw from 'twin.macro';
+import { css } from 'styled-components/macro'; //eslint-disable-line
+import { ReactComponent as TwitterIcon } from '../assets/twitter-icon.svg';
+import { ReactComponent as GitHubIcon } from '../assets/github-icon.svg';
+import { ReactComponent as LinkedInIcon } from '../assets/linkedin-icon.svg';
+import React, { useEffect, useState } from 'react';
+import { IUser } from '../interface';
 
 const Content = tw.div`flex flex-col justify-center px-6 text-gray-100`;
 
@@ -47,14 +47,14 @@ const TableFollowed = tw.a`flex items-center justify-center rounded shadow curso
 
 export default function Home() {
   const [twitterFollowStatus, setTwitterFollowStatus] = useState({
-    user: "",
+    user: '',
     status: 0,
   });
 
   const [users, setUsers] = useState<IUser[]>();
   useEffect(() => {
     axios
-      .get("http://localhost:4000/api/user/getall")
+      .get('http://localhost:4000/api/user/getall')
       .then((res: AxiosResponse) => {
         console.log(res.data);
         setUsers(res.data);
@@ -86,7 +86,7 @@ export default function Home() {
                   const handleFollowSubmit = async () => {
                     try {
                       const res = await axios({
-                        method: "post",
+                        method: 'post',
                         url: `http://localhost:4000/api/user/twitterfollow?username=${user.twitter.username}`,
                         withCredentials: true,
                       });

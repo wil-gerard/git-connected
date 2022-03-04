@@ -1,17 +1,17 @@
-const DiscordStrategy = require("passport-discord").Strategy;
-import User from "../models/User";
-import { IDatabaseUser, IReqAuth } from "../interface";
+const DiscordStrategy = require('passport-discord').Strategy;
+import User from '../models/User';
+import { IDatabaseUser, IReqAuth } from '../interface';
 
 const discordScopes = [
-  "identify",
-  "guilds",
-  "guilds.join",
-  "guilds.members.read",
+  'identify',
+  'guilds',
+  'guilds.join',
+  'guilds.members.read',
 ];
 const discordStrategySettings: any = {
   clientID: `${process.env.DISCORD_CLIENT_ID}`,
   clientSecret: `${process.env.DISCORD_CLIENT_SECRET}`,
-  callbackURL: "/api/auth/discord/callback",
+  callbackURL: '/api/auth/discord/callback',
   scope: discordScopes,
   passReqToCallback: true,
 };
@@ -29,14 +29,14 @@ async function handleDiscordLogin(
 ) {
   if (
     !discordProfile.guilds.some(
-      (guild: any) => guild.id === "735923219315425401"
+      (guild: any) => guild.id === '735923219315425401'
     )
   ) {
-    console.log("not a member of the 100devs discord server");
+    console.log('not a member of the 100devs discord server');
     return;
   }
   User.findOne(
-    { "discord.id": discordProfile.id },
+    { 'discord.id': discordProfile.id },
     async (err: Error, userInDatabase: IDatabaseUser) => {
       if (err) {
         return callback(err, null);
@@ -55,9 +55,9 @@ function getNewUser(discordProfile: any, discordAccessToken: String) {
   const newUser = new User();
   newUser.gitHubConnected = false;
   newUser.twitterConnected = false;
-  newUser.customBio = "";
-  newUser.customLocation = "";
-  newUser.customName = "";
+  newUser.customBio = '';
+  newUser.customLocation = '';
+  newUser.customName = '';
   newUser.lookingForCoffeeChats = false;
   newUser.openToCoffeeChats = false;
   newUser.discord.id = discordProfile.id;

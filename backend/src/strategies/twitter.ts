@@ -1,9 +1,9 @@
-const TwitterStrategy = require("passport-twitter").Strategy;
+const TwitterStrategy = require('passport-twitter').Strategy;
 
 const twitterStrategySettings: any = {
   consumerKey: `${process.env.TWITTER_CONSUMER_KEY}`,
   consumerSecret: `${process.env.TWITTER_CONSUMER_SECRET}`,
-  callbackURL: "/api/auth/twitter/callback",
+  callbackURL: '/api/auth/twitter/callback',
   skipExtendedUserProfile: true,
   passReqToCallback: true,
 };

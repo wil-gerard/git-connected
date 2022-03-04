@@ -1,8 +1,8 @@
-import { Response, NextFunction } from "express";
-import { IReqAuth } from "../interface";
-import User from "../models/User";
+import { Response, NextFunction } from 'express';
+import { IReqAuth } from '../interface';
+import User from '../models/User';
 
-declare module "express-session" {
+declare module 'express-session' {
   interface SessionData {
     passport: {
       user: string;
@@ -19,7 +19,7 @@ const auth = async (req: IReqAuth, res: Response, next: NextFunction) => {
       req.user = user;
       next();
     } else if (!req.isAuthenticated()) {
-      return res.status(401).send("Invalid Authentication");
+      return res.status(401).send('Invalid Authentication');
     }
   } catch (err) {
     return res.status(500).send(err.message);

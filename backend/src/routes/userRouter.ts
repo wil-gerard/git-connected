@@ -1,24 +1,24 @@
-import dotenv from "dotenv";
+import dotenv from 'dotenv';
 dotenv.config();
 
-import { Response } from "express";
-import express from "express";
-import Twitter from "twit";
-import User from "../models/User";
-import { IDatabaseUser, IReqAuth, IUser, IUserUpdateForm } from "../interface";
-import auth from "../middleware/auth";
-import { nextTick } from "process";
+import { Response } from 'express';
+import express from 'express';
+import Twitter from 'twit';
+import User from '../models/User';
+import { IDatabaseUser, IReqAuth, IUser, IUserUpdateForm } from '../interface';
+import auth from '../middleware/auth';
+import { nextTick } from 'process';
 
 const router = express.Router();
 
-router.put("/user/update", auth, async (req: IReqAuth, res: Response, next) => {
+router.put('/user/update', auth, async (req: IReqAuth, res: Response, next) => {
   const { ...userUpdateProps }: IUserUpdateForm = req.body;
   const query = req.user._id;
   const update = { ...userUpdateProps };
   const options = {
     new: true,
     runValidators: true,
-    context: "query",
+    context: 'query',
     upsert: true,
   };
 
@@ -34,11 +34,11 @@ router.put("/user/update", auth, async (req: IReqAuth, res: Response, next) => {
     });
 });
 
-router.post("/user/twitterfollow", auth, async (req: IReqAuth, res) => {
+router.post('/user/twitterfollow', auth, async (req: IReqAuth, res) => {
   try {
-    console.log(`User is about to follow '${req.query["username"]}'`);
+    console.log(`User is about to follow '${req.query['username']}'`);
 
-    let username = req.query["username"] as string;
+    let username = req.query['username'] as string;
 
     const twitter = new Twitter({
       consumer_key: process.env.TWITTER_CONSUMER_KEY,
@@ -47,7 +47,7 @@ router.post("/user/twitterfollow", auth, async (req: IReqAuth, res) => {
       access_token_secret: req.user.twitterTokenSecret,
     });
 
-    const doTwitterFollow = await twitter.post("friendships/create", {
+    const doTwitterFollow = await twitter.post('friendships/create', {
       screen_name: username,
     });
 
@@ -57,11 +57,11 @@ router.post("/user/twitterfollow", auth, async (req: IReqAuth, res) => {
   }
 });
 
-router.get("/user/getuser", auth, async (req, res) => {
+router.get('/user/getuser', auth, async (req, res) => {
   res.send(req.user);
 });
 
-router.get("/user/getall", async (req, res) => {
+router.get('/user/getall', async (req, res) => {
   await User.find(
     { gitHubConnected: true, twitterConnected: true },
     (err: Error, data: IDatabaseUser[]) => {

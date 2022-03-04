@@ -1,5 +1,5 @@
 function testSum(a: number, b: number) {
-  if (!a) throw Error("a cannot be empty");
+  if (!a) throw Error('a cannot be empty');
   return a + b;
 }
 

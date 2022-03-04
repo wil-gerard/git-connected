@@ -1,4 +1,4 @@
-import mongoose from "mongoose";
+import mongoose from 'mongoose';
 
 const User = new mongoose.Schema({
   gitHubConnected: {
@@ -12,19 +12,19 @@ const User = new mongoose.Schema({
   customBio: {
     required: false,
     type: String,
-    maxlength: [40, "Bio must be less than 40 characters."],
+    maxlength: [40, 'Bio must be less than 40 characters.'],
     trim: true,
   },
   customLocation: {
     required: false,
     type: String,
-    maxlength: [20, "Location must be less than 20 characters."],
+    maxlength: [20, 'Location must be less than 20 characters.'],
     trim: true,
   },
   customName: {
     required: false,
     type: String,
-    maxlength: [20, "Name must be less than 20 characters."],
+    maxlength: [20, 'Name must be less than 20 characters.'],
     trim: true,
   },
   discordToken: {
@@ -99,4 +99,4 @@ const User = new mongoose.Schema({
   },
 });
 
-export default mongoose.model("User", User);
+export default mongoose.model('User', User);

@@ -1,4 +1,4 @@
-import { GradientBar } from "./GradiantBar";
+import { GradientBar } from './GradiantBar';
 
 export default function Footer() {
   return (

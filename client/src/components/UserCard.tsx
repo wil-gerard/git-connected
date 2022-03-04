@@ -1,10 +1,10 @@
-import React from "react";
-import tw from "twin.macro";
-import styled from "styled-components";
-import { IUser } from "../interface";
-import { ReactComponent as TwitterIcon } from "../assets/twitter-icon.svg";
-import { ReactComponent as GitHubIcon } from "../assets/github-icon.svg";
-import { ReactComponent as LinkedInIcon } from "../assets/linkedin-icon.svg";
+import React from 'react';
+import tw from 'twin.macro';
+import styled from 'styled-components';
+import { IUser } from '../interface';
+import { ReactComponent as TwitterIcon } from '../assets/twitter-icon.svg';
+import { ReactComponent as GitHubIcon } from '../assets/github-icon.svg';
+import { ReactComponent as LinkedInIcon } from '../assets/linkedin-icon.svg';
 
 const Card = tw.div`mx-auto ml-auto max-w-sm md:max-w-xs lg:max-w-sm xl:max-w-xs bg-secondary-800 p-4 rounded shadow-lg`;
 

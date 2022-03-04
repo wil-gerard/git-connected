@@ -1,13 +1,13 @@
-import tw from "twin.macro";
-import styled from "styled-components";
-import { ReactComponent as TwitterIcon } from "../assets/twitter-icon.svg";
-import { ReactComponent as GitHubIcon } from "../assets/github-icon.svg";
-import { ReactComponent as LinkedInIcon } from "../assets/linkedin-icon.svg";
-import { myContext } from "../hooks/Context";
-import React, { useContext, useState } from "react";
-import { IUser } from "../interface";
-import { UserCard } from "../components/UserCard";
-import axios from "axios";
+import tw from 'twin.macro';
+import styled from 'styled-components';
+import { ReactComponent as TwitterIcon } from '../assets/twitter-icon.svg';
+import { ReactComponent as GitHubIcon } from '../assets/github-icon.svg';
+import { ReactComponent as LinkedInIcon } from '../assets/linkedin-icon.svg';
+import { myContext } from '../hooks/Context';
+import React, { useContext, useState } from 'react';
+import { IUser } from '../interface';
+import { UserCard } from '../components/UserCard';
+import axios from 'axios';
 
 const Container = tw.div`flex flex-col px-6 text-gray-100`;
 
@@ -60,11 +60,11 @@ const LoginContainer = tw.div`px-10 py-2 flex-col flex`;
 
 export default function Profile() {
   const gitHubConnect = () => {
-    window.open("http://localhost:4000/api/auth/github", "_self");
+    window.open('http://localhost:4000/api/auth/github', '_self');
   };
 
   const twitterConnect = () => {
-    window.open("http://localhost:4000/api/auth/twitter", "_self");
+    window.open('http://localhost:4000/api/auth/twitter', '_self');
   };
 
   const [showModal, setShowModal] = useState(false);
@@ -72,9 +72,9 @@ export default function Profile() {
   const user = useContext(myContext) as IUser;
 
   const [formData, setFormData] = useState({
-    customBio: "",
-    customLocation: "",
-    customName: "",
+    customBio: '',
+    customLocation: '',
+    customName: '',
     lookingForCoffeeChats: false,
     openToCoffeeChats: false,
   });
@@ -91,7 +91,7 @@ export default function Profile() {
     setFormData({
       ...formData,
       [e.target.name]:
-        e.target.type === "checkbox" ? e.target.checked : e.target.value,
+        e.target.type === 'checkbox' ? e.target.checked : e.target.value,
     });
 
   const handleProfileFormSubmit = async () => {
@@ -99,11 +99,11 @@ export default function Profile() {
 
     try {
       axios({
-        method: "put",
-        url: "http://localhost:4000/api/user/update",
+        method: 'put',
+        url: 'http://localhost:4000/api/user/update',
         data: formData,
         withCredentials: true,
-        responseType: "json",
+        responseType: 'json',
       }).then((res) => {
         if (res) {
           console.log(res);

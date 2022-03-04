@@ -1,5 +1,5 @@
-import authRouter from "./authRouter";
-import userRouter from "./userRouter";
+import authRouter from './authRouter';
+import userRouter from './userRouter';
 
 const routes = [authRouter, userRouter];
 
