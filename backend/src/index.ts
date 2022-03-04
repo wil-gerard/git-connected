@@ -47,7 +47,7 @@ app.use((err: any, req: any, res: any, next: any) => {
 });
 
 // Passport
-import './config/passport/passport'
+import './config/passport/passport';
 app.use(passport.initialize());
 app.use(passport.session());
 
@@ -58,11 +58,11 @@ app.use('/api', routes);
 import './config/database';
 
 // Production Deploy
-if(process.env.NODE_ENV === 'production'){
-  app.use(express.static('client/build'))
+if (process.env.NODE_ENV === 'production') {
+  app.use(express.static('client/build'));
   app.get('*', (req, res) => {
-    res.sendFile(path.join(__dirname, '../client', 'build', 'index.html'))
-  })
+    res.sendFile(path.join(__dirname, '../client', 'build', 'index.html'));
+  });
 }
 
 const PORT = process.env.PORT || process.env.BACKEND_DEV_PORT;
