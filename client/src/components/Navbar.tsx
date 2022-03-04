@@ -8,6 +8,8 @@ import { myContext } from '../hooks/Context';
 import React, { useContext, useState } from 'react';
 import { IUser } from '../interface';
 import { ReactComponent as DiscordIcon } from '../assets/discord-icon.svg';
+// import { useNavigate } from 'react-router-dom';
+
 
 const NavContainer = styled.nav`
   ${tw`flex items-center justify-between bg-secondary-700 py-6 px-6 lg:px-10 lg:py-8 w-full mb-6 lg:mb-12`}
@@ -63,7 +65,7 @@ export default function Navbar() {
         withCredentials: true,
       })
       .then((res: AxiosResponse) => {
-        if (res.data === 'Succesful Logout') {
+        if (res.data.message === 'Logout succesful') {
           window.location.href = '/';
         }
       });

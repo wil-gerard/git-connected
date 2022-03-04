@@ -54,7 +54,7 @@ export default function Home() {
   const [users, setUsers] = useState<IUser[]>();
   useEffect(() => {
     axios
-      .get('http://localhost:4000/api/user/getall')
+      .get('http://localhost:4000/api/user/getallusers')
       .then((res: AxiosResponse) => {
         console.log(res.data);
         setUsers(res.data);
@@ -84,7 +84,7 @@ export default function Home() {
                       try {
                         const res = await axios({
                           method: 'post',
-                          url: `http://localhost:4000/api/user/twitterfollow?username=${user.twitter.username}`,
+                          url: `http://localhost:4000/api/user/followall?username=${user.twitter.username}`,
                           withCredentials: true,
                         });
                         setTwitterFollowStatus({

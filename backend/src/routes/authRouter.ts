@@ -1,11 +1,8 @@
-import dotenv from 'dotenv';
-dotenv.config();
-
 import express from 'express';
 import auth from '../middleware/auth';
 import { Request, Response } from 'express';
-import { IReqAuth } from '../config/interface';
 import passport from 'passport';
+import { logout } from '../controllers/authControllers'
 
 const router = express.Router();
 
@@ -57,11 +54,6 @@ router.get(
   }
 );
 
-router.delete('/auth/logout', auth, (req: IReqAuth, res: Response) => {
-  if (req.user) {
-    req.logout();
-    res.send('Succesful Logout');
-  }
-});
+router.delete('/auth/logout', auth, logout);
 
 export default router;
