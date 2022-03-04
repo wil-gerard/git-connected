@@ -1,25 +1,19 @@
 {
-    "compilerOptions": {
-        "esModuleInterop": true,
-        "types": [
-            "node",
-            "jest"
-        ],
-        "forceConsistentCasingInFileNames": true,
-        "allowSyntheticDefaultImports": true,
-        "baseUrl": ".",
-        "outDir": "dist",
-        "module": "commonjs",
-        "target": "es5",
-        "lib": [
-            "es6",
-            "dom"
-        ],
-        "sourceMap": true,
-        "allowJs": false,
-        "skipLibCheck": true,
-        "moduleResolution": "node",
-        "noFallthroughCasesInSwitch": true,
-        "noImplicitAny": true,
-    }
+  "compilerOptions": {
+    "esModuleInterop": true,
+    "types": ["node", "jest"],
+    "forceConsistentCasingInFileNames": true,
+    "allowSyntheticDefaultImports": true,
+    "baseUrl": ".",
+    "outDir": "dist",
+    "module": "commonjs",
+    "target": "es5",
+    "lib": ["es6", "dom"],
+    "sourceMap": true,
+    "allowJs": false,
+    "skipLibCheck": true,
+    "moduleResolution": "node",
+    "noFallthroughCasesInSwitch": true,
+    "noImplicitAny": true
+  }
 }
