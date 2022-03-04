@@ -60,94 +60,102 @@ export default function Home() {
     })
   }, []);
 
-  if (!users) {
-    return <p>loading...</p>
-  }
-
   return (
     <>
       <Content>
         <TableContainer>
           <Header>
-            <HeaderText>
-              Showing all users
-            </HeaderText>
+            <HeaderText>Showing all users</HeaderText>
           </Header>
           <TablePadding>
             <Table>
               <TableThead>
                 <TableRow>
-                  <TableHeader>
-                    Name
-                  </TableHeader>
-                  <TableHeader>
-                    Location
-                  </TableHeader>
-                  <TableHeader>
-                    Links
-                  </TableHeader>
+                  <TableHeader>Name</TableHeader>
+                  <TableHeader>Location</TableHeader>
+                  <TableHeader>Links</TableHeader>
                 </TableRow>
               </TableThead>
               <TableBody>
-                {users.map((user: IUser) => {
+                {users ? (
+                  users.map((user: IUser) => {
+                    const handleFollowSubmit = async () => {
+                      try {
+                        const res = await axios({
+                          method: 'post',
+                          url: `http://localhost:4000/api/user/twitterfollow?username=${user.twitter.username}`,
+                          withCredentials: true,
+                        });
+                        setTwitterFollowStatus({
+                          ...twitterFollowStatus,
+                          user: `${user.twitter.username}`,
+                          status: res.status,
+                        });
+                      } catch (err: any) {
+                        console.error(err.message);
+                      }
+                    };
 
-                  const handleFollowSubmit = async () => {
-                    try {
-                      const res = await axios({
-                        method: 'post',
-                        url: `http://localhost:4000/api/user/twitterfollow?username=${user.twitter.username}`,
-                        withCredentials: true
-                      })
-                      setTwitterFollowStatus({
-                        ...twitterFollowStatus,
-                        user: `${user.twitter.username}`,
-                        status: res.status
-                      })
-                    } catch (err: any) {
-                      console.error(err.message)
-                    }
-                  }
-
-                  return (
-                    <TableRow key={user.twitter.username} id={user.twitter.username} >
-                      <TableDataCell>
-                        <TableDataNameContainer>
-                          <TableDataImage src={`${user.gitHub.json.avatar_url}`} />
-                          <TableDataName>
-                            {user.gitHub.json.name}
-                          </TableDataName>
-                        </TableDataNameContainer>
-                      </TableDataCell>
-                      <TableDataCell>
-                        <TableDataLocation>
-                          {user.gitHub.json.location}
-                        </TableDataLocation>
-                      </TableDataCell>
-                      <TableDataCell>
-                        <TableActions>
-                          <TableLink href={`https://www.twitter.com/${user.twitter.username}`} target="blank" rel="noopener noreferrer">
-                            <TwitterIcon />
-                          </TableLink>
-                          <TableLink href={user.gitHub.json.html_url} target="blank" rel="noopener noreferrer">
-                            <GitHubIcon />
-                          </TableLink>
-                          <TableLink href={`https://discordapp.com/channels/@me/${user.discord.username}#${user.discord.discriminator}`} target="blank" rel="noopener noreferrer">
-                            <LinkedInIcon />
-                          </TableLink>
-                          {user.twitter.username === twitterFollowStatus.user && twitterFollowStatus.status === 200 ?
-                            <TableFollowed>
-                              Following
-                            </TableFollowed>
-                            :
-                            <TableFollow onClick={handleFollowSubmit}>
-                              Follow All
-                            </TableFollow>
-                          }
-                        </TableActions>
-                      </TableDataCell>
-                    </TableRow>
-                  )
-                })}
+                    return (
+                      <TableRow
+                        key={user.twitter.username}
+                        id={user.twitter.username}
+                      >
+                        <TableDataCell>
+                          <TableDataNameContainer>
+                            <TableDataImage
+                              src={`${user.gitHub.json.avatar_url}`}
+                            />
+                            <TableDataName>
+                              {user.gitHub.json.name}
+                            </TableDataName>
+                          </TableDataNameContainer>
+                        </TableDataCell>
+                        <TableDataCell>
+                          <TableDataLocation>
+                            {user.gitHub.json.location}
+                          </TableDataLocation>
+                        </TableDataCell>
+                        <TableDataCell>
+                          <TableActions>
+                            <TableLink
+                              href={`https://www.twitter.com/${user.twitter.username}`}
+                              target="blank"
+                              rel="noopener noreferrer"
+                            >
+                              <TwitterIcon />
+                            </TableLink>
+                            <TableLink
+                              href={user.gitHub.json.html_url}
+                              target="blank"
+                              rel="noopener noreferrer"
+                            >
+                              <GitHubIcon />
+                            </TableLink>
+                            <TableLink
+                              href={`https://discordapp.com/channels/@me/${user.discord.username}#${user.discord.discriminator}`}
+                              target="blank"
+                              rel="noopener noreferrer"
+                            >
+                              <LinkedInIcon />
+                            </TableLink>
+                            {user.twitter.username ===
+                              twitterFollowStatus.user &&
+                            twitterFollowStatus.status === 200 ? (
+                              <TableFollowed>Following</TableFollowed>
+                            ) : (
+                              <TableFollow onClick={handleFollowSubmit}>
+                                Follow All
+                              </TableFollow>
+                            )}
+                          </TableActions>
+                        </TableDataCell>
+                      </TableRow>
+                    );
+                  })
+                ) : (
+                  <p>loading...</p>
+                )}
               </TableBody>
             </Table>
           </TablePadding>
