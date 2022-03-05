@@ -66,9 +66,9 @@ export const UserCard: React.FC<IUser> = (user) => {
           <CardMetaFeature>
             <GitHubIcon />
           </CardMetaFeature>
-          <CardMetaFeature>
+          {/* <CardMetaFeature>
             <LinkedInIcon />
-          </CardMetaFeature>
+          </CardMetaFeature> */}
         </CardMeta>
       </CardText>
     </Card>

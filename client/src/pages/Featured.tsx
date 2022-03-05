@@ -56,11 +56,6 @@ export default function Featured() {
     return <p>loading...</p>;
   }
 
-  // const randomNumberGenerator = () => {
-  //   return Math.floor(Math.random() * user.length)
-  // }
-
-  // let randomNumber: number = randomNumberGenerator()
 
   return (
     <>

@@ -122,9 +122,9 @@ export default function Profile() {
     <>
       <Container>
         <Content>
-          <Button type="button" onClick={() => setShowModal(true)}>
+          {/* <Button type="button" onClick={() => setShowModal(true)}>
             Edit profile
-          </Button>
+          </Button> */}
           {showModal ? (
             <>
               <ModalContainer>
@@ -226,7 +226,7 @@ export default function Profile() {
                 Connect to Twitter
               </ConnectAccountButton>
             )}
-            {user.lookingForCoffeeChats ? (
+            {/* {user.lookingForCoffeeChats ? (
               <ConnectedAccountButton disabled>
                 <LinkedInIcon />
                 Connected to LinkedIn ✔
@@ -236,7 +236,7 @@ export default function Profile() {
                 <LinkedInIcon />
                 Connect to LinkedIn
               </ConnectAccountButton>
-            )}
+            )} */}
           </LoginContainer>
         </Content>
       </Container>

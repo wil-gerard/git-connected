@@ -133,20 +133,20 @@ export default function Home() {
                             >
                               <GitHubIcon />
                             </TableLink>
-                            <TableLink
+                            {/* <TableLink
                               href={`https://discordapp.com/channels/@me/${user.discord.username}#${user.discord.discriminator}`}
                               target="blank"
                               rel="noopener noreferrer"
                             >
                               <LinkedInIcon />
-                            </TableLink>
+                            </TableLink> */}
                             {user.twitter.username ===
                               twitterFollowStatus.user &&
                             twitterFollowStatus.status === 200 ? (
                               <TableFollowed>Following</TableFollowed>
                             ) : (
                               <TableFollow onClick={handleFollowSubmit}>
-                                Follow All
+                                Follow Twitter
                               </TableFollow>
                             )}
                           </TableActions>
