@@ -61,6 +61,10 @@ export default function Home() {
       });
   }, []);
 
+  users?.sort( (a: IUser, b:IUser ) => { 
+    return a.gitHub.json.name.localeCompare( b.gitHub.json.name) ;
+  })
+
   return (
     <>
       <Content>
