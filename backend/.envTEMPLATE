@@ -6,7 +6,7 @@ END_MONGODB = @clusterNumberHere.GarbledCharactersHere.mongodb.net/params?params
 
 FRONTEND_DEV_URL = http://localhost:3000
 
-BACKEND_DEV_URL = http://localhost:4000
+BACKEND_DEV_PORT = 4000
 
 PRODUCTION_URL = YourHostedURLGoesHere
 
