@@ -8,9 +8,9 @@ FRONTEND_DEV_URL = http://localhost:3000
 
 BACKEND_DEV_URL = http://localhost:4000
 
-HOSTED_URL = YourHostedURLGoesHere
+PRODUCTION_URL = YourHostedURLGoesHere
 
-AUTH_CALLBACK_URL = HerokuHostedCallbackURLGoesHere
+PRODUCTION_AUTH_CALLBACK_URL = HerokuHostedCallbackURLGoesHere
 
 SESSION_SECRET = YourSessionSecretGoesHere
 
