@@ -1,4 +1,5 @@
-![banner](https://user-images.githubusercontent.com/74286884/156848307-b77026a3-36f3-4e82-bc90-4721ddd1d996.svg)
+![github-docs-banner](https://user-images.githubusercontent.com/74286884/156865155-7af481ea-261d-40ee-83b0-64e414072a22.png)
+
 <p align="center" style="text-align: center;">
 <a href="https://lbesson.mit-license.org">
   <img alt="MIT license"
