@@ -48,18 +48,18 @@ const TableFollowed = tw.a`flex items-center justify-center rounded shadow curso
 
 export default function Home() {
 
-  const discordId = window.localStorage.getItem("discordId");
+  const id = window.localStorage.getItem("id");
 
   const [twitterFollowStatus, setTwitterFollowStatus] = useState({
     user: '',
     status: 0,
   });
 
-  const handleFollowSubmit = async (twitterUsername: string, discordId: string) => {
+  const handleFollowSubmit = async (twitterUsername: string, id: string) => {
     try {
       const res = await axios({
         method: 'post',
-        url: `http://localhost:4000/api/user/followall?username=${twitterUsername}&discordId=${discordId}`,
+        url: `http://localhost:4000/api/user/followall?username=${twitterUsername}&id=${id}`,
         withCredentials: true,
       });
 
@@ -156,15 +156,15 @@ export default function Home() {
                             </TableLink> */}
                             
                             {
-                             !discordId ? "" : 
+                             !id ? "" : 
                             user.twitter.username ===
                               twitterFollowStatus.user &&
                             twitterFollowStatus.status === 200 ? (
                               <TableFollowed>Following</TableFollowed>
                             ) : (
-                              <TableFollow onClick={ ()=> { handleFollowSubmit(user.twitter.username) } } 
+                              <TableFollow onClick={ ()=> { handleFollowSubmit(user.twitter.username, user._id) } } 
                                 style={ 
-                                  discordId === user.discord.id ?
+                                  id === user._id ?
                                   {opacity:0, pointerEvents:"none"}  :
                                   undefined
                                 }

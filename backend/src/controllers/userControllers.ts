@@ -61,7 +61,7 @@ export const userFollowAll = async (
   try {
 
     let username = req.query['username'] as string;
-    const discordId: string = req.query['discordId'];
+    const id: string = req.query['id'];
 
     const twitter = new Twitter({
       consumer_key: process.env.TWITTER_CONSUMER_KEY,

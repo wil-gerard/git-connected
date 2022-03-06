@@ -3,7 +3,7 @@ import { Request } from 'express';
 export interface IDatabaseUser {
   _id: string;
   __v: number;
-  alreadyFollowingTheseDiscordIds: any;
+  alreadyFollowingTheseIds: any;
   twitterConnected: boolean;
   gitHubConnected: boolean;
   customBio: string;
@@ -35,7 +35,7 @@ export interface IDatabaseUser {
 
 export interface IUser {
   _id: string;
-  alreadyFollowingTheseDiscordIds: any;
+  alreadyFollowingTheseIds: any;
   twitterConnected: boolean;
   gitHubConnected: boolean;
   customBio: string;
