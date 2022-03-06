@@ -30,7 +30,6 @@ export const userUpdate = async (
 };
 
 export const removeConnection = async ( req: IReqAuth, res: Response, next: NextFunction) => { 
-  console.log('received');
   const { platformName } = req.body;
   const id = req.user._id;
   const userUpdateProps: any = {};
@@ -53,6 +52,7 @@ export const removeConnection = async ( req: IReqAuth, res: Response, next: Next
     err.status = 422;
     next(err);
   })
+
 }
 
 export const userFollowAll = async (
