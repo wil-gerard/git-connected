@@ -1,0 +1,19 @@
+{
+  "name": "git-connected",
+  "version": "1.0.0",
+  "description": "![github-docs-banner](https://user-images.githubusercontent.com/74286884/156865155-7af481ea-261d-40ee-83b0-64e414072a22.png)",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/wil-gerard/git-connected.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/wil-gerard/git-connected/issues"
+  },
+  "homepage": "https://github.com/wil-gerard/git-connected#readme"
+}
