@@ -54,7 +54,11 @@ const ConnectAccountButton = styled.button`
 
 const ConnectedAccountButton = tw(
   ConnectAccountButton
-)`bg-green-800 disabled:hocus:bg-green-800 disabled:cursor-auto`;
+)`flex justify-center bg-green-800 hocus:bg-red-800 cursor-pointer`;
+
+const ConnectedAccountText = tw.p` group-hocus:hidden `
+const DisconnectAccountText = tw.p`hidden group-hocus:inline`
+
 
 const LoginContainer = tw.div`px-10 py-2 flex-col flex`;
 
@@ -229,9 +233,10 @@ export default function Profile() {
           <UserCard {...user} />
           <LoginContainer>
             {user.gitHubConnected ? (
-              <ConnectedAccountButton onClick={ ()=>{ removeConnection("gitHub") } }>
+              <ConnectedAccountButton className="group" onClick={ ()=>{ removeConnection("gitHub") } }>
                 <GitHubIcon />
-                Connected to GitHub ✔
+                <ConnectedAccountText>Connected to GitHub</ConnectedAccountText>
+                <DisconnectAccountText>Disconnect GitHub</DisconnectAccountText>
               </ConnectedAccountButton>
             ) : (
               <ConnectAccountButton onClick={gitHubConnect}>
@@ -240,9 +245,10 @@ export default function Profile() {
               </ConnectAccountButton>
             )}
             {user.twitterConnected ? (
-              <ConnectedAccountButton onClick={ ()=>{ removeConnection("twitter") } }>
+              <ConnectedAccountButton className="group" onClick={ ()=>{ removeConnection("twitter") } }>
                 <TwitterIcon />
-                Connected to Twitter ✔
+                <ConnectedAccountText>Connected to Twitter</ConnectedAccountText>
+                <DisconnectAccountText>Disconnect Twitter</DisconnectAccountText>
               </ConnectedAccountButton>
             ) : (
               <ConnectAccountButton onClick={twitterConnect}>
