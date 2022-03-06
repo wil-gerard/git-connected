@@ -53,7 +53,6 @@ export default function Home() {
   });
 
   const currentUser = useContext(myContext) as IUser;
-  // const currentUser: any = {discord:{id:"2134"}}
 
   const [users, setUsers] = useState<IUser[]>();
 
