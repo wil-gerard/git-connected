@@ -55,14 +55,17 @@ export default function Home() {
     status: 0,
   });
 
-  const handleFollowSubmit = async (twitterUsername: string, id: string) => {
+
+  const [users, setUsers] = useState<IUser[]>();
+
+  const handleFollowSubmit = async (twitterUsername: string, targetId: string) => {
     try {
       const res = await axios({
         method: 'post',
-        url: `http://localhost:4000/api/user/followall?username=${twitterUsername}&id=${id}`,
+        url: `http://localhost:4000/api/user/followall?username=${twitterUsername}&targetId=${id}`,
         withCredentials: true,
       });
-
+      console.log(res.data);
       // setTwitterFollowStatus({
       //   ...twitterFollowStatus,
       //   user: `${twitterUsername}`,
@@ -72,8 +75,6 @@ export default function Home() {
       console.error(err.message);
     }
   };
-
-  const [users, setUsers] = useState<IUser[]>();
 
   useEffect(() => {
     axios

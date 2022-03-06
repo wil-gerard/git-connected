@@ -61,7 +61,8 @@ export const userFollowAll = async (
   try {
 
     let username = req.query['username'] as string;
-    // const id: string = req.query['id'];
+    const targetId = req.query['targetId'] as string;
+    const sourceId = req.user._id;
 
     const twitter = new Twitter({
       consumer_key: process.env.TWITTER_CONSUMER_KEY,
@@ -75,11 +76,28 @@ export const userFollowAll = async (
     });
 
     const options = defaultOptions;
-    const userUpdateProps = {
-      
-    }
 
-    res.json(doTwitterFollow.resp.statusCode);
+    let allFollowedIds: any = { };
+    if (req.user.alreadyFollowingTheseIds) { 
+      allFollowedIds = { 
+        ... req.user.alreadyFollowingTheseIds
+      }
+    }
+    allFollowedIds[targetId] = true;
+
+    const userUpdateProps = { 
+      alreadyFollowingTheseIds : allFollowedIds
+    }
+    console.log(userUpdateProps, sourceId, targetId);
+    await User.findByIdAndUpdate(sourceId, userUpdateProps, options, (err, doc) => { 
+      if (!err) { 
+        console.log('no error i guess ?')
+        res.status(200).send(doc);
+      }
+    }).clone().catch( err => { 
+      err.status = 422;
+      next(err);
+    })
   } catch (err) {
     next(err);
   }
