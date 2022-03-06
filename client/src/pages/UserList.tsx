@@ -53,8 +53,10 @@ export default function Home() {
   });
 
   const currentUser = useContext(myContext) as IUser;
+  // const currentUser: any = {discord:{id:"2134"}}
 
   const [users, setUsers] = useState<IUser[]>();
+
   useEffect(() => {
     axios
       .get('http://localhost:4000/api/user/getallusers')
@@ -149,15 +151,18 @@ export default function Home() {
                             </TableLink> */}
                             
                             {
-                            currentUser.discord.id === user.discord.id ?
-                              ""
-                            :
                             user.twitter.username ===
                               twitterFollowStatus.user &&
                             twitterFollowStatus.status === 200 ? (
                               <TableFollowed>Following</TableFollowed>
                             ) : (
-                              <TableFollow onClick={handleFollowSubmit}>
+                              <TableFollow onClick={handleFollowSubmit} 
+                                style={ 
+                                  currentUser.discord.id === user.discord.id ?
+                                  {opacity:0, pointerEvents:"none"}  :
+                                  undefined
+                                }
+                              >
                                 Follow Twitter
                               </TableFollow>
                             )}
