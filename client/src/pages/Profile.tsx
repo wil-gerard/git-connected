@@ -108,7 +108,9 @@ export default function Profile() {
         responseType: 'json',
       }).then((res) => {
         if (res) {
-          console.log(res);
+          console.log(res.data);
+          window.open("/profile","_self") 
+          // more elegant way to do this?? - aim is to refresh page/button so it's clear that it's now disconnected
         }
       });
     } catch (err: any) {
@@ -251,6 +253,12 @@ export default function Profile() {
               <ConnectAccountButton onClick={ ()=>{ removeConnection("twitter") } }>
               <TwitterIcon />
               🚫Disconnect Twitter
+              </ConnectAccountButton>
+            }
+            { 
+              <ConnectAccountButton onClick={ ()=>{ removeConnection("gitHub") } }>
+              <GitHubIcon />
+              🚫Disconnect GitHub
               </ConnectAccountButton>
             }
             {/* {user.lookingForCoffeeChats ? (

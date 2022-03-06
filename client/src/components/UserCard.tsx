@@ -31,7 +31,7 @@ const CardMeta = styled.div`
 const CardMetaFeature = styled.a`
   ${tw`flex items-center mt-4 mr-4 last:mr-0`}
   svg {
-    ${tw`w-6 h-6 mr-1 rounded shadow bg-secondary-600 text-secondary-100  hocus:text-primary-600 transition duration-300`}
+    ${tw`w-6 h-6 mr-1 mb-2 rounded shadow bg-secondary-600 text-secondary-100  hocus:text-primary-600 transition duration-300`}
   }
 `;
 
@@ -60,12 +60,17 @@ export const UserCard: React.FC<IUser> = (user) => {
         </CardHeader>
         <CardBio>{user.gitHubConnected ? user.gitHub.json.bio : null}</CardBio>
         <CardMeta>
-          <CardMetaFeature href={"https://www.twitter.com/" + user.gitHub.json.twitter_username} target="_blank">
-            <TwitterIcon />
-          </CardMetaFeature>
-          <CardMetaFeature href={user.gitHub.json.html_url} target="_blank">
-            <GitHubIcon />
-          </CardMetaFeature>
+          {user.gitHub && user.gitHub.json && 
+            <CardMetaFeature href={ "https://www.twitter.com/" + user.gitHub.json?.twitter_username} target="_blank"> 
+              <TwitterIcon />
+            </CardMetaFeature>
+          }
+          {user.gitHub && user.gitHub.json &&
+            <CardMetaFeature href={user.gitHub.json.html_url} target="_blank">
+              <GitHubIcon />
+            </CardMetaFeature>
+          }
+          {user.gitHub && user.twitter ? "" : <div>{"Connect Github & Twitter to be listed"}</div> }
           {/* <CardMetaFeature>
             <LinkedInIcon />
           </CardMetaFeature> */}
