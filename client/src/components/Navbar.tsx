@@ -66,6 +66,7 @@ export default function Navbar() {
       })
       .then((res: AxiosResponse) => {
         if (res.data.message === 'Logout succesful') {
+          window.localStorage.removeItem('discordId')
           window.location.href = '/';
         }
       });

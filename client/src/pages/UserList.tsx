@@ -4,8 +4,9 @@ import { css } from 'styled-components/macro'; //eslint-disable-line
 import { ReactComponent as TwitterIcon } from '../assets/twitter-icon.svg';
 import { ReactComponent as GitHubIcon } from '../assets/github-icon.svg';
 import { ReactComponent as LinkedInIcon } from '../assets/linkedin-icon.svg';
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState,  useContext } from 'react';
 import { IUser } from '../interface';
+import { myContext } from '../hooks/Context';
 
 const Content = tw.div`flex flex-col justify-center px-6 text-gray-100`;
 
@@ -46,12 +47,16 @@ const TableFollow = tw.a`flex items-center rounded shadow cursor-pointer bg-seco
 const TableFollowed = tw.a`flex items-center justify-center rounded shadow cursor-default bg-green-600 transition duration-300  ml-1 py-0.5 px-2`;
 
 export default function Home() {
+
+  const discordId = window.localStorage.getItem("discordId");
+
   const [twitterFollowStatus, setTwitterFollowStatus] = useState({
     user: '',
     status: 0,
   });
 
   const [users, setUsers] = useState<IUser[]>();
+
   useEffect(() => {
     axios
       .get('http://localhost:4000/api/user/getallusers')
@@ -60,6 +65,10 @@ export default function Home() {
         setUsers(res.data);
       });
   }, []);
+
+  users?.sort( (a: IUser, b:IUser ) => { 
+    return a.gitHub.json.name.localeCompare( b.gitHub.json.name) ;
+  })
 
   return (
     <>
@@ -133,20 +142,29 @@ export default function Home() {
                             >
                               <GitHubIcon />
                             </TableLink>
-                            <TableLink
+                            {/* <TableLink
                               href={`https://discordapp.com/channels/@me/${user.discord.username}#${user.discord.discriminator}`}
                               target="blank"
                               rel="noopener noreferrer"
                             >
                               <LinkedInIcon />
-                            </TableLink>
-                            {user.twitter.username ===
+                            </TableLink> */}
+                            
+                            {
+                             !discordId ? "" : 
+                            user.twitter.username ===
                               twitterFollowStatus.user &&
                             twitterFollowStatus.status === 200 ? (
                               <TableFollowed>Following</TableFollowed>
                             ) : (
-                              <TableFollow onClick={handleFollowSubmit}>
-                                Follow All
+                              <TableFollow onClick={handleFollowSubmit} 
+                                style={ 
+                                  discordId === user.discord.id ?
+                                  {opacity:0, pointerEvents:"none"}  :
+                                  undefined
+                                }
+                              >
+                                Follow Twitter
                               </TableFollow>
                             )}
                           </TableActions>
@@ -155,7 +173,11 @@ export default function Home() {
                     );
                   })
                 ) : (
-                  <p>loading...</p>
+                  <TableRow>
+                    <TableDataCell>
+                    <p>loading...</p>
+                   </TableDataCell>
+                  </TableRow>
                 )}
               </TableBody>
             </Table>

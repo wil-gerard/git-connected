@@ -11,7 +11,7 @@ import React, { useEffect, useState, useContext } from 'react';
 import { IUser } from '../interface';
 
 const Container = tw.div`flex flex-col px-6 text-gray-100`;
-const Content = tw.div`flex-row flex max-w-screen-xl mx-auto py-2 lg:py-24`;
+const Content = tw.div`flex-row flex max-w-screen-xl mx-auto py-2`;
 
 const Card = tw.div`mx-auto xl:mx-0 xl:ml-auto max-w-sm md:max-w-xs lg:max-w-sm xl:max-w-xs`;
 const CardImageContainer = styled.div`
@@ -38,12 +38,12 @@ const CardMetaFeature = styled.a`
   }
 `;
 
-const Header = tw.h1`flex flex-col items-center text-5xl font-bold`;
+const Header = tw.h1`flex flex-col items-center text-5xl font-bold mb-0`;
 
 export default function Featured() {
   const ctx = useContext(myContext);
 
-  const [user, setUsers] = useState<IUser[]>();
+  const [users, setUsers] = useState<IUser[]>();
   useEffect(() => {
     Axios.get('http://localhost:4000/api/user/getallusers').then(
       (res: AxiosResponse) => {
@@ -52,48 +52,42 @@ export default function Featured() {
     );
   }, [ctx]);
 
-  if (!user) {
-    return <p>loading...</p>;
+  if (!users) {
+    return <p>Loading...</p>;
   }
 
-  // const randomNumberGenerator = () => {
-  //   return Math.floor(Math.random() * user.length)
-  // }
-
-  // let randomNumber: number = randomNumberGenerator()
+  const randomIndex = Math.floor( Math.random() * users.length ) ;
+  const randomUser = users[randomIndex];
 
   return (
     <>
       <Container>
         <Header>Git to Know...</Header>
         <Content>
-          {user.map((user: IUser, index, array) => {
-            return (
-              <Card key={user.gitHub.id}>
+              <Card key={randomUser.gitHub.id}>
                 <CardImageContainer>
-                  <CardImage src={user.gitHub.json.avatar_url} />
+                  <CardImage src={randomUser.gitHub.json.avatar_url} />
                 </CardImageContainer>
                 <CardText>
                   <CardHeader>
-                    <CardName>{user.gitHub.json.name}</CardName>
-                    <CardLocation>{user.gitHub.json.location}</CardLocation>
+                    <CardName>{randomUser.gitHub.json.name}</CardName>
+                    <CardLocation>{randomUser.gitHub.json.location}</CardLocation>
                   </CardHeader>
-                  <CardBio>{user.gitHub.json.bio}</CardBio>
+                  <CardBio>{randomUser.gitHub.json.bio}</CardBio>
                   <CardMeta>
-                    <CardMetaFeature href={user.gitHub.json.twitter_username}>
+                    <CardMetaFeature href={"https://www.twitter.com/" + randomUser.gitHub.json.twitter_username} target="_blank">
                       <TwitterIcon />
                     </CardMetaFeature>
-                    <CardMetaFeature>
+                    <CardMetaFeature href={randomUser.gitHub.json.html_url} target="_blank">
                       <GitHubIcon />
                     </CardMetaFeature>
-                    <CardMetaFeature>
+                    {/* <CardMetaFeature>
                       <LinkedInIcon />
-                    </CardMetaFeature>
+                    </CardMetaFeature> */}
                   </CardMeta>
                 </CardText>
               </Card>
-            );
-          })}
+            
         </Content>
       </Container>
     </>

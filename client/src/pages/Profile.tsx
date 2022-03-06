@@ -46,7 +46,7 @@ const FormSubmitButton = tw.button`bg-green-600 text-white hover:bg-green-800 fo
 const BgOpacity = tw.div`opacity-25 fixed inset-0 z-40 bg-black`;
 
 const ConnectAccountButton = styled.button`
-  ${tw`cursor-pointer py-2 pl-2 pr-8 rounded-full bg-primary-600 text-gray-100 hocus:bg-primary-800 transition duration-300 m-2 text-sm flex justify-start items-center`}
+  ${tw`cursor-pointer flex justify-center w-64 py-2 pl-2 pr-8 rounded-full bg-primary-600 text-gray-100 hocus:bg-primary-800 transition duration-300 m-2 text-sm flex justify-start items-center`}
   svg {
     ${tw`w-8 h-8 mx-2`}
   }
@@ -54,7 +54,11 @@ const ConnectAccountButton = styled.button`
 
 const ConnectedAccountButton = tw(
   ConnectAccountButton
-)`bg-green-800 disabled:hocus:bg-green-800 disabled:cursor-auto`;
+)`bg-green-800 hocus:bg-red-800 cursor-pointer`;
+
+const ConnectedAccountText = tw.p` group-hocus:hidden `
+const DisconnectAccountText = tw.p`hidden group-hocus:inline`
+
 
 const LoginContainer = tw.div`px-10 py-2 flex-col flex`;
 
@@ -87,17 +91,41 @@ export default function Profile() {
     openToCoffeeChats,
   } = formData;
 
+  
+
   const handleInputChange = (e: any) =>
     setFormData({
       ...formData,
       [e.target.name]:
         e.target.type === 'checkbox' ? e.target.checked : e.target.value,
-    });
+  });
+
+
+  
+  const removeConnection = async (platformName: string) => { 
+    try { 
+      axios({
+        method: 'put',
+        url: `http://localhost:4000/api/user/removeConnection`,
+        data: {platformName},
+        withCredentials: true,
+        responseType: 'json',
+      }).then((res) => {
+        if (res) {
+          console.log(res.data);
+          window.open("/profile","_self") 
+          // more elegant way to do this?? - aim is to refresh page/button so it's clear that it's now disconnected
+        }
+      });
+    } catch (err: any) {
+      console.error(err);
+    }
+  }
 
   const handleProfileFormSubmit = async () => {
     setShowModal(false);
 
-    try {
+    try { 
       axios({
         method: 'put',
         url: 'http://localhost:4000/api/user/update',
@@ -122,9 +150,9 @@ export default function Profile() {
     <>
       <Container>
         <Content>
-          <Button type="button" onClick={() => setShowModal(true)}>
+          {/* <Button type="button" onClick={() => setShowModal(true)}>
             Edit profile
-          </Button>
+          </Button> */}
           {showModal ? (
             <>
               <ModalContainer>
@@ -205,9 +233,10 @@ export default function Profile() {
           <UserCard {...user} />
           <LoginContainer>
             {user.gitHubConnected ? (
-              <ConnectedAccountButton disabled>
+              <ConnectedAccountButton className="group" onClick={ ()=>{ removeConnection("gitHub") } }>
                 <GitHubIcon />
-                Connected to GitHub ✔
+                <ConnectedAccountText>Connected to GitHub</ConnectedAccountText>
+                <DisconnectAccountText>Disconnect GitHub</DisconnectAccountText>
               </ConnectedAccountButton>
             ) : (
               <ConnectAccountButton onClick={gitHubConnect}>
@@ -216,17 +245,18 @@ export default function Profile() {
               </ConnectAccountButton>
             )}
             {user.twitterConnected ? (
-              <ConnectedAccountButton disabled>
+              <ConnectedAccountButton className="group" onClick={ ()=>{ removeConnection("twitter") } }>
                 <TwitterIcon />
-                Connected to Twitter ✔
+                <ConnectedAccountText>Connected to Twitter</ConnectedAccountText>
+                <DisconnectAccountText>Disconnect Twitter</DisconnectAccountText>
               </ConnectedAccountButton>
             ) : (
               <ConnectAccountButton onClick={twitterConnect}>
                 <TwitterIcon />
                 Connect to Twitter
               </ConnectAccountButton>
-            )}
-            {user.lookingForCoffeeChats ? (
+            )} 
+            {/* {user.lookingForCoffeeChats ? (
               <ConnectedAccountButton disabled>
                 <LinkedInIcon />
                 Connected to LinkedIn ✔
@@ -236,7 +266,7 @@ export default function Profile() {
                 <LinkedInIcon />
                 Connect to LinkedIn
               </ConnectAccountButton>
-            )}
+            )} */}
           </LoginContainer>
         </Content>
       </Container>
