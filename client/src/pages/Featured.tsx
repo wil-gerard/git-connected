@@ -43,7 +43,7 @@ const Header = tw.h1`flex flex-col items-center text-5xl font-bold`;
 export default function Featured() {
   const ctx = useContext(myContext);
 
-  const [user, setUsers] = useState<IUser[]>();
+  const [users, setUsers] = useState<IUser[]>();
   useEffect(() => {
     Axios.get('http://localhost:4000/api/user/getallusers').then(
       (res: AxiosResponse) => {
@@ -52,43 +52,42 @@ export default function Featured() {
     );
   }, [ctx]);
 
-  if (!user) {
+  if (!users) {
     return <p>loading...</p>;
   }
 
+  const randomIndex = Math.floor( Math.random() * users.length ) ;
+  const randomUser = users[randomIndex];
 
   return (
     <>
       <Container>
         <Header>Git to Know...</Header>
         <Content>
-          {user.map((user: IUser, index, array) => {
-            return (
-              <Card key={user.gitHub.id}>
+              <Card key={randomUser.gitHub.id}>
                 <CardImageContainer>
-                  <CardImage src={user.gitHub.json.avatar_url} />
+                  <CardImage src={randomUser.gitHub.json.avatar_url} />
                 </CardImageContainer>
                 <CardText>
                   <CardHeader>
-                    <CardName>{user.gitHub.json.name}</CardName>
-                    <CardLocation>{user.gitHub.json.location}</CardLocation>
+                    <CardName>{randomUser.gitHub.json.name}</CardName>
+                    <CardLocation>{randomUser.gitHub.json.location}</CardLocation>
                   </CardHeader>
-                  <CardBio>{user.gitHub.json.bio}</CardBio>
+                  <CardBio>{randomUser.gitHub.json.bio}</CardBio>
                   <CardMeta>
-                    <CardMetaFeature href={user.gitHub.json.twitter_username}>
+                    <CardMetaFeature href={"https://www.twitter.com/" + randomUser.gitHub.json.twitter_username} target="_blank">
                       <TwitterIcon />
                     </CardMetaFeature>
-                    <CardMetaFeature>
+                    <CardMetaFeature href={randomUser.gitHub.json.html_url} target="_blank">
                       <GitHubIcon />
                     </CardMetaFeature>
-                    <CardMetaFeature>
+                    {/* <CardMetaFeature>
                       <LinkedInIcon />
-                    </CardMetaFeature>
+                    </CardMetaFeature> */}
                   </CardMeta>
                 </CardText>
               </Card>
             );
-          })}
         </Content>
       </Container>
     </>
