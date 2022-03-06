@@ -94,7 +94,6 @@ These instructions will get a copy of the project on your local machine for deve
 ### Prerequisites
 
 * Node v16 or higher
-* [Yarn](https://yarnpkg.com/)
 
 ### Installing
 * Clone repo

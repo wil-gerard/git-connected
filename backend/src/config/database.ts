@@ -1,6 +1,6 @@
 import mongoose from 'mongoose';
 
-const URI = `${process.env.START_MONGODB}${process.env.MONGODB_USERNAME}:${process.env.MONGODB_PASSWORD}${process.env.END_MONGODB}`;
+const URI = `${process.env.MONGODB_URI_START}${process.env.MONGODB_USERNAME}:${process.env.MONGODB_PASSWORD}${process.env.MONGODB_URI_END}`;
 
 mongoose.connect(`${URI}`, (err) => {
   if (err) throw err;
