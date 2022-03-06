@@ -3,6 +3,12 @@ import { Request, Response, NextFunction } from 'express';
 import { IReqAuth, IUserUpdateForm } from '../config/interface';
 import Twitter from 'twit';
 
+const defaultOptions =  {
+  new: true,
+  runValidators: true,
+  context: 'query',
+};
+
 export const userUpdate = async (
   req: IReqAuth,
   res: Response,
@@ -11,11 +17,7 @@ export const userUpdate = async (
   const { ...userUpdateProps }: IUserUpdateForm = req.body;
   const id = req.user._id;
   const update = { ...userUpdateProps };
-  const options = {
-    new: true,
-    runValidators: true,
-    context: 'query',
-  };
+  const options = defaultOptions
 
   await User.findByIdAndUpdate(id, update, options, (err, doc) => {
     if (!err) {
@@ -38,12 +40,8 @@ export const removeConnection = async ( req: IReqAuth, res: Response, next: Next
   userUpdateProps[`${platformName}`] = {};
   if (platformName === "twitter") { userUpdateProps.twitterTokenSecret = ""; };
 
-  const options = {
-    new: true,
-    runValidators: true,
-    context: 'query',
-  };
-   
+  const options = defaultOptions;
+
   await User.findByIdAndUpdate(id, userUpdateProps, options, (err, doc) => { 
     if (!err) { 
       res.status(200).send(doc);
@@ -63,6 +61,7 @@ export const userFollowAll = async (
   try {
 
     let username = req.query['username'] as string;
+    const discordId: string = req.query['discordId'];
 
     const twitter = new Twitter({
       consumer_key: process.env.TWITTER_CONSUMER_KEY,
@@ -74,6 +73,9 @@ export const userFollowAll = async (
     const doTwitterFollow = await twitter.post('friendships/create', {
       screen_name: username,
     });
+
+    const options = defaultOptions;
+    
 
     res.json(doTwitterFollow.resp.statusCode);
   } catch (err) {

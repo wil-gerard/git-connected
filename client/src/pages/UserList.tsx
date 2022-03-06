@@ -54,18 +54,20 @@ export default function Home() {
     user: '',
     status: 0,
   });
-  const handleFollowSubmit = async (twitterUsername: string) => {
+
+  const handleFollowSubmit = async (twitterUsername: string, discordId: string) => {
     try {
       const res = await axios({
         method: 'post',
-        url: `http://localhost:4000/api/user/followall?username=${twitterUsername}`,
+        url: `http://localhost:4000/api/user/followall?username=${twitterUsername}&discordId=${discordId}`,
         withCredentials: true,
       });
-      setTwitterFollowStatus({
-        ...twitterFollowStatus,
-        user: `${twitterUsername}`,
-        status: res.status,
-      });
+
+      // setTwitterFollowStatus({
+      //   ...twitterFollowStatus,
+      //   user: `${twitterUsername}`,
+      //   status: res.status,
+      // });
     } catch (err: any) {
       console.error(err.message);
     }
