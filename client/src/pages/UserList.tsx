@@ -54,6 +54,22 @@ export default function Home() {
     user: '',
     status: 0,
   });
+  const handleFollowSubmit = async (twitterUsername: string) => {
+    try {
+      const res = await axios({
+        method: 'post',
+        url: `http://localhost:4000/api/user/followall?username=${twitterUsername}`,
+        withCredentials: true,
+      });
+      setTwitterFollowStatus({
+        ...twitterFollowStatus,
+        user: `${twitterUsername}`,
+        status: res.status,
+      });
+    } catch (err: any) {
+      console.error(err.message);
+    }
+  };
 
   const [users, setUsers] = useState<IUser[]>();
 
@@ -68,7 +84,9 @@ export default function Home() {
 
   users?.sort( (a: IUser, b:IUser ) => { 
     return a.gitHub.json.name.localeCompare( b.gitHub.json.name) ;
-  })
+  });
+
+
 
   return (
     <>
@@ -89,22 +107,7 @@ export default function Home() {
               <TableBody>
                 {users ? (
                   users.map((user: IUser) => {
-                    const handleFollowSubmit = async () => {
-                      try {
-                        const res = await axios({
-                          method: 'post',
-                          url: `http://localhost:4000/api/user/followall?username=${user.twitter.username}`,
-                          withCredentials: true,
-                        });
-                        setTwitterFollowStatus({
-                          ...twitterFollowStatus,
-                          user: `${user.twitter.username}`,
-                          status: res.status,
-                        });
-                      } catch (err: any) {
-                        console.error(err.message);
-                      }
-                    };
+
 
                     return (
                       <TableRow
@@ -157,7 +160,7 @@ export default function Home() {
                             twitterFollowStatus.status === 200 ? (
                               <TableFollowed>Following</TableFollowed>
                             ) : (
-                              <TableFollow onClick={handleFollowSubmit} 
+                              <TableFollow onClick={ ()=> { handleFollowSubmit(user.twitter.username) } } 
                                 style={ 
                                   discordId === user.discord.id ?
                                   {opacity:0, pointerEvents:"none"}  :
