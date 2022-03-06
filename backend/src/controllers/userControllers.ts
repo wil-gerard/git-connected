@@ -61,7 +61,7 @@ export const userFollowAll = async (
   try {
 
     let username = req.query['username'] as string;
-    const id: string = req.query['id'];
+    // const id: string = req.query['id'];
 
     const twitter = new Twitter({
       consumer_key: process.env.TWITTER_CONSUMER_KEY,
@@ -75,7 +75,9 @@ export const userFollowAll = async (
     });
 
     const options = defaultOptions;
-    
+    const userUpdateProps = {
+      
+    }
 
     res.json(doTwitterFollow.resp.statusCode);
   } catch (err) {
