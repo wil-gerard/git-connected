@@ -61,7 +61,6 @@ export const userFollowAll = async (
   next: NextFunction
 ) => {
   try {
-    console.log(`User is about to follow '${req.query['username']}'`);
 
     let username = req.query['username'] as string;
 
@@ -96,7 +95,6 @@ export const getUser = async (
 
 
 export const getAllUsers = async (req: Request, res: Response, next: NextFunction) => {
-  console.log('get all users')
   try {
     const users = await User.find(
       { gitHubConnected: true, twitterConnected: true },
