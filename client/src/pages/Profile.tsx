@@ -229,7 +229,7 @@ export default function Profile() {
           <UserCard {...user} />
           <LoginContainer>
             {user.gitHubConnected ? (
-              <ConnectedAccountButton disabled>
+              <ConnectedAccountButton onClick={ ()=>{ removeConnection("gitHub") } }>
                 <GitHubIcon />
                 Connected to GitHub ✔
               </ConnectedAccountButton>
@@ -240,7 +240,7 @@ export default function Profile() {
               </ConnectAccountButton>
             )}
             {user.twitterConnected ? (
-              <ConnectedAccountButton disabled>
+              <ConnectedAccountButton onClick={ ()=>{ removeConnection("twitter") } }>
                 <TwitterIcon />
                 Connected to Twitter ✔
               </ConnectedAccountButton>
@@ -249,18 +249,7 @@ export default function Profile() {
                 <TwitterIcon />
                 Connect to Twitter
               </ConnectAccountButton>
-            )} { 
-              <ConnectAccountButton onClick={ ()=>{ removeConnection("twitter") } }>
-              <TwitterIcon />
-              🚫Disconnect Twitter
-              </ConnectAccountButton>
-            }
-            { 
-              <ConnectAccountButton onClick={ ()=>{ removeConnection("gitHub") } }>
-              <GitHubIcon />
-              🚫Disconnect GitHub
-              </ConnectAccountButton>
-            }
+            )} 
             {/* {user.lookingForCoffeeChats ? (
               <ConnectedAccountButton disabled>
                 <LinkedInIcon />
