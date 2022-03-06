@@ -30,13 +30,14 @@ app.use(
   })
 );
 app.set('trust proxy', 1);
+const URI = `${process.env.MONGODB_URI_START}${process.env.MONGODB_USERNAME}:${process.env.MONGODB_PASSWORD}${process.env.MONGODB_URI_END}`;
 app.use(
   session({
     secret: process.env.SESSION_SECRET,
     resave: false,
     saveUninitialized: false,
     store: mongoStore.create({
-      mongoUrl: `${process.env.START_MONGODB}${process.env.MONGODB_USERNAME}:${process.env.MONGODB_PASSWORD}${process.env.END_MONGODB}`,
+      mongoUrl: `${URI}`,
     }),
   })
 );

@@ -1,8 +1,8 @@
 (this is a sample to demonstrate the proper .env variables and structure)
-START_MONGODB = mongodb+srv://
+MONGODB_URI_START = mongodb+srv://
 MONGODB_USERNAME = UsernameGoesHere
 MONGODB_PASSWORD = PasswordGoesHere
-END_MONGODB = @clusterNumberHere.GarbledCharactersHere.mongodb.net/params?paramsGoHere=values
+MONGODB_URI_END = @clusterNumberHere.GarbledCharactersHere.mongodb.net/development-database?paramsGoHere=values
 
 FRONTEND_DEV_URL = http://localhost:3000
 
