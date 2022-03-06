@@ -11,7 +11,7 @@ import React, { useEffect, useState, useContext } from 'react';
 import { IUser } from '../interface';
 
 const Container = tw.div`flex flex-col px-6 text-gray-100`;
-const Content = tw.div`flex-row flex max-w-screen-xl mx-auto py-2 lg:py-24`;
+const Content = tw.div`flex-row flex max-w-screen-xl mx-auto py-2`;
 
 const Card = tw.div`mx-auto xl:mx-0 xl:ml-auto max-w-sm md:max-w-xs lg:max-w-sm xl:max-w-xs`;
 const CardImageContainer = styled.div`
@@ -38,7 +38,7 @@ const CardMetaFeature = styled.a`
   }
 `;
 
-const Header = tw.h1`flex flex-col items-center text-5xl font-bold`;
+const Header = tw.h1`flex flex-col items-center text-5xl font-bold mb-0`;
 
 export default function Featured() {
   const ctx = useContext(myContext);
@@ -87,7 +87,7 @@ export default function Featured() {
                   </CardMeta>
                 </CardText>
               </Card>
-            );
+            
         </Content>
       </Container>
     </>
