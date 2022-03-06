@@ -47,12 +47,13 @@ const TableFollow = tw.a`flex items-center rounded shadow cursor-pointer bg-seco
 const TableFollowed = tw.a`flex items-center justify-center rounded shadow cursor-default bg-green-600 transition duration-300  ml-1 py-0.5 px-2`;
 
 export default function Home() {
+
+  const discordId = window.localStorage.getItem("discordId");
+
   const [twitterFollowStatus, setTwitterFollowStatus] = useState({
     user: '',
     status: 0,
   });
-
-  //const currentUser = useContext(myContext) as IUser;
 
   const [users, setUsers] = useState<IUser[]>();
 
@@ -157,8 +158,8 @@ export default function Home() {
                             ) : (
                               <TableFollow onClick={handleFollowSubmit} 
                                 style={ 
-                                  // currentUser.discord.id === user.discord.id ?
-                                  // {opacity:0, pointerEvents:"none"}  :
+                                  discordId === user.discord.id ?
+                                  {opacity:0, pointerEvents:"none"}  :
                                   undefined
                                 }
                               >
@@ -171,7 +172,11 @@ export default function Home() {
                     );
                   })
                 ) : (
-                  <p>loading...</p>
+                  <TableRow>
+                    <TableDataCell>
+                    <p>loading...</p>
+                   </TableDataCell>
+                  </TableRow>
                 )}
               </TableBody>
             </Table>
