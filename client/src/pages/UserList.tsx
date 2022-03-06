@@ -52,7 +52,7 @@ export default function Home() {
     status: 0,
   });
 
-  const currentUser = useContext(myContext) as IUser;
+  //const currentUser = useContext(myContext) as IUser;
 
   const [users, setUsers] = useState<IUser[]>();
 
@@ -157,8 +157,8 @@ export default function Home() {
                             ) : (
                               <TableFollow onClick={handleFollowSubmit} 
                                 style={ 
-                                  currentUser.discord.id === user.discord.id ?
-                                  {opacity:0, pointerEvents:"none"}  :
+                                  // currentUser.discord.id === user.discord.id ?
+                                  // {opacity:0, pointerEvents:"none"}  :
                                   undefined
                                 }
                               >
