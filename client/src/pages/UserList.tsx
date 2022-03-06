@@ -151,6 +151,7 @@ export default function Home() {
                             </TableLink> */}
                             
                             {
+                             !discordId ? "" : 
                             user.twitter.username ===
                               twitterFollowStatus.user &&
                             twitterFollowStatus.status === 200 ? (
