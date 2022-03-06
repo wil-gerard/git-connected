@@ -53,7 +53,7 @@ export default function Featured() {
   }, [ctx]);
 
   if (!users) {
-    return <p>loading...</p>;
+    return <p>Loading...</p>;
   }
 
   const randomIndex = Math.floor( Math.random() * users.length ) ;
