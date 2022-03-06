@@ -1,4 +1,5 @@
 export interface IUser {
+  _id: string;
   twitterConnected: boolean;
   gitHubConnected: boolean;
   customBio: string;

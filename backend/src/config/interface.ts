@@ -34,6 +34,7 @@ export interface IDatabaseUser {
 }
 
 export interface IUser {
+  _id: string;
   alreadyFollowingTheseDiscordIds: any;
   twitterConnected: boolean;
   gitHubConnected: boolean;
