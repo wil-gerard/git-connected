@@ -1,10 +1,12 @@
 import express from 'express';
 import auth from '../middleware/auth';
-import { userUpdate, userFollowAll, getUser, getAllUsers } from '../controllers/userControllers'
+import { userUpdate, userFollowAll, getUser, getAllUsers, removeConnection } from '../controllers/userControllers'
 
 const router = express.Router();
 
 router.put('/user/update', auth, userUpdate);
+
+router.put('/user/removeConnection', auth, removeConnection);
 
 router.post('/user/followall', auth, userFollowAll);
 

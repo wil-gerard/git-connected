@@ -9,7 +9,7 @@ export const userUpdate = async (
   next: NextFunction
 ) => {
   const { ...userUpdateProps }: IUserUpdateForm = req.body;
-  const query = req.user._id;
+  const id = req.user._id;
   const update = { ...userUpdateProps };
   const options = {
     new: true,
@@ -17,7 +17,7 @@ export const userUpdate = async (
     context: 'query',
   };
 
-  await User.findByIdAndUpdate(query, update, options, (err, doc) => {
+  await User.findByIdAndUpdate(id, update, options, (err, doc) => {
     if (!err) {
       res.status(200).send(doc);
     }
@@ -28,6 +28,32 @@ export const userUpdate = async (
       next(err);
     });
 };
+
+export const removeConnection = async ( req: IReqAuth, res: Response, next: NextFunction) => { 
+  console.log('received');
+  const { platformName } = req.body;
+  const id = req.user._id;
+  const userUpdateProps: any = {};
+  userUpdateProps[`${platformName}Connected`] = false;
+  userUpdateProps[`${platformName}Token`] = "";
+  userUpdateProps[`${platformName}`] = {};
+  if (platformName === "twitter") { userUpdateProps.twitterTokenSecret = ""; };
+
+  const options = {
+    new: true,
+    runValidators: true,
+    context: 'query',
+  };
+   
+  await User.findByIdAndUpdate(id, userUpdateProps, options, (err, doc) => { 
+    if (!err) { 
+      res.status(200).send(doc);
+    }
+  }).clone().catch( err => { 
+    err.status = 422;
+    next(err);
+  })
+}
 
 export const userFollowAll = async (
   req: IReqAuth,
@@ -68,7 +94,9 @@ export const getUser = async (
   }
 };
 
+
 export const getAllUsers = async (req: Request, res: Response, next: NextFunction) => {
+  console.log('get all users')
   try {
     const users = await User.find(
       { gitHubConnected: true, twitterConnected: true },

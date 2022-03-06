@@ -87,17 +87,39 @@ export default function Profile() {
     openToCoffeeChats,
   } = formData;
 
+  
+
   const handleInputChange = (e: any) =>
     setFormData({
       ...formData,
       [e.target.name]:
         e.target.type === 'checkbox' ? e.target.checked : e.target.value,
-    });
+  });
+
+
+  
+  const removeConnection = async (platformName: string) => { 
+    try { 
+      axios({
+        method: 'put',
+        url: `http://localhost:4000/api/user/removeConnection`,
+        data: {platformName},
+        withCredentials: true,
+        responseType: 'json',
+      }).then((res) => {
+        if (res) {
+          console.log(res);
+        }
+      });
+    } catch (err: any) {
+      console.error(err);
+    }
+  }
 
   const handleProfileFormSubmit = async () => {
     setShowModal(false);
 
-    try {
+    try { 
       axios({
         method: 'put',
         url: 'http://localhost:4000/api/user/update',
@@ -122,9 +144,9 @@ export default function Profile() {
     <>
       <Container>
         <Content>
-          {/* <Button type="button" onClick={() => setShowModal(true)}>
+          <Button type="button" onClick={() => setShowModal(true)}>
             Edit profile
-          </Button> */}
+          </Button>
           {showModal ? (
             <>
               <ModalContainer>
@@ -225,7 +247,12 @@ export default function Profile() {
                 <TwitterIcon />
                 Connect to Twitter
               </ConnectAccountButton>
-            )}
+            )} { 
+              <ConnectAccountButton onClick={ ()=>{ removeConnection("twitter") } }>
+              <TwitterIcon />
+              🚫Disconnect Twitter
+              </ConnectAccountButton>
+            }
             {/* {user.lookingForCoffeeChats ? (
               <ConnectedAccountButton disabled>
                 <LinkedInIcon />
