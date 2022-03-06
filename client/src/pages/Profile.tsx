@@ -46,7 +46,7 @@ const FormSubmitButton = tw.button`bg-green-600 text-white hover:bg-green-800 fo
 const BgOpacity = tw.div`opacity-25 fixed inset-0 z-40 bg-black`;
 
 const ConnectAccountButton = styled.button`
-  ${tw`cursor-pointer py-2 pl-2 pr-8 rounded-full bg-primary-600 text-gray-100 hocus:bg-primary-800 transition duration-300 m-2 text-sm flex justify-start items-center`}
+  ${tw`cursor-pointer flex justify-center w-64 py-2 pl-2 pr-8 rounded-full bg-primary-600 text-gray-100 hocus:bg-primary-800 transition duration-300 m-2 text-sm flex justify-start items-center`}
   svg {
     ${tw`w-8 h-8 mx-2`}
   }
@@ -54,7 +54,7 @@ const ConnectAccountButton = styled.button`
 
 const ConnectedAccountButton = tw(
   ConnectAccountButton
-)`flex justify-center bg-green-800 hocus:bg-red-800 cursor-pointer`;
+)`bg-green-800 hocus:bg-red-800 cursor-pointer`;
 
 const ConnectedAccountText = tw.p` group-hocus:hidden `
 const DisconnectAccountText = tw.p`hidden group-hocus:inline`
@@ -150,9 +150,9 @@ export default function Profile() {
     <>
       <Container>
         <Content>
-          <Button type="button" onClick={() => setShowModal(true)}>
+          {/* <Button type="button" onClick={() => setShowModal(true)}>
             Edit profile
-          </Button>
+          </Button> */}
           {showModal ? (
             <>
               <ModalContainer>
