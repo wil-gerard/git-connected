@@ -4,8 +4,9 @@ import { css } from 'styled-components/macro'; //eslint-disable-line
 import { ReactComponent as TwitterIcon } from '../assets/twitter-icon.svg';
 import { ReactComponent as GitHubIcon } from '../assets/github-icon.svg';
 import { ReactComponent as LinkedInIcon } from '../assets/linkedin-icon.svg';
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState,  useContext } from 'react';
 import { IUser } from '../interface';
+import { myContext } from '../hooks/Context';
 
 const Content = tw.div`flex flex-col justify-center px-6 text-gray-100`;
 
@@ -50,6 +51,8 @@ export default function Home() {
     user: '',
     status: 0,
   });
+
+  const currentUser = useContext(myContext) as IUser;
 
   const [users, setUsers] = useState<IUser[]>();
   useEffect(() => {
@@ -144,7 +147,12 @@ export default function Home() {
                             >
                               <LinkedInIcon />
                             </TableLink> */}
-                            {user.twitter.username ===
+                            
+                            {
+                            currentUser.discord.id === user.discord.id ?
+                              ""
+                            :
+                            user.twitter.username ===
                               twitterFollowStatus.user &&
                             twitterFollowStatus.status === 200 ? (
                               <TableFollowed>Following</TableFollowed>
