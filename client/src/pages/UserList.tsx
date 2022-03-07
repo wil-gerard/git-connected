@@ -69,14 +69,15 @@ export default function Home( ) {
     });
   } 
   
-  const handleFollowSubmit = async (twitterUsername: string, targetId: string) => {
+  const handleFollowSubmit = async (gitHubUsername: string, twitterUsername: string, targetId: string) => {
     try {
       const res = await axios({
         method: 'post',
         url: `http://localhost:4000/api/user/followall`,
         params:{ 
-          username:twitterUsername,
-          targetId:targetId
+          twitterUsername,
+          gitHubUsername,
+          targetId
         },
         withCredentials: true,
       });
@@ -102,8 +103,6 @@ export default function Home( ) {
   users?.sort( (a: IUser, b:IUser ) => { 
     return a.gitHub.json.name.localeCompare( b.gitHub.json.name) ;
   });
-
-
 
   return (
     <>
@@ -173,7 +172,7 @@ export default function Home( ) {
                             alreadyFollowing && alreadyFollowing[user._id] ? (
                               <TableFollowed>Following</TableFollowed>
                             ) : (
-                              <TableFollow onClick={ ()=> { handleFollowSubmit(user.twitter.username, user._id) } } 
+                              <TableFollow onClick={ ()=> { handleFollowSubmit(user.gitHub.json.login, user.twitter.username, user._id) } } 
                                 style={ 
                                   id === user._id ?
                                   {opacity:0, pointerEvents:"none"}  :
