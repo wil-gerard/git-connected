@@ -122,7 +122,7 @@ export default function Home( ) {
                 </TableRow>
               </TableThead>
               <TableBody>
-                {users && currentUser ? (
+                {users ? (
                   users.map((user: IUser) => {
 
                     return (
