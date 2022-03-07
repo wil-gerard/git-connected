@@ -77,7 +77,7 @@ There are several ways to help.
 
 3. **[Answer questions](https://github.com/wil-gerard/git-connected/discussions)**: You know the answer to another user's problem? Share your knowledge!
 
-4. **[Provide your opinion](https://github.com/wil-gerard/git-connected/issues?q=is%3Aissue+is%3Aopen+sort%3Areactions-%2B1-desc+label%3A%22community+feedback+wanted%22):** Your input might be helpful even if it is just an up- or down-vote.
+4. **[Provide your opinion](https://github.com/wil-gerard/git-connected/discussions?discussions_q=label%3A%22community+feedback+wanted%22):** Your input might be helpful even if it is just an up- or down-vote.
 
 5. **[Provide a more refined ui spec for existing feature requests](https://github.com/wil-gerard/git-connected/issues?q=is%3Aissue+is%3Aopen+label%3A%22needs+concept+and%2For+ui+spec%22)**
 
