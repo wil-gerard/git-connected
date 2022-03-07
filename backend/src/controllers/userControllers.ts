@@ -2,6 +2,7 @@ import User from '../models/User';
 import { Request, Response, NextFunction } from 'express';
 import { IReqAuth, IUserUpdateForm } from '../config/interface';
 import Twitter from 'twit';
+import { Octokit } from '@octokit/core';
 
 export const userUpdate = async (
   req: IReqAuth,
@@ -62,7 +63,8 @@ export const userFollowAll = async (
 ) => {
   try {
 
-    let username = req.query['username'] as string;
+    let twitterUsername = req.query['twitterUsername'] as string;
+    let gitHubUsername = req.query['gitHubUsername'] as string;
 
     const twitter = new Twitter({
       consumer_key: process.env.TWITTER_CONSUMER_KEY,
@@ -71,11 +73,28 @@ export const userFollowAll = async (
       access_token_secret: req.user.twitterTokenSecret,
     });
 
-    const doTwitterFollow = await twitter.post('friendships/create', {
-      screen_name: username,
+    const octokit = new Octokit({
+      auth: req.user.gitHubToken,
     });
 
-    res.json(doTwitterFollow.resp.statusCode);
+    const doTwitterFollow = await twitter.post('friendships/create', {
+      screen_name: twitterUsername,
+    });
+
+    const doGitHubFollow = await octokit.request(
+      `PUT /user/following/${gitHubUsername}`,
+      {
+        username: gitHubUsername,
+      }
+    );
+    console.log('after doGitHubFollow');
+
+    const followResponse = []
+
+    followResponse.push(doTwitterFollow.resp.statusCode);
+    followResponse.push(doGitHubFollow.status);
+
+    res.json(followResponse);
   } catch (err) {
     next(err);
   }
