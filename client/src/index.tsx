@@ -5,9 +5,8 @@ import App from './App';
 import Context from './hooks/Context';
 
 const validParameters: {[key: string]: Boolean} = { 
-  discordId: true
+  id: true
 }
-
 
 const parameters = new URLSearchParams(window.location.search)
 parameters.forEach( (value,key) => { 

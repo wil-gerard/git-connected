@@ -15,7 +15,7 @@ router.get('/auth/discord/callback', passport_1.default.authenticate('discord', 
     session: true,
 }), function (req, res) {
     var userDetails = req.user;
-    res.redirect("".concat(process.env.FRONTEND_DEV_URL, "/profile?discordId=").concat(userDetails.discord.id));
+    res.redirect("".concat(process.env.FRONTEND_DEV_URL, "/profile?id=").concat(userDetails._id));
 });
 // --- Twitter ---
 router.get('/auth/twitter', auth_1.default, passport_1.default.authorize('twitter'));

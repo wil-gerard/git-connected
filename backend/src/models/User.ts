@@ -1,6 +1,7 @@
 import mongoose from 'mongoose';
 
 const User = new mongoose.Schema({
+  alreadyFollowingTheseIds: {},
   gitHubConnected: {
     required: true,
     type: Boolean,

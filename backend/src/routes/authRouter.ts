@@ -17,7 +17,7 @@ router.get(
   }),
   function (req: Request, res: Response) {
     const userDetails: any = req.user;
-    res.redirect(`${process.env.FRONTEND_DEV_URL}/profile?discordId=${userDetails.discord.id}`);
+    res.redirect(`${process.env.FRONTEND_DEV_URL}/profile?id=${userDetails._id}`);
   }
 );
 

@@ -46,16 +46,48 @@ const TableFollow = tw.a`flex items-center rounded shadow cursor-pointer bg-seco
 
 const TableFollowed = tw.a`flex items-center justify-center rounded shadow cursor-default bg-green-600 transition duration-300  ml-1 py-0.5 px-2`;
 
-export default function Home() {
 
-  const discordId = window.localStorage.getItem("discordId");
 
-  const [twitterFollowStatus, setTwitterFollowStatus] = useState({
-    user: '',
-    status: 0,
-  });
 
+export default function Home( ) {
+
+  const id = window.localStorage.getItem("id");
+
+  let initialState: any = {};
+  const [currentUser, setCurrentUser] = useState()
   const [users, setUsers] = useState<IUser[]>();
+  const [alreadyFollowing, setAlreadyFollowing] = useState(initialState)
+
+  async function getCurrentUserInfo() { 
+    axios.get('http://localhost:4000/api/user/getuser', {
+      withCredentials: true,
+    }).then((res: AxiosResponse) => {
+      if (res.data) {
+        setCurrentUser(res.data);
+        setAlreadyFollowing(res.data.alreadyFollowingTheseIds)
+      }
+    });
+  } 
+  
+  const handleFollowSubmit = async (gitHubUsername: string, twitterUsername: string, targetId: string) => {
+    try {
+      const res = await axios({
+        method: 'post',
+        url: `http://localhost:4000/api/user/followall`,
+        params:{ 
+          twitterUsername,
+          gitHubUsername,
+          targetId
+        },
+        withCredentials: true,
+      });
+      setCurrentUser(res.data);
+      setAlreadyFollowing(res.data.alreadyFollowingTheseIds)
+
+    } catch (err: any) {
+      console.error(err.message);
+    }
+  };
 
   useEffect(() => {
     axios
@@ -64,11 +96,13 @@ export default function Home() {
         console.log(res.data);
         setUsers(res.data);
       });
-  }, []);
+
+    getCurrentUserInfo(); 
+  }, []); 
 
   users?.sort( (a: IUser, b:IUser ) => { 
     return a.gitHub.json.name.localeCompare( b.gitHub.json.name) ;
-  })
+  });
 
   return (
     <>
@@ -89,26 +123,10 @@ export default function Home() {
               <TableBody>
                 {users ? (
                   users.map((user: IUser) => {
-                    const handleFollowSubmit = async () => {
-                      try {
-                        const res = await axios({
-                          method: 'post',
-                          url: `http://localhost:4000/api/user/followall?username=${user.twitter.username}`,
-                          withCredentials: true,
-                        });
-                        setTwitterFollowStatus({
-                          ...twitterFollowStatus,
-                          user: `${user.twitter.username}`,
-                          status: res.status,
-                        });
-                      } catch (err: any) {
-                        console.error(err.message);
-                      }
-                    };
 
                     return (
                       <TableRow
-                        key={user.twitter.username}
+                        key={user._id}
                         id={user.twitter.username}
                       >
                         <TableDataCell>
@@ -149,22 +167,19 @@ export default function Home() {
                             >
                               <LinkedInIcon />
                             </TableLink> */}
-                            
                             {
-                             !discordId ? "" : 
-                            user.twitter.username ===
-                              twitterFollowStatus.user &&
-                            twitterFollowStatus.status === 200 ? (
+                             !id ? "" : 
+                            alreadyFollowing && alreadyFollowing[user._id] ? (
                               <TableFollowed>Following</TableFollowed>
                             ) : (
-                              <TableFollow onClick={handleFollowSubmit} 
+                              <TableFollow onClick={ ()=> { handleFollowSubmit(user.gitHub.json.login, user.twitter.username, user._id) } } 
                                 style={ 
-                                  discordId === user.discord.id ?
+                                  id === user._id ?
                                   {opacity:0, pointerEvents:"none"}  :
                                   undefined
                                 }
                               >
-                                Follow Twitter
+                                Follow All
                               </TableFollow>
                             )}
                           </TableActions>
