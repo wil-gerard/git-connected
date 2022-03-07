@@ -26,7 +26,7 @@ router.get('/auth/twitter/callback', auth_1.default, passport_1.default.authoriz
     res.redirect("".concat(process.env.FRONTEND_DEV_URL, "/profile"));
 });
 // --- GitHub ---
-router.get('/auth/github', auth_1.default, passport_1.default.authorize('github', { scope: ['read:user'] }));
+router.get('/auth/github', auth_1.default, passport_1.default.authorize('github'));
 router.get('/auth/github/callback', auth_1.default, passport_1.default.authorize('github', {
     failureRedirect: '/',
     session: true,

@@ -64,11 +64,11 @@ const LoginContainer = tw.div`px-10 py-2 flex-col flex`;
 
 export default function Profile() {
   const gitHubConnect = () => {
-    window.open('http://localhost:4000/api/auth/github', '_self');
+    window.open('/api/auth/github', '_self');
   };
 
   const twitterConnect = () => {
-    window.open('http://localhost:4000/api/auth/twitter', '_self');
+    window.open('/api/auth/twitter', '_self');
   };
 
   const [showModal, setShowModal] = useState(false);
@@ -106,7 +106,7 @@ export default function Profile() {
     try { 
       axios({
         method: 'put',
-        url: `http://localhost:4000/api/user/removeConnection`,
+        url: `/api/user/removeConnection`,
         data: {platformName},
         withCredentials: true,
         responseType: 'json',
@@ -128,7 +128,7 @@ export default function Profile() {
     try { 
       axios({
         method: 'put',
-        url: 'http://localhost:4000/api/user/update',
+        url: '/api/user/update',
         data: formData,
         withCredentials: true,
         responseType: 'json',

@@ -4,18 +4,19 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 var dotenv_1 = __importDefault(require("dotenv"));
-dotenv_1.default.config();
+var path_1 = __importDefault(require("path"));
+dotenv_1.default.config({ path: __dirname + "/../.env" });
 var express_1 = __importDefault(require("express"));
 var cors_1 = __importDefault(require("cors"));
 var morgan_1 = __importDefault(require("morgan"));
 var express_session_1 = __importDefault(require("express-session"));
 var passport_1 = __importDefault(require("passport"));
 var index_1 = __importDefault(require("./routes/index"));
-var path_1 = __importDefault(require("path"));
 var connect_mongo_1 = __importDefault(require("connect-mongo"));
 // Middleware
 var app = (0, express_1.default)();
 app.use(express_1.default.json());
+app.use(express_1.default.static("../../client/build"));
 app.use(express_1.default.urlencoded({ extended: true }));
 app.use((0, cors_1.default)({
     origin: "".concat(process.env.FRONTEND_DEV_URL),

@@ -59,7 +59,7 @@ export default function Home( ) {
   const [alreadyFollowing, setAlreadyFollowing] = useState(initialState)
 
   async function getCurrentUserInfo() { 
-    axios.get('http://localhost:4000/api/user/getuser', {
+    axios.get('/api/user/getuser', {
       withCredentials: true,
     }).then((res: AxiosResponse) => {
       if (res.data) {
@@ -73,7 +73,7 @@ export default function Home( ) {
     try {
       const res = await axios({
         method: 'post',
-        url: `http://localhost:4000/api/user/followall`,
+        url: `/api/user/followall`,
         params:{ 
           twitterUsername,
           gitHubUsername,
@@ -91,7 +91,7 @@ export default function Home( ) {
 
   useEffect(() => {
     axios
-      .get('http://localhost:4000/api/user/getallusers')
+      .get('/api/user/getallusers')
       .then((res: AxiosResponse) => {
         console.log(res.data);
         setUsers(res.data);

@@ -1,5 +1,6 @@
 import dotenv from 'dotenv';
-dotenv.config();
+import path from 'path';
+dotenv.config( { path: __dirname+"/../.env"} );
 
 import express from 'express';
 import cors from 'cors';
@@ -7,12 +8,12 @@ import morgan from 'morgan';
 import session from 'express-session';
 import passport from 'passport';
 import routes from './routes/index';
-import path from 'path';
 import mongoStore from 'connect-mongo';
 
 // Middleware
 const app = express();
 app.use(express.json());
+app.use( express.static("../../client/build") );
 app.use(express.urlencoded({ extended: true }));
 app.use(
   cors({

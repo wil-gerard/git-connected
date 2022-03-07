@@ -56,12 +56,12 @@ export default function Navbar() {
   const [showModal, setShowModal] = useState(false);
 
   const discordLogin = () => {
-    window.open('http://localhost:4000/api/auth/discord', '_self');
+    window.open('/api/auth/discord', '_self');
   };
 
   const logout = () => {
     axios
-      .delete('http://localhost:4000/api/auth/logout', {
+      .delete('/api/auth/logout', {
         withCredentials: true,
       })
       .then((res: AxiosResponse) => {
