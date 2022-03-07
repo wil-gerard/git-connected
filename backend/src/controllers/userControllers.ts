@@ -2,6 +2,7 @@ import User from '../models/User';
 import { Request, Response, NextFunction } from 'express';
 import { IReqAuth, IUserUpdateForm } from '../config/interface';
 import Twitter from 'twit';
+import { Octokit } from '@octokit/core';
 
 const defaultOptions =  {
   new: true,
@@ -19,9 +20,9 @@ export const userUpdate = async (
   const update = { ...userUpdateProps };
   const options = defaultOptions
 
-  await User.findByIdAndUpdate(id, update, options, (err, doc) => {
+  await User.findByIdAndUpdate(id, update, options, (err, user) => {
     if (!err) {
-      res.status(200).send(doc);
+      res.status(200).send(user);
     }
   })
     .clone()
@@ -60,9 +61,10 @@ export const userFollowAll = async (
 ) => {
   try {
 
-    let username = req.query['username'] as string;
     const targetId = req.query['targetId'] as string;
     const sourceId = req.user._id;
+    const twitterUsername = req.query['twitterUsername'] as string;
+    const gitHubUsername = req.query['gitHubUsername'] as string;
 
     const twitter = new Twitter({
       consumer_key: process.env.TWITTER_CONSUMER_KEY,
@@ -71,14 +73,20 @@ export const userFollowAll = async (
       access_token_secret: req.user.twitterTokenSecret,
     });
 
-    const doTwitterFollow = await twitter.post('friendships/create', {
-      screen_name: username,
+    const octokit = new Octokit({
+      auth: req.user.gitHubToken,
     });
 
-    /*
-    GitHub stuff goes here
-    */
-
+    const doTwitterFollow = await twitter.post('friendships/create', {
+      screen_name: twitterUsername,
+    });
+    
+     const doGitHubFollow = await octokit.request(
+      `PUT /user/following/${gitHubUsername}`,
+      {
+        username: gitHubUsername,
+      }
+    );
 
     const options = defaultOptions;
     let allFollowedIds: any = { };
@@ -93,14 +101,15 @@ export const userFollowAll = async (
       alreadyFollowingTheseIds : allFollowedIds
     }
     
-    await User.findByIdAndUpdate(sourceId, userUpdateProps, options, (err, doc) => { 
+    await User.findByIdAndUpdate(sourceId, userUpdateProps, options, (err, user) => { 
       if (!err) { 
-        res.status(200).send(doc);
+        res.status(200).send(user);
       }
     }).clone().catch( err => { 
-      err.status = 422;
+      err.status = 400;
       next(err);
     })
+    
   } catch (err) {
     next(err);
   }
