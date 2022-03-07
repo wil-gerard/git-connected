@@ -73,7 +73,11 @@ export default function Home( ) {
     try {
       const res = await axios({
         method: 'post',
-        url: `http://localhost:4000/api/user/followall?username=${twitterUsername}&targetId=${targetId}`,
+        url: `http://localhost:4000/api/user/followall`,
+        params:{ 
+          username:twitterUsername,
+          targetId:targetId
+        },
         withCredentials: true,
       });
       setCurrentUser(res.data);
@@ -166,7 +170,7 @@ export default function Home( ) {
                             </TableLink> */}
                             {
                              !id ? "" : 
-                            alreadyFollowing[user._id] ? (
+                            alreadyFollowing && alreadyFollowing[user._id] ? (
                               <TableFollowed>Following</TableFollowed>
                             ) : (
                               <TableFollow onClick={ ()=> { handleFollowSubmit(user.twitter.username, user._id) } } 

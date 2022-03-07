@@ -75,10 +75,13 @@ export const userFollowAll = async (
       screen_name: username,
     });
 
-    const options = defaultOptions;
+    /*
+    GitHub stuff goes here
+    */
 
+
+    const options = defaultOptions;
     let allFollowedIds: any = { };
-    
     if (req.user.alreadyFollowingTheseIds) { 
       allFollowedIds = { 
         ... req.user.alreadyFollowingTheseIds
