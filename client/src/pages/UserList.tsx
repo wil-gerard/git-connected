@@ -46,31 +46,39 @@ const TableFollow = tw.a`flex items-center rounded shadow cursor-pointer bg-seco
 
 const TableFollowed = tw.a`flex items-center justify-center rounded shadow cursor-default bg-green-600 transition duration-300  ml-1 py-0.5 px-2`;
 
-export default function Home() {
+
+
+
+export default function Home( ) {
 
   const id = window.localStorage.getItem("id");
 
-  const [twitterFollowStatus, setTwitterFollowStatus] = useState({
-    user: '',
-    status: 0,
-  });
-
-
+  let initialState: any = {};
+  const [currentUser, setCurrentUser] = useState()
   const [users, setUsers] = useState<IUser[]>();
+  const [alreadyFollowing, setAlreadyFollowing] = useState(initialState)
 
+  async function getCurrentUserInfo() { 
+    axios.get('http://localhost:4000/api/user/getuser', {
+      withCredentials: true,
+    }).then((res: AxiosResponse) => {
+      if (res.data) {
+        setCurrentUser(res.data);
+        setAlreadyFollowing(res.data.alreadyFollowingTheseIds)
+      }
+    });
+  } 
+  
   const handleFollowSubmit = async (twitterUsername: string, targetId: string) => {
     try {
       const res = await axios({
         method: 'post',
-        url: `http://localhost:4000/api/user/followall?username=${twitterUsername}&targetId=${id}`,
+        url: `http://localhost:4000/api/user/followall?username=${twitterUsername}&targetId=${targetId}`,
         withCredentials: true,
       });
-      console.log(res.data);
-      // setTwitterFollowStatus({
-      //   ...twitterFollowStatus,
-      //   user: `${twitterUsername}`,
-      //   status: res.status,
-      // });
+      setCurrentUser(res.data);
+      setAlreadyFollowing(res.data.alreadyFollowingTheseIds)
+
     } catch (err: any) {
       console.error(err.message);
     }
@@ -83,7 +91,9 @@ export default function Home() {
         console.log(res.data);
         setUsers(res.data);
       });
-  }, []);
+
+    getCurrentUserInfo(); 
+  }, []); 
 
   users?.sort( (a: IUser, b:IUser ) => { 
     return a.gitHub.json.name.localeCompare( b.gitHub.json.name) ;
@@ -108,13 +118,12 @@ export default function Home() {
                 </TableRow>
               </TableThead>
               <TableBody>
-                {users ? (
+                {users && currentUser ? (
                   users.map((user: IUser) => {
-
 
                     return (
                       <TableRow
-                        key={user.twitter.username}
+                        key={user._id}
                         id={user.twitter.username}
                       >
                         <TableDataCell>
@@ -155,12 +164,9 @@ export default function Home() {
                             >
                               <LinkedInIcon />
                             </TableLink> */}
-                            
                             {
                              !id ? "" : 
-                            user.twitter.username ===
-                              twitterFollowStatus.user &&
-                            twitterFollowStatus.status === 200 ? (
+                            alreadyFollowing[user._id] ? (
                               <TableFollowed>Following</TableFollowed>
                             ) : (
                               <TableFollow onClick={ ()=> { handleFollowSubmit(user.twitter.username, user._id) } } 

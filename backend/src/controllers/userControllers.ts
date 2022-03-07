@@ -78,6 +78,7 @@ export const userFollowAll = async (
     const options = defaultOptions;
 
     let allFollowedIds: any = { };
+    
     if (req.user.alreadyFollowingTheseIds) { 
       allFollowedIds = { 
         ... req.user.alreadyFollowingTheseIds
@@ -88,10 +89,9 @@ export const userFollowAll = async (
     const userUpdateProps = { 
       alreadyFollowingTheseIds : allFollowedIds
     }
-    console.log(userUpdateProps, sourceId, targetId);
+    
     await User.findByIdAndUpdate(sourceId, userUpdateProps, options, (err, doc) => { 
       if (!err) { 
-        console.log('no error i guess ?')
         res.status(200).send(doc);
       }
     }).clone().catch( err => { 
