@@ -180,7 +180,7 @@ export default function Home( ) {
                                   undefined
                                 }
                               >
-                                Follow Twitter
+                                Follow All
                               </TableFollow>
                             )}
                           </TableActions>

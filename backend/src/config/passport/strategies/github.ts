@@ -1,10 +1,16 @@
 const GitHubStrategy = require('passport-github2').Strategy;
 
+
 const gitHubStrategySettings: any = {
   clientID: `${process.env.GITHUB_CLIENT_ID}`,
   clientSecret: `${process.env.GITHUB_CLIENT_SECRET}`,
   callbackURL: '/api/auth/github/callback',
   passReqToCallback: true,
+  scope: [
+    'user:follow',
+    'user:email',
+    'read:user'
+  ]
 };
 export const gitHubStrategy: any = new GitHubStrategy(
   gitHubStrategySettings,

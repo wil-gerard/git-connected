@@ -40,7 +40,7 @@ router.get(
 router.get(
   '/auth/github',
   auth,
-  passport.authorize('github', { scope: ['read:user'] })
+  passport.authorize('github')
 );
 
 router.get(
