@@ -15,15 +15,12 @@ const app = express();
 app.use(express.json());
 
 app.use(express.urlencoded({ extended: true }));
-// app.use(
-//   cors({
-//     origin: `${process.env.FRONTEND_ORIGIN_URL}`,
-//     methods: 'GET,PUT,POST,DELETE',
-//     credentials: true,
-//   })
-// );
 app.use(
-  cors()
+  cors({
+    origin: `${process.env.FRONTEND_ORIGIN_URL}`,
+    methods: 'GET,PUT,POST,DELETE',
+    credentials: true,
+  })
 );
 app.use(
   morgan(process.env.NODE_ENV !== 'production' ? 'dev' : 'combined', {
