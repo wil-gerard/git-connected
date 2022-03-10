@@ -32,7 +32,7 @@ async function handleDiscordLogin(
       (guild: any) => guild.id === '735923219315425401'
     )
   ) {
-    console.log('not a member of the 100devs discord server');
+
     return;
   }
   User.findOne(

@@ -7,6 +7,5 @@ var mongoose_1 = __importDefault(require("mongoose"));
 mongoose_1.default.connect("".concat(process.env.MONGODB_URL), function (err) {
     if (err)
         throw err;
-    console.log('MongoDB connected');
 });
 //# sourceMappingURL=database.js.map
