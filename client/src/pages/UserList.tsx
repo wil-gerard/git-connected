@@ -3,10 +3,8 @@ import tw from 'twin.macro';
 import { css } from 'styled-components/macro'; //eslint-disable-line
 import { ReactComponent as TwitterIcon } from '../assets/twitter-icon.svg';
 import { ReactComponent as GitHubIcon } from '../assets/github-icon.svg';
-import { ReactComponent as LinkedInIcon } from '../assets/linkedin-icon.svg';
-import React, { useEffect, useState,  useContext } from 'react';
+import React, { useEffect, useState } from 'react';
 import { IUser } from '../interface';
-import { myContext } from '../hooks/Context';
 
 const Content = tw.div`flex flex-col justify-center px-6 text-gray-100`;
 
@@ -54,7 +52,7 @@ export default function Home( ) {
   const id = window.localStorage.getItem("id");
 
   let initialState: any = {};
-  const [currentUser, setCurrentUser] = useState()
+  // const [currentUser, setCurrentUser] = useState()
   const [users, setUsers] = useState<IUser[]>();
   const [alreadyFollowing, setAlreadyFollowing] = useState(initialState)
 
@@ -65,7 +63,7 @@ export default function Home( ) {
       })
       .then((res: AxiosResponse) => {
         if (res.data) {
-          setCurrentUser(res.data);
+          // setCurrentUser(res.data);
           setAlreadyFollowing(res.data.alreadyFollowingTheseIds);
         }
       });
@@ -83,7 +81,7 @@ export default function Home( ) {
         },
         withCredentials: true,
       });
-      setCurrentUser(res.data);
+      // setCurrentUser(res.data);
       setAlreadyFollowing(res.data.alreadyFollowingTheseIds)
 
     } catch (err: any) {
