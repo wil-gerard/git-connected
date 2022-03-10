@@ -8,7 +8,8 @@
     "build": "tsc -p .",
     "dev": "nodemon --exec ts-node src/index.ts",
     "test": "jest --coverage --runInBand --no-cache",
-    "test:watch": "jest --watchAll --runInBand"
+    "test:watch": "jest --watchAll --runInBand",
+    "heroku-postbuild": "cd client && yarn install && yarn run build"
   },
   "keywords": [],
   "author": "",
