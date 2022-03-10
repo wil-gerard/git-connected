@@ -7,7 +7,7 @@ export default function Context(props: any) {
   const [userObject, setUserObject] = useState<any>();
 
   useEffect(() => {
-    Axios.get('https://git-connected.herokuapp.com/api/user/getuser', {
+    Axios.get(`${process.env.REACT_APP_API_GET_USER}`, {
       withCredentials: true,
     }).then((res: AxiosResponse) => {
       if (res.data) {
