@@ -17,7 +17,7 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(
   cors({
-    origin: `${process.env.ORIGIN_URL}`,
+    origin: `${process.env.FRONTEND_ORIGIN_URL}`,
     methods: 'GET,PUT,POST,DELETE',
     credentials: true,
   })
@@ -31,14 +31,17 @@ app.use(
   })
 );
 app.set('trust proxy', 1);
-const URI = `${process.env.MONGODB_URI_START}${process.env.MONGODB_USERNAME}:${process.env.MONGODB_PASSWORD}${process.env.MONGODB_URI_END}`;
 app.use(
   session({
     secret: process.env.SESSION_SECRET,
     resave: false,
     saveUninitialized: false,
+    cookie: {
+      maxAge: 60000 * 60 * 24, //1Sec * 1H * 24 = 1 Day
+      secure: process.env.NODE_ENV !== 'production' ? false : true,
+    },
     store: mongoStore.create({
-      mongoUrl: `${URI}`,
+      mongoUrl: `${process.env.MONGODB_URL}`,
     }),
   })
 );

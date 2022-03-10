@@ -4,8 +4,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 var mongoose_1 = __importDefault(require("mongoose"));
-var URI = "".concat(process.env.MONGODB_URI_START).concat(process.env.MONGODB_USERNAME, ":").concat(process.env.MONGODB_PASSWORD).concat(process.env.MONGODB_URI_END);
-mongoose_1.default.connect("".concat(URI), function (err) {
+mongoose_1.default.connect("".concat(process.env.MONGODB_URL), function (err) {
     if (err)
         throw err;
     console.log('MongoDB connected');

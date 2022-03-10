@@ -56,17 +56,20 @@ export default function Navbar() {
   const [showModal, setShowModal] = useState(false);
 
   const discordLogin = () => {
-    window.open('/api/auth/discord', '_self');
+    window.open(
+      'https://git-connected.herokuapp.com/api/auth/discord',
+      '_self'
+    );
   };
 
   const logout = () => {
     axios
-      .delete('/api/auth/logout', {
+      .delete('https://git-connected.herokuapp.com/api/auth/logout', {
         withCredentials: true,
       })
       .then((res: AxiosResponse) => {
         if (res.data.message === 'Logout succesful') {
-          window.localStorage.removeItem('id')
+          window.localStorage.removeItem('id');
           window.location.href = '/';
         }
       });

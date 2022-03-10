@@ -106,14 +106,14 @@ export default function Profile() {
     try { 
       axios({
         method: 'put',
-        url: `/api/user/removeConnection`,
-        data: {platformName},
+        url: `https://git-connected.herokuapp.com/api/user/removeConnection`,
+        data: { platformName },
         withCredentials: true,
         responseType: 'json',
       }).then((res) => {
         if (res) {
           console.log(res.data);
-          window.open("/profile","_self") 
+          window.open('/profile', '_self');
           // more elegant way to do this?? - aim is to refresh page/button so it's clear that it's now disconnected
         }
       });

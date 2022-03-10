@@ -5,19 +5,18 @@ import passport from 'passport';
 import { logout } from '../controllers/authControllers'
 
 const router = express.Router();
-const frontendSite = "https://www.gitconnect.dev"
 // --- Discord ---
 router.get('/auth/discord', passport.authenticate('discord'));
 
 router.get(
   '/auth/discord/callback',
   passport.authenticate('discord', {
-    failureRedirect: frontendSite,
+    failureRedirect: process.env.FRONTEND_ORIGIN_URL,
     session: true,
   }),
   function (req: Request, res: Response) {
     const userDetails: any = req.user;
-    res.redirect(`${frontendSite}/profile?id=${userDetails._id}`);
+    res.redirect(`${process.env.FRONTEND_ORIGIN_URL}/profile?id=${userDetails._id}`);
   }
 );
 
@@ -28,11 +27,11 @@ router.get(
   '/auth/twitter/callback',
   auth,
   passport.authorize('twitter', {
-    failureRedirect: frontendSite,
+    failureRedirect: process.env.FRONTEND_ORIGIN_URL,
     session: true,
   }),
   function (req: Request, res: Response) {
-    res.redirect(`${frontendSite}/profile`);
+    res.redirect(`${process.env.FRONTEND_ORIGIN_URL}/profile`);
   }
 );
 
@@ -47,11 +46,11 @@ router.get(
   '/auth/github/callback',
   auth,
   passport.authorize('github', {
-    failureRedirect: frontendSite,
+    failureRedirect: process.env.FRONTEND_ORIGIN_URL,
     session: true,
   }),
   function (req: Request, res: Response) {
-    res.redirect(`${frontendSite}/profile`);
+    res.redirect(`${process.env.FRONTEND_ORIGIN_URL}/profile`);
   }
 );
 

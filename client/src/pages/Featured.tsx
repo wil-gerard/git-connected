@@ -15,7 +15,7 @@ export default function Featured() {
 
   const [users, setUsers] = useState<IUser[]>();
   useEffect(() => {
-    Axios.get('/api/user/getallusers').then(
+    Axios.get('https://git-connected.herokuapp.com/api/user/getallusers').then(
       (res: AxiosResponse) => {
         setUsers(res.data);
       }
