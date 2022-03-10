@@ -93,7 +93,6 @@ export default function Home( ) {
     axios
       .get('/api/user/getallusers')
       .then((res: AxiosResponse) => {
-        console.log(res.data);
         setUsers(res.data);
       });
 

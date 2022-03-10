@@ -11,7 +11,6 @@ export default function Context(props: any) {
       withCredentials: true,
     }).then((res: AxiosResponse) => {
       if (res.data) {
-        console.log(res.data);
         setUserObject(res.data);
       }
     });
