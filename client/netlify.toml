@@ -1,6 +1,3 @@
-[build]
-base = "client/"
-
 [[redirects]]
     from = "/*"    
     to = "/index.html" 
