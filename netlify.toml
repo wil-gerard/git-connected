@@ -1,0 +1,9 @@
+[build]
+base = "./client/"
+publish = "build/"
+command = "yarn build"
+
+[[redirects]]
+    from = "/*"    
+    to = "public/index.html" 
+    status =  200
