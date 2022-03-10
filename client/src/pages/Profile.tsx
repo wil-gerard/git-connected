@@ -64,11 +64,11 @@ const LoginContainer = tw.div`px-10 py-2 flex-col flex`;
 
 export default function Profile() {
   const gitHubConnect = () => {
-    window.open('/api/auth/github', '_self');
+    window.open(`${process.env.REACT_APP_API_CONNECT_GITHUB}`, '_self');
   };
 
   const twitterConnect = () => {
-    window.open('/api/auth/twitter', '_self');
+    window.open(`${process.env.REACT_APP_API_CONNECT_TWITTER}`, '_self');
   };
 
   const [showModal, setShowModal] = useState(false);
@@ -106,7 +106,7 @@ export default function Profile() {
     try { 
       axios({
         method: 'put',
-        url: `https://git-connected.herokuapp.com/api/user/removeConnection`,
+        url: `${process.env.REACT_APP_API_REMOVE_CONNECTION}`,
         data: { platformName },
         withCredentials: true,
         responseType: 'json',

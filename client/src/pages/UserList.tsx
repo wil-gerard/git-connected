@@ -59,25 +59,27 @@ export default function Home( ) {
   const [alreadyFollowing, setAlreadyFollowing] = useState(initialState)
 
   async function getCurrentUserInfo() { 
-    axios.get('/api/user/getuser', {
-      withCredentials: true,
-    }).then((res: AxiosResponse) => {
-      if (res.data) {
-        setCurrentUser(res.data);
-        setAlreadyFollowing(res.data.alreadyFollowingTheseIds)
-      }
-    });
+    axios
+      .get(`${process.env.REACT_APP_API_GET_USER}`, {
+        withCredentials: true,
+      })
+      .then((res: AxiosResponse) => {
+        if (res.data) {
+          setCurrentUser(res.data);
+          setAlreadyFollowing(res.data.alreadyFollowingTheseIds);
+        }
+      });
   } 
   
   const handleFollowSubmit = async (gitHubUsername: string, twitterUsername: string, targetId: string) => {
     try {
       const res = await axios({
         method: 'post',
-        url: `/api/user/followall`,
-        params:{ 
+        url: `${process.env.REACT_APP_API_FOLLOW_ALL}`,
+        params: {
           twitterUsername,
           gitHubUsername,
-          targetId
+          targetId,
         },
         withCredentials: true,
       });
@@ -91,7 +93,7 @@ export default function Home( ) {
 
   useEffect(() => {
     axios
-      .get('/api/user/getallusers')
+      .get(`${process.env.REACT_APP_API_GET_ALL_USERS}`)
       .then((res: AxiosResponse) => {
         setUsers(res.data);
       });
