@@ -61,7 +61,6 @@ function handleDiscordLogin(req, discordAccessToken, refreshToken, discordProfil
         var _this = this;
         return __generator(this, function (_a) {
             if (!discordProfile.guilds.some(function (guild) { return guild.id === '735923219315425401'; })) {
-                console.log('not a member of the 100devs discord server');
                 return [2 /*return*/];
             }
             User_1.default.findOne({ 'discord.id': discordProfile.id }, function (err, userInDatabase) { return __awaiter(_this, void 0, void 0, function () {

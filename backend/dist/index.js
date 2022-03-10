@@ -63,6 +63,5 @@ if (process.env.NODE_ENV === 'production') {
 }
 var PORT = process.env.PORT || process.env.BACKEND_DEV_PORT;
 app.listen(PORT, function () {
-    console.log("Server is running on port ".concat(PORT));
 });
 //# sourceMappingURL=index.js.map
