@@ -1,1 +1,1 @@
-web: cd ./backend && npm i && npm run build && cd ./dist && node ./index.js
+web: npm run start
