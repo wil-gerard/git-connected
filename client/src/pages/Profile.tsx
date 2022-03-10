@@ -112,7 +112,6 @@ export default function Profile() {
         responseType: 'json',
       }).then((res) => {
         if (res) {
-          console.log(res.data);
           window.open('/profile', '_self');
           // more elegant way to do this?? - aim is to refresh page/button so it's clear that it's now disconnected
         }
@@ -134,7 +133,6 @@ export default function Profile() {
         responseType: 'json',
       }).then((res) => {
         if (res) {
-          console.log(res);
         }
       });
     } catch (err: any) {
