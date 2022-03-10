@@ -73,6 +73,12 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.getAllUsers = exports.getUser = exports.userFollowAll = exports.removeConnection = exports.userUpdate = void 0;
 var User_1 = __importDefault(require("../models/User"));
 var twit_1 = __importDefault(require("twit"));
+var core_1 = require("@octokit/core");
+var defaultOptions = {
+    new: true,
+    runValidators: true,
+    context: 'query',
+};
 var userUpdate = function (req, res, next) { return __awaiter(void 0, void 0, void 0, function () {
     var userUpdateProps, id, update, options;
     return __generator(this, function (_a) {
@@ -81,14 +87,10 @@ var userUpdate = function (req, res, next) { return __awaiter(void 0, void 0, vo
                 userUpdateProps = __rest(req.body, []);
                 id = req.user._id;
                 update = __assign({}, userUpdateProps);
-                options = {
-                    new: true,
-                    runValidators: true,
-                    context: 'query',
-                };
-                return [4 /*yield*/, User_1.default.findByIdAndUpdate(id, update, options, function (err, doc) {
+                options = defaultOptions;
+                return [4 /*yield*/, User_1.default.findByIdAndUpdate(id, update, options, function (err, user) {
                         if (!err) {
-                            res.status(200).send(doc);
+                            res.status(200).send(user);
                         }
                     })
                         .clone()
@@ -118,11 +120,7 @@ var removeConnection = function (req, res, next) { return __awaiter(void 0, void
                     userUpdateProps.twitterTokenSecret = "";
                 }
                 ;
-                options = {
-                    new: true,
-                    runValidators: true,
-                    context: 'query',
-                };
+                options = defaultOptions;
                 return [4 /*yield*/, User_1.default.findByIdAndUpdate(id, userUpdateProps, options, function (err, doc) {
                         if (!err) {
                             res.status(200).send(doc);
@@ -139,30 +137,59 @@ var removeConnection = function (req, res, next) { return __awaiter(void 0, void
 }); };
 exports.removeConnection = removeConnection;
 var userFollowAll = function (req, res, next) { return __awaiter(void 0, void 0, void 0, function () {
-    var username, twitter, doTwitterFollow, err_1;
+    var targetId, sourceId, twitterUsername, gitHubUsername, twitter, octokit, doTwitterFollow, doGitHubFollow, options, allFollowedIds, userUpdateProps, err_1;
     return __generator(this, function (_a) {
         switch (_a.label) {
             case 0:
-                _a.trys.push([0, 2, , 3]);
-                username = req.query['username'];
+                _a.trys.push([0, 4, , 5]);
+                targetId = req.query['targetId'];
+                sourceId = req.user._id;
+                twitterUsername = req.query['twitterUsername'];
+                gitHubUsername = req.query['gitHubUsername'];
                 twitter = new twit_1.default({
                     consumer_key: process.env.TWITTER_CONSUMER_KEY,
                     consumer_secret: process.env.TWITTER_CONSUMER_SECRET,
                     access_token: req.user.twitterToken,
                     access_token_secret: req.user.twitterTokenSecret,
                 });
+                octokit = new core_1.Octokit({
+                    auth: req.user.gitHubToken,
+                });
                 return [4 /*yield*/, twitter.post('friendships/create', {
-                        screen_name: username,
+                        screen_name: twitterUsername,
                     })];
             case 1:
                 doTwitterFollow = _a.sent();
-                res.json(doTwitterFollow.resp.statusCode);
-                return [3 /*break*/, 3];
+                return [4 /*yield*/, octokit.request("PUT /user/following/".concat(gitHubUsername), {
+                        username: gitHubUsername,
+                    })];
             case 2:
+                doGitHubFollow = _a.sent();
+                options = defaultOptions;
+                allFollowedIds = {};
+                if (req.user.alreadyFollowingTheseIds) {
+                    allFollowedIds = __assign({}, req.user.alreadyFollowingTheseIds);
+                }
+                allFollowedIds[targetId] = true;
+                userUpdateProps = {
+                    alreadyFollowingTheseIds: allFollowedIds
+                };
+                return [4 /*yield*/, User_1.default.findByIdAndUpdate(sourceId, userUpdateProps, options, function (err, user) {
+                        if (!err) {
+                            res.status(200).send(user);
+                        }
+                    }).clone().catch(function (err) {
+                        err.status = 400;
+                        next(err);
+                    })];
+            case 3:
+                _a.sent();
+                return [3 /*break*/, 5];
+            case 4:
                 err_1 = _a.sent();
                 next(err_1);
-                return [3 /*break*/, 3];
-            case 3: return [2 /*return*/];
+                return [3 /*break*/, 5];
+            case 5: return [2 /*return*/];
         }
     });
 }); };

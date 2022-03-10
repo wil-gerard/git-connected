@@ -7,7 +7,7 @@ export default function Context(props: any) {
   const [userObject, setUserObject] = useState<any>();
 
   useEffect(() => {
-    Axios.get('http://localhost:4000/api/user/getuser', {
+    Axios.get('/api/user/getuser', {
       withCredentials: true,
     }).then((res: AxiosResponse) => {
       if (res.data) {

@@ -7,6 +7,11 @@ var gitHubStrategySettings = {
     clientSecret: "".concat(process.env.GITHUB_CLIENT_SECRET),
     callbackURL: '/api/auth/github/callback',
     passReqToCallback: true,
+    scope: [
+        'user:follow',
+        'user:email',
+        'read:user'
+    ]
 };
 exports.gitHubStrategy = new GitHubStrategy(gitHubStrategySettings, handleConnectGitHubAccount);
 function handleConnectGitHubAccount(req, gitHubAccessToken, refreshToken, gitHubProfile, callback) {
