@@ -13,7 +13,7 @@ import mongoStore from 'connect-mongo';
 // Middleware
 const app = express();
 app.use(express.json());
-app.use( express.static("../../client/build") );
+
 app.use(express.urlencoded({ extended: true }));
 app.use(
   cors({

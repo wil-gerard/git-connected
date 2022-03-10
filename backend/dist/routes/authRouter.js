@@ -8,30 +8,31 @@ var auth_1 = __importDefault(require("../middleware/auth"));
 var passport_1 = __importDefault(require("passport"));
 var authControllers_1 = require("../controllers/authControllers");
 var router = express_1.default.Router();
+var frontendSite = "https://www.gitconnect.dev";
 // --- Discord ---
 router.get('/auth/discord', passport_1.default.authenticate('discord'));
 router.get('/auth/discord/callback', passport_1.default.authenticate('discord', {
-    failureRedirect: '/',
+    failureRedirect: frontendSite,
     session: true,
 }), function (req, res) {
     var userDetails = req.user;
-    res.redirect("".concat(process.env.FRONTEND_DEV_URL, "/profile?id=").concat(userDetails._id));
+    res.redirect("".concat(frontendSite, "/profile?id=").concat(userDetails._id));
 });
 // --- Twitter ---
 router.get('/auth/twitter', auth_1.default, passport_1.default.authorize('twitter'));
 router.get('/auth/twitter/callback', auth_1.default, passport_1.default.authorize('twitter', {
-    failureRedirect: '/',
+    failureRedirect: frontendSite,
     session: true,
 }), function (req, res) {
-    res.redirect("".concat(process.env.FRONTEND_DEV_URL, "/profile"));
+    res.redirect("".concat(frontendSite, "/profile"));
 });
 // --- GitHub ---
 router.get('/auth/github', auth_1.default, passport_1.default.authorize('github'));
 router.get('/auth/github/callback', auth_1.default, passport_1.default.authorize('github', {
-    failureRedirect: '/',
+    failureRedirect: frontendSite,
     session: true,
 }), function (req, res) {
-    res.redirect("".concat(process.env.FRONTEND_DEV_URL, "/profile"));
+    res.redirect("".concat(frontendSite, "/profile"));
 });
 router.delete('/auth/logout', auth_1.default, authControllers_1.logout);
 exports.default = router;
