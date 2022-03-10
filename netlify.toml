@@ -1,7 +1,7 @@
 [build]
-base = "./client/"
-publish = "build/"
-command = "yarn build"
+  base = "./client/"
+  publish = "build/"
+  command = "CI=false yarn build"
 
 [[redirects]]
     from = "/*"    
