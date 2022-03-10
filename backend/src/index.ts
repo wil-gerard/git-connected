@@ -1,6 +1,6 @@
-import dotenv from 'dotenv';
+// import dotenv from 'dotenv';
 import path from 'path';
-dotenv.config( { path: __dirname+"/../.env"} );
+// dotenv.config( { path: __dirname+"/../.env"} );
 
 import express from 'express';
 import cors from 'cors';
