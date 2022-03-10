@@ -3,10 +3,8 @@ import tw from 'twin.macro';
 import { css } from 'styled-components/macro'; //eslint-disable-line
 import { ReactComponent as TwitterIcon } from '../assets/twitter-icon.svg';
 import { ReactComponent as GitHubIcon } from '../assets/github-icon.svg';
-import { ReactComponent as LinkedInIcon } from '../assets/linkedin-icon.svg';
-import React, { useEffect, useState,  useContext } from 'react';
+import React, { useEffect, useState } from 'react';
 import { IUser } from '../interface';
-import { myContext } from '../hooks/Context';
 
 const Content = tw.div`flex flex-col justify-center px-6 text-gray-100`;
 
@@ -54,34 +52,36 @@ export default function Home( ) {
   const id = window.localStorage.getItem("id");
 
   let initialState: any = {};
-  const [currentUser, setCurrentUser] = useState()
+  // const [currentUser, setCurrentUser] = useState()
   const [users, setUsers] = useState<IUser[]>();
   const [alreadyFollowing, setAlreadyFollowing] = useState(initialState)
 
   async function getCurrentUserInfo() { 
-    axios.get('/api/user/getuser', {
-      withCredentials: true,
-    }).then((res: AxiosResponse) => {
-      if (res.data) {
-        setCurrentUser(res.data);
-        setAlreadyFollowing(res.data.alreadyFollowingTheseIds)
-      }
-    });
+    axios
+      .get(`${process.env.REACT_APP_API_GET_USER}`, {
+        withCredentials: true,
+      })
+      .then((res: AxiosResponse) => {
+        if (res.data) {
+          // setCurrentUser(res.data);
+          setAlreadyFollowing(res.data.alreadyFollowingTheseIds);
+        }
+      });
   } 
   
   const handleFollowSubmit = async (gitHubUsername: string, twitterUsername: string, targetId: string) => {
     try {
       const res = await axios({
         method: 'post',
-        url: `/api/user/followall`,
-        params:{ 
+        url: `${process.env.REACT_APP_API_FOLLOW_ALL}`,
+        params: {
           twitterUsername,
           gitHubUsername,
-          targetId
+          targetId,
         },
         withCredentials: true,
       });
-      setCurrentUser(res.data);
+      // setCurrentUser(res.data);
       setAlreadyFollowing(res.data.alreadyFollowingTheseIds)
 
     } catch (err: any) {
@@ -91,7 +91,7 @@ export default function Home( ) {
 
   useEffect(() => {
     axios
-      .get('/api/user/getallusers')
+      .get(`${process.env.REACT_APP_API_GET_ALL_USERS}`)
       .then((res: AxiosResponse) => {
         setUsers(res.data);
       });

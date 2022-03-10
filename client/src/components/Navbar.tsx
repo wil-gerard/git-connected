@@ -57,14 +57,14 @@ export default function Navbar() {
 
   const discordLogin = () => {
     window.open(
-      'https://git-connected.herokuapp.com/api/auth/discord',
+      `${process.env.REACT_APP_API_DISCORD_LOGIN}`,
       '_self'
     );
   };
 
   const logout = () => {
     axios
-      .delete('https://git-connected.herokuapp.com/api/auth/logout', {
+      .delete(`${process.env.REACT_APP_API_LOGOUT}`, {
         withCredentials: true,
       })
       .then((res: AxiosResponse) => {
