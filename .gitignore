@@ -25,7 +25,3 @@ git-connected.code-workspace
 npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
-backend/yarn.lock
-client/package-lock.json
-client/yarn.lock
-backend/package-lock.json
