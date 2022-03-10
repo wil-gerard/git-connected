@@ -4,7 +4,6 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "heroku-prebuild": "yarn install",
     "start": "node build/dist/index.js",
     "build": "tsc -p .",
     "dev": "nodemon --exec ts-node src/index.ts",
