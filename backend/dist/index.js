@@ -18,7 +18,7 @@ var app = (0, express_1.default)();
 app.use(express_1.default.json());
 app.use(express_1.default.urlencoded({ extended: true }));
 app.use((0, cors_1.default)({
-    origin: "".concat(process.env.FRONTEND_DEV_URL),
+    origin: "".concat(process.env.FRONTEND_ORIGIN_URL),
     methods: 'GET,PUT,POST,DELETE',
     credentials: true,
 }));
@@ -29,13 +29,16 @@ app.use((0, morgan_1.default)(process.env.NODE_ENV !== 'production' ? 'dev' : 'c
     stream: process.stdout,
 }));
 app.set('trust proxy', 1);
-var URI = "".concat(process.env.MONGODB_URI_START).concat(process.env.MONGODB_USERNAME, ":").concat(process.env.MONGODB_PASSWORD).concat(process.env.MONGODB_URI_END);
 app.use((0, express_session_1.default)({
     secret: process.env.SESSION_SECRET,
     resave: false,
     saveUninitialized: false,
+    cookie: {
+        maxAge: 60000 * 60 * 24,
+        secure: process.env.NODE_ENV !== 'production' ? false : true,
+    },
     store: connect_mongo_1.default.create({
-        mongoUrl: "".concat(URI),
+        mongoUrl: "".concat(process.env.MONGODB_URL),
     }),
 }));
 app.use(function (err, req, res, next) {
