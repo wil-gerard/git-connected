@@ -4,7 +4,7 @@
   "description": "![github-docs-banner](https://user-images.githubusercontent.com/74286884/156865155-7af481ea-261d-40ee-83b0-64e414072a22.png)",
   "main": "index.js",
   "scripts": {
-    "heroku-prebuild": "cd backend && yarn && yarn run build && cd .. & cd client && yarn && yarn build",
+    "heroku-prebuild": "cd backend && npm install && npm run build && cd .. & cd client && npm install && npm build",
     "start": "node ./backend/dist/index.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
