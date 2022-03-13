@@ -1,6 +1,7 @@
 # See https://help.github.com/articles/ignoring-files/ for more about ignoring files.
 
 # dependencies
+
 */.env
 */development.env
 */production.env
@@ -12,7 +13,8 @@
 /coverage
 
 # production
-/build
+*/build
+*/dist
 
 # misc
 git-connected.code-workspace

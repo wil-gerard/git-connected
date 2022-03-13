@@ -44,21 +44,17 @@ const TableFollow = tw.a`flex items-center rounded shadow cursor-pointer bg-seco
 
 const TableFollowed = tw.a`flex items-center justify-center rounded shadow cursor-default bg-green-600 transition duration-300  ml-1 py-0.5 px-2`;
 
-
-
-
-export default function Home( ) {
-
-  const id = window.localStorage.getItem("id");
+export default function Home() {
+  const id = window.localStorage.getItem('id');
 
   let initialState: any = {};
   // const [currentUser, setCurrentUser] = useState()
   const [users, setUsers] = useState<IUser[]>();
-  const [alreadyFollowing, setAlreadyFollowing] = useState(initialState)
+  const [alreadyFollowing, setAlreadyFollowing] = useState(initialState);
 
-  async function getCurrentUserInfo() { 
+  async function getCurrentUserInfo() {
     axios
-      .get(`${process.env.REACT_APP_API_GET_USER}`, {
+      .get(`/api/user/getuser`, {
         withCredentials: true,
       })
       .then((res: AxiosResponse) => {
@@ -67,13 +63,17 @@ export default function Home( ) {
           setAlreadyFollowing(res.data.alreadyFollowingTheseIds);
         }
       });
-  } 
-  
-  const handleFollowSubmit = async (gitHubUsername: string, twitterUsername: string, targetId: string) => {
+  }
+
+  const handleFollowSubmit = async (
+    gitHubUsername: string,
+    twitterUsername: string,
+    targetId: string
+  ) => {
     try {
       const res = await axios({
         method: 'post',
-        url: `${process.env.REACT_APP_API_FOLLOW_ALL}`,
+        url: `/api/user/followall`,
         params: {
           twitterUsername,
           gitHubUsername,
@@ -82,25 +82,22 @@ export default function Home( ) {
         withCredentials: true,
       });
       // setCurrentUser(res.data);
-      setAlreadyFollowing(res.data.alreadyFollowingTheseIds)
-
+      setAlreadyFollowing(res.data.alreadyFollowingTheseIds);
     } catch (err: any) {
       console.error(err.message);
     }
   };
 
   useEffect(() => {
-    axios
-      .get(`${process.env.REACT_APP_API_GET_ALL_USERS}`)
-      .then((res: AxiosResponse) => {
-        setUsers(res.data);
-      });
+    axios.get('/api/user/getallusers').then((res: AxiosResponse) => {
+      setUsers(res.data);
+    });
 
-    getCurrentUserInfo(); 
-  }, []); 
+    getCurrentUserInfo();
+  }, []);
 
-  users?.sort( (a: IUser, b:IUser ) => { 
-    return a.gitHub.json.name.localeCompare( b.gitHub.json.name) ;
+  users?.sort((a: IUser, b: IUser) => {
+    return a.gitHub.json.name.localeCompare(b.gitHub.json.name);
   });
 
   return (
@@ -122,12 +119,8 @@ export default function Home( ) {
               <TableBody>
                 {users ? (
                   users.map((user: IUser) => {
-
                     return (
-                      <TableRow
-                        key={user._id}
-                        id={user.twitter.username}
-                      >
+                      <TableRow key={user._id} id={user.twitter.username}>
                         <TableDataCell>
                           <TableDataNameContainer>
                             <TableDataImage
@@ -166,16 +159,24 @@ export default function Home( ) {
                             >
                               <LinkedInIcon />
                             </TableLink> */}
-                            {
-                             !id ? "" : 
-                            alreadyFollowing && alreadyFollowing[user._id] ? (
+                            {!id ? (
+                              ''
+                            ) : alreadyFollowing &&
+                              alreadyFollowing[user._id] ? (
                               <TableFollowed>Following</TableFollowed>
                             ) : (
-                              <TableFollow onClick={ ()=> { handleFollowSubmit(user.gitHub.json.login, user.twitter.username, user._id) } } 
-                                style={ 
-                                  id === user._id ?
-                                  {opacity:0, pointerEvents:"none"}  :
-                                  undefined
+                              <TableFollow
+                                onClick={() => {
+                                  handleFollowSubmit(
+                                    user.gitHub.json.login,
+                                    user.twitter.username,
+                                    user._id
+                                  );
+                                }}
+                                style={
+                                  id === user._id
+                                    ? { opacity: 0, pointerEvents: 'none' }
+                                    : undefined
                                 }
                               >
                                 Follow All
@@ -189,8 +190,8 @@ export default function Home( ) {
                 ) : (
                   <TableRow>
                     <TableDataCell>
-                    <p>loading...</p>
-                   </TableDataCell>
+                      <p>loading...</p>
+                    </TableDataCell>
                   </TableRow>
                 )}
               </TableBody>

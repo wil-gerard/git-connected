@@ -63,11 +63,11 @@ const LoginContainer = tw.div`px-10 py-2 flex-col flex`;
 
 export default function Profile() {
   const gitHubConnect = () => {
-    window.open(`${process.env.REACT_APP_API_CONNECT_GITHUB}`, '_self');
+    window.open(`/api/auth/github`, '_self');
   };
 
   const twitterConnect = () => {
-    window.open(`${process.env.REACT_APP_API_CONNECT_TWITTER}`, '_self');
+    window.open(`/api/auth/twitter`, '_self');
   };
 
   const [showModal, setShowModal] = useState(false);
@@ -105,7 +105,7 @@ export default function Profile() {
     try { 
       axios({
         method: 'put',
-        url: `${process.env.REACT_APP_API_REMOVE_CONNECTION}`,
+        url: `/api/user/removeConnection`,
         data: { platformName },
         withCredentials: true,
         responseType: 'json',

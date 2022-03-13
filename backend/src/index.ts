@@ -1,6 +1,6 @@
 import dotenv from 'dotenv';
 import path from 'path';
-dotenv.config( { path: __dirname+"/../.env"} );
+dotenv.config({ path: __dirname + '/../.env' });
 
 import express from 'express';
 import cors from 'cors';
@@ -14,6 +14,8 @@ import mongoStore from 'connect-mongo';
 const app = express();
 app.use(express.json());
 
+app.use(express.static( path.resolve(__dirname, '../../client/build') ) );
+
 app.use(express.urlencoded({ extended: true }));
 // app.use(
 //   cors({
@@ -23,8 +25,12 @@ app.use(express.urlencoded({ extended: true }));
 //   })
 // );
 app.use(
-  cors()
+  cors({
+    methods: 'GET,PUT,POST,DELETE',
+    credentials: true,
+  })
 );
+
 app.use(
   morgan(process.env.NODE_ENV !== 'production' ? 'dev' : 'combined', {
     skip: function (req, res) {
@@ -61,25 +67,16 @@ app.use(passport.session());
 
 // Routes
 app.use('/api', routes);
+app.get("*", (request, response)=> { 
+  response.sendFile(path.resolve(__dirname, '../../client/build', 'index.html'))
+})
 
 // Database
 import './config/database';
 
-// Production Deploy
-if (process.env.NODE_ENV === 'production') {
-  app.use(express.static(path.join(__dirname, "./client/build")));
-  app.get('*', (req, res) => {
-    res.sendFile(path.join(__dirname, './client/build/index.html'),
-      function (err) {
-        if (err) {
-          res.status(500).send(err);
-      }
-    });
-  });
-}
 
 const PORT = process.env.PORT || process.env.BACKEND_DEV_PORT;
 
 app.listen(PORT, () => {
-  console.log(`Serving running on PORT ${PORT}`)
+  console.log(`Serving running on PORT ${PORT}`);
 });
