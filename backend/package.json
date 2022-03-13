@@ -5,16 +5,19 @@
   "main": "index.js",
   "scripts": {
     "heroku-prebuild": "yarn install",
-    "start": "node src/index.js",
+    "postinstall": "tsc",
+    "start": "node dist/index.js",
     "build": "tsc -p .",
     "dev": "nodemon --exec ts-node src/index.ts",
     "test": "jest --coverage --runInBand --no-cache",
-    "test:watch": "jest --watchAll --runInBand",
-    "heroku-postbuild": "cd client && yarn install && yarn run build"
+    "test:watch": "jest --watchAll --runInBand"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
+  "engines": {
+    "node": "v16.13.0"
+  },
   "dependencies": {
     "@octokit/core": "^3.5.1",
     "@octokit/rest": "^18.12.0",

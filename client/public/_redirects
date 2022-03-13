@@ -1,1 +1,2 @@
 /* /index.html 200
+/api/*  https://api.example.com/:splat  200
