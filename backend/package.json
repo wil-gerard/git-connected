@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "heroku-prebuild": "yarn install",
-    "postinstall": "tsc",
+    "postinstall": "tsc -p .",
     "start": "node dist/index.js",
     "build": "tsc -p .",
     "dev": "nodemon --exec ts-node src/index.ts",
