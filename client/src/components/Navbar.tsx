@@ -57,14 +57,14 @@ export default function Navbar() {
 
   const discordLogin = () => {
     window.open(
-      `/api/auth/discord`,
+      `${process.env.REACT_APP_API_ORIGIN}/api/auth/discord`,
       '_self'
     );
   };
 
   const logout = () => {
     axios
-      .delete(`/api/auth/logout`, {
+      .delete(`${process.env.REACT_APP_API_ORIGIN}/api/auth/logout`, {
         withCredentials: true,
       })
       .then((res: AxiosResponse) => {

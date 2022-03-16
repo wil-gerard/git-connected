@@ -16,9 +16,11 @@ export default function Featured() {
 
   const [users, setUsers] = useState<IUser[]>();
   useEffect(() => {
-    Axios.get(`/api/user/getallusers`).then((res: AxiosResponse) => {
-      setUsers(res.data);
-    });
+    Axios.get(`${process.env.REACT_APP_API_ORIGIN}/api/user/getallusers`).then(
+      (res: AxiosResponse) => {
+        setUsers(res.data);
+      }
+    );
   }, [ctx]);
 
   if (!users) {

@@ -105,7 +105,7 @@ export default function Profile() {
     try { 
       axios({
         method: 'put',
-        url: `/api/user/removeConnection`,
+        url: `${process.env.REACT_APP_API_ORIGIN}/api/user/removeConnection`,
         data: { platformName },
         withCredentials: true,
         responseType: 'json',
@@ -126,7 +126,7 @@ export default function Profile() {
     try { 
       axios({
         method: 'put',
-        url: '/api/user/update',
+        url: `${process.env.REACT_APP_API_ORIGIN}/api/user/update`,
         data: formData,
         withCredentials: true,
         responseType: 'json',

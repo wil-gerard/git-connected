@@ -54,7 +54,7 @@ export default function Home() {
 
   async function getCurrentUserInfo() {
     axios
-      .get(`/api/user/getuser`, {
+      .get(`${process.env.REACT_APP_API_ORIGIN}/api/user/getuser`, {
         withCredentials: true,
       })
       .then((res: AxiosResponse) => {
@@ -73,7 +73,7 @@ export default function Home() {
     try {
       const res = await axios({
         method: 'post',
-        url: `/api/user/followall`,
+        url: `${process.env.REACT_APP_API_ORIGIN}/api/user/followall`,
         params: {
           twitterUsername,
           gitHubUsername,
@@ -89,9 +89,11 @@ export default function Home() {
   };
 
   useEffect(() => {
-    axios.get('/api/user/getallusers').then((res: AxiosResponse) => {
-      setUsers(res.data);
-    });
+    axios
+      .get(`${process.env.REACT_APP_API_ORIGIN}/api/user/getallusers`)
+      .then((res: AxiosResponse) => {
+        setUsers(res.data);
+      });
 
     getCurrentUserInfo();
   }, []);

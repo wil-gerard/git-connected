@@ -10,27 +10,27 @@ const defaultOptions =  {
   context: 'query',
 };
 
-export const userUpdate = async (
-  req: IReqAuth,
-  res: Response,
-  next: NextFunction
-) => {
-  const { ...userUpdateProps }: IUserUpdateForm = req.body;
-  const id = req.user._id;
-  const update = { ...userUpdateProps };
-  const options = defaultOptions
+// export const userUpdate = async (
+//   req: IReqAuth,
+//   res: Response,
+//   next: NextFunction
+// ) => {
+//   const { ...userUpdateProps }: IUserUpdateForm = req.body;
+//   const id = req.user._id;
+//   const update = { ...userUpdateProps };
+//   const options = defaultOptions
 
-  await User.findByIdAndUpdate(id, update, options, (err, user) => {
-    if (!err) {
-      res.status(200).send(user);
-    }
-  })
-    .clone()
-    .catch((err) => {
-      err.status = 422;
-      next(err);
-    });
-};
+//   await User.findByIdAndUpdate(id, update, options, (err, user) => {
+//     if (!err) {
+//       res.status(200).send(user);
+//     }
+//   })
+//     .clone()
+//     .catch((err) => {
+//       err.status = 422;
+//       next(err);
+//     });
+// };
 
 export const removeConnection = async ( req: IReqAuth, res: Response, next: NextFunction) => { 
   const { platformName } = req.body;
