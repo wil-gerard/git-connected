@@ -7,8 +7,6 @@
 /.pnp
 .pnp.js
 
-*/dist
-
 # testing
 /coverage
 
