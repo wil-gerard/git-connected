@@ -14,7 +14,7 @@ import mongoStore from 'connect-mongo';
 const app = express();
 app.use(express.json());
 
-app.use(express.static( path.resolve(__dirname, '../../client/build') ) );
+app.use(express.static(path.resolve(__dirname, '../../client/build')));
 
 app.use(express.urlencoded({ extended: true }));
 // app.use(
@@ -67,13 +67,14 @@ app.use(passport.session());
 
 // Routes
 app.use('/api', routes);
-app.get("*", (request, response)=> { 
-  response.sendFile(path.resolve(__dirname, '../../client/build', 'index.html'))
-})
+app.get('*', (request, response) => {
+  response.sendFile(
+    path.resolve(__dirname, '../../client/build', 'index.html')
+  );
+});
 
 // Database
 import './config/database';
-
 
 const PORT = process.env.PORT || process.env.BACKEND_DEV_PORT;
 
