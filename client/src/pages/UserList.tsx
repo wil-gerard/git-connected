@@ -99,7 +99,9 @@ export default function Home() {
   }, []);
 
   users?.sort((a: IUser, b: IUser) => {
-    return a.gitHub.json.name.localeCompare(b.gitHub.json.name);
+    if ( alreadyFollowing[a._id] ) { return 1 }
+    else if (alreadyFollowing[b._id]) { return -1 }
+    else { return 0 }
   });
 
   return (
