@@ -117,7 +117,8 @@ yarn
 #### Environment variables
 - You will find a .env template at git-connected/server/.envTEMPLATE
 - Delete "TEMPLATE" from the filename
-- MONGODB_URL: Instructions on [setting up a MongoDB Atlas account.](https://hevodata.com/learn/mongodb-atlas-nodejs/) Refer to the image below on where to copy your connection string from. ![mongodb_url](https://user-images.githubusercontent.com/74286884/159807213-b7146a46-22e6-4927-bc18-65a2ed63025b.png)
+- MONGODB_URL: Instructions on [setting up a MongoDB Atlas account.](https://hevodata.com/learn/mongodb-atlas-nodejs/) Refer to the image below on where to find your connection string. 
+  ![mongodb_url](https://user-images.githubusercontent.com/74286884/159807213-b7146a46-22e6-4927-bc18-65a2ed63025b.png)
 - DISCORD_CLIENT_ID and DISCORD_SECRET: Instructions on [setting up a Discord OAuth application](https://circlertech.com/working-with-discord-oauth2) 
   - Redirect URI: `http://localhost:4000/api/auth/discord/callback`
   
