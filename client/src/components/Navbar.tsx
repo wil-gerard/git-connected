@@ -3,11 +3,12 @@ import styled from 'styled-components';
 import { ReactComponent as LogoBase } from '../assets/logo.svg';
 import { GradientBar } from './GradiantBar';
 import { Link } from 'react-router-dom';
-import axios, { AxiosResponse } from 'axios';
+import { AxiosResponse } from 'axios';
 import { myContext } from '../hooks/Context';
 import React, { useContext, useState } from 'react';
 import { IUser } from '../interface';
 import { ReactComponent as DiscordIcon } from '../assets/discord-icon.svg';
+import apiClient from '../api/apiClient';
 // import { useNavigate } from 'react-router-dom';
 
 
@@ -63,8 +64,8 @@ export default function Navbar() {
   };
 
   const logout = () => {
-    axios
-      .delete(`${process.env.REACT_APP_API_ORIGIN}/api/auth/logout`, {
+    apiClient
+      .delete('/api/auth/logout', {
         withCredentials: true,
       })
       .then((res: AxiosResponse) => {
