@@ -1,10 +1,11 @@
-import axios, { AxiosResponse } from 'axios';
+import { AxiosResponse } from 'axios';
 import tw from 'twin.macro';
 import { css } from 'styled-components/macro'; //eslint-disable-line
 import { ReactComponent as TwitterIcon } from '../assets/twitter-icon.svg';
 import { ReactComponent as GitHubIcon } from '../assets/github-icon.svg';
 import React, { useEffect, useState } from 'react';
 import { IUser } from '../interface';
+import apiClient from '../api/apiClient';
 
 const Content = tw.div`flex flex-col justify-center px-6 text-gray-100`;
 
@@ -53,8 +54,8 @@ export default function Home() {
   const [alreadyFollowing, setAlreadyFollowing] = useState(initialState);
 
   async function getCurrentUserInfo() {
-    axios
-      .get(`${process.env.REACT_APP_API_ORIGIN}/api/user/getuser`, {
+    apiClient
+      .get('/api/user/getuser', {
         withCredentials: true,
       })
       .then((res: AxiosResponse) => {
@@ -71,9 +72,9 @@ export default function Home() {
     targetId: string
   ) => {
     try {
-      const res = await axios({
+      const res = await apiClient({
         method: 'post',
-        url: `${process.env.REACT_APP_API_ORIGIN}/api/user/followall`,
+        url: '/api/user/followall',
         params: {
           twitterUsername,
           gitHubUsername,
@@ -89,8 +90,8 @@ export default function Home() {
   };
 
   useEffect(() => {
-    axios
-      .get(`${process.env.REACT_APP_API_ORIGIN}/api/user/getallusers`)
+    apiClient
+      .get('/api/user/getallusers')
       .then((res: AxiosResponse) => {
         setUsers(res.data);
       });

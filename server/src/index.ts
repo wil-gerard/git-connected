@@ -14,22 +14,18 @@ import mongoStore from 'connect-mongo';
 const app = express();
 app.use(express.json());
 
-app.use(express.static(path.resolve(__dirname, '../../client/build')));
-
 app.use(express.urlencoded({ extended: true }));
-// app.use(
-//   cors({
-//     origin: `${process.env.FRONTEND_ORIGIN_URL}`,
-//     methods: 'GET,PUT,POST,DELETE',
-//     credentials: true,
-//   })
-// );
-app.use(
-  cors({
-    methods: 'GET,PUT,POST,DELETE',
-    credentials: true,
-  })
-);
+
+if (process.env.NODE_ENV === 'development') {
+  app.use(
+    cors({
+      origin: 'http://localhost:3000',
+      credentials: true
+    })
+  );
+} else {
+  app.use(cors({ credentials: true }))
+};
 
 app.use(
   morgan(process.env.NODE_ENV !== 'production' ? 'dev' : 'combined', {
@@ -67,16 +63,21 @@ app.use(passport.session());
 
 // Routes
 app.use('/api', routes);
-app.get('*', (request, response) => {
-  response.sendFile(
-    path.resolve(__dirname, '../../client/build', 'index.html')
-  );
-});
+
+// Production Deployment
+if (process.env.NODE_ENV === 'production') {
+  app.use(express.static(path.resolve(__dirname, '../../client/build')));
+  app.get('*', (request, response) => {
+    response.sendFile(
+      path.resolve(__dirname, '../../client/build', 'index.html')
+    );
+  });
+}
 
 // Database
 import './config/database';
 
-const PORT = process.env.PORT || process.env.BACKEND_DEV_PORT;
+const PORT = process.env.PORT || 4000;
 
 app.listen(PORT, () => {
   console.log(`Serving running on PORT ${PORT}`);

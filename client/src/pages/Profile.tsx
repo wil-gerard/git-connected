@@ -6,7 +6,7 @@ import { myContext } from '../hooks/Context';
 import React, { useContext, useState } from 'react';
 import { IUser } from '../interface';
 import { UserCard } from '../components/UserCard';
-import axios from 'axios';
+import apiClient from '../api/apiClient';
 
 const Container = tw.div`flex flex-col px-6 text-gray-100`;
 
@@ -63,11 +63,14 @@ const LoginContainer = tw.div`px-10 py-2 flex-col flex`;
 
 export default function Profile() {
   const gitHubConnect = () => {
-    window.open(`/api/auth/github`, '_self');
+    window.open(`${process.env.REACT_APP_API_ORIGIN}/api/auth/github`, '_self');
   };
 
   const twitterConnect = () => {
-    window.open(`/api/auth/twitter`, '_self');
+    window.open(
+      `${process.env.REACT_APP_API_ORIGIN}/api/auth/twitter`,
+      '_self'
+    );
   };
 
   const [showModal, setShowModal] = useState(false);
@@ -103,15 +106,15 @@ export default function Profile() {
   
   const removeConnection = async (platformName: string) => { 
     try { 
-      axios({
+      apiClient({
         method: 'put',
-        url: `${process.env.REACT_APP_API_ORIGIN}/api/user/removeConnection`,
+        url: '/api/user/removeConnection',
         data: { platformName },
         withCredentials: true,
         responseType: 'json',
       }).then((res) => {
         if (res) {
-          window.open('/profile', '_self');
+          window.open(`/profile`, '_self');
           // more elegant way to do this?? - aim is to refresh page/button so it's clear that it's now disconnected
         }
       });
@@ -124,9 +127,9 @@ export default function Profile() {
     setShowModal(false);
 
     try { 
-      axios({
+      apiClient({
         method: 'put',
-        url: `${process.env.REACT_APP_API_ORIGIN}/api/user/update`,
+        url: '/user/update',
         data: formData,
         withCredentials: true,
         responseType: 'json',

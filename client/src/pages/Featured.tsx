@@ -1,10 +1,11 @@
-import Axios, { AxiosResponse } from 'axios';
+import { AxiosResponse } from 'axios';
 import tw from 'twin.macro';
 import { css } from 'styled-components/macro'; //eslint-disable-line
 import { UserCard } from '../components/UserCard';
 import { myContext } from '../hooks/Context';
 import React, { useEffect, useState, useContext } from 'react';
 import { IUser } from '../interface';
+import apiClient from '../api/apiClient';
 
 const Container = tw.div`flex flex-col px-6 text-gray-100`;
 const Content = tw.div`flex-row flex max-w-screen-xl mx-auto py-2`;
@@ -15,7 +16,7 @@ export default function Featured() {
 
   const [users, setUsers] = useState<IUser[]>();
   useEffect(() => {
-    Axios.get(`${process.env.REACT_APP_API_ORIGIN}/api/user/getallusers`).then(
+    apiClient.get('/api/user/getallusers').then(
       (res: AxiosResponse) => {
         setUsers(res.data);
       }
