@@ -1,14 +1,9 @@
 (this is a sample to demonstrate the proper .env variables and structure)
-MONGODB_URI_START = mongodb+srv://
-MONGODB_USERNAME = UsernameGoesHere
-MONGODB_PASSWORD = PasswordGoesHere
-MONGODB_URI_END = @clusterNumberHere.GarbledCharactersHere.mongodb.net/development-database?paramsGoHere=values
+NODE_ENV = development
 
-FRONTEND_DEV_URL = http://localhost:3000
+MONGODB_URL = YourMongoDBatlasURLGoesHere
 
-PRODUCTION_URL = YourHostedURLGoesHere
-
-PRODUCTION_AUTH_CALLBACK_URL = HerokuHostedCallbackURLGoesHere
+FRONTEND_ORIGIN_URL = http://localhost:3000
 
 SESSION_SECRET = YourSessionSecretGoesHere
 

@@ -13,16 +13,16 @@
        align="center" />
 </a>
   
-# GitConnected
+# Git Connected
 
-GitConnected is a social networking application that allows software engineers to reciprocate connections, follows, and endorsements - built by and for the [100Devs](https://leonnoel.com/100devs/) community.
+Git Connected is a social networking application that allows software engineers to reciprocate connections, follows, and endorsements - built by and for the [100Devs](https://leonnoel.com/100devs/) community.
 
 ## Table of Contents
 * [Features](#features)
 * [Tools and technologies](#tools-and-technologies)
-* [Installation and setup](#installation-and-setup)
 * [Contributing :hearts:](#contributing)
-* [Authors](#authors)
+* [Installation and local development](#installation-and-local-development)
+* [Contributors](#contributors)
 * [License](#license)
 
 ### Features
@@ -87,36 +87,66 @@ There are several ways to help.
 
 8. **Design, project management, translations, etc.**: You don't have to be programmer to help!
 
-## Installation and setup
+## Installation and local development
 
 These instructions will get a copy of the project on your local machine for development and testing purposes. If you have any further questions, feel free to reach out to [Wil Gerard.](https://github.com/wil-gerard)
 
 ### Prerequisites
 
 * Node v16 or higher
+* Yarn v3.2.0
 
-### Installing
-* Clone repo
-`git clone https://github.com/wil-gerard/GitConnected`
-* Install NPM modules for **backend** `cd backend` and then `yarn install`
-* Install NPM modules for **client** `cd client` and then `yarn install`
-* Create an .env file with your own environment variables:
+### Installation and setup
 
-### .env
-Expects a .env file in the root directory of **backend** with environment variables. If you're unsure what that means, locate our template **.envTEMPLATE**, delete "TEMPLATE" from the filename, plug in your environment variables, and save.
+For instructions on installing Node, please visit [https://nodejs.org/](https://nodejs.org/)
 
-### Running locally
+#### Installing Yarn 2 (aka Yarn Modern)
+```
+npm install -g yarn
+yarn set version berry
+```
+#### Clone repo
+```
+git clone https://github.com/wil-gerard/git-connected.git
+```
+#### Install dependencies
+```
+yarn
+```
 
-#### Frontend
-* Navigate to root directory of **client** in your terminal `cd client` and then `yarn start`
+#### Environment variables
+- You will find a .env template at git-connected/server/.envTEMPLATE
+- Delete "TEMPLATE" from the filename
+- MONGODB_URL: Instructions on [setting up a MongoDB Atlas account.](https://hevodata.com/learn/mongodb-atlas-nodejs/) Refer to the image below on where to find your connection string.
+  
+  ![mongodb_url](https://user-images.githubusercontent.com/74286884/159807213-b7146a46-22e6-4927-bc18-65a2ed63025b.png)
+- DISCORD_CLIENT_ID and DISCORD_SECRET: Instructions on [setting up a Discord OAuth application](https://circlertech.com/working-with-discord-oauth2) 
+  - Redirect URI: `http://localhost:4000/api/auth/discord/callback`
+  
+*The previous two environment variables should be enough for most development adjustments. But if you'd like full app functionality, feel free to add the other environment variables.*
 
-#### Backend
-* Navigate to root directory of **backend** in your terminal `cd backend` and then `yarn dev`
+- TWITTER_CONSUMER_KEY and TWITTER_CONSUMER_SECRET: [Create a Twitter OAuth app with v1.1 access](https://developer.twitter.com)
+  - Redirect URI: `http://localhost:4000/api/auth/twitter/callback`
+- GITHUB_CLIENT_ID and GITHUB_CLIENT_SECRET: [Create a GitHub OAuth app](https://docs.github.com/en/developers/apps/building-oauth-apps/creating-an-oauth-app)
+  - Redirect URI: `http://localhost:4000/api/auth/github/callback`
 
-## Authors
+#### Developing locally
+
+Open a terminal and run this script to start the dev server
+```
+yarn workspace server dev
+```
+
+In a new terminal, run this script to start the React client
+```
+yarn workspace client start
+```
+
+## Contributors
   - **Wil Gerard** - *Software Engineer* - [wil-gerard](https://github.com/wil-gerard)
   - **Ken aka Frosty** - *Software Engineer* - [KenAKAFrosty](https://github.com/KenAKAFrosty)
   - **Jeff Bucher** - *Software Engineer* - [JeffBucherDev](https://github.com/JeffBucherDev)
+  - **Miracle Banks** - *Software Engineer* - [miraclebanks](https://github.com/miraclebanks)
 
 See also the list of
 [contributors](https://github.com/wil-gerard/GitConnected/contributors)
