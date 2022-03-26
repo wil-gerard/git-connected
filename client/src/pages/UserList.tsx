@@ -99,11 +99,13 @@ export default function Home() {
     getCurrentUserInfo();
   }, []);
 
-  users?.sort((a: IUser, b: IUser) => {
-    if ( alreadyFollowing[a._id] ) { return 1 }
-    else if (alreadyFollowing[b._id]) { return -1 }
-    else { return 0 }
-  });
+  if ( alreadyFollowing ) {
+    users?.sort((a: IUser, b: IUser) => {
+      if ( alreadyFollowing[a._id] ) { return 1 }
+      else if (alreadyFollowing[b._id]) { return -1 }
+      else { return 0 }
+    });
+  }
 
   return (
     <>
