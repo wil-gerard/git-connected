@@ -147,6 +147,7 @@ yarn workspace client start
   - **Ken aka Frosty** - *Software Engineer* - [KenAKAFrosty](https://github.com/KenAKAFrosty)
   - **Jeff Bucher** - *Software Engineer* - [JeffBucherDev](https://github.com/JeffBucherDev)
   - **Miracle Banks** - *Software Engineer* - [miraclebanks](https://github.com/miraclebanks)
+  - **Dan Anderson** - *Software Engineer* - [DanCAnderson](https://github.com/DanCAnderson)
 
 See also the list of
 [contributors](https://github.com/wil-gerard/GitConnected/contributors)
