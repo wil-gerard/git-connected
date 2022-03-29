@@ -2,8 +2,8 @@ import tw from 'twin.macro';
 import styled from 'styled-components';
 import { ReactComponent as TwitterIcon } from '../assets/twitter-icon.svg';
 import { ReactComponent as GitHubIcon } from '../assets/github-icon.svg';
-import { myContext } from '../hooks/Context';
-import React, { useContext, useState } from 'react';
+import { useUserContext } from '../hooks/UserContext';
+import React, { useState } from 'react';
 import { IUser } from '../interface';
 import { UserCard } from '../components/UserCard';
 import apiClient from '../api/apiClient';
@@ -75,7 +75,7 @@ export default function Profile() {
 
   const [showModal, setShowModal] = useState(false);
 
-  const user = useContext(myContext) as IUser;
+  const user = useUserContext() as IUser;
 
   const [formData, setFormData] = useState({
     customBio: '',
