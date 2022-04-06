@@ -4,7 +4,6 @@ import styled from 'styled-components';
 import { IUser } from '../interface';
 import { ReactComponent as TwitterIcon } from '../assets/twitter-icon.svg';
 import { ReactComponent as GitHubIcon } from '../assets/github-icon.svg';
-import { ReactComponent as LinkedInIcon } from '../assets/linkedin-icon.svg';
 
 const Card = tw.div`mx-auto ml-auto max-w-sm md:max-w-xs lg:max-w-sm xl:max-w-xs bg-secondary-800 p-4 rounded shadow-lg`;
 
@@ -36,6 +35,39 @@ const CardMetaFeature = styled.a`
 `;
 
 export const UserCard: React.FC<IUser> = (user) => {
+
+  const username = (user: IUser) => {
+    if (user.customName !== '') {
+      return user.customName
+    } else if(user.gitHubConnected) {
+      return user.gitHub.json.login
+    } else if (user.twitterConnected) {
+      return user.twitter.username
+    } else {
+      return user.discord.username
+    }
+  }
+
+  const location = (user: IUser) => {
+    if (user.customLocation !== '') {
+      return user.customLocation
+    } else if (user.gitHubConnected) {
+      return user.gitHub.json.location
+    } else {
+      return null
+    }
+  }
+
+  const bio = (user: IUser) => {
+    if (user.customBio !== '') {
+      return user.customBio
+    } else if (user.gitHubConnected) {
+      return user.gitHub.json.bio
+    } else {
+      return null
+    }
+  }
+
   return (
     <Card>
       <CardImageContainer>
@@ -50,27 +82,36 @@ export const UserCard: React.FC<IUser> = (user) => {
       <CardText>
         <CardHeader>
           <CardName>
-            {user.gitHubConnected
-              ? user.gitHub.json.name || user.gitHub.json.login
-              : user.discord.username}
+            {username(user)}
           </CardName>
           <CardLocation>
-            {user.gitHubConnected ? user.gitHub.json.location : null}
+            {location(user)}
           </CardLocation>
         </CardHeader>
-        <CardBio>{user.gitHubConnected ? user.gitHub.json.bio : null}</CardBio>
+        <CardBio>
+          {bio(user)}
+        </CardBio>
         <CardMeta>
-          {user.gitHub && user.gitHub.json && 
-            <CardMetaFeature href={ "https://www.twitter.com/" + user.gitHub.json?.twitter_username} target="_blank"> 
+          {user.twitter?.id && (
+            <CardMetaFeature
+              href={
+                'https://www.twitter.com/' + user.twitter.id
+              }
+              target="_blank"
+            >
               <TwitterIcon />
             </CardMetaFeature>
-          }
-          {user.gitHub && user.gitHub.json &&
+          )}
+          {user.gitHub?.json && (
             <CardMetaFeature href={user.gitHub.json.html_url} target="_blank">
               <GitHubIcon />
             </CardMetaFeature>
-          }
-          {user.gitHub && user.twitter ? "" : <div>{"Connect Github & Twitter to be listed"}</div> }
+          )}
+          {user.gitHub && user.twitter ? (
+            ''
+          ) : (
+            <div>{'Connect Github & Twitter to be listed'}</div>
+          )}
           {/* <CardMetaFeature>
             <LinkedInIcon />
           </CardMetaFeature> */}

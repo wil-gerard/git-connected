@@ -90,22 +90,46 @@ export default function Home() {
   };
 
   useEffect(() => {
-    apiClient
-      .get('/api/user/getallusers')
-      .then((res: AxiosResponse) => {
-        setUsers(res.data);
-      });
+    apiClient.get('/api/user/getallusers').then((res: AxiosResponse) => {
+      setUsers(res.data);
+    });
 
     getCurrentUserInfo();
   }, []);
 
-  if ( alreadyFollowing ) {
+  if (alreadyFollowing) {
     users?.sort((a: IUser, b: IUser) => {
-      if ( alreadyFollowing[a._id] ) { return 1 }
-      else if (alreadyFollowing[b._id]) { return -1 }
-      else { return 0 }
+      if (alreadyFollowing[a._id]) {
+        return 1;
+      } else if (alreadyFollowing[b._id]) {
+        return -1;
+      } else {
+        return 0;
+      }
     });
   }
+
+  const username = (user: IUser) => {
+    if (user.customName !== '') {
+      return user.customName;
+    } else if (user.gitHubConnected) {
+      return user.gitHub.json.login;
+    } else if (user.twitterConnected) {
+      return user.twitter.username;
+    } else {
+      return user.discord.username;
+    }
+  };
+
+  const location = (user: IUser) => {
+    if (user.customLocation !== '') {
+      return user.customLocation;
+    } else if (user.gitHubConnected) {
+      return user.gitHub.json.location;
+    } else {
+      return null;
+    }
+  };
 
   return (
     <>
@@ -127,20 +151,20 @@ export default function Home() {
                 {users ? (
                   users.map((user: IUser) => {
                     return (
-                      <TableRow key={user._id} id={user.twitter.username}>
+                      <TableRow key={user._id}>
                         <TableDataCell>
                           <TableDataNameContainer>
                             <TableDataImage
                               src={`${user.gitHub.json.avatar_url}`}
                             />
                             <TableDataName>
-                              {user.gitHub.json.name}
+                              {username(user)}
                             </TableDataName>
                           </TableDataNameContainer>
                         </TableDataCell>
                         <TableDataCell>
                           <TableDataLocation>
-                            {user.gitHub.json.location}
+                            {location(user)}
                           </TableDataLocation>
                         </TableDataCell>
                         <TableDataCell>

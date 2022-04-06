@@ -2,9 +2,8 @@ import tw from 'twin.macro';
 import styled from 'styled-components';
 import { ReactComponent as TwitterIcon } from '../assets/twitter-icon.svg';
 import { ReactComponent as GitHubIcon } from '../assets/github-icon.svg';
-import { myContext } from '../hooks/Context';
-import React, { useContext, useState } from 'react';
-import { IUser } from '../interface';
+import { useUserContext } from '../hooks/UserContext';
+import React, { useState } from 'react';
 import { UserCard } from '../components/UserCard';
 import apiClient from '../api/apiClient';
 
@@ -12,7 +11,7 @@ const Container = tw.div`flex flex-col px-6 text-gray-100`;
 
 const Content = tw.div`mx-auto justify-center `;
 
-// const Button = tw.button`focus:outline-none text-gray-100 text-sm py-2 px-4 rounded-full bg-primary-600 hocus:bg-primary-800 transition duration-300 hover:shadow-lg mb-4`;
+const Button = tw.button`focus:outline-none text-gray-100 text-sm py-2 px-4 rounded-full bg-primary-600 hocus:bg-primary-800 transition duration-300 hover:shadow-lg mb-4`;
 
 const ModalContainer = tw.div`justify-center items-center flex overflow-x-hidden overflow-y-auto fixed inset-0 z-50 outline-none focus:outline-none w-full`;
 
@@ -30,7 +29,7 @@ const FormTextInput = tw.input`border-0 px-3 py-3 placeholder-gray-600 text-gray
 
 const FormTextArea = tw.textarea`w-full border-0 px-3 py-3 placeholder-gray-600 text-gray-100 bg-secondary-700 rounded text-sm shadow focus:outline-none focus:ring ease-linear transition-all duration-150`;
 
-const FormCheckbox = tw.input`h-4 w-4 focus:ring border-gray-300 border-0 px-3 py-3 text-gray-100 bg-secondary-700 rounded text-sm shadow focus:outline-none ease-linear transition-all duration-150`;
+// const FormCheckbox = tw.input`h-4 w-4 focus:ring border-gray-300 border-0 px-3 py-3 text-gray-100 bg-secondary-700 rounded text-sm shadow focus:outline-none ease-linear transition-all duration-150`;
 
 const FormLabel = tw.label`block uppercase text-gray-300 text-xs font-bold mb-2`;
 
@@ -74,26 +73,24 @@ export default function Profile() {
   };
 
   const [showModal, setShowModal] = useState(false);
-
-  const user = useContext(myContext) as IUser;
+  
+  const { user, setUser } = useUserContext();
 
   const [formData, setFormData] = useState({
-    customBio: '',
-    customLocation: '',
-    customName: '',
-    lookingForCoffeeChats: false,
-    openToCoffeeChats: false,
+    customBio: user?.customBio,
+    customLocation: user?.customLocation,
+    customName: user?.customName,
+    lookingForCoffeeChats: user?.lookingForCoffeeChats,
+    openToCoffeeChats: user?.openToCoffeeChats,
   });
 
   const {
     customBio,
     customLocation,
     customName,
-    lookingForCoffeeChats,
-    openToCoffeeChats,
+    // lookingForCoffeeChats,
+    // openToCoffeeChats,
   } = formData;
-
-  
 
   const handleInputChange = (e: any) =>
     setFormData({
@@ -102,8 +99,6 @@ export default function Profile() {
         e.target.type === 'checkbox' ? e.target.checked : e.target.value,
   });
 
-
-  
   const removeConnection = async (platformName: string) => { 
     try { 
       apiClient({
@@ -114,8 +109,7 @@ export default function Profile() {
         responseType: 'json',
       }).then((res) => {
         if (res) {
-          window.open(`/profile`, '_self');
-          // more elegant way to do this?? - aim is to refresh page/button so it's clear that it's now disconnected
+          setUser(res.data)
         }
       });
     } catch (err: any) {
@@ -129,12 +123,13 @@ export default function Profile() {
     try { 
       apiClient({
         method: 'put',
-        url: '/user/update',
+        url: '/api/user/update',
         data: formData,
         withCredentials: true,
         responseType: 'json',
-      }).then((res) => {
+      }).then((res: any) => {
         if (res) {
+          setUser(res.data)
         }
       });
     } catch (err: any) {
@@ -150,9 +145,9 @@ export default function Profile() {
     <>
       <Container>
         <Content>
-          {/* <Button type="button" onClick={() => setShowModal(true)}>
+          <Button type="button" onClick={() => setShowModal(true)}>
             Edit profile
-          </Button> */}
+          </Button>
           {showModal ? (
             <>
               <ModalContainer>
@@ -176,7 +171,7 @@ export default function Profile() {
                         <FormTextInput
                           type="text"
                           name="customName"
-                          value={customName}
+                          value={customName ?? ''}
                           onChange={handleInputChange}
                         />
                       </FormInputContainer>
@@ -185,7 +180,7 @@ export default function Profile() {
                         <FormTextInput
                           type="text"
                           name="customLocation"
-                          value={customLocation}
+                          value={customLocation ?? ''}
                           onChange={handleInputChange}
                         />
                       </FormInputContainer>
@@ -194,11 +189,11 @@ export default function Profile() {
                         <FormTextArea
                           rows={2}
                           name="customBio"
-                          value={customBio}
+                          value={customBio ?? ''}
                           onChange={handleInputChange}
                         />
                       </FormInputContainer>
-                      <FormInputContainer>
+                      {/* <FormInputContainer>
                         <FormLabel htmlFor="lookingForCoffeeChats">
                           Looking for coffee chat
                         </FormLabel>
@@ -217,7 +212,7 @@ export default function Profile() {
                           checked={openToCoffeeChats}
                           onChange={handleInputChange}
                         />
-                      </FormInputContainer>
+                      </FormInputContainer> */}
                       <ModalFooter>
                         <FormSubmitButton type="submit">
                           Save Changes
