@@ -1,6 +1,7 @@
 import React, { createContext, useEffect, useState, useContext } from 'react';
 import { AxiosResponse } from 'axios';
 import apiClient from '../api/apiClient';
+import { IUser } from '../interface';
 
 export const useUserContext = () => {
   const context = useContext(UserContext);
@@ -8,10 +9,13 @@ export const useUserContext = () => {
   return context;
 };
 
-const UserContext = createContext({});
+const UserContext = createContext({
+  user: {} as IUser,
+  setUser: {} as any
+});
 
 export default function UserContextProvider(props: any) {
-  const [userObject, setUserObject] = useState<any>();
+  const [user, setUser] = useState<any>();
 
   useEffect(() => {
     apiClient
@@ -20,11 +24,13 @@ export default function UserContextProvider(props: any) {
       })
       .then((res: AxiosResponse) => {
         if (res.data) {
-          setUserObject(res.data);
+          setUser(res.data);
         }
       });
   }, []);
   return (
-    <UserContext.Provider value={userObject}>{props.children}</UserContext.Provider>
+    <UserContext.Provider value={{ user, setUser }}>
+      {props.children}
+    </UserContext.Provider>
   );
 }

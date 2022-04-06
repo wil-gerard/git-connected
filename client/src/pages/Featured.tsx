@@ -12,7 +12,7 @@ const Content = tw.div`flex-row flex max-w-screen-xl mx-auto py-2`;
 const Header = tw.h1`flex flex-col items-center text-5xl font-bold mb-0`;
 
 export default function Featured() {
-  const user = useUserContext() as IUser;
+  const { user } = useUserContext();
 
   const [users, setUsers] = useState<IUser[]>();
   useEffect(() => {

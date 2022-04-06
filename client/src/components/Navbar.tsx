@@ -6,7 +6,6 @@ import { Link } from 'react-router-dom';
 import { AxiosResponse } from 'axios';
 import { useUserContext } from '../hooks/UserContext';
 import React, { useState } from 'react';
-import { IUser } from '../interface';
 import { ReactComponent as DiscordIcon } from '../assets/discord-icon.svg';
 import apiClient from '../api/apiClient';
 
@@ -51,7 +50,7 @@ const LoginButton = styled.a`
 `;
 
 export default function Navbar() {
-  const user = useUserContext() as IUser;
+  const { user } = useUserContext()
 
   const [showModal, setShowModal] = useState(false);
 
