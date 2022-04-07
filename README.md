@@ -26,13 +26,18 @@ Git Connected is a social networking application that allows software engineers 
 * [License](#license)
 
 ### Features
+- Login through Discord OAuth first checks if a user is a part of the 100Devs server
+- Connect your GitHub and Twitter accounts
+- Update your username, location, and bio
+- Follow other 100Devs directly in-app
+- A featured 100Dev page
 
 #### Made by and for the 100Devs community
-User login that only allows members of the 100Devs Discord server. Connect your GitHub, Twitter, and LinkedIn accounts.
+User login that only allows members of the 100Devs Discord server.
 
 ![sign-in](https://user-images.githubusercontent.com/74286884/156219311-52e31316-2435-4e19-bbf0-981c30d9233d.gif)
 
-#### Connect across Twitter, GitHub, LinkedIn, and Discord
+#### Connect across Twitter, GitHub, and Discord
 Follow other 100Devs and be followed on all platforms, directly in-app.
 
 ![follow](https://user-images.githubusercontent.com/74286884/156219385-920d9663-a2cd-4e8a-9e6f-f17cefcfb3f5.gif)
