@@ -45,7 +45,9 @@ const TableFollow = tw.a`flex items-center rounded shadow cursor-pointer bg-seco
 
 const TableFollowed = tw.a`flex items-center justify-center rounded shadow cursor-default bg-green-600 transition duration-300  ml-1 py-0.5 px-2`;
 
+
 export default function Home() {
+
   const id = window.localStorage.getItem('id');
 
   let initialState: any = {};
@@ -89,13 +91,20 @@ export default function Home() {
     }
   };
 
+  const [windowWidth, setWindowWidth] = useState(window.innerWidth)
+
   useEffect(() => {
+    window.addEventListener('resize', (event) => {
+      setWindowWidth(window.innerWidth);
+    })
+
     apiClient.get('/api/user/getallusers').then((res: AxiosResponse) => {
       setUsers(res.data);
     });
 
     getCurrentUserInfo();
   }, []);
+
 
   if (alreadyFollowing) {
     users?.sort((a: IUser, b: IUser) => {
@@ -143,7 +152,10 @@ export default function Home() {
               <TableThead>
                 <TableRow>
                   <TableHeader>Name</TableHeader>
-                  <TableHeader>Location</TableHeader>
+                  {
+                    windowWidth > 500 &&
+                    <TableHeader>Location</TableHeader>
+                  }
                   <TableHeader>Links</TableHeader>
                 </TableRow>
               </TableThead>
@@ -163,9 +175,12 @@ export default function Home() {
                           </TableDataNameContainer>
                         </TableDataCell>
                         <TableDataCell>
-                          <TableDataLocation>
-                            {location(user)}
-                          </TableDataLocation>
+                          {
+                            windowWidth > 500 &&
+                            <TableDataLocation>
+                              {location(user)}
+                            </TableDataLocation>
+                          }
                         </TableDataCell>
                         <TableDataCell>
                           <TableActions>
