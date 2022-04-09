@@ -10,12 +10,12 @@ export const useUserContext = () => {
 };
 
 const UserContext = createContext({
-  user: {} as IUser,
-  setUser: {} as any
+  currentUser: {} as IUser,
+  setCurrentUser: {} as any
 });
 
 export default function UserContextProvider(props: any) {
-  const [user, setUser] = useState<any>();
+  const [currentUser, setCurrentUser] = useState<any>();
 
   useEffect(() => {
     apiClient
@@ -24,12 +24,12 @@ export default function UserContextProvider(props: any) {
       })
       .then((res: AxiosResponse) => {
         if (res.data) {
-          setUser(res.data);
+          setCurrentUser(res.data);
         }
       });
   }, []);
   return (
-    <UserContext.Provider value={{ user, setUser }}>
+    <UserContext.Provider value={{ currentUser, setCurrentUser }}>
       {props.children}
     </UserContext.Provider>
   );
