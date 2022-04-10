@@ -60,7 +60,6 @@ export const userFollowAll = async (
   next: NextFunction
 ) => {
   try {
-
     const targetId = req.query['targetId'] as string;
     const sourceId = req.user._id;
     const twitterUsername = req.query['twitterUsername'] as string;
@@ -77,11 +76,12 @@ export const userFollowAll = async (
       auth: req.user.gitHubToken,
     });
 
-    const doTwitterFollow = await twitter.post('friendships/create', {
+    // Responses will be used for error handling
+    const twitterFollowResponse = await twitter.post('friendships/create', {
       screen_name: twitterUsername,
     });
-    
-     const doGitHubFollow = await octokit.request(
+
+    const gitHubFollowResponse = await octokit.request(
       `PUT /user/following/${gitHubUsername}`,
       {
         username: gitHubUsername,
@@ -89,27 +89,33 @@ export const userFollowAll = async (
     );
 
     const options = defaultOptions;
-    let allFollowedIds: any = { };
-    if (req.user.alreadyFollowingTheseIds) { 
-      allFollowedIds = { 
-        ... req.user.alreadyFollowingTheseIds
-      }
+    let allFollowedIds: any = {};
+    if (req.user.alreadyFollowingTheseIds) {
+      allFollowedIds = {
+        ...req.user.alreadyFollowingTheseIds,
+      };
     }
     allFollowedIds[targetId] = true;
 
-    const userUpdateProps = { 
-      alreadyFollowingTheseIds : allFollowedIds
-    }
-    
-    await User.findByIdAndUpdate(sourceId, userUpdateProps, options, (err, user) => { 
-      if (!err) { 
-        res.status(200).send(user);
+    const userUpdateProps = {
+      alreadyFollowingTheseIds: allFollowedIds,
+    };
+
+    await User.findByIdAndUpdate(
+      sourceId,
+      userUpdateProps,
+      options,
+      (err, user) => {
+        if (!err) {
+          res.status(200).send(user);
+        }
       }
-    }).clone().catch( err => { 
-      err.status = 400;
-      next(err);
-    })
-    
+    )
+      .clone()
+      .catch((err) => {
+        err.status = 400;
+        next(err);
+      });
   } catch (err) {
     next(err);
   }
