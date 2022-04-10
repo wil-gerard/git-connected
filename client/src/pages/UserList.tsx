@@ -164,13 +164,13 @@ export default function Home() {
                             <TableDataName>{username(user)}</TableDataName>
                           </TableDataNameContainer>
                         </TableDataCell>
-                        <TableDataCell>
-                          {windowWidth > 500 && (
+                        {windowWidth > 500 && (
+                          <TableDataCell>
                             <TableDataLocation>
                               {location(user)}
                             </TableDataLocation>
-                          )}
-                        </TableDataCell>
+                          </TableDataCell>
+                        )}
                         <TableDataCell>
                           <TableActions>
                             <TableLink
