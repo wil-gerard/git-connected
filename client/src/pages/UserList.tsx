@@ -5,6 +5,7 @@ import { ReactComponent as TwitterIcon } from '../assets/twitter-icon.svg';
 import { ReactComponent as GitHubIcon } from '../assets/github-icon.svg';
 import React, { useEffect, useState } from 'react';
 import { IUser } from '../interface';
+import { useUserContext } from '../hooks/UserContext';
 import apiClient from '../api/apiClient';
 
 const Content = tw.div`flex flex-col justify-center px-6 text-gray-100`;
@@ -46,7 +47,8 @@ const TableFollow = tw.a`flex items-center rounded shadow cursor-pointer bg-seco
 const TableFollowed = tw.a`flex items-center justify-center rounded shadow cursor-default bg-green-600 transition duration-300  ml-1 py-0.5 px-2`;
 
 export default function Home() {
-  const id = window.localStorage.getItem('id');
+  //const id = window.localStorage.getItem('id');
+  const { currentUser } = useUserContext();
 
   let initialState: any = {};
   // const [currentUser, setCurrentUser] = useState()
@@ -190,7 +192,7 @@ export default function Home() {
                             >
                               <LinkedInIcon />
                             </TableLink> */}
-                            {!id ? (
+                            {!currentUser ? (
                               ''
                             ) : alreadyFollowing &&
                               alreadyFollowing[user._id] ? (
@@ -205,7 +207,7 @@ export default function Home() {
                                   );
                                 }}
                                 style={
-                                  id === user._id
+                                  currentUser._id === user._id
                                     ? { opacity: 0, pointerEvents: 'none' }
                                     : undefined
                                 }

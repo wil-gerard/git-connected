@@ -74,14 +74,14 @@ export default function Profile() {
 
   const [showModal, setShowModal] = useState(false);
   
-  const { user, setUser } = useUserContext();
+  const { currentUser, setCurrentUser } = useUserContext();
 
   const [formData, setFormData] = useState({
-    customBio: user?.customBio,
-    customLocation: user?.customLocation,
-    customName: user?.customName,
-    lookingForCoffeeChats: user?.lookingForCoffeeChats,
-    openToCoffeeChats: user?.openToCoffeeChats,
+    customBio: currentUser?.customBio,
+    customLocation: currentUser?.customLocation,
+    customName: currentUser?.customName,
+    lookingForCoffeeChats: currentUser?.lookingForCoffeeChats,
+    openToCoffeeChats: currentUser?.openToCoffeeChats,
   });
 
   const {
@@ -109,7 +109,7 @@ export default function Profile() {
         responseType: 'json',
       }).then((res) => {
         if (res) {
-          setUser(res.data)
+          setCurrentUser(res.data)
         }
       });
     } catch (err: any) {
@@ -129,7 +129,7 @@ export default function Profile() {
         responseType: 'json',
       }).then((res: any) => {
         if (res) {
-          setUser(res.data)
+          setCurrentUser(res.data)
         }
       });
     } catch (err: any) {
@@ -137,7 +137,7 @@ export default function Profile() {
     }
   };
 
-  if (!user) {
+  if (!currentUser) {
     return <p>loading...</p>;
   }
 
@@ -225,9 +225,9 @@ export default function Profile() {
               <BgOpacity />
             </>
           ) : null}
-          <UserCard {...user} />
+          <UserCard {...currentUser} />
           <LoginContainer>
-            {user.gitHubConnected ? (
+            {currentUser.gitHubConnected ? (
               <ConnectedAccountButton className="group" onClick={ ()=>{ removeConnection("gitHub") } }>
                 <GitHubIcon />
                 <ConnectedAccountText>Connected to GitHub</ConnectedAccountText>
@@ -239,7 +239,7 @@ export default function Profile() {
                 Connect to GitHub
               </ConnectAccountButton>
             )}
-            {user.twitterConnected ? (
+            {currentUser.twitterConnected ? (
               <ConnectedAccountButton className="group" onClick={ ()=>{ removeConnection("twitter") } }>
                 <TwitterIcon />
                 <ConnectedAccountText>Connected to Twitter</ConnectedAccountText>
