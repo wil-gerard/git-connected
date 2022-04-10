@@ -50,7 +50,7 @@ const LoginButton = styled.a`
 `;
 
 export default function Navbar() {
-  const { user } = useUserContext()
+  const { currentUser } = useUserContext()
 
   const [showModal, setShowModal] = useState(false);
 
@@ -104,7 +104,7 @@ export default function Navbar() {
           <NavLink to="/featured">Featured</NavLink>
         </MainLinks>
         <UserContextLinks>
-          {user ? (
+          {currentUser ? (
             <>
               <NavLink to="/profile">My Profile</NavLink>
               <LogoutNavLink onClick={logout}>Logout</LogoutNavLink>
