@@ -61,7 +61,6 @@ export default function Home() {
       })
       .then((res: AxiosResponse) => {
         if (res.data) {
-          // setCurrentUser(res.data);
           setAlreadyFollowing(res.data.alreadyFollowingTheseIds);
         }
       });
