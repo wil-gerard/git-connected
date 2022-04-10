@@ -54,9 +54,8 @@ const ConnectedAccountButton = tw(
   ConnectAccountButton
 )`bg-green-800 hocus:bg-red-800 cursor-pointer`;
 
-const ConnectedAccountText = tw.p` group-hocus:hidden `
-const DisconnectAccountText = tw.p`hidden group-hocus:inline`
-
+const ConnectedAccountText = tw.p` group-hocus:hidden `;
+const DisconnectAccountText = tw.p`hidden group-hocus:inline`;
 
 const LoginContainer = tw.div`px-10 py-2 flex-col flex`;
 
@@ -73,7 +72,7 @@ export default function Profile() {
   };
 
   const [showModal, setShowModal] = useState(false);
-  
+
   const { currentUser, setCurrentUser } = useUserContext();
 
   const [formData, setFormData] = useState({
@@ -97,10 +96,10 @@ export default function Profile() {
       ...formData,
       [e.target.name]:
         e.target.type === 'checkbox' ? e.target.checked : e.target.value,
-  });
+    });
 
-  const removeConnection = async (platformName: string) => { 
-    try { 
+  const removeConnection = async (platformName: string) => {
+    try {
       apiClient({
         method: 'put',
         url: '/api/user/removeConnection',
@@ -109,18 +108,18 @@ export default function Profile() {
         responseType: 'json',
       }).then((res) => {
         if (res) {
-          setCurrentUser(res.data)
+          setCurrentUser(res.data);
         }
       });
     } catch (err: any) {
       console.error(err);
     }
-  }
+  };
 
   const handleProfileFormSubmit = async () => {
     setShowModal(false);
 
-    try { 
+    try {
       apiClient({
         method: 'put',
         url: '/api/user/update',
@@ -129,7 +128,7 @@ export default function Profile() {
         responseType: 'json',
       }).then((res: any) => {
         if (res) {
-          setCurrentUser(res.data)
+          setCurrentUser(res.data);
         }
       });
     } catch (err: any) {
@@ -228,7 +227,12 @@ export default function Profile() {
           <UserCard {...currentUser} />
           <LoginContainer>
             {currentUser.gitHubConnected ? (
-              <ConnectedAccountButton className="group" onClick={ ()=>{ removeConnection("gitHub") } }>
+              <ConnectedAccountButton
+                className="group"
+                onClick={() => {
+                  removeConnection('gitHub');
+                }}
+              >
                 <GitHubIcon />
                 <ConnectedAccountText>Connected to GitHub</ConnectedAccountText>
                 <DisconnectAccountText>Disconnect GitHub</DisconnectAccountText>
@@ -240,17 +244,26 @@ export default function Profile() {
               </ConnectAccountButton>
             )}
             {currentUser.twitterConnected ? (
-              <ConnectedAccountButton className="group" onClick={ ()=>{ removeConnection("twitter") } }>
+              <ConnectedAccountButton
+                className="group"
+                onClick={() => {
+                  removeConnection('twitter');
+                }}
+              >
                 <TwitterIcon />
-                <ConnectedAccountText>Connected to Twitter</ConnectedAccountText>
-                <DisconnectAccountText>Disconnect Twitter</DisconnectAccountText>
+                <ConnectedAccountText>
+                  Connected to Twitter
+                </ConnectedAccountText>
+                <DisconnectAccountText>
+                  Disconnect Twitter
+                </DisconnectAccountText>
               </ConnectedAccountButton>
             ) : (
               <ConnectAccountButton onClick={twitterConnect}>
                 <TwitterIcon />
                 Connect to Twitter
               </ConnectAccountButton>
-            )} 
+            )}
             {/* {user.lookingForCoffeeChats ? (
               <ConnectedAccountButton disabled>
                 <LinkedInIcon />

@@ -35,38 +35,37 @@ const CardMetaFeature = styled.a`
 `;
 
 export const UserCard: React.FC<IUser> = (user) => {
-
   const username = (user: IUser) => {
     if (user.customName !== '') {
-      return user.customName
-    } else if(user.gitHubConnected) {
-      return user.gitHub.json.login
+      return user.customName;
+    } else if (user.gitHubConnected) {
+      return user.gitHub.json.login;
     } else if (user.twitterConnected) {
-      return user.twitter.username
+      return user.twitter.username;
     } else {
-      return user.discord.username
+      return user.discord.username;
     }
-  }
+  };
 
   const location = (user: IUser) => {
     if (user.customLocation !== '') {
-      return user.customLocation
+      return user.customLocation;
     } else if (user.gitHubConnected) {
-      return user.gitHub.json.location
+      return user.gitHub.json.location;
     } else {
-      return null
+      return null;
     }
-  }
+  };
 
   const bio = (user: IUser) => {
     if (user.customBio !== '') {
-      return user.customBio
+      return user.customBio;
     } else if (user.gitHubConnected) {
-      return user.gitHub.json.bio
+      return user.gitHub.json.bio;
     } else {
-      return null
+      return null;
     }
-  }
+  };
 
   return (
     <Card>
@@ -81,22 +80,14 @@ export const UserCard: React.FC<IUser> = (user) => {
       </CardImageContainer>
       <CardText>
         <CardHeader>
-          <CardName>
-            {username(user)}
-          </CardName>
-          <CardLocation>
-            {location(user)}
-          </CardLocation>
+          <CardName>{username(user)}</CardName>
+          <CardLocation>{location(user)}</CardLocation>
         </CardHeader>
-        <CardBio>
-          {bio(user)}
-        </CardBio>
+        <CardBio>{bio(user)}</CardBio>
         <CardMeta>
           {user.twitter?.id && (
             <CardMetaFeature
-              href={
-                'https://www.twitter.com/' + user.twitter.id
-              }
+              href={'https://www.twitter.com/' + user.twitter.id}
               target="_blank"
             >
               <TwitterIcon />

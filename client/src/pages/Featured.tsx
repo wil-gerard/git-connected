@@ -16,11 +16,9 @@ export default function Featured() {
 
   const [users, setUsers] = useState<IUser[]>();
   useEffect(() => {
-    apiClient.get('/api/user/getallusers').then(
-      (res: AxiosResponse) => {
-        setUsers(res.data);
-      }
-    );
+    apiClient.get('/api/user/getallusers').then((res: AxiosResponse) => {
+      setUsers(res.data);
+    });
   }, [currentUser]);
 
   if (!users) {

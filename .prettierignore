@@ -1,0 +1,41 @@
+*/.env
+*/development.env
+*/production.env
+*/node_modules
+/.pnp
+.pnp.js
+
+# testing
+/coverage
+
+# production
+*/build
+*/dist
+
+# misc
+git-connected.code-workspace
+.DS_Store
+.env.local
+.env.development.local
+.env.test.local
+.env.production.local
+
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# Yarn
+.pnp.*
+.yarn/*
+!.yarn/patches
+!.yarn/plugins
+!.yarn/releases
+!.yarn/sdks
+!.yarn/versions
+node_modules
+
+.yarnrc.yml
+CODE_OF_CONDUCT.md
+LICENSE.md
+README.md
+*/package.json

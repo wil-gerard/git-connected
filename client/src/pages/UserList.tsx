@@ -46,7 +46,6 @@ const TableFollow = tw.a`flex items-center rounded shadow cursor-pointer bg-seco
 
 const TableFollowed = tw.a`flex items-center justify-center rounded shadow cursor-default bg-green-600 transition duration-300  ml-1 py-0.5 px-2`;
 
-
 export default function Home() {
   const { currentUser } = useUserContext();
 
@@ -61,7 +60,6 @@ export default function Home() {
       })
       .then((res: AxiosResponse) => {
         if (res.data) {
-          // setCurrentUser(res.data);
           setAlreadyFollowing(res.data.alreadyFollowingTheseIds);
         }
       });
@@ -89,12 +87,12 @@ export default function Home() {
     }
   };
 
-  const [windowWidth, setWindowWidth] = useState(window.innerWidth)
+  const [windowWidth, setWindowWidth] = useState(window.innerWidth);
 
   useEffect(() => {
     window.addEventListener('resize', (event) => {
       setWindowWidth(window.innerWidth);
-    })
+    });
 
     apiClient.get('/api/user/getallusers').then((res: AxiosResponse) => {
       setUsers(res.data);
@@ -102,7 +100,6 @@ export default function Home() {
 
     getCurrentUserInfo();
   }, []);
-
 
   if (alreadyFollowing) {
     users?.sort((a: IUser, b: IUser) => {
@@ -150,10 +147,7 @@ export default function Home() {
               <TableThead>
                 <TableRow>
                   <TableHeader>Name</TableHeader>
-                  {
-                    windowWidth > 500 &&
-                    <TableHeader>Location</TableHeader>
-                  }
+                  {windowWidth > 500 && <TableHeader>Location</TableHeader>}
                   <TableHeader>Links</TableHeader>
                 </TableRow>
               </TableThead>
@@ -167,19 +161,16 @@ export default function Home() {
                             <TableDataImage
                               src={`${user.gitHub.json.avatar_url}`}
                             />
-                            <TableDataName>
-                              {username(user)}
-                            </TableDataName>
+                            <TableDataName>{username(user)}</TableDataName>
                           </TableDataNameContainer>
                         </TableDataCell>
-                        <TableDataCell>
-                          {
-                            windowWidth > 500 &&
+                        {windowWidth > 500 && (
+                          <TableDataCell>
                             <TableDataLocation>
                               {location(user)}
                             </TableDataLocation>
-                          }
-                        </TableDataCell>
+                          </TableDataCell>
+                        )}
                         <TableDataCell>
                           <TableActions>
                             <TableLink

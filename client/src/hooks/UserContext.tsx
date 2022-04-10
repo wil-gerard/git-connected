@@ -11,7 +11,7 @@ export const useUserContext = () => {
 
 const UserContext = createContext({
   currentUser: {} as IUser,
-  setCurrentUser: {} as any
+  setCurrentUser: {} as any,
 });
 
 export default function UserContextProvider(props: any) {
