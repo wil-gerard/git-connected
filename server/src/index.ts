@@ -20,12 +20,12 @@ if (process.env.NODE_ENV === 'development') {
   app.use(
     cors({
       origin: 'http://localhost:3000',
-      credentials: true
+      credentials: true,
     })
   );
 } else {
-  app.use(cors({ credentials: true }))
-};
+  app.use(cors({ credentials: true }));
+}
 
 app.use(
   morgan(process.env.NODE_ENV !== 'production' ? 'dev' : 'combined', {

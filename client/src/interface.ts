@@ -1,6 +1,6 @@
 export interface IUser {
   _id: string;
-  alreadyFollowingTheseIds:any;
+  alreadyFollowingTheseIds: any;
   twitterConnected: boolean;
   gitHubConnected: boolean;
   customBio: string;

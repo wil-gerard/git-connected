@@ -2,7 +2,7 @@ import express from 'express';
 import auth from '../middleware/auth';
 import { Request, Response } from 'express';
 import passport from 'passport';
-import { logout } from '../controllers/authControllers'
+import { logout } from '../controllers/authControllers';
 
 const router = express.Router();
 // --- Discord ---
@@ -16,7 +16,9 @@ router.get(
   }),
   function (req: Request, res: Response) {
     const userDetails: any = req.user;
-    res.redirect(`${process.env.FRONTEND_ORIGIN_URL}/profile?id=${userDetails._id}`);
+    res.redirect(
+      `${process.env.FRONTEND_ORIGIN_URL}/profile?id=${userDetails._id}`
+    );
   }
 );
 
@@ -36,11 +38,7 @@ router.get(
 );
 
 // --- GitHub ---
-router.get(
-  '/auth/github',
-  auth,
-  passport.authorize('github')
-);
+router.get('/auth/github', auth, passport.authorize('github'));
 
 router.get(
   '/auth/github/callback',
