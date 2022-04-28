@@ -5,7 +5,6 @@ import { IDatabaseUser, IReqAuth } from '../../interface';
 const discordScopes = [
   'identify',
   'guilds',
-  'guilds.join',
   'guilds.members.read',
 ];
 const discordStrategySettings: any = {
