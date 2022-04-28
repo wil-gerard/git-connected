@@ -1,4 +1,3 @@
-
 (this is a sample to demonstrate the proper .env variables and structure)
 NODE_ENV = development
 
