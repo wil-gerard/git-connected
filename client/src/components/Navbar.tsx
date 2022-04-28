@@ -73,8 +73,8 @@ export default function Navbar() {
           window.localStorage.removeItem('id');
           
           // reset user state and navigate to '/'
-          setCurrentUser(null)
-          navigate('/')
+          setCurrentUser(null);
+          navigate('/');
         }
       });
   };
