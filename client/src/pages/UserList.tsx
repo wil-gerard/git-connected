@@ -12,7 +12,7 @@ const Content = tw.div`flex flex-col justify-center px-6 text-gray-100`;
 
 const Header = tw.header`px-5 py-4 border-b border-gray-100`;
 
-const HeaderText = tw.h2`font-semibold text-gray-300`;
+const HeaderText = tw.h2`font-semibold text-gray-100`;
 
 const TableContainer = tw.div`w-full max-w-2xl mx-auto shadow-lg rounded bg-secondary-800`;
 
