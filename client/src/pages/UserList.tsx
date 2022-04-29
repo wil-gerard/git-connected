@@ -20,7 +20,7 @@ const Table = tw.table`table-auto w-full`;
 
 const TablePadding = tw.div`p-3`;
 
-const TableThead = tw.thead`text-xs font-semibold uppercase text-gray-300 bg-secondary-700`;
+const TableThead = tw.thead`text-sm font-semibold text-gray-300 bg-secondary-600`;
 
 const TableRow = tw.tr``;
 
