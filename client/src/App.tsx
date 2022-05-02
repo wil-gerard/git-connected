@@ -1,8 +1,9 @@
 import React from 'react';
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import Profile from './pages/Profile';
-import UserList from './pages/UserList';
+import Profiles from './pages/Profiles';
 import Featured from './pages/Featured';
+import Home from './pages/Home';
 import Navbar from './components/Navbar';
 import Footer from './components/Footer';
 
@@ -13,7 +14,8 @@ function App() {
         <Navbar />
         <div className="flex-grow">
           <Routes>
-            <Route path="/" element={<UserList />} />
+            <Route path="/" element={<Home />} />
+            <Route path="/profiles" element={<Profiles />} />
             <Route path="/featured" element={<Featured />} />
             <Route path="/profile" element={<Profile />} />
           </Routes>

@@ -105,7 +105,7 @@ export default function Navbar() {
           <NavLink to="/">
             <Logo />
           </NavLink>
-          <NavLink to="/">Profiles</NavLink>
+          <NavLink to="/profiles">Profiles</NavLink>
           <NavLink to="/featured">Featured</NavLink>
         </MainLinks>
         <UserContextLinks>
