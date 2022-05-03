@@ -1,41 +1,52 @@
-import { AxiosResponse } from 'axios';
+/* eslint-disable import/no-anonymous-default-export */
+import React from 'react';
 import tw from 'twin.macro';
 import { css } from 'styled-components/macro'; //eslint-disable-line
-import { UserCard } from '../components/UserCard';
-import { useUserContext } from '../hooks/UserContext';
-import React, { useEffect, useState } from 'react';
-import { IUser } from '../interface';
-import apiClient from '../api/apiClient';
+import { PageTitle } from '../components/misc/Typography';
+import { SectionHeading } from '../components/misc/Typography';
+import { Subheading } from '../components/misc/Typography';
+import { Description } from '../components/misc/Typography';
+import { BodyText } from '../components/misc/Typography';
+import { PrimaryButton as PrimaryButtonBase } from '../components/misc/Buttons.js';
+import ConnectPic from '../assets/connect.jpg';
 
-const Container = tw.div`flex flex-col px-6 text-gray-100`;
-const Content = tw.div`flex-row flex max-w-screen-xl mx-auto py-2`;
-const Header = tw.h1`flex flex-col items-center text-5xl font-bold mb-0`;
+const Container = tw.div`relative mx-10`;
+const TwoColumn = tw.div`flex flex-col md:flex-row justify-between max-w-screen-xl mx-auto py-20 md:py-24 items-center`;
+const Column = tw.div`w-full max-w-md mx-auto md:max-w-none md:mx-0`;
+const ImageColumn = tw(Column)`md:w-1/2 flex-shrink-0 relative`;
+const TextColumn = tw(
+  Column
+)`md:w-6/12 mt-16 md:mt-0 md:mr-12 lg:mr-16 md:order-first`;
 
-export default function Featured() {
-  const { currentUser } = useUserContext();
+const Image = tw.img`rounded-md shadow`;
 
-  const [users, setUsers] = useState<IUser[]>();
-  useEffect(() => {
-    apiClient.get('/api/user/getallusers').then((res: AxiosResponse) => {
-      setUsers(res.data);
-    });
-  }, [currentUser]);
+const TextContent = tw.div`lg:py-8 text-center md:text-left`;
 
-  if (!users) {
-    return <p>Loading...</p>;
-  }
+// const PageTitle = tw(
+//   SectionHeading
+// )`mt-4 font-black text-left text-3xl sm:text-4xl lg:text-5xl text-center md:text-left leading-tight`;
 
-  const randomIndex = Math.floor(Math.random() * users.length);
-  const randomUser = users[randomIndex];
+export default function Home() {
+  const heading = <>Git Connected</>
 
-  return (
-    <>
-      <Container>
-        <Header>Homepage...</Header>
-        <Content>
-          <UserCard {...randomUser} />
-        </Content>
-      </Container>
-    </>
+  const description = (
+    <>A social networking hub built by and for the 100Devs community. </>
   );
-}
+ 
+  return (
+    <Container>
+      <TwoColumn>
+        <ImageColumn>
+          <Image src={ConnectPic}/>
+        </ImageColumn>
+        <TextColumn>
+          <TextContent>
+            <PageTitle>{heading}</PageTitle>
+            <Description>{description}</Description>
+            <Subheading>{description}</Subheading>
+          </TextContent>
+        </TextColumn>
+      </TwoColumn>
+    </Container>
+  );
+};
