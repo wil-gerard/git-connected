@@ -27,11 +27,11 @@ const CardHeaderContainer = tw.div`flex justify-center items-center flex-col`;
 const CardName = tw(Subheading)``
 
 const CardMeta = styled.div`
-  ${tw`flex flex-row flex-wrap justify-center sm:items-center font-semibold tracking-wide text-gray-600 uppercase text-xs`}
+  ${tw`flex justify-center`}
 `;
 
 const CardMetaFeature = styled.a`
-  ${tw`flex items-center mt-4 mr-4 last:mr-0`}
+  ${tw`mt-4 mr-4 last:mr-0`}
   svg {
     ${tw`w-6 h-6 mr-1 text-secondary-100 hocus:text-primary-600 transition duration-300`}
   }
