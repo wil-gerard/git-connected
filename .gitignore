@@ -5,6 +5,7 @@
 */.env
 */development.env
 */production.env
+*/.env.production
 */node_modules
 /.pnp
 .pnp.js
