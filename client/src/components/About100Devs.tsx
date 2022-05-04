@@ -5,7 +5,7 @@ import { Description as BaseDescription } from '../components/misc/Typography';
 import { PrimaryButton as PrimaryButtonBase } from '../components/misc/Buttons';
 
 const Container = tw.div`relative w-full px-10 lg:mx-auto py-20 lg:py-24 bg-secondary-800`;
-const Column = tw.div`flex flex-col justify-between max-w-screen-xl mx-auto items-center`;
+const Column = tw.div``;
 const TextColumn = tw(Column)`md:w-8/12 mt-16 md:mt-0`;
 
 const TextContent = tw.div`py-8 text-center`;
