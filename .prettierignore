@@ -19,6 +19,7 @@ git-connected.code-workspace
 .env.development.local
 .env.test.local
 .env.production.local
+*/tsconfig.json
 
 npm-debug.log*
 yarn-debug.log*

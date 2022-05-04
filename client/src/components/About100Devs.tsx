@@ -14,7 +14,6 @@ const SectionHeading = tw(BaseSectionHeading)`text-center`;
 const Description = tw(BaseDescription)`text-center`;
 
 export default function FeatureStats() {
-
   const heading = `What is 100Devs?`;
 
   const description = `100Devs is a free full-stack JavaScript bootcamp that has grown into a community of over 30,000 on the Discord server. The bootcamp director, Leon Noel, teaches classes via Twitch and posts study material on the Discord server. We are a diverse global community that helps build each other up - all are welcome to join!`;

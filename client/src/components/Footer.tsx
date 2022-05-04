@@ -18,8 +18,12 @@ export default function Footer() {
           <FooterContent>
             <FooterContentHeader>Content</FooterContentHeader>
             <FooterLink onClick={() => navigate('/')}>Home</FooterLink>
-            <FooterLink onClick={() => navigate('/profiles')}>Profiles</FooterLink>
-            <FooterLink onClick={() => navigate('/featured')}>Featured</FooterLink>
+            <FooterLink onClick={() => navigate('/profiles')}>
+              Profiles
+            </FooterLink>
+            <FooterLink onClick={() => navigate('/featured')}>
+              Featured
+            </FooterLink>
           </FooterContent>
           <FooterContent>
             <FooterContentHeader>100Devs</FooterContentHeader>
