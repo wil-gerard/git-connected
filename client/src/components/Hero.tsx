@@ -1,13 +1,7 @@
-/* eslint-disable import/no-anonymous-default-export */
 import React from 'react';
 import tw from 'twin.macro';
-import { css } from 'styled-components/macro'; //eslint-disable-line
 import { PageTitle } from '../components/misc/Typography';
-import { SectionHeading } from '../components/misc/Typography';
-import { Subheading } from '../components/misc/Typography';
 import { Description } from '../components/misc/Typography';
-import { BodyText } from '../components/misc/Typography';
-import { PrimaryButton as PrimaryButtonBase } from '../components/misc/Buttons';
 import ConnectPic from '../assets/connect.jpg';
 
 const Container = tw.div`relative mx-10`;

@@ -1,7 +1,5 @@
-/* eslint-disable import/no-anonymous-default-export */
 import React from 'react';
 import tw from 'twin.macro';
-import { css } from 'styled-components/macro'; //eslint-disable-line
 import { SectionHeading as BaseSectionHeading } from '../components/misc/Typography';
 import { Subheading } from '../components/misc/Typography';
 import { Description as BaseDescription } from '../components/misc/Typography';
@@ -9,11 +7,11 @@ import { Subtitle } from '../components/misc/Typography';
 import { PrimaryButton as PrimaryButtonBase } from '../components/misc/Buttons';
 import GetRepoInfo from '../hooks/GetRepoInfo';
 
-const Container = tw.div`relative w-full mx-auto py-20 lg:py-24 bg-secondary-800`;
+const Container = tw.div`relative w-full px-10 lg:mx-auto py-20 lg:py-24 bg-secondary-900`;
 const Column = tw.div`flex flex-col justify-between max-w-screen-xl mx-auto items-center`;
 const TextColumn = tw(Column)`md:w-8/12 mt-16 md:mt-0`;
 
-const TextContent = tw.div`lg:py-8 text-center`;
+const TextContent = tw.div`py-8 text-center`;
 
 const StatsContainer = tw.div`mt-8 flex flex-col sm:flex-row items-center flex-wrap max-w-screen-md justify-between mx-auto text-gray-100`;
 const Stat = tw.div`flex flex-col text-center p-4 tracking-wide`;
@@ -27,7 +25,7 @@ const Description = tw(BaseDescription)`text-center`;
 export default function FeatureStats() {
   const { data } = GetRepoInfo();
 
-  const heading = `Developed open-source`;
+  const heading = `How it works`;
 
   const description = `We are driving development through a GitHub monorepo. Your feedback helps us understand what works, what doesn't, and what features the community would like to see.`;
 
