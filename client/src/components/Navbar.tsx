@@ -1,6 +1,6 @@
 import tw from 'twin.macro';
 import styled from 'styled-components';
-import {useNavigate } from 'react-router-dom'
+import { useNavigate } from 'react-router-dom';
 import { ReactComponent as LogoBase } from '../assets/logo.svg';
 import { GradientBar } from './GradiantBar';
 import { Link } from 'react-router-dom';
@@ -50,7 +50,7 @@ export default function Navbar() {
 
   const [showModal, setShowModal] = useState(false);
 
-  const navigate = useNavigate()
+  const navigate = useNavigate();
 
   const discordLogin = () => {
     window.open(
@@ -67,7 +67,7 @@ export default function Navbar() {
       .then((res: AxiosResponse) => {
         if (res.data.message === 'Logout succesful') {
           window.localStorage.removeItem('id');
-          
+
           // reset user state and navigate to '/'
           setCurrentUser(null);
           navigate('/');

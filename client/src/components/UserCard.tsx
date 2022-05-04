@@ -18,13 +18,13 @@ const CardImage = styled.img`
 `;
 const CardText = tw.div`mt-4`;
 
-const CardLocation = tw(Subtitle)``
+const CardLocation = tw(Subtitle)``;
 
 const CardBio = tw(BodyText)`mt-2 text-center`;
 
 const CardHeaderContainer = tw.div`flex justify-center items-center flex-col`;
 
-const CardName = tw(Subheading)``
+const CardName = tw(Subheading)``;
 
 const CardMeta = styled.div`
   ${tw`flex justify-center`}

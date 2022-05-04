@@ -48,7 +48,6 @@ export default function FeatureStats() {
     },
   ];
 
-  
   return (
     <>
       <Container>

@@ -6,5 +6,3 @@ export const Subheading = tw.h3`text-lg xl:text-xl text-primary-500 font-bold`;
 export const Description = tw.p`mt-4 text-center md:text-left text-sm md:text-base xl:text-lg font-medium leading-loose text-gray-100`;
 export const BodyText = tw.p`text-base font-medium text-gray-100`;
 export const Subtitle = tw.p`font-semibold text-sm text-secondary-100`;
-
-

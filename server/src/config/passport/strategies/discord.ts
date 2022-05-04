@@ -2,11 +2,7 @@ const DiscordStrategy = require('passport-discord').Strategy;
 import User from '../../../models/User';
 import { IDatabaseUser, IReqAuth } from '../../interface';
 
-const discordScopes = [
-  'identify',
-  'guilds',
-  'guilds.members.read',
-];
+const discordScopes = ['identify', 'guilds', 'guilds.members.read'];
 const discordStrategySettings: any = {
   clientID: `${process.env.DISCORD_CLIENT_ID}`,
   clientSecret: `${process.env.DISCORD_CLIENT_SECRET}`,

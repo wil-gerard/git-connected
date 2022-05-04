@@ -2,7 +2,11 @@ import tw from 'twin.macro';
 import { ReactComponent as TwitterIcon } from '../assets/twitter-icon.svg';
 import { ReactComponent as GitHubIcon } from '../assets/github-icon.svg';
 import { useUserContext } from '../hooks/UserContext';
-import { PrimaryButton, SmallButton, ConnectionButton } from '../components/misc/Buttons';
+import {
+  PrimaryButton,
+  SmallButton,
+  ConnectionButton,
+} from '../components/misc/Buttons';
 import React, { useState } from 'react';
 import { UserCard } from '../components/UserCard';
 import apiClient from '../api/apiClient';
@@ -41,11 +45,11 @@ const ModalFooter = tw.div`flex items-center justify-center p-6 border-t border-
 
 // const FormSubmitButton = tw.button`bg-green-600 text-white hover:bg-green-800 font-bold uppercase text-sm px-6 py-3 rounded shadow hover:shadow-lg outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150`;
 
-const FormSubmitButton = tw(PrimaryButton)`bg-green-600 hocus:bg-green-800`
+const FormSubmitButton = tw(PrimaryButton)`bg-green-600 hocus:bg-green-800`;
 
 const BgOpacity = tw.div`opacity-25 fixed inset-0 z-40 bg-black`;
 
-const ConnectAccountButton = tw(ConnectionButton)`w-72`
+const ConnectAccountButton = tw(ConnectionButton)`w-72`;
 
 const ConnectedAccountButton = tw(
   ConnectAccountButton
