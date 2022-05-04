@@ -7,6 +7,7 @@ import { Link } from 'react-router-dom';
 import { AxiosResponse } from 'axios';
 import { useUserContext } from '../hooks/UserContext';
 import React, { useState } from 'react';
+import { ConnectionButton } from './misc/Buttons';
 import { ReactComponent as DiscordIcon } from '../assets/discord-icon.svg';
 import apiClient from '../api/apiClient';
 
@@ -42,12 +43,7 @@ const BgOpacity = tw.div`opacity-25 fixed inset-0 z-40 bg-black`;
 
 const LoginContainer = tw.div`px-10 py-5 flex-col flex`;
 
-const LoginButton = styled.a`
-  ${tw`cursor-pointer py-2 pl-2 pr-8 rounded-full bg-primary-600 text-gray-100 hocus:bg-primary-800 transition duration-300 m-2 text-sm`}
-  svg {
-    ${tw`inline-block w-8 h-8 mx-2`}
-  }
-`;
+const LoginButton = tw(ConnectionButton)``;
 
 export default function Navbar() {
   const { currentUser, setCurrentUser } = useUserContext();
@@ -105,7 +101,7 @@ export default function Navbar() {
           <NavLink to="/">
             <Logo />
           </NavLink>
-          <NavLink to="/">Profiles</NavLink>
+          <NavLink to="/profiles">Profiles</NavLink>
           <NavLink to="/featured">Featured</NavLink>
         </MainLinks>
         <UserContextLinks>

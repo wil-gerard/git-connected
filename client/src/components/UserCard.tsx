@@ -1,6 +1,9 @@
 import React from 'react';
 import tw from 'twin.macro';
 import styled from 'styled-components';
+import { Subtitle } from './misc/Typography';
+import { Subheading } from './misc/Typography';
+import { BodyText } from './misc/Typography';
 import { IUser } from '../interface';
 import { ReactComponent as TwitterIcon } from '../assets/twitter-icon.svg';
 import { ReactComponent as GitHubIcon } from '../assets/github-icon.svg';
@@ -15,20 +18,20 @@ const CardImage = styled.img`
 `;
 const CardText = tw.div`mt-4`;
 
-const CardLocation = tw.div`font-semibold text-sm text-gray-600`;
+const CardLocation = tw(Subtitle)``
 
-const CardBio = tw.h5`text-base mt-2 font-bold text-gray-100 text-center`;
+const CardBio = tw(BodyText)`mt-2 text-center`;
 
-const CardHeader = tw.div`flex justify-center items-center flex-col`;
+const CardHeaderContainer = tw.div`flex justify-center items-center flex-col`;
 
-const CardName = tw.div`text-primary-500 font-bold text-xl`;
+const CardName = tw(Subheading)``
 
 const CardMeta = styled.div`
-  ${tw`flex flex-row flex-wrap justify-center sm:items-center font-semibold tracking-wide text-gray-600 uppercase text-xs`}
+  ${tw`flex justify-center`}
 `;
 
 const CardMetaFeature = styled.a`
-  ${tw`flex items-center mt-4 mr-4 last:mr-0`}
+  ${tw`mt-4 mr-4 last:mr-0`}
   svg {
     ${tw`w-6 h-6 mr-1 text-secondary-100 hocus:text-primary-600 transition duration-300`}
   }
@@ -79,10 +82,10 @@ export const UserCard: React.FC<IUser> = (user) => {
         />
       </CardImageContainer>
       <CardText>
-        <CardHeader>
+        <CardHeaderContainer>
           <CardName>{username(user)}</CardName>
           <CardLocation>{location(user)}</CardLocation>
-        </CardHeader>
+        </CardHeaderContainer>
         <CardBio>{bio(user)}</CardBio>
         <CardMeta>
           {user.twitter?.id && (

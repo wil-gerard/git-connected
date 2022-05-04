@@ -12,7 +12,7 @@ const Content = tw.div`flex flex-col justify-center px-6 text-gray-100`;
 
 const Header = tw.header`px-5 py-4 border-b border-gray-100`;
 
-const HeaderText = tw.h2`font-semibold text-gray-300`;
+const HeaderText = tw.h2`font-semibold text-gray-100`;
 
 const TableContainer = tw.div`w-full max-w-2xl mx-auto shadow-lg rounded bg-secondary-800`;
 
@@ -20,7 +20,7 @@ const Table = tw.table`table-auto w-full`;
 
 const TablePadding = tw.div`p-3`;
 
-const TableThead = tw.thead`text-xs font-semibold uppercase text-gray-300 bg-secondary-700`;
+const TableThead = tw.thead`text-sm font-semibold text-gray-300 bg-secondary-600`;
 
 const TableRow = tw.tr``;
 
@@ -135,12 +135,21 @@ export default function Home() {
     }
   };
 
+  const followingCount = Object.keys(alreadyFollowing).length
+  const totalUserCount = users?.length
+  console.log(currentUser)
+
+
   return (
     <>
       <Content>
         <TableContainer>
           <Header>
-            <HeaderText>Showing all users</HeaderText>
+            <HeaderText>
+              {currentUser
+                ? `You are following ${followingCount} out of ${totalUserCount} users`
+                : `Listing all ${totalUserCount} users`}
+            </HeaderText>
           </Header>
           <TablePadding>
             <Table>

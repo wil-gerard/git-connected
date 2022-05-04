@@ -1,8 +1,8 @@
 import tw from 'twin.macro';
-import styled from 'styled-components';
 import { ReactComponent as TwitterIcon } from '../assets/twitter-icon.svg';
 import { ReactComponent as GitHubIcon } from '../assets/github-icon.svg';
 import { useUserContext } from '../hooks/UserContext';
+import { PrimaryButton, SmallButton, ConnectionButton } from '../components/misc/Buttons';
 import React, { useState } from 'react';
 import { UserCard } from '../components/UserCard';
 import apiClient from '../api/apiClient';
@@ -11,7 +11,7 @@ const Container = tw.div`flex flex-col px-6 text-gray-100`;
 
 const Content = tw.div`mx-auto justify-center `;
 
-const Button = tw.button`focus:outline-none text-gray-100 text-sm py-2 px-4 rounded-full bg-primary-600 hocus:bg-primary-800 transition duration-300 hover:shadow-lg mb-4`;
+const EditProfileButton = tw(SmallButton)`mb-4`;
 
 const ModalContainer = tw.div`justify-center items-center flex overflow-x-hidden overflow-y-auto fixed inset-0 z-50 outline-none focus:outline-none w-full`;
 
@@ -25,9 +25,9 @@ const ProfileForm = tw.form``;
 
 const FormInputContainer = tw.div`relative p-4 flex-auto w-full`;
 
-const FormTextInput = tw.input`border-0 px-3 py-3 placeholder-gray-600 text-gray-100 bg-secondary-700 rounded text-sm shadow focus:outline-none focus:ring hocus:w-full ease-linear transition-all duration-150`;
+const FormTextInput = tw.input`border-0 px-3 py-3 placeholder-gray-600 text-gray-100 bg-secondary-700 rounded text-sm shadow focus:outline-none focus:ring hocus:w-full ease-linear transition-all duration-300`;
 
-const FormTextArea = tw.textarea`w-full border-0 px-3 py-3 placeholder-gray-600 text-gray-100 bg-secondary-700 rounded text-sm shadow focus:outline-none focus:ring ease-linear transition-all duration-150`;
+const FormTextArea = tw.textarea`w-full border-0 px-3 py-3 placeholder-gray-600 text-gray-100 bg-secondary-700 rounded text-sm shadow focus:outline-none focus:ring ease-linear transition-all duration-300`;
 
 // const FormCheckbox = tw.input`h-4 w-4 focus:ring border-gray-300 border-0 px-3 py-3 text-gray-100 bg-secondary-700 rounded text-sm shadow focus:outline-none ease-linear transition-all duration-150`;
 
@@ -39,20 +39,17 @@ const ModalCloseButton = tw.button`flex items-center justify-center bg-transpare
 
 const ModalFooter = tw.div`flex items-center justify-center p-6 border-t border-solid rounded-b`;
 
-const FormSubmitButton = tw.button`bg-green-600 text-white hover:bg-green-800 font-bold uppercase text-sm px-6 py-3 rounded shadow hover:shadow-lg outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150`;
+// const FormSubmitButton = tw.button`bg-green-600 text-white hover:bg-green-800 font-bold uppercase text-sm px-6 py-3 rounded shadow hover:shadow-lg outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150`;
+
+const FormSubmitButton = tw(PrimaryButton)`bg-green-600 hocus:bg-green-800`
 
 const BgOpacity = tw.div`opacity-25 fixed inset-0 z-40 bg-black`;
 
-const ConnectAccountButton = styled.button`
-  ${tw`cursor-pointer w-64 py-2 pl-2 pr-8 rounded-full bg-primary-600 text-gray-100 hocus:bg-primary-800 transition duration-300 m-2 text-sm flex justify-start items-center`}
-  svg {
-    ${tw`w-8 h-8 mx-2`}
-  }
-`;
+const ConnectAccountButton = tw(ConnectionButton)`w-72`
 
 const ConnectedAccountButton = tw(
   ConnectAccountButton
-)`bg-green-800 hocus:bg-red-800 cursor-pointer`;
+)`bg-green-800 hocus:bg-red-800`;
 
 const ConnectedAccountText = tw.p` group-hocus:hidden `;
 const DisconnectAccountText = tw.p`hidden group-hocus:inline`;
@@ -144,9 +141,9 @@ export default function Profile() {
     <>
       <Container>
         <Content>
-          <Button type="button" onClick={() => setShowModal(true)}>
+          <EditProfileButton type="button" onClick={() => setShowModal(true)}>
             Edit profile
-          </Button>
+          </EditProfileButton>
           {showModal ? (
             <>
               <ModalContainer>

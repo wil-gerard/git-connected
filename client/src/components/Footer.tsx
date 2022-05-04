@@ -1,84 +1,71 @@
 import { GradientBar } from './GradiantBar';
+import { useNavigate } from 'react-router-dom';
+import tw from 'twin.macro';
+
+const FooterContainer = tw.footer`container mx-auto px-6 pt-10`;
+const Column = tw.div`mt-8 mb-16 sm:mt-0 sm:w-full sm:px-8 lg:px-40 flex flex-col md:flex-row justify-between`;
+const FooterContent = tw.div`flex flex-col`;
+const FooterContentHeader = tw.h4`font-bold text-gray-300 uppercase mb-2`;
+const FooterLink = tw.span`my-2 text-gray-300 text-base hover:text-primary-500 transition duration-300`;
 
 export default function Footer() {
+  const navigate = useNavigate();
+
   return (
-    <footer className="pt-10">
-      <div className="container mx-auto px-6">
-        <div className="mt-8 mb-16 sm:mt-0 sm:w-full sm:px-8 lg:px-52 flex flex-col md:flex-row justify-between">
-          <div className="flex flex-col">
-            <span className="font-bold text-gray-300 uppercase mb-2">
-              Content
-            </span>
-            <span className="my-2">
-              <a
-                href="/"
-                className="text-gray-300 text-md hover:text-primary-500 transition duration-300"
-              >
-                Profiles
-              </a>
-            </span>
-            <span className="my-2">
-              <a
-                href="/featured"
-                className="text-gray-300 text-md hover:text-primary-500 transition duration-300"
-              >
-                Featured
-              </a>
-            </span>
-          </div>
-          <div className="flex flex-col">
-            <span className="font-bold text-gray-300 uppercase mt-4 md:mt-0 mb-2">
-              100devs
-            </span>
-            <span className="my-2">
+    <>
+      <FooterContainer>
+        <Column>
+          <FooterContent>
+            <FooterContentHeader>Content</FooterContentHeader>
+            <FooterLink onClick={() => navigate('/')}>Home</FooterLink>
+            <FooterLink onClick={() => navigate('/profiles')}>Profiles</FooterLink>
+            <FooterLink onClick={() => navigate('/featured')}>Featured</FooterLink>
+          </FooterContent>
+          <FooterContent>
+            <FooterContentHeader>100Devs</FooterContentHeader>
+            <FooterLink>
               <a
                 href="https://leonnoel.com/100devs/"
                 target="_blank"
                 rel="noreferrer noopener"
-                className="text-gray-300 text-md hover:text-primary-500 transition duration-300"
               >
                 Info
               </a>
-            </span>
-            <span className="my-2">
+            </FooterLink>
+            <FooterLink>
               <a
                 href="https://leonnoel.com/discord"
                 target="_blank"
                 rel="noreferrer noopener"
-                className="text-gray-300 text-md hover:text-primary-500 transition duration-300"
               >
                 Discord
               </a>
-            </span>
-          </div>
-          <div className="flex flex-col">
-            <span className="font-bold text-gray-300 uppercase mt-4 md:mt-0 mb-2">
-              Contact
-            </span>
-            <span className="my-2">
+            </FooterLink>
+          </FooterContent>
+          <FooterContent>
+            <FooterContentHeader>Contact</FooterContentHeader>
+            <FooterLink>
               <a
-                href="https://github.com/wil-gerard/GitConnected"
+                href="https://github.com/wil-gerard/git-connected"
                 target="_blank"
                 rel="noreferrer noopener"
-                className="text-gray-300 text-md hover:text-primary-500 transition duration-300"
               >
-                Project Repo
+                Project GitHub repo
               </a>
-            </span>
-            <span className="my-2">
+            </FooterLink>
+            <FooterLink>
               <a
                 href="https://www.wilgerard.com/"
                 target="_blank"
                 rel="noreferrer noopener"
-                className="text-gray-300 text-md hover:text-primary-500 transition duration-300"
               >
-                Lead Developer
+                Lead developer
               </a>
-            </span>
-          </div>
-        </div>
-      </div>
+            </FooterLink>
+          </FooterContent>
+        </Column>
+      </FooterContainer>
       <GradientBar />
-    </footer>
+    </>
   );
 }
