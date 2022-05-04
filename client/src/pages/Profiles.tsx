@@ -135,12 +135,21 @@ export default function Home() {
     }
   };
 
+  const followingCount = Object.keys(alreadyFollowing).length
+  const totalUserCount = users?.length
+  console.log(currentUser)
+
+
   return (
     <>
       <Content>
         <TableContainer>
           <Header>
-            <HeaderText>Showing all users</HeaderText>
+            <HeaderText>
+              {currentUser
+                ? `You are following ${followingCount} out of ${totalUserCount} users`
+                : `Listing all ${totalUserCount} users`}
+            </HeaderText>
           </Header>
           <TablePadding>
             <Table>
