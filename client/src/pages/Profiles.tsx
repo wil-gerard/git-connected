@@ -6,6 +6,7 @@ import { ReactComponent as GitHubIcon } from '../assets/github-icon.svg';
 import React, { useEffect, useState } from 'react';
 import { IUser } from '../interface';
 import { useUserContext } from '../hooks/UserContext';
+import GetWindowSize from '../hooks/GetWindowSize';
 import apiClient from '../api/apiClient';
 
 const Content = tw.div`flex flex-col justify-center px-6 text-gray-100`;
@@ -87,12 +88,13 @@ export default function Home() {
     }
   };
 
-  const [windowWidth, setWindowWidth] = useState(window.innerWidth);
+  //const [windowWidth, setWindowWidth] = useState(window.innerWidth);
+  const windowWidth = GetWindowSize();
 
   useEffect(() => {
-    window.addEventListener('resize', (event) => {
-      setWindowWidth(window.innerWidth);
-    });
+    // window.addEventListener('resize', (event) => {
+    //   setWindowWidth(window.innerWidth);
+    // });
 
     apiClient.get('/api/user/getallusers').then((res: AxiosResponse) => {
       setUsers(res.data);
