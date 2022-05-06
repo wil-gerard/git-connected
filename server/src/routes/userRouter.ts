@@ -6,6 +6,7 @@ import {
   getAllUsers,
   removeConnection,
   userUpdate,
+  getRandomUser,
 } from '../controllers/userControllers';
 
 const router = express.Router();
@@ -19,5 +20,7 @@ router.post('/user/followall', auth, userFollowAll);
 router.get('/user/getuser', auth, getUser);
 
 router.get('/user/getallusers', getAllUsers);
+
+router.get('/user/getrandomuser', getRandomUser);
 
 export default router;
