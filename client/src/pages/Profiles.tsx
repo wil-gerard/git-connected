@@ -46,7 +46,7 @@ const TableFollow = tw.a`flex items-center rounded shadow cursor-pointer bg-seco
 
 const TableFollowed = tw.a`flex items-center justify-center rounded shadow cursor-default bg-green-600 transition duration-300  ml-1 py-0.5 px-2`;
 
-export default function Home() {
+export default function Profiles() {
   const { currentUser } = useUserContext();
 
   let initialState: any = {};
@@ -59,7 +59,7 @@ export default function Home() {
         withCredentials: true,
       })
       .then((res: AxiosResponse) => {
-        if (res.data) {
+        if (res.data.alreadyFollowingTheseIds) {
           setAlreadyFollowing(res.data.alreadyFollowingTheseIds);
         }
       });
