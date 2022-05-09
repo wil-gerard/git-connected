@@ -15,19 +15,16 @@ const PageTitle = tw(BasePageTitle)`flex flex-col items-center`;
 export default function Featured() {
   const { currentUser } = useUserContext();
 
-  const [users, setUsers] = useState<IUser[]>();
+  const [randomUser, setRandomUser] = useState<IUser>();
   useEffect(() => {
-    apiClient.get('/api/user/getallusers').then((res: AxiosResponse) => {
-      setUsers(res.data);
+    apiClient.get('/api/user/getrandomuser').then((res: AxiosResponse) => {
+      setRandomUser(res.data);
     });
   }, [currentUser]);
 
-  if (!users) {
+  if (!randomUser) {
     return <p>Loading...</p>;
   }
-
-  const randomIndex = Math.floor(Math.random() * users.length);
-  const randomUser = users[randomIndex];
 
   return (
     <>

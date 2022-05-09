@@ -134,7 +134,6 @@ export default function Home() {
 
   const followingCount = Object.keys(alreadyFollowing).length;
   const totalUserCount = users?.length;
-  console.log(currentUser);
 
   return (
     <>

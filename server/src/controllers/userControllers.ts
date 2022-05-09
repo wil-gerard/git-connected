@@ -140,11 +140,7 @@ export const getUser = async (
   }
 };
 
-export const getAllUsers = async (
-  req: Request,
-  res: Response,
-  next: NextFunction
-) => {
+const getUsersFromDB = async (next: NextFunction) => {
   try {
     const users = await User.find(
       { gitHubConnected: true, twitterConnected: true },
@@ -155,7 +151,37 @@ export const getAllUsers = async (
         twitterTokenSecret: 0,
       }
     ).clone();
+    return users;
+  } catch (err) {
+    console.error(err);
+    next(err);
+  }
+};
+
+export const getAllUsers = async (
+  req: Request,
+  res: Response,
+  next: NextFunction
+) => {
+  try {
+    const users = await getUsersFromDB(next);
     res.status(200).send([...users]);
+  } catch (err) {
+    console.error(err);
+    next(err);
+  }
+};
+
+export const getRandomUser = async (
+  req: Request,
+  res: Response,
+  next: NextFunction
+) => {
+  try {
+    const users = await getUsersFromDB(next);
+    const randomIndex = Math.floor(Math.random() * users.length);
+    const randomUser = users[randomIndex];
+    res.status(200).send(randomUser);
   } catch (err) {
     console.error(err);
     next(err);
