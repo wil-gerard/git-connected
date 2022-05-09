@@ -88,13 +88,9 @@ export default function Home() {
     }
   };
 
-  //const [windowWidth, setWindowWidth] = useState(window.innerWidth);
   const windowWidth = GetWindowSize();
 
   useEffect(() => {
-    // window.addEventListener('resize', (event) => {
-    //   setWindowWidth(window.innerWidth);
-    // });
 
     apiClient.get('/api/user/getallusers').then((res: AxiosResponse) => {
       setUsers(res.data);
