@@ -6,6 +6,7 @@ import { ReactComponent as GitHubIcon } from '../assets/github-icon.svg';
 import React, { useEffect, useState } from 'react';
 import { IUser } from '../interface';
 import { useUserContext } from '../hooks/UserContext';
+import GetWindowSize from '../hooks/GetWindowSize';
 import apiClient from '../api/apiClient';
 
 const Content = tw.div`flex flex-col justify-center px-6 text-gray-100`;
@@ -46,7 +47,7 @@ const TableFollow = tw.a`flex items-center rounded shadow cursor-pointer bg-seco
 
 const TableFollowed = tw.a`flex items-center justify-center rounded shadow cursor-default bg-green-600 transition duration-300  ml-1 py-0.5 px-2`;
 
-export default function Home() {
+export default function Profiles() {
   const { currentUser } = useUserContext();
 
   let initialState: any = {};
@@ -59,7 +60,7 @@ export default function Home() {
         withCredentials: true,
       })
       .then((res: AxiosResponse) => {
-        if (res.data) {
+        if (res.data.alreadyFollowingTheseIds) {
           setAlreadyFollowing(res.data.alreadyFollowingTheseIds);
         }
       });
@@ -87,13 +88,9 @@ export default function Home() {
     }
   };
 
-  const [windowWidth, setWindowWidth] = useState(window.innerWidth);
+  const { windowWidth } = GetWindowSize();
 
   useEffect(() => {
-    window.addEventListener('resize', (event) => {
-      setWindowWidth(window.innerWidth);
-    });
-
     apiClient.get('/api/user/getallusers').then((res: AxiosResponse) => {
       setUsers(res.data);
     });

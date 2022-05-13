@@ -153,6 +153,8 @@ yarn workspace client start
   - **Jeff Bucher** - *Software Engineer* - [JeffBucherDev](https://github.com/JeffBucherDev)
   - **Miracle Banks** - *Software Engineer* - [miraclebanks](https://github.com/miraclebanks)
   - **Dan Anderson** - *Software Engineer* - [DanCAnderson](https://github.com/DanCAnderson)
+  - **Tim Jackson** - *Software Engineer* - [timjacksonm](https://github.com/timjacksonm)
+  - **Gerard Strecker** - *Software Engineer* - [whoadood](https://github.com/whoadood)
 
 See also the list of
 [contributors](https://github.com/wil-gerard/GitConnected/contributors)
