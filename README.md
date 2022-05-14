@@ -1,10 +1,11 @@
 ![github-docs-banner](https://user-images.githubusercontent.com/74286884/156865155-7af481ea-261d-40ee-83b0-64e414072a22.png)
 <!-- ALL-CONTRIBUTORS-BADGE:START - Do not remove or modify this section -->
 [![All Contributors](https://img.shields.io/badge/all_contributors-12-orange.svg?style=flat-square)](#contributors-)
-<!-- ALL-CONTRIBUTORS-BADGE:END -->
 [![MIT License](https://img.shields.io/badge/License-MIT-blue.svg?style=flat-square)](https://github.com/wil-gerard/git-connected/blob/main/LICENSE.md)
 [![Star on GitHub](https://img.shields.io/github/stars/wil-gerard/git-connected.svg?style=social)](https://github.com/wil-gerard/git-connected/stargazers)
 [![Twitter](https://img.shields.io/twitter/url/https/github.com/ArmynC/ArminC-AutoExec.svg?label=Help%20spread%20the%20word%21&style=social&logo=twitter)](https://twitter.com/intent/tweet?text=Git%20Connected%20%20https%3A%2F%2Fgithub.com%2Fwil-gerard%2Fgit-connected)
+<!-- ALL-CONTRIBUTORS-BADGE:END -->
+
 
 # Git Connected
 
@@ -164,11 +165,10 @@ yarn workspace client start
     <td align="center"><a href="https://kevinlindholm.netlify.app/"><img src="https://avatars.githubusercontent.com/u/94518833?v=4?s=100" width="100px;" alt=""/><br /><sub><b>Kevin Lindholm</b></sub></a><br /><a href="#ideas-KevinLindh" title="Ideas, Planning, & Feedback">🤔</a></td>
   </tr>
 </table>
-
 <!-- markdownlint-restore -->
 <!-- prettier-ignore-end -->
-
 <!-- ALL-CONTRIBUTORS-LIST:END -->
+
 ## License
 
-MIT License - see the [LICENSE.md](LICENSE.md) file for details
+MIT License - see the [LICENSE](LICENSE) file for details

@@ -12,19 +12,16 @@
       "profile": "http://www.wilgerard.com",
       "contributions": [
         "code",
+        "projectManagement",
         "infra",
+        "design",
         "ideas",
         "maintenance",
         "review",
         "mentoring",
         "bug",
-        "design",
-        "projectManagement",
-        "review",
         "question",
-        "mentoring",
-        "doc",
-        "bug"
+        "doc"
       ]
     },
     {
@@ -37,9 +34,6 @@
         "infra",
         "ideas",
         "maintenance",
-        "review",
-        "mentoring",
-        "bug",
         "review",
         "mentoring",
         "bug"
