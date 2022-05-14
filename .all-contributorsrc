@@ -9,7 +9,7 @@
   "imageSize": 100,
   "commit": true,
   "commitConvention": "angular",
-  "contributorsPerLine": 6,
+  "contributorsPerLine": 7,
   "skipCi": true,
   "contributors": [
     {
@@ -27,7 +27,6 @@
         "review",
         "mentoring",
         "bug",
-        "question",
         "doc"
       ]
     },
