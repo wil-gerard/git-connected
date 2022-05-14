@@ -1,4 +1,7 @@
 ![github-docs-banner](https://user-images.githubusercontent.com/74286884/156865155-7af481ea-261d-40ee-83b0-64e414072a22.png)
+<!-- ALL-CONTRIBUTORS-BADGE:START - Do not remove or modify this section -->
+[![All Contributors](https://img.shields.io/badge/all_contributors-1-orange.svg?style=flat-square)](#contributors-)
+<!-- ALL-CONTRIBUTORS-BADGE:END -->
 
 <p align="center" style="text-align: center;">
 <a href="https://lbesson.mit-license.org">
@@ -150,6 +153,19 @@ yarn workspace client start
 ## Contributors
   - **Wil Gerard** - *Software Engineer* - [wil-gerard](https://github.com/wil-gerard)
   - **Ken aka Frosty** - *Software Engineer* - [KenAKAFrosty](https://github.com/KenAKAFrosty)
+<!-- ALL-CONTRIBUTORS-LIST:START - Do not remove or modify this section -->
+<!-- prettier-ignore-start -->
+<!-- markdownlint-disable -->
+<table>
+  <tr>
+    <td align="center"><a href="https://github.com/KenAKAFrosty"><img src="https://avatars.githubusercontent.com/u/90424167?v=4?s=100" width="100px;" alt=""/><br /><sub><b>Ken aka Frosty</b></sub></a><br /><a href="https://github.com/wil-gerard/git-connected/commits?author=KenAKAFrosty" title="Code">💻</a> <a href="#infra-KenAKAFrosty" title="Infrastructure (Hosting, Build-Tools, etc)">🚇</a> <a href="#ideas-KenAKAFrosty" title="Ideas, Planning, & Feedback">🤔</a> <a href="#maintenance-KenAKAFrosty" title="Maintenance">🚧</a> <a href="https://github.com/wil-gerard/git-connected/pulls?q=is%3Apr+reviewed-by%3AKenAKAFrosty" title="Reviewed Pull Requests">👀</a> <a href="#mentoring-KenAKAFrosty" title="Mentoring">🧑‍🏫</a> <a href="https://github.com/wil-gerard/git-connected/issues?q=author%3AKenAKAFrosty" title="Bug reports">🐛</a></td>
+  </tr>
+</table>
+
+<!-- markdownlint-restore -->
+<!-- prettier-ignore-end -->
+
+<!-- ALL-CONTRIBUTORS-LIST:END -->
   - **Jeff Bucher** - *Software Engineer* - [JeffBucherDev](https://github.com/JeffBucherDev)
   - **Miracle Banks** - *Software Engineer* - [miraclebanks](https://github.com/miraclebanks)
   - **Dan Anderson** - *Software Engineer* - [DanCAnderson](https://github.com/DanCAnderson)
