@@ -44,15 +44,15 @@ Scan through our [existing issues](https://github.com/wil-gerard/git-connected/i
 1. We recommend using [VSCode](https://code.visualstudio.com/) as an editor with the [Tailwind IntelliSense Extension which supports twin.macro](https://marketplace.visualstudio.com/items?itemName=lightyen.tailwindcss-intellisense-twin)
 
 2. Fork the repository or create a new branch.
-- If you are a **first time contributor**, please fork the repository:
-    - Using GitHub Desktop:
-        - [Getting started with GitHub Desktop](https://docs.github.com/en/desktop/installing-and-configuring-github-desktop/getting-started-with-github-desktop) will guide you through setting up Desktop.
-        - Once Desktop is set up, you can use it to [fork the repo](https://docs.github.com/en/desktop/contributing-and-collaborating-using-github-desktop/cloning-and-forking-repositories-from-github-desktop)!
+    - If you are a **first time contributor**, please fork the repository:
+        - Using GitHub Desktop:
+            - [Getting started with GitHub Desktop](https://docs.github.com/en/desktop/installing-and-configuring-github-desktop/getting-started-with-github-desktop) will guide you through setting up Desktop.
+            - Once Desktop is set up, you can use it to [fork the repo](https://docs.github.com/en/desktop/contributing-and-collaborating-using-github-desktop/cloning-and-forking-repositories-from-github-desktop)!
 
-    - Using the command line:
-        - [Fork the repo](https://docs.github.com/en/github/getting-started-with-github/fork-a-repo#fork-an-example-repository) so that you can make your changes without affecting the original project until you're ready to merge them.
+        - Using the command line:
+            - [Fork the repo](https://docs.github.com/en/github/getting-started-with-github/fork-a-repo#fork-an-example-repository) so that you can make your changes without affecting the original project until you're ready to merge them.
 
-- **Established contributors**, please [create a branch directly from the issue you are working on,](https://github.blog/changelog/2022-03-02-create-a-branch-for-an-issue/) keep it updated with the latest [commits,](#commit-you-update) and submit a [pull request](#pull-requests) when ready.
+    - **Established contributors**, please [create a branch directly from the issue you are working on,](https://github.blog/changelog/2022-03-02-create-a-branch-for-an-issue/) keep it updated with the latest [commits,](#:scroll:-commit-your-update) and submit a [pull request](#:hammer_and_wrench:-pull-requests) when ready.
 
 3. See the [installation and setup guide](https://github.com/wil-gerard/git-connected#installation-and-local-development).
 
