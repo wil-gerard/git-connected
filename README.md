@@ -1,6 +1,6 @@
 ![github-docs-banner](https://user-images.githubusercontent.com/74286884/156865155-7af481ea-261d-40ee-83b0-64e414072a22.png)
 <!-- ALL-CONTRIBUTORS-BADGE:START - Do not remove or modify this section -->
-[![All Contributors](https://img.shields.io/badge/all_contributors-5-orange.svg?style=flat-square)](#contributors-)
+[![All Contributors](https://img.shields.io/badge/all_contributors-6-orange.svg?style=flat-square)](#contributors-)
 <!-- ALL-CONTRIBUTORS-BADGE:END -->
 [![MIT License](https://img.shields.io/badge/License-MIT-blue.svg?style=flat-square)](https://github.com/wil-gerard/git-connected/blob/main/LICENSE.md)
 [![Star on GitHub](https://img.shields.io/github/stars/wil-gerard/git-connected.svg?style=social)](https://github.com/wil-gerard/git-connected/stargazers)
@@ -153,6 +153,7 @@ yarn workspace client start
     <td align="center"><a href="https://github.com/whoadood"><img src="https://avatars.githubusercontent.com/u/82413454?v=4?s=100" width="100px;" alt=""/><br /><sub><b>Gerard Strecker</b></sub></a><br /><a href="https://github.com/wil-gerard/git-connected/commits?author=whoadood" title="Code">💻</a> <a href="#ideas-whoadood" title="Ideas, Planning, & Feedback">🤔</a></td>
     <td align="center"><a href="https://github.com/JeffBucherDev"><img src="https://avatars.githubusercontent.com/u/71293215?v=4?s=100" width="100px;" alt=""/><br /><sub><b>Jeff Bucher</b></sub></a><br /><a href="https://github.com/wil-gerard/git-connected/commits?author=JeffBucherDev" title="Code">💻</a> <a href="#ideas-JeffBucherDev" title="Ideas, Planning, & Feedback">🤔</a></td>
     <td align="center"><a href="https://github.com/miraclebanks"><img src="https://avatars.githubusercontent.com/u/27967485?v=4?s=100" width="100px;" alt=""/><br /><sub><b>Miracle</b></sub></a><br /><a href="https://github.com/wil-gerard/git-connected/commits?author=miraclebanks" title="Code">💻</a> <a href="#ideas-miraclebanks" title="Ideas, Planning, & Feedback">🤔</a></td>
+    <td align="center"><a href="https://www.timjacksonm.com/"><img src="https://avatars.githubusercontent.com/u/76879054?v=4?s=100" width="100px;" alt=""/><br /><sub><b>Tim Jackson</b></sub></a><br /><a href="https://github.com/wil-gerard/git-connected/commits?author=timjacksonm" title="Code">💻</a> <a href="#ideas-timjacksonm" title="Ideas, Planning, & Feedback">🤔</a> <a href="https://github.com/wil-gerard/git-connected/issues?q=author%3Atimjacksonm" title="Bug reports">🐛</a></td>
   </tr>
 </table>
 
