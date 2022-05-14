@@ -15,12 +15,33 @@
         "infra",
         "ideas",
         "maintenance",
+        "review",
+        "mentoring",
+        "bug"
         "design",
         "projectManagement",
         "review",
         "question",
         "mentoring",
         "doc",
+        "bug"
+      ]
+    },
+    {
+      "login": "KenAKAFrosty",
+      "name": "Ken aka Frosty",
+      "avatar_url": "https://avatars.githubusercontent.com/u/90424167?v=4",
+      "profile": "https://github.com/KenAKAFrosty",
+       "contributions": [
+        "code",
+        "infra",
+        "ideas",
+        "maintenance",
+        "review",
+        "mentoring",
+        "bug"
+        "review",
+        "mentoring",
         "bug"
       ]
     },
