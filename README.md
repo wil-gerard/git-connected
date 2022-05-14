@@ -1,26 +1,8 @@
-<div align="center">
-    <a href="https://gitconnnected.dev">
-        <img src="https://user-images.githubusercontent.com/74286884/156865155-7af481ea-261d-40ee-83b0-64e414072a22.png" alt="Git Connected - A social networking web application to help connect the 100Devs community" width="800px" />
-    </a>
-</div>
-
-<a href="#contributors">
-  <img alt="tweet"
-       src="https://img.shields.io/github/contributors/wil-gerard/git-connected?color=orange&style=flat-square"
-       target="_blank"
-       align="center" />
-</a>
-<a href="https://twitter.com/intent/tweet?text=Git%20Connected%20%20https%3A%2F%2Fgithub.com%2Fwil-gerard%2Fgit-connected">
-  <img alt="Help spread the word with a tweet!"
-       src="https://img.shields.io/twitter/url/https/github.com/ArmynC/ArminC-AutoExec.svg?label=Help%20spread%20the%20word%21&style=social&logo=twitter"
-       target="_blank"
-       align="center" />
-</a>
-<a href="https://github.com/wil-gerard/git-connected/blob/main/LICENSE.md">
-  <img alt="MIT license"
-       src="https://img.shields.io/badge/License-MIT-blue.svg?style=flat-square"
-       align="center">
-</a>
+![github-docs-banner](https://user-images.githubusercontent.com/74286884/156865155-7af481ea-261d-40ee-83b0-64e414072a22.png)
+[![All Contributors](https://img.shields.io/badge/all_contributors-1-blue.svg?style=flat-square)](#contributors)
+[![MIT License](https://img.shields.io/badge/License-MIT-blue.svg?style=flat-square)](https://github.com/wil-gerard/git-connected/blob/main/LICENSE.md)
+[![Star on GitHub](https://img.shields.io/github/stars/wil-gerard/git-connected.svg?style=social)](https://github.com/wil-gerard/git-connected/stargazers)
+[![Twitter](https://img.shields.io/twitter/url/https/github.com/ArmynC/ArminC-AutoExec.svg?label=Help%20spread%20the%20word%21&style=social&logo=twitter)](https://twitter.com/intent/tweet?text=Git%20Connected%20%20https%3A%2F%2Fgithub.com%2Fwil-gerard%2Fgit-connected)
 
 </br>
 
@@ -161,17 +143,19 @@ yarn workspace client start
 ```
 
 ## Contributors
-  - **Wil Gerard** - *Software Engineer* - [wil-gerard](https://github.com/wil-gerard)
-  - **Ken aka Frosty** - *Software Engineer* - [KenAKAFrosty](https://github.com/KenAKAFrosty)
-  - **Jeff Bucher** - *Software Engineer* - [JeffBucherDev](https://github.com/JeffBucherDev)
-  - **Miracle Banks** - *Software Engineer* - [miraclebanks](https://github.com/miraclebanks)
-  - **Dan Anderson** - *Software Engineer* - [DanCAnderson](https://github.com/DanCAnderson)
-  - **Tim Jackson** - *Software Engineer* - [timjacksonm](https://github.com/timjacksonm)
-  - **Gerard Strecker** - *Software Engineer* - [whoadood](https://github.com/whoadood)
+<!-- ALL-CONTRIBUTORS-LIST:START - Do not remove or modify this section -->
+<!-- prettier-ignore-start -->
+<!-- markdownlint-disable -->
+<table>
+  <tr>
+    <td align="center"><a href="https://github.com/whoadood"><img src="https://avatars.githubusercontent.com/u/82413454?v=4?s=100" width="100px;" alt=""/><br /><sub><b>Gerard Strecker</b></sub></a><br /><a href="https://github.com/wil-gerard/git-connected/commits?author=whoadood" title="Code">💻</a> <a href="#ideas-whoadood" title="Ideas, Planning, & Feedback">🤔</a></td>
+  </tr>
+</table>
 
-See also the list of
-[contributors](https://github.com/wil-gerard/GitConnected/contributors)
-who participated in this project.
+<!-- markdownlint-restore -->
+<!-- prettier-ignore-end -->
+
+<!-- ALL-CONTRIBUTORS-LIST:END -->
 
 ## License
 

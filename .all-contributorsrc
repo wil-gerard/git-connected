@@ -1,0 +1,25 @@
+{
+  "files": [
+    "README.md"
+  ],
+  "imageSize": 100,
+  "commit": false,
+  "contributors": [
+    {
+      "login": "whoadood",
+      "name": "Gerard Strecker",
+      "avatar_url": "https://avatars.githubusercontent.com/u/82413454?v=4",
+      "profile": "https://github.com/whoadood",
+      "contributions": [
+        "code",
+        "ideas"
+      ]
+    }
+  ],
+  "contributorsPerLine": 7,
+  "projectName": "git-connected",
+  "projectOwner": "wil-gerard",
+  "repoType": "github",
+  "repoHost": "https://github.com",
+  "skipCi": true
+}
