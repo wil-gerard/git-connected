@@ -1,0 +1,34 @@
+{
+  "files": [
+    "README.md"
+  ],
+  "imageSize": 100,
+  "commit": false,
+  "contributors": [
+    {
+      "login": "wil-gerard",
+      "name": "Wil Gerard",
+      "avatar_url": "https://avatars.githubusercontent.com/u/74286884?v=4",
+      "profile": "http://www.wilgerard.com",
+      "contributions": [
+        "code",
+        "infra",
+        "ideas",
+        "maintenance",
+        "design",
+        "projectManagement",
+        "review",
+        "question",
+        "mentoring",
+        "doc",
+        "bug"
+      ]
+    }
+  ],
+  "contributorsPerLine": 7,
+  "projectName": "git-connected",
+  "projectOwner": "wil-gerard",
+  "repoType": "github",
+  "repoHost": "https://github.com",
+  "skipCi": true
+}
