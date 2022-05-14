@@ -4,8 +4,6 @@
 [![Star on GitHub](https://img.shields.io/github/stars/wil-gerard/git-connected.svg?style=social)](https://github.com/wil-gerard/git-connected/stargazers)
 [![Twitter](https://img.shields.io/twitter/url/https/github.com/ArmynC/ArminC-AutoExec.svg?label=Help%20spread%20the%20word%21&style=social&logo=twitter)](https://twitter.com/intent/tweet?text=Git%20Connected%20%20https%3A%2F%2Fgithub.com%2Fwil-gerard%2Fgit-connected)
 
-</br>
-
 # Git Connected
 
 Git Connected is a social networking application that allows software engineers to reciprocate connections, follows, and endorsements - built by and for the [100Devs](https://leonnoel.com/100devs/) community.
