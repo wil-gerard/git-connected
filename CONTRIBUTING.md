@@ -37,7 +37,7 @@ If you've found something in the docs or the web app that should be updated, sea
 
 #### Solve an issue
 
-Scan through our [existing issues](https://github.com/wil-gerard/git-connected/issues) to find one that interests you. You can narrow down the search using `labels` as filters. View the [labels](https://github.com/wil-gerard/git-connected/labels) for more information. If you're interested in working on an issue - post a comment and tag @wil-gerard for the assignment.
+Scan through our [existing issues](https://github.com/wil-gerard/git-connected/issues) to find one that interests you. You can narrow down the search using `labels` as filters. View the [labels](https://github.com/wil-gerard/git-connected/labels) for more information. If you're interested in working on an issue - post a comment and tag [@wil-gerard](https://github.com/wil-gerard) for the assignment.
 
 ### :pencil2: Make Changes Locally
 
@@ -70,9 +70,11 @@ We follow the specifications for [Convential Commits.](https://www.conventionalc
 
  Commit sample:
 
-`refactor(Navbar.tsx): logout redirect (#132)
+```
+refactor(Navbar.tsx): logout redirect (#132)
 
-use navigate function to return to / route`
+use navigate function to return to / route
+```
 
 ### :hammer_and_wrench: Pull requests
 
@@ -82,7 +84,7 @@ When you're finished with the changes, create a pull request, also known as a PR
 - Fill the "Ready for review" template so that we can review your PR. This template helps reviewers understand your changes as well as the purpose of your pull request. 
 - Don't forget to [link PR to issue](https://docs.github.com/en/issues/tracking-your-work-with-issues/linking-a-pull-request-to-an-issue) if you are solving one.
 - Enable the checkbox to [allow maintainer edits](https://docs.github.com/en/github/collaborating-with-issues-and-pull-requests/allowing-changes-to-a-pull-request-branch-created-from-a-fork) so the branch can be updated for a merge.
-- Request @wil-gerard to review
+- Request [@wil-gerard](https://github.com/wil-gerard) to review
 Once you submit your PR, a team member will review your proposal. We may ask questions or request for additional information.
 - We may ask for changes to be made before a PR can be merged, either using [suggested changes](https://docs.github.com/en/github/collaborating-with-issues-and-pull-requests/incorporating-feedback-in-your-pull-request) or pull request comments. You can apply suggested changes directly through the UI. You can make any other changes in your fork, then commit them to your branch.
 - As you update your PR and apply changes, mark each conversation as [resolved](https://docs.github.com/en/github/collaborating-with-issues-and-pull-requests/commenting-on-a-pull-request#resolving-conversations).
@@ -90,6 +92,6 @@ Once you submit your PR, a team member will review your proposal. We may ask que
 
 ### :tada: Your PR is merged!
 
-Congratulations :tada::tada: The Git Connected team thanks you :sparkles:. 
+Congratulations :tada::tada: the Git Connected team thanks you :sparkles:. 
 
 Once your PR is merged, your contributions will be publicly visible on the [README docs](https://github.com/wil-gerard/git-connected#contributors).
