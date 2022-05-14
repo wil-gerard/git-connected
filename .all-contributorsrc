@@ -96,6 +96,15 @@
         "ideas",
         "bug"
       ]
+    },
+    {
+      "login": "ivngzmn",
+      "name": "Ivan Guzman",
+      "avatar_url": "https://avatars.githubusercontent.com/u/15111222?v=4",
+      "profile": "http://ivanguzman.dev",
+      "contributions": [
+        "ideas"
+      ]
     }
   ],
   "contributorsPerLine": 7,
