@@ -1,6 +1,6 @@
 ![github-docs-banner](https://user-images.githubusercontent.com/74286884/156865155-7af481ea-261d-40ee-83b0-64e414072a22.png)
 <!-- ALL-CONTRIBUTORS-BADGE:START - Do not remove or modify this section -->
-[![All Contributors](https://img.shields.io/badge/all_contributors-11-orange.svg?style=flat-square)](#contributors-)
+[![All Contributors](https://img.shields.io/badge/all_contributors-12-orange.svg?style=flat-square)](#contributors-)
 <!-- ALL-CONTRIBUTORS-BADGE:END -->
 [![MIT License](https://img.shields.io/badge/License-MIT-blue.svg?style=flat-square)](https://github.com/wil-gerard/git-connected/blob/main/LICENSE.md)
 [![Star on GitHub](https://img.shields.io/github/stars/wil-gerard/git-connected.svg?style=social)](https://github.com/wil-gerard/git-connected/stargazers)
@@ -161,6 +161,7 @@ yarn workspace client start
     <td align="center"><a href="http://nickrooney.me"><img src="https://avatars.githubusercontent.com/u/63169331?v=4?s=100" width="100px;" alt=""/><br /><sub><b>Nick Rooney</b></sub></a><br /><a href="#ideas-nrooney024" title="Ideas, Planning, & Feedback">🤔</a></td>
     <td align="center"><a href="http://sulthannk.netlify.app"><img src="https://avatars.githubusercontent.com/u/32130871?v=4?s=100" width="100px;" alt=""/><br /><sub><b>Sulthan Mohaideen</b></sub></a><br /><a href="#ideas-sulthanNK" title="Ideas, Planning, & Feedback">🤔</a></td>
     <td align="center"><a href="https://github.com/kevindeal"><img src="https://avatars.githubusercontent.com/u/34038025?v=4?s=100" width="100px;" alt=""/><br /><sub><b>Kevin Deal</b></sub></a><br /><a href="#ideas-kevindeal" title="Ideas, Planning, & Feedback">🤔</a> <a href="https://github.com/wil-gerard/git-connected/commits?author=kevindeal" title="Code">💻</a></td>
+    <td align="center"><a href="https://kevinlindholm.netlify.app/"><img src="https://avatars.githubusercontent.com/u/94518833?v=4?s=100" width="100px;" alt=""/><br /><sub><b>Kevin Lindholm</b></sub></a><br /><a href="#ideas-KevinLindh" title="Ideas, Planning, & Feedback">🤔</a></td>
   </tr>
 </table>
 
