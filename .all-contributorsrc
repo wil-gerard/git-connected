@@ -74,6 +74,17 @@
         "code",
         "ideas"
       ]
+    },
+    {
+      "login": "timjacksonm",
+      "name": "Tim Jackson",
+      "avatar_url": "https://avatars.githubusercontent.com/u/76879054?v=4",
+      "profile": "https://www.timjacksonm.com/",
+      "contributions": [
+        "code",
+        "ideas",
+        "bug"
+      ]
     }
   ],
   "contributorsPerLine": 7,
