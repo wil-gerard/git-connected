@@ -1,21 +1,23 @@
 ![github-docs-banner](https://user-images.githubusercontent.com/74286884/156865155-7af481ea-261d-40ee-83b0-64e414072a22.png)
 
 <p align="center" style="text-align: center;">
-<a href="https://lbesson.mit-license.org">
+<a href="#contributors">
+  <img alt="tweet"
+       src="https://img.shields.io/github/contributors/wil-gerard/git-connected?color=orange&style=flat-square"
+       target="_blank"
+       align="center" />
+</a>
+<a href="https://twitter.com/intent/tweet?text=Git%20Connected%20%20https%3A%2F%2Fgithub.com%2Fwil-gerard%2Fgit-connected">
+  <img alt="Help spread the word with a tweet!"
+       src="https://img.shields.io/twitter/url/https/github.com/ArmynC/ArminC-AutoExec.svg?label=Help%20spread%20the%20word%21&style=social&logo=twitter"
+       target="_blank"
+       align="center" />
+</a>
+<a href="https://github.com/wil-gerard/git-connected/blob/main/LICENSE.md">
   <img alt="MIT license"
        src="https://img.shields.io/badge/License-MIT-blue.svg?style=flat-square"
        align="center">
 </a>
-<a href="https://twitter.com/intent/tweet?text=Git%20Connected%20%20https%3A%2F%2Fgithub.com%2Fwil-gerard%2Fgit-connected">
-  <img alt="tweet"
-       src="https://img.shields.io/twitter/url/https/github.com/ArmynC/ArminC-AutoExec.svg?style=flat-square&logo=twitter"
-       target="_blank"
-       align="center" />
-</a>
-
-<!-- ALL-CONTRIBUTORS-BADGE:START - Do not remove or modify this section -->
-[![All Contributors](https://img.shields.io/github/contributors/wil-gerard/git-connected?color=orange&style=flat-square)](#contributors)
-<!-- ALL-CONTRIBUTORS-BADGE:END --> 
   
 # Git Connected
 
