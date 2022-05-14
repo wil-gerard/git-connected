@@ -1,0 +1,65 @@
+{
+  "files": [
+    "README.md"
+  ],
+  "imageSize": 100,
+  "commit": false,
+  "contributors": [
+    {
+      "login": "wil-gerard",
+      "name": "Wil Gerard",
+      "avatar_url": "https://avatars.githubusercontent.com/u/74286884?v=4",
+      "profile": "http://www.wilgerard.com",
+      "contributions": [
+        "code",
+        "infra",
+        "ideas",
+        "maintenance",
+        "review",
+        "mentoring",
+        "bug"
+        "design",
+        "projectManagement",
+        "review",
+        "question",
+        "mentoring",
+        "doc",
+        "bug"
+      ]
+    },
+    {
+      "login": "KenAKAFrosty",
+      "name": "Ken aka Frosty",
+      "avatar_url": "https://avatars.githubusercontent.com/u/90424167?v=4",
+      "profile": "https://github.com/KenAKAFrosty",
+       "contributions": [
+        "code",
+        "infra",
+        "ideas",
+        "maintenance",
+        "review",
+        "mentoring",
+        "bug"
+        "review",
+        "mentoring",
+        "bug"
+      ]
+    },
+    {
+      "login": "whoadood",
+      "name": "Gerard Strecker",
+      "avatar_url": "https://avatars.githubusercontent.com/u/82413454?v=4",
+      "profile": "https://github.com/whoadood",
+      "contributions": [
+        "code",
+        "ideas"
+      ]
+    }
+  ],
+  "contributorsPerLine": 7,
+  "projectName": "git-connected",
+  "projectOwner": "wil-gerard",
+  "repoType": "github",
+  "repoHost": "https://github.com",
+  "skipCi": true
+}
