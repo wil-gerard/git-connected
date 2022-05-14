@@ -32,7 +32,7 @@
       "name": "Ken aka Frosty",
       "avatar_url": "https://avatars.githubusercontent.com/u/90424167?v=4",
       "profile": "https://github.com/KenAKAFrosty",
-       "contributions": [
+      "contributions": [
         "code",
         "infra",
         "ideas",
@@ -50,6 +50,16 @@
       "name": "Gerard Strecker",
       "avatar_url": "https://avatars.githubusercontent.com/u/82413454?v=4",
       "profile": "https://github.com/whoadood",
+      "contributions": [
+        "code",
+        "ideas"
+      ]
+    },
+    {
+      "login": "JeffBucherDev",
+      "name": "Jeff Bucher",
+      "avatar_url": "https://avatars.githubusercontent.com/u/71293215?v=4",
+      "profile": "https://github.com/JeffBucherDev",
       "contributions": [
         "code",
         "ideas"
