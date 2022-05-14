@@ -1,6 +1,9 @@
-![github-docs-banner](https://user-images.githubusercontent.com/74286884/156865155-7af481ea-261d-40ee-83b0-64e414072a22.png)
+<div align="center">
+    <a href="https://gitconnnected.dev">
+        <img src="https://user-images.githubusercontent.com/74286884/156865155-7af481ea-261d-40ee-83b0-64e414072a22.png" alt="Git Connected - A social networking web application to help connect the 100Devs community" width="800px" />
+    </a>
+</div>
 
-<p align="center" style="text-align: center;">
 <a href="#contributors">
   <img alt="tweet"
        src="https://img.shields.io/github/contributors/wil-gerard/git-connected?color=orange&style=flat-square"
@@ -18,7 +21,9 @@
        src="https://img.shields.io/badge/License-MIT-blue.svg?style=flat-square"
        align="center">
 </a>
-  
+
+</br>
+
 # Git Connected
 
 Git Connected is a social networking application that allows software engineers to reciprocate connections, follows, and endorsements - built by and for the [100Devs](https://leonnoel.com/100devs/) community.
