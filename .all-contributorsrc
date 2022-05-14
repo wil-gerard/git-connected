@@ -6,6 +6,25 @@
   "commit": false,
   "contributors": [
     {
+      "login": "wil-gerard",
+      "name": "Wil Gerard",
+      "avatar_url": "https://avatars.githubusercontent.com/u/74286884?v=4",
+      "profile": "http://www.wilgerard.com",
+      "contributions": [
+        "code",
+        "infra",
+        "ideas",
+        "maintenance",
+        "design",
+        "projectManagement",
+        "review",
+        "question",
+        "mentoring",
+        "doc",
+        "bug"
+      ]
+    },
+    {
       "login": "whoadood",
       "name": "Gerard Strecker",
       "avatar_url": "https://avatars.githubusercontent.com/u/82413454?v=4",
