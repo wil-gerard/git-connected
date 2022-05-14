@@ -1,6 +1,6 @@
 ![github-docs-banner](https://user-images.githubusercontent.com/74286884/156865155-7af481ea-261d-40ee-83b0-64e414072a22.png)
 <!-- ALL-CONTRIBUTORS-BADGE:START - Do not remove or modify this section -->
-[![All Contributors](https://img.shields.io/badge/all_contributors-9-orange.svg?style=flat-square)](#contributors-)
+[![All Contributors](https://img.shields.io/badge/all_contributors-10-orange.svg?style=flat-square)](#contributors-)
 <!-- ALL-CONTRIBUTORS-BADGE:END -->
 [![MIT License](https://img.shields.io/badge/License-MIT-blue.svg?style=flat-square)](https://github.com/wil-gerard/git-connected/blob/main/LICENSE.md)
 [![Star on GitHub](https://img.shields.io/github/stars/wil-gerard/git-connected.svg?style=social)](https://github.com/wil-gerard/git-connected/stargazers)
@@ -159,6 +159,7 @@ yarn workspace client start
   <tr>
     <td align="center"><a href="http://ivanguzman.dev"><img src="https://avatars.githubusercontent.com/u/15111222?v=4?s=100" width="100px;" alt=""/><br /><sub><b>Ivan Guzman</b></sub></a><br /><a href="#ideas-ivngzmn" title="Ideas, Planning, & Feedback">🤔</a></td>
     <td align="center"><a href="http://nickrooney.me"><img src="https://avatars.githubusercontent.com/u/63169331?v=4?s=100" width="100px;" alt=""/><br /><sub><b>Nick Rooney</b></sub></a><br /><a href="#ideas-nrooney024" title="Ideas, Planning, & Feedback">🤔</a></td>
+    <td align="center"><a href="http://sulthannk.netlify.app"><img src="https://avatars.githubusercontent.com/u/32130871?v=4?s=100" width="100px;" alt=""/><br /><sub><b>Sulthan Mohaideen</b></sub></a><br /><a href="#ideas-sulthanNK" title="Ideas, Planning, & Feedback">🤔</a></td>
   </tr>
 </table>
 
