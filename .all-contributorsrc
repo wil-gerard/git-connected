@@ -85,6 +85,17 @@
         "ideas",
         "bug"
       ]
+    },
+    {
+      "login": "DanCAnderson",
+      "name": "Dan Anderson",
+      "avatar_url": "https://avatars.githubusercontent.com/u/31596870?v=4",
+      "profile": "https://github.com/DanCAnderson",
+      "contributions": [
+        "code",
+        "ideas",
+        "bug"
+      ]
     }
   ],
   "contributorsPerLine": 7,
