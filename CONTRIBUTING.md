@@ -1,6 +1,6 @@
 # Welcome to the Git Connected contributing guide
 
-Thank you for investing your time in contributing to our project! Any contribution you make will be reflected on [the README](https://github.com/wil-gerard/git-connected#readme) :sparkles:.
+Thank you for investing your time in contributing to our project! Any contribution you make will be reflected on the [README](https://github.com/wil-gerard/git-connected#readme) :sparkles:.
 
 This project follows the [all-contributors](https://github.com/all-contributors/all-contributors) specification. Contributions of any kind are welcome!
 
@@ -41,7 +41,7 @@ Scan through our [existing issues](https://github.com/wil-gerard/git-connected/i
 
 ### :pencil2: Make Changes Locally
 
-1. We recommend using [VSCode](https://code.visualstudio.com/) as an editor with the [Tailwind IntelliSense Extension which supports twin.macro](https://marketplace.visualstudio.com/items?itemName=lightyen.tailwindcss-intellisense-twin)
+1. We recommend using [VS Code](https://code.visualstudio.com/) as an editor with the [Tailwind IntelliSense Twin Extension](https://marketplace.visualstudio.com/items?itemName=lightyen.tailwindcss-intellisense-twin) which supports twin.macro.
 
 2. Fork the repository or create a new branch.
     - If you are a **first time contributor**, please fork the repository:
@@ -52,7 +52,7 @@ Scan through our [existing issues](https://github.com/wil-gerard/git-connected/i
         - Using the command line:
             - [Fork the repo](https://docs.github.com/en/github/getting-started-with-github/fork-a-repo#fork-an-example-repository) so that you can make your changes without affecting the original project until you're ready to merge them.
 
-    - **Established contributors**, please [create a branch directly from the issue you are working on,](https://github.blog/changelog/2022-03-02-create-a-branch-for-an-issue/) keep it updated with the latest [commits,](#:scroll:-commit-your-update) and submit a [pull request](#:hammer_and_wrench:-pull-requests) when ready.
+    - **Established contributors**, please [create a branch directly from the issue you are working on,](https://github.blog/changelog/2022-03-02-create-a-branch-for-an-issue/) keep it updated with the latest commits and submit a pull request when ready.
 
 3. See the [installation and setup guide](https://github.com/wil-gerard/git-connected#installation-and-local-development).
 

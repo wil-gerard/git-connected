@@ -12,6 +12,10 @@
        target="_blank"
        align="center" />
 </a>
+
+<!-- ALL-CONTRIBUTORS-BADGE:START - Do not remove or modify this section -->
+[![All Contributors](https://img.shields.io/github/contributors/wil-gerard/git-connected?color=orange&style=flat-square)](#contributors)
+<!-- ALL-CONTRIBUTORS-BADGE:END --> 
   
 # Git Connected
 
@@ -71,14 +75,16 @@ Future improvements:
 
 ## Contributing 
 
-Please check out the [CODE_OF_CONDUCT.md](CODE_OF_CONDUCT.md)
+Please see the [CONTRIBUTING.md](CONTRIBUTING.md) for a detailed guide on contributing.
 
-There are several ways to help.
+This project follows the [all-contributors](https://github.com/all-contributors/all-contributors) specification. Contributions of any kind are welcome!
+
+There are several ways to help. 
 
 1. **Spread the word:** More users means more people testing and contributing to the app which in turn means better stability and possibly more and better features. You can [tweet about it](https://twitter.com/intent/tweet?url=https%3A%2F%2Fgithub.com%2Fwil-gerard%2Fgit-connected&text=Hey%20folks%21%20We%20are%20building%20a%20social%20networking%20app%20to%20help%20connect%20the%20%23100devs%20community.%20Want%20to%20help%20out%3F&hashtags=techtwitter), share it on [LinkedIn](http://www.linkedin.com/shareArticle?mini=true&url=https://github.com/wil-gerard/git-connected&title=A%20social%20networking%20app%20to%20help%20connect%20the%20%23100devs%20community.), [reddit](http://www.reddit.com/submit?url=https%3A%2F%2Fgithub.com%2Fwil-gerard%2Fgit-connected&title=A%20social%20networking%20app%20to%20help%20connect%20the%20%23100devs%20community.) or any of your favorite social media platforms. Every little bit helps!
 
 2. **Provide a Pull Request:** Here is a list of [the most popular community requests](https://github.com/wil-gerard/git-connected/issues?q=is%3Aissue+is%3Aopen+sort%3Areactions-%2B1-desc) and here's some info on [installation and setup](https://github.com/wil-gerard/git-connected#installation-and-setup).
-   Please make sure that you're following the [angular commit guidelines](https://github.com/angular/angular.js/blob/master/DEVELOPERS.md#commits) and to also include the issue number in your commit message, if you're fixing a particular issue (e.g.: `test: create unit test for new user #44`).
+   Please make sure that you're following the [Conentional Commits guideline](https://www.conventionalcommits.org/en/v1.0.0/) and to also include the issue number in your commit message, if you're fixing a particular issue (e.g.: `test: create unit test for new user (#44)`). Please visit[CONTRIBUTING.md](CONTRIBUTING.md) for more details.
 
 3. **[Answer questions](https://github.com/wil-gerard/git-connected/discussions)**: You know the answer to another user's problem? Share your knowledge!
 
@@ -90,7 +96,7 @@ There are several ways to help.
 
 7. **[Make a feature or improvement request](https://github.com/wil-gerard/git-connected/issues/new)**: Something can be be done better? Something essential missing? Let us know!
 
-8. **Design, project management, translations, etc.**: You don't have to be programmer to help!
+8. **Design, ideas, planning, project management, etc.**: You don't have to be programmer to help! See the this list on [all-contributors](https://allcontributors.org/docs/en/emoji-key) for more ideas.
 
 ## Installation and local development
 
