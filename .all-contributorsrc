@@ -142,6 +142,17 @@
       "contributions": [
         "ideas"
       ]
+    },
+    {
+      "login": "AlejandroRamirezJr",
+      "name": "Alejandro Ramirez Jr.",
+      "avatar_url": "https://avatars.githubusercontent.com/u/57689090?v=4",
+      "profile": "https://github.com/AlejandroRamirezJr",
+      "contributions": [
+        "question",
+        "ideas",
+        "bug"
+      ]
     }
   ]
 }
