@@ -1,9 +1,16 @@
 {
+  "projectName": "git-connected",
+  "projectOwner": "wil-gerard",
+  "repoType": "github",
+  "repoHost": "https://github.com",
   "files": [
     "README.md"
   ],
   "imageSize": 100,
-  "commit": false,
+  "commit": true,
+  "commitConvention": "angular",
+  "contributorsPerLine": 6,
+  "skipCi": true,
   "contributors": [
     {
       "login": "wil-gerard",
@@ -137,11 +144,5 @@
         "ideas"
       ]
     }
-  ],
-  "contributorsPerLine": 7,
-  "projectName": "git-connected",
-  "projectOwner": "wil-gerard",
-  "repoType": "github",
-  "repoHost": "https://github.com",
-  "skipCi": true
+  ]
 }

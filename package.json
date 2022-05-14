@@ -22,5 +22,8 @@
     "server",
     "client"
   ],
-  "packageManager": "yarn@3.2.0"
+  "packageManager": "yarn@3.2.0",
+  "devDependencies": {
+    "all-contributors-cli": "^6.20.0"
+  }
 }
