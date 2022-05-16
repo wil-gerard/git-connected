@@ -4,10 +4,10 @@ import { css } from 'styled-components/macro'; //eslint-disable-line
 import { ReactComponent as TwitterIcon } from '../assets/twitter-icon.svg';
 import { ReactComponent as GitHubIcon } from '../assets/github-icon.svg';
 import React, { useEffect, useState } from 'react';
-import { CurrentUser } from '../interface';
+import { SanitizedUser } from '../interface';
 import { useUserContext } from '../hooks/UserContext';
 import GetWindowSize from '../hooks/GetWindowSize';
-import apiClient from '../api/apiClient';
+import clientApi from '../api/clientApi';
 
 const Content = tw.div`flex flex-col justify-center px-6 text-gray-100`;
 
@@ -51,11 +51,11 @@ export default function Profiles() {
   const { currentUser } = useUserContext();
 
   let initialState: any = {};
-  const [users, setUsers] = useState<CurrentUser[]>();
+  const [users, setUsers] = useState<SanitizedUser[]>();
   const [alreadyFollowing, setAlreadyFollowing] = useState(initialState);
 
   async function getCurrentUserInfo() {
-    apiClient
+    clientApi
       .get('/api/user/getuser', {
         withCredentials: true,
       })
@@ -72,7 +72,7 @@ export default function Profiles() {
     targetId: string
   ) => {
     try {
-      const res = await apiClient({
+      const res = await clientApi({
         method: 'post',
         url: '/api/user/followall',
         params: {
@@ -91,7 +91,7 @@ export default function Profiles() {
   const { windowWidth } = GetWindowSize();
 
   useEffect(() => {
-    apiClient.get('/api/user/getallusers').then((res: AxiosResponse) => {
+    clientApi.get('/api/user/getallusers').then((res: AxiosResponse) => {
       setUsers(res.data);
     });
 
@@ -99,7 +99,7 @@ export default function Profiles() {
   }, []);
 
   if (alreadyFollowing) {
-    users?.sort((a: CurrentUser, b: CurrentUser) => {
+    users?.sort((a: SanitizedUser, b: SanitizedUser) => {
       if (alreadyFollowing[a._id]) {
         return 1;
       } else if (alreadyFollowing[b._id]) {
@@ -110,7 +110,7 @@ export default function Profiles() {
     });
   }
 
-  const username = (user: CurrentUser) => {
+  const username = (user: SanitizedUser) => {
     if (user.customName !== '') {
       return user.customName;
     } else if (user.gitHubConnected) {
@@ -122,7 +122,7 @@ export default function Profiles() {
     }
   };
 
-  const location = (user: CurrentUser) => {
+  const location = (user: SanitizedUser) => {
     if (user.customLocation !== '') {
       return user.customLocation;
     } else if (user.gitHubConnected) {
@@ -157,7 +157,7 @@ export default function Profiles() {
               </TableThead>
               <TableBody>
                 {users ? (
-                  users.map((user: CurrentUser) => {
+                  users.map((user: SanitizedUser) => {
                     return (
                       <TableRow key={user._id}>
                         <TableDataCell>

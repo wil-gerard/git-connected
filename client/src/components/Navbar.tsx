@@ -9,7 +9,7 @@ import { useUserContext } from '../hooks/UserContext';
 import React, { useState } from 'react';
 import { ConnectionButton } from './misc/Buttons';
 import { ReactComponent as DiscordIcon } from '../assets/discord-icon.svg';
-import apiClient from '../api/apiClient';
+import * as authApi from '../api/authApi';
 
 const NavContainer = styled.nav`
   ${tw`flex items-center justify-between bg-secondary-700 py-6 px-6 lg:px-10 lg:py-8 w-full mb-6 lg:mb-12`}
@@ -60,19 +60,12 @@ export default function Navbar() {
   };
 
   const logout = () => {
-    apiClient
-      .delete('/api/auth/logout', {
-        withCredentials: true,
-      })
-      .then((res: AxiosResponse) => {
-        if (res.data.message === 'Logout succesful') {
-          window.localStorage.removeItem('id');
-
-          // reset user state and navigate to '/'
-          setCurrentUser(null);
-          navigate('/');
-        }
-      });
+    authApi.logoutCurrentUser().then((res: AxiosResponse) => {
+      // reset user state and navigate to '/'
+      window.localStorage.removeItem('id');
+      setCurrentUser(null);
+      navigate('/');
+    });
   };
 
   return (

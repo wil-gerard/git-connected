@@ -1,17 +1,13 @@
 import { Response, NextFunction } from 'express';
 import { ReqAuth } from '../config/interface';
 
-export const logout = async (
-  req: ReqAuth,
-  res: Response,
-  next: NextFunction
-) => {
+export const logout = (req: ReqAuth, res: Response, next: NextFunction) => {
   try {
-    if (req.user) {
+    if (req.session.passport) {
       req.logout();
-      res.send({ message: 'Logout succesful' });
+      res.status(205).send({ message: 'Successfully logged out' });
     } else {
-      res.send({ message: 'No user to log out' });
+      res.redirect('/');
     }
   } catch (err) {
     next(err);

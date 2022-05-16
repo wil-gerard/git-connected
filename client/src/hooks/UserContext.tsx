@@ -1,7 +1,7 @@
 import React, { createContext, useEffect, useState, useContext } from 'react';
 import { AxiosResponse } from 'axios';
-import apiClient from '../api/apiClient';
-import { CurrentUser } from '../interface';
+import clientApi from '../api/clientApi';
+import { SanitizedUser } from '../interface';
 
 export const useUserContext = () => {
   const context = useContext(UserContext);
@@ -10,7 +10,7 @@ export const useUserContext = () => {
 };
 
 const UserContext = createContext({
-  currentUser: {} as CurrentUser,
+  currentUser: {} as SanitizedUser,
   setCurrentUser: {} as any,
 });
 
@@ -18,7 +18,7 @@ export default function UserContextProvider(props: any) {
   const [currentUser, setCurrentUser] = useState<any>();
 
   useEffect(() => {
-    apiClient
+    clientApi
       .get('/api/user/getuser', {
         withCredentials: true,
       })

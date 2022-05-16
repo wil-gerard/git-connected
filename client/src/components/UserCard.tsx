@@ -4,7 +4,7 @@ import styled from 'styled-components';
 import { Subtitle } from './misc/Typography';
 import { Subheading } from './misc/Typography';
 import { BodyText } from './misc/Typography';
-import { CurrentUser } from '../interface';
+import { SanitizedUser } from '../interface';
 import { ReactComponent as TwitterIcon } from '../assets/twitter-icon.svg';
 import { ReactComponent as GitHubIcon } from '../assets/github-icon.svg';
 
@@ -37,8 +37,8 @@ const CardMetaFeature = styled.a`
   }
 `;
 
-export const UserCard: React.FC<CurrentUser> = (user) => {
-  const username = (user: CurrentUser) => {
+export const UserCard: React.FC<SanitizedUser> = (user) => {
+  const username = (user: SanitizedUser) => {
     if (user.customName !== '') {
       return user.customName;
     } else if (user.gitHubConnected) {
@@ -50,7 +50,7 @@ export const UserCard: React.FC<CurrentUser> = (user) => {
     }
   };
 
-  const location = (user: CurrentUser) => {
+  const location = (user: SanitizedUser) => {
     if (user.customLocation !== '') {
       return user.customLocation;
     } else if (user.gitHubConnected) {
@@ -60,7 +60,7 @@ export const UserCard: React.FC<CurrentUser> = (user) => {
     }
   };
 
-  const bio = (user: CurrentUser) => {
+  const bio = (user: SanitizedUser) => {
     if (user.customBio !== '') {
       return user.customBio;
     } else if (user.gitHubConnected) {
