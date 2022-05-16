@@ -1,7 +1,7 @@
 import React, { createContext, useEffect, useState, useContext } from 'react';
 import { AxiosResponse } from 'axios';
 import apiClient from '../api/apiClient';
-import { IUser } from '../interface';
+import { CurrentUser } from '../interface';
 
 export const useUserContext = () => {
   const context = useContext(UserContext);
@@ -10,7 +10,7 @@ export const useUserContext = () => {
 };
 
 const UserContext = createContext({
-  currentUser: {} as IUser,
+  currentUser: {} as CurrentUser,
   setCurrentUser: {} as any,
 });
 

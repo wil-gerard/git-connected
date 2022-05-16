@@ -1,6 +1,6 @@
 import { Request } from 'express';
 
-export interface IDatabaseUser {
+export interface DatabaseUser {
   _id: string;
   __v: number;
   alreadyFollowingTheseIds: any;
@@ -33,7 +33,7 @@ export interface IDatabaseUser {
   };
 }
 
-export interface IUser {
+export interface CurrentUser {
   _id: string;
   alreadyFollowingTheseIds: any;
   twitterConnected: boolean;
@@ -76,7 +76,7 @@ export interface IUser {
   };
 }
 
-export interface IUserUpdateForm {
+export interface UserUpdateForm {
   customBio: string;
   customLocation: string;
   customName: string;
@@ -84,6 +84,6 @@ export interface IUserUpdateForm {
   openToCoffeeChats: boolean;
 }
 
-export interface IReqAuth extends Request {
-  user?: IDatabaseUser;
+export interface ReqAuth extends Request {
+  user?: DatabaseUser;
 }

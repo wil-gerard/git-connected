@@ -1,8 +1,8 @@
 import { Response, NextFunction } from 'express';
-import { IReqAuth } from '../config/interface';
+import { ReqAuth } from '../config/interface';
 
 export const logout = async (
-  req: IReqAuth,
+  req: ReqAuth,
   res: Response,
   next: NextFunction
 ) => {

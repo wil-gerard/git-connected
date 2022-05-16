@@ -1,5 +1,5 @@
 import { Response, NextFunction } from 'express';
-import { IReqAuth } from '../config/interface';
+import { ReqAuth } from '../config/interface';
 import User from '../models/User';
 
 declare module 'express-session' {
@@ -10,7 +10,7 @@ declare module 'express-session' {
   }
 }
 
-const auth = async (req: IReqAuth, res: Response, next: NextFunction) => {
+const auth = async (req: ReqAuth, res: Response, next: NextFunction) => {
   try {
     if (req.isAuthenticated() && req.user) {
       next();

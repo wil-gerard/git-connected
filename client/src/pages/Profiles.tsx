@@ -4,7 +4,7 @@ import { css } from 'styled-components/macro'; //eslint-disable-line
 import { ReactComponent as TwitterIcon } from '../assets/twitter-icon.svg';
 import { ReactComponent as GitHubIcon } from '../assets/github-icon.svg';
 import React, { useEffect, useState } from 'react';
-import { IUser } from '../interface';
+import { CurrentUser } from '../interface';
 import { useUserContext } from '../hooks/UserContext';
 import GetWindowSize from '../hooks/GetWindowSize';
 import apiClient from '../api/apiClient';
@@ -51,7 +51,7 @@ export default function Profiles() {
   const { currentUser } = useUserContext();
 
   let initialState: any = {};
-  const [users, setUsers] = useState<IUser[]>();
+  const [users, setUsers] = useState<CurrentUser[]>();
   const [alreadyFollowing, setAlreadyFollowing] = useState(initialState);
 
   async function getCurrentUserInfo() {
@@ -99,7 +99,7 @@ export default function Profiles() {
   }, []);
 
   if (alreadyFollowing) {
-    users?.sort((a: IUser, b: IUser) => {
+    users?.sort((a: CurrentUser, b: CurrentUser) => {
       if (alreadyFollowing[a._id]) {
         return 1;
       } else if (alreadyFollowing[b._id]) {
@@ -110,7 +110,7 @@ export default function Profiles() {
     });
   }
 
-  const username = (user: IUser) => {
+  const username = (user: CurrentUser) => {
     if (user.customName !== '') {
       return user.customName;
     } else if (user.gitHubConnected) {
@@ -122,7 +122,7 @@ export default function Profiles() {
     }
   };
 
-  const location = (user: IUser) => {
+  const location = (user: CurrentUser) => {
     if (user.customLocation !== '') {
       return user.customLocation;
     } else if (user.gitHubConnected) {
@@ -157,7 +157,7 @@ export default function Profiles() {
               </TableThead>
               <TableBody>
                 {users ? (
-                  users.map((user: IUser) => {
+                  users.map((user: CurrentUser) => {
                     return (
                       <TableRow key={user._id}>
                         <TableDataCell>
