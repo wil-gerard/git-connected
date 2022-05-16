@@ -140,6 +140,19 @@ export const getUser = async (
   }
 };
 
+export const getUserById = async (
+  req: IReqAuth,
+  res: Response,
+  next: NextFunction
+) => {
+  try {
+    const user = await User.findById(req.params.id);
+    res.status(200).send(user);
+  } catch (err) {
+    next(err);
+  }
+};
+
 const getUsersFromDB = async (next: NextFunction) => {
   try {
     const users = await User.find(
