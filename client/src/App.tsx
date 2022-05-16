@@ -6,6 +6,7 @@ import Featured from './pages/Featured';
 import Home from './pages/Home';
 import Navbar from './components/Navbar';
 import Footer from './components/Footer';
+import RequireAuth from './components/RequireAuth';
 
 function App() {
   return (
@@ -17,7 +18,14 @@ function App() {
             <Route path="/" element={<Home />} />
             <Route path="/profiles" element={<Profiles />} />
             <Route path="/featured" element={<Featured />} />
-            <Route path="/profile" element={<Profile />} />
+            <Route
+              path="/profile"
+              element={
+                <RequireAuth>
+                  <Profile />
+                </RequireAuth>
+              }
+            />
           </Routes>
         </div>
         <Footer />
