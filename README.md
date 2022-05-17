@@ -1,18 +1,9 @@
 ![github-docs-banner](https://user-images.githubusercontent.com/74286884/156865155-7af481ea-261d-40ee-83b0-64e414072a22.png)
+[![All Contributors](https://img.shields.io/badge/all_contributors-12-orange.svg?style=flat-square)](#contributors-)
+[![MIT License](https://img.shields.io/badge/License-MIT-blue.svg?style=flat-square)](https://github.com/wil-gerard/git-connected/blob/main/LICENSE.md)
+[![Star on GitHub](https://img.shields.io/github/stars/wil-gerard/git-connected.svg?style=social)](https://github.com/wil-gerard/git-connected/stargazers)
+[![Twitter](https://img.shields.io/twitter/url/https/github.com/ArmynC/ArminC-AutoExec.svg?label=Help%20spread%20the%20word%21&style=social&logo=twitter)](https://twitter.com/intent/tweet?text=Git%20Connected%20%20https%3A%2F%2Fgithub.com%2Fwil-gerard%2Fgit-connected)
 
-<p align="center" style="text-align: center;">
-<a href="https://lbesson.mit-license.org">
-  <img alt="MIT license"
-       src="https://img.shields.io/badge/License-MIT-blue.svg?style=flat-square"
-       align="center">
-</a>
-<a href="https://twitter.com/intent/tweet?text=Git%20Connected%20%20https%3A%2F%2Fgithub.com%2Fwil-gerard%2Fgit-connected">
-  <img alt="tweet"
-       src="https://img.shields.io/twitter/url/https/github.com/ArmynC/ArminC-AutoExec.svg?style=flat-square&logo=twitter"
-       target="_blank"
-       align="center" />
-</a>
-  
 # Git Connected
 
 Git Connected is a social networking application that allows software engineers to reciprocate connections, follows, and endorsements - built by and for the [100Devs](https://leonnoel.com/100devs/) community.
@@ -71,14 +62,16 @@ Future improvements:
 
 ## Contributing 
 
-Please check out the [CODE_OF_CONDUCT.md](CODE_OF_CONDUCT.md)
+Please see the [CONTRIBUTING.md](CONTRIBUTING.md) for a detailed guide on contributing.
 
-There are several ways to help.
+This project follows the [all-contributors](https://github.com/all-contributors/all-contributors) specification. Contributions of any kind are welcome!
+
+There are several ways to help. 
 
 1. **Spread the word:** More users means more people testing and contributing to the app which in turn means better stability and possibly more and better features. You can [tweet about it](https://twitter.com/intent/tweet?url=https%3A%2F%2Fgithub.com%2Fwil-gerard%2Fgit-connected&text=Hey%20folks%21%20We%20are%20building%20a%20social%20networking%20app%20to%20help%20connect%20the%20%23100devs%20community.%20Want%20to%20help%20out%3F&hashtags=techtwitter), share it on [LinkedIn](http://www.linkedin.com/shareArticle?mini=true&url=https://github.com/wil-gerard/git-connected&title=A%20social%20networking%20app%20to%20help%20connect%20the%20%23100devs%20community.), [reddit](http://www.reddit.com/submit?url=https%3A%2F%2Fgithub.com%2Fwil-gerard%2Fgit-connected&title=A%20social%20networking%20app%20to%20help%20connect%20the%20%23100devs%20community.) or any of your favorite social media platforms. Every little bit helps!
 
 2. **Provide a Pull Request:** Here is a list of [the most popular community requests](https://github.com/wil-gerard/git-connected/issues?q=is%3Aissue+is%3Aopen+sort%3Areactions-%2B1-desc) and here's some info on [installation and setup](https://github.com/wil-gerard/git-connected#installation-and-setup).
-   Please make sure that you're following the [angular commit guidelines](https://github.com/angular/angular.js/blob/master/DEVELOPERS.md#commits) and to also include the issue number in your commit message, if you're fixing a particular issue (e.g.: `test: create unit test for new user #44`).
+   Please make sure that you're following the [Conentional Commits guideline](https://www.conventionalcommits.org/en/v1.0.0/) and to also include the issue number in your commit message, if you're fixing a particular issue (e.g.: `test: create unit test for new user (#44)`). Please visit[CONTRIBUTING.md](CONTRIBUTING.md) for more details.
 
 3. **[Answer questions](https://github.com/wil-gerard/git-connected/discussions)**: You know the answer to another user's problem? Share your knowledge!
 
@@ -90,7 +83,7 @@ There are several ways to help.
 
 7. **[Make a feature or improvement request](https://github.com/wil-gerard/git-connected/issues/new)**: Something can be be done better? Something essential missing? Let us know!
 
-8. **Design, project management, translations, etc.**: You don't have to be programmer to help!
+8. **Design, ideas, planning, project management, etc.**: You don't have to be programmer to help! See the this list on [all-contributors](https://allcontributors.org/docs/en/emoji-key) for more ideas.
 
 ## Installation and local development
 
@@ -148,18 +141,36 @@ yarn workspace client start
 ```
 
 ## Contributors
-  - **Wil Gerard** - *Software Engineer* - [wil-gerard](https://github.com/wil-gerard)
-  - **Ken aka Frosty** - *Software Engineer* - [KenAKAFrosty](https://github.com/KenAKAFrosty)
-  - **Jeff Bucher** - *Software Engineer* - [JeffBucherDev](https://github.com/JeffBucherDev)
-  - **Miracle Banks** - *Software Engineer* - [miraclebanks](https://github.com/miraclebanks)
-  - **Dan Anderson** - *Software Engineer* - [DanCAnderson](https://github.com/DanCAnderson)
-  - **Tim Jackson** - *Software Engineer* - [timjacksonm](https://github.com/timjacksonm)
-  - **Gerard Strecker** - *Software Engineer* - [whoadood](https://github.com/whoadood)
 
-See also the list of
-[contributors](https://github.com/wil-gerard/GitConnected/contributors)
-who participated in this project.
+Git Connected is developed collaboratively with folks across the globe. A huge thank you goes out to those helping make it happen ([emoji key](https://allcontributors.org/docs/en/emoji-key)):
+<!-- ALL-CONTRIBUTORS-LIST:START - Do not remove or modify this section -->
+<!-- prettier-ignore-start -->
+<!-- markdownlint-disable -->
+<table>
+  <tr>
+    <td align="center"><a href="http://www.wilgerard.com"><img src="https://avatars.githubusercontent.com/u/74286884?v=4?s=100" width="100px;" alt=""/><br /><sub><b>Wil Gerard</b></sub></a><br /><a href="https://github.com/wil-gerard/git-connected/commits?author=wil-gerard" title="Code">💻</a> <a href="#projectManagement-wil-gerard" title="Project Management">📆</a> <a href="#infra-wil-gerard" title="Infrastructure (Hosting, Build-Tools, etc)">🚇</a> <a href="#design-wil-gerard" title="Design">🎨</a> <a href="#ideas-wil-gerard" title="Ideas, Planning, & Feedback">🤔</a> <a href="#maintenance-wil-gerard" title="Maintenance">🚧</a> <a href="https://github.com/wil-gerard/git-connected/pulls?q=is%3Apr+reviewed-by%3Awil-gerard" title="Reviewed Pull Requests">👀</a> <a href="#mentoring-wil-gerard" title="Mentoring">🧑‍🏫</a> <a href="https://github.com/wil-gerard/git-connected/issues?q=author%3Awil-gerard" title="Bug reports">🐛</a> <a href="https://github.com/wil-gerard/git-connected/commits?author=wil-gerard" title="Documentation">📖</a></td>
+    <td align="center"><a href="https://github.com/KenAKAFrosty"><img src="https://avatars.githubusercontent.com/u/90424167?v=4?s=100" width="100px;" alt=""/><br /><sub><b>Ken aka Frosty</b></sub></a><br /><a href="https://github.com/wil-gerard/git-connected/commits?author=KenAKAFrosty" title="Code">💻</a> <a href="#infra-KenAKAFrosty" title="Infrastructure (Hosting, Build-Tools, etc)">🚇</a> <a href="#ideas-KenAKAFrosty" title="Ideas, Planning, & Feedback">🤔</a> <a href="#maintenance-KenAKAFrosty" title="Maintenance">🚧</a> <a href="https://github.com/wil-gerard/git-connected/pulls?q=is%3Apr+reviewed-by%3AKenAKAFrosty" title="Reviewed Pull Requests">👀</a> <a href="#mentoring-KenAKAFrosty" title="Mentoring">🧑‍🏫</a> <a href="https://github.com/wil-gerard/git-connected/issues?q=author%3AKenAKAFrosty" title="Bug reports">🐛</a></td>
+    <td align="center"><a href="https://github.com/whoadood"><img src="https://avatars.githubusercontent.com/u/82413454?v=4?s=100" width="100px;" alt=""/><br /><sub><b>Gerard Strecker</b></sub></a><br /><a href="https://github.com/wil-gerard/git-connected/commits?author=whoadood" title="Code">💻</a> <a href="#ideas-whoadood" title="Ideas, Planning, & Feedback">🤔</a></td>
+    <td align="center"><a href="https://github.com/JeffBucherDev"><img src="https://avatars.githubusercontent.com/u/71293215?v=4?s=100" width="100px;" alt=""/><br /><sub><b>Jeff Bucher</b></sub></a><br /><a href="https://github.com/wil-gerard/git-connected/commits?author=JeffBucherDev" title="Code">💻</a> <a href="#ideas-JeffBucherDev" title="Ideas, Planning, & Feedback">🤔</a></td>
+    <td align="center"><a href="https://github.com/miraclebanks"><img src="https://avatars.githubusercontent.com/u/27967485?v=4?s=100" width="100px;" alt=""/><br /><sub><b>Miracle</b></sub></a><br /><a href="https://github.com/wil-gerard/git-connected/commits?author=miraclebanks" title="Code">💻</a> <a href="#ideas-miraclebanks" title="Ideas, Planning, & Feedback">🤔</a></td>
+    <td align="center"><a href="https://www.timjacksonm.com/"><img src="https://avatars.githubusercontent.com/u/76879054?v=4?s=100" width="100px;" alt=""/><br /><sub><b>Tim Jackson</b></sub></a><br /><a href="https://github.com/wil-gerard/git-connected/commits?author=timjacksonm" title="Code">💻</a> <a href="#ideas-timjacksonm" title="Ideas, Planning, & Feedback">🤔</a> <a href="https://github.com/wil-gerard/git-connected/issues?q=author%3Atimjacksonm" title="Bug reports">🐛</a></td>
+    <td align="center"><a href="https://github.com/DanCAnderson"><img src="https://avatars.githubusercontent.com/u/31596870?v=4?s=100" width="100px;" alt=""/><br /><sub><b>Dan Anderson</b></sub></a><br /><a href="https://github.com/wil-gerard/git-connected/commits?author=DanCAnderson" title="Code">💻</a> <a href="#ideas-DanCAnderson" title="Ideas, Planning, & Feedback">🤔</a> <a href="https://github.com/wil-gerard/git-connected/issues?q=author%3ADanCAnderson" title="Bug reports">🐛</a></td>
+  </tr>
+  <tr>
+    <td align="center"><a href="http://ivanguzman.dev"><img src="https://avatars.githubusercontent.com/u/15111222?v=4?s=100" width="100px;" alt=""/><br /><sub><b>Ivan Guzman</b></sub></a><br /><a href="#ideas-ivngzmn" title="Ideas, Planning, & Feedback">🤔</a></td>
+    <td align="center"><a href="http://nickrooney.me"><img src="https://avatars.githubusercontent.com/u/63169331?v=4?s=100" width="100px;" alt=""/><br /><sub><b>Nick Rooney</b></sub></a><br /><a href="#ideas-nrooney024" title="Ideas, Planning, & Feedback">🤔</a></td>
+    <td align="center"><a href="http://sulthannk.netlify.app"><img src="https://avatars.githubusercontent.com/u/32130871?v=4?s=100" width="100px;" alt=""/><br /><sub><b>Sulthan Mohaideen</b></sub></a><br /><a href="#ideas-sulthanNK" title="Ideas, Planning, & Feedback">🤔</a></td>
+    <td align="center"><a href="https://github.com/kevindeal"><img src="https://avatars.githubusercontent.com/u/34038025?v=4?s=100" width="100px;" alt=""/><br /><sub><b>Kevin Deal</b></sub></a><br /><a href="#ideas-kevindeal" title="Ideas, Planning, & Feedback">🤔</a> <a href="https://github.com/wil-gerard/git-connected/commits?author=kevindeal" title="Code">💻</a></td>
+    <td align="center"><a href="https://kevinlindholm.netlify.app/"><img src="https://avatars.githubusercontent.com/u/94518833?v=4?s=100" width="100px;" alt=""/><br /><sub><b>Kevin Lindholm</b></sub></a><br /><a href="#ideas-KevinLindh" title="Ideas, Planning, & Feedback">🤔</a></td>
+    <td align="center"><a href="https://github.com/AlejandroRamirezJr"><img src="https://avatars.githubusercontent.com/u/57689090?v=4?s=100" width="100px;" alt=""/><br /><sub><b>Alejandro Ramirez Jr.</b></sub></a><br /><a href="#question-AlejandroRamirezJr" title="Answering Questions">💬</a> <a href="#ideas-AlejandroRamirezJr" title="Ideas, Planning, & Feedback">🤔</a> <a href="https://github.com/wil-gerard/git-connected/issues?q=author%3AAlejandroRamirezJr" title="Bug reports">🐛</a></td>
+  </tr>
+</table>
+
+<!-- markdownlint-restore -->
+<!-- prettier-ignore-end -->
+
+<!-- ALL-CONTRIBUTORS-LIST:END -->
 
 ## License
 
-MIT License - see the [LICENSE.md](LICENSE.md) file for details
+MIT License - see the [LICENSE](LICENSE) file for details

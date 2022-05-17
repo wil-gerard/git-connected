@@ -1,0 +1,158 @@
+{
+  "projectName": "git-connected",
+  "projectOwner": "wil-gerard",
+  "repoType": "github",
+  "repoHost": "https://github.com",
+  "files": [
+    "README.md"
+  ],
+  "imageSize": 100,
+  "commit": true,
+  "commitConvention": "angular",
+  "contributorsPerLine": 7,
+  "skipCi": true,
+  "contributors": [
+    {
+      "login": "wil-gerard",
+      "name": "Wil Gerard",
+      "avatar_url": "https://avatars.githubusercontent.com/u/74286884?v=4",
+      "profile": "http://www.wilgerard.com",
+      "contributions": [
+        "code",
+        "projectManagement",
+        "infra",
+        "design",
+        "ideas",
+        "maintenance",
+        "review",
+        "mentoring",
+        "bug",
+        "doc"
+      ]
+    },
+    {
+      "login": "KenAKAFrosty",
+      "name": "Ken aka Frosty",
+      "avatar_url": "https://avatars.githubusercontent.com/u/90424167?v=4",
+      "profile": "https://github.com/KenAKAFrosty",
+      "contributions": [
+        "code",
+        "infra",
+        "ideas",
+        "maintenance",
+        "review",
+        "mentoring",
+        "bug"
+      ]
+    },
+    {
+      "login": "whoadood",
+      "name": "Gerard Strecker",
+      "avatar_url": "https://avatars.githubusercontent.com/u/82413454?v=4",
+      "profile": "https://github.com/whoadood",
+      "contributions": [
+        "code",
+        "ideas"
+      ]
+    },
+    {
+      "login": "JeffBucherDev",
+      "name": "Jeff Bucher",
+      "avatar_url": "https://avatars.githubusercontent.com/u/71293215?v=4",
+      "profile": "https://github.com/JeffBucherDev",
+      "contributions": [
+        "code",
+        "ideas"
+      ]
+    },
+    {
+      "login": "miraclebanks",
+      "name": "Miracle",
+      "avatar_url": "https://avatars.githubusercontent.com/u/27967485?v=4",
+      "profile": "https://github.com/miraclebanks",
+      "contributions": [
+        "code",
+        "ideas"
+      ]
+    },
+    {
+      "login": "timjacksonm",
+      "name": "Tim Jackson",
+      "avatar_url": "https://avatars.githubusercontent.com/u/76879054?v=4",
+      "profile": "https://www.timjacksonm.com/",
+      "contributions": [
+        "code",
+        "ideas",
+        "bug"
+      ]
+    },
+    {
+      "login": "DanCAnderson",
+      "name": "Dan Anderson",
+      "avatar_url": "https://avatars.githubusercontent.com/u/31596870?v=4",
+      "profile": "https://github.com/DanCAnderson",
+      "contributions": [
+        "code",
+        "ideas",
+        "bug"
+      ]
+    },
+    {
+      "login": "ivngzmn",
+      "name": "Ivan Guzman",
+      "avatar_url": "https://avatars.githubusercontent.com/u/15111222?v=4",
+      "profile": "http://ivanguzman.dev",
+      "contributions": [
+        "ideas"
+      ]
+    },
+    {
+      "login": "nrooney024",
+      "name": "Nick Rooney",
+      "avatar_url": "https://avatars.githubusercontent.com/u/63169331?v=4",
+      "profile": "http://nickrooney.me",
+      "contributions": [
+        "ideas"
+      ]
+    },
+    {
+      "login": "sulthanNK",
+      "name": "Sulthan Mohaideen",
+      "avatar_url": "https://avatars.githubusercontent.com/u/32130871?v=4",
+      "profile": "http://sulthannk.netlify.app",
+      "contributions": [
+        "ideas"
+      ]
+    },
+    {
+      "login": "kevindeal",
+      "name": "Kevin Deal",
+      "avatar_url": "https://avatars.githubusercontent.com/u/34038025?v=4",
+      "profile": "https://github.com/kevindeal",
+      "contributions": [
+        "ideas",
+        "code"
+      ]
+    },
+    {
+      "login": "KevinLindh",
+      "name": "Kevin Lindholm",
+      "avatar_url": "https://avatars.githubusercontent.com/u/94518833?v=4",
+      "profile": "https://kevinlindholm.netlify.app/",
+      "contributions": [
+        "ideas"
+      ]
+    },
+    {
+      "login": "AlejandroRamirezJr",
+      "name": "Alejandro Ramirez Jr.",
+      "avatar_url": "https://avatars.githubusercontent.com/u/57689090?v=4",
+      "profile": "https://github.com/AlejandroRamirezJr",
+      "contributions": [
+        "question",
+        "ideas",
+        "bug"
+      ]
+    }
+  ]
+}

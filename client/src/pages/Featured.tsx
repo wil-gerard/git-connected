@@ -3,8 +3,8 @@ import { AxiosResponse } from 'axios';
 import tw from 'twin.macro';
 import { UserCard } from '../components/UserCard';
 import { useUserContext } from '../hooks/UserContext';
-import { IUser } from '../interface';
-import apiClient from '../api/apiClient';
+import { SanitizedUser } from '../interface';
+import clientApi from '../api/clientApi';
 import { PageTitle as BasePageTitle } from '../components/misc/Typography';
 
 const Container = tw.div`relative w-full px-10 lg:mx-auto pb-64`;
@@ -15,9 +15,9 @@ const PageTitle = tw(BasePageTitle)`flex flex-col items-center`;
 export default function Featured() {
   const { currentUser } = useUserContext();
 
-  const [randomUser, setRandomUser] = useState<IUser>();
+  const [randomUser, setRandomUser] = useState<SanitizedUser>();
   useEffect(() => {
-    apiClient.get('/api/user/getrandomuser').then((res: AxiosResponse) => {
+    clientApi.get('/api/user/getrandomuser').then((res: AxiosResponse) => {
       setRandomUser(res.data);
     });
   }, [currentUser]);
