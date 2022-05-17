@@ -13,6 +13,7 @@ import { SanitizedUser } from '../interface';
 interface UserContextType {
   currentUser?: SanitizedUser;
   setCurrentUser: any;
+  loading: boolean;
   error?: any;
   logout: () => void;
 }
@@ -33,6 +34,7 @@ export default function UserContextProvider({
   const [loading, setLoading] = useState<boolean>(true);
 
   useEffect(() => {
+    setLoading(true);
     try {
       userInfoApi
         .getCurrentUser()
@@ -46,7 +48,7 @@ export default function UserContextProvider({
 
   const logout = () => {
     authApi.logoutCurrentUser().then(() => setCurrentUser(undefined));
-  }
+  };
 
   const memoedValue = useMemo(
     () => ({

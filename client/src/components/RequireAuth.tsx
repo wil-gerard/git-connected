@@ -1,13 +1,11 @@
 import { Navigate } from 'react-router-dom';
+import { useUserContext } from '../hooks/UserContext';
 
-// unsure if I should be declaring type inline or some other way
 export default function RequireAuth({ children }: { children: JSX.Element }) {
-  const storageId = window.localStorage.getItem('id');
+  const { currentUser } = useUserContext();
 
-  // initially tried checking for user in context with local storage - felt more robust
-  // redirecting back from logging in user context isnt set yet failing the auth check
-  if (!storageId) {
-    return <Navigate to="/" />;
+  if (!currentUser) {
+    return <Navigate to="/" replace />;
   }
   return children;
 }
