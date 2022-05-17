@@ -1,6 +1,6 @@
 const DiscordStrategy = require('passport-discord').Strategy;
 import User from '../../../models/User';
-import { IDatabaseUser, IReqAuth } from '../../interface';
+import { DatabaseUser, ReqAuth } from '../../interface';
 
 const discordScopes = ['identify', 'guilds', 'guilds.members.read'];
 const discordStrategySettings: any = {
@@ -16,7 +16,7 @@ export const discordStrategy: any = new DiscordStrategy(
 );
 
 async function handleDiscordLogin(
-  req: IReqAuth,
+  req: ReqAuth,
   discordAccessToken: String,
   refreshToken: String,
   discordProfile: any,
@@ -31,7 +31,7 @@ async function handleDiscordLogin(
   }
   User.findOne(
     { 'discord.id': discordProfile.id },
-    async (err: Error, userInDatabase: IDatabaseUser) => {
+    async (err: Error, userInDatabase: DatabaseUser) => {
       if (err) {
         return callback(err, null);
       }
