@@ -7,7 +7,7 @@ import { Subtitle } from '../components/misc/Typography';
 import { PrimaryButton as PrimaryButtonBase } from '../components/misc/Buttons';
 import GetRepoInfo from '../hooks/GetRepoInfo';
 
-const Container = tw.div`relative w-full px-10 lg:mx-auto py-20 lg:py-24 bg-secondary-900`;
+const Container = tw.div`relative w-full px-10 lg:mx-auto py-20 lg:py-24 bg-secondary-800`;
 const Column = tw.div`flex flex-col justify-between max-w-screen-xl mx-auto items-center`;
 const TextColumn = tw(Column)`md:w-8/12 mt-16 md:mt-0`;
 
@@ -25,7 +25,7 @@ const Description = tw(BaseDescription)`text-center`;
 export default function FeatureStats() {
   const { data } = GetRepoInfo();
 
-  const heading = `How it works`;
+  const heading = `Help us build`;
 
   const description = `We are driving development through a GitHub monorepo. Your feedback helps us understand what works, what doesn't, and what features the community would like to see.`;
 
