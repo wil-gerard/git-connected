@@ -1,7 +1,7 @@
 import tw from 'twin.macro';
 import { SectionHeading as BaseSectionHeading } from '../components/misc/Typography';
 import { Description as BaseDescription } from '../components/misc/Typography';
-import { Subtitle, BodyText } from '../components/misc/Typography';
+import { Subtitle, BodyText, Subheading } from '../components/misc/Typography';
 import {
   SignInIcon,
   AppsIcon,
@@ -16,32 +16,32 @@ const TextContent = tw.div`py-8 text-center`;
 const StepsContainer = tw.div`mt-8 flex flex-wrap max-w-screen-md items-center mx-auto text-gray-100`;
 const Step = tw.div`flex py-4 w-full md:w-1/2 tracking-wide`;
 const StepKey = tw(Subtitle)`text-sm font-medium text-left`;
-const StepTitle = tw(BodyText)`font-medium text-primary-400`;
+const StepTitle = tw(Subheading)``;
 const StepInfoContainer = tw.div`text-left pr-4 flex flex-col justify-center`;
 const Description = tw(BaseDescription)`text-center`;
 const SectionHeading = tw(BaseSectionHeading)`text-center`;
-const Link = tw.a`text-primary-900`;
+const Link = tw.a`text-primary-600 hover:text-primary-800 transition duration-300`;
 const IconContainer = tw.div`mr-4`;
-const Icon = tw.div`bg-primary-200 p-4 text-primary-700 rounded-full`;
+const Icon = tw.div`bg-primary-200 p-4 text-primary-900 rounded-full`;
 
 export default function HowItWorks() {
   const heading = `How it works`;
-  const description = `Sign in with Discord, get to know other 100Devs, and conect with the community on Twitter and GitHub at the click of a button.`;
+  const description = `Sign in with Discord, get to know other 100Devs, and connect with the community on Twitter and GitHub at the click of a button.`;
   const stats = [
     {
-      title: 'Join 100Devs',
-      link: 'asdf',
-      details: 'Already a member? Cool! Follow ahead.',
+      title: 'Sign in with Discord',
+      link: 'https://leonnoel.com/discord',
+      details: 'Already a member? Sign in!',
       icon: <SignInIcon size="large" />,
     },
     {
-      title: 'Connect Twitter and Github',
-      details: 'Other users can then follow both your accounts in-app.',
+      title: 'Connect Accounts',
+      details: 'Other users can then view and follow your accounts in-app.',
       icon: <AppsIcon size="large" />,
     },
     {
       title: 'Edit Profile',
-      details: `Edit the name, location, and bio you'd like to be displayed`,
+      details: `Edit the name, location, and bio you'd like to be displayed.`,
       icon: <PencilIcon size="large" />,
     },
     {
@@ -71,7 +71,7 @@ export default function HowItWorks() {
                   <StepTitle>{step.title}</StepTitle>
                   <BodyText>
                     {step.link && (
-                      <Link href={step.link}>Learn more here. </Link>
+                      <Link href={step.link}>Join the Discord. </Link>
                     )}
                     {step.details}
                   </BodyText>

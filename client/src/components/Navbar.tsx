@@ -87,11 +87,11 @@ export default function Navbar() {
           {currentUser ? (
             <>
               <NavLink to="/profile">My Profile</NavLink>
-              <LogoutNavLink onClick={logout}>Logout</LogoutNavLink>
+              <LogoutNavLink onClick={logout}>Sign Out</LogoutNavLink>
             </>
           ) : (
             <LoginNavLink onClick={() => setShowModal(true)}>
-              Log In
+              Sign In
             </LoginNavLink>
           )}
         </UserContextLinks>
