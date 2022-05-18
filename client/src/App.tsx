@@ -1,6 +1,7 @@
 import React from 'react';
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import Profile from './pages/Profile';
+import PublicProfile from './pages/PublicProfile';
 import Profiles from './pages/Profiles';
 import Featured from './pages/Featured';
 import Home from './pages/Home';
@@ -20,6 +21,7 @@ function App() {
               <Route path="/" element={<Home />} />
               <Route path="/profiles" element={<Profiles />} />
               <Route path="/featured" element={<Featured />} />
+              <Route path="/publicprofile/:id" element={<PublicProfile />} />
               <Route
                 path="/profile"
                 element={
