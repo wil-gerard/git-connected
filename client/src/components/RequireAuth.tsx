@@ -1,10 +1,9 @@
 import { Navigate } from 'react-router-dom';
-import { useUserContext } from '../hooks/UserContext';
 
 export default function RequireAuth({ children }: { children: JSX.Element }) {
-  const { currentUser } = useUserContext();
+  const storageId = window.localStorage.getItem('id')
 
-  if (!currentUser) {
+  if (!storageId) {
     return <Navigate to="/" replace />;
   }
   return children;
