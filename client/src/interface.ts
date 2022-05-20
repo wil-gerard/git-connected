@@ -1,4 +1,4 @@
-export interface IUser {
+export interface SanitizedUser {
   _id: string;
   alreadyFollowingTheseIds: any;
   twitterConnected: boolean;

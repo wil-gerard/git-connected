@@ -1,6 +1,6 @@
 import User from '../models/User';
 import { Request, Response, NextFunction } from 'express';
-import { IReqAuth, IUserUpdateForm } from '../config/interface';
+import { ReqAuth, UserUpdateForm } from '../config/interface';
 import Twitter from 'twit';
 import { Octokit } from '@octokit/core';
 
@@ -11,11 +11,11 @@ const defaultOptions = {
 };
 
 export const userUpdate = async (
-  req: IReqAuth,
+  req: ReqAuth,
   res: Response,
   next: NextFunction
 ) => {
-  const { ...userUpdateProps }: IUserUpdateForm = req.body;
+  const { ...userUpdateProps }: UserUpdateForm = req.body;
   const id = req.user._id;
   const update = { ...userUpdateProps };
   const options = defaultOptions;
@@ -33,7 +33,7 @@ export const userUpdate = async (
 };
 
 export const removeConnection = async (
-  req: IReqAuth,
+  req: ReqAuth,
   res: Response,
   next: NextFunction
 ) => {
@@ -62,7 +62,7 @@ export const removeConnection = async (
 };
 
 export const userFollowAll = async (
-  req: IReqAuth,
+  req: ReqAuth,
   res: Response,
   next: NextFunction
 ) => {
@@ -129,7 +129,7 @@ export const userFollowAll = async (
 };
 
 export const getUser = async (
-  req: IReqAuth,
+  req: ReqAuth,
   res: Response,
   next: NextFunction
 ) => {

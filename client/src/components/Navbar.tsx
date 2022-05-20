@@ -1,15 +1,12 @@
 import tw from 'twin.macro';
 import styled from 'styled-components';
-import { useNavigate } from 'react-router-dom';
 import { ReactComponent as LogoBase } from '../assets/logo.svg';
 import { GradientBar } from './GradiantBar';
 import { Link } from 'react-router-dom';
-import { AxiosResponse } from 'axios';
 import { useUserContext } from '../hooks/UserContext';
 import React, { useState } from 'react';
 import { ConnectionButton } from './misc/Buttons';
 import { ReactComponent as DiscordIcon } from '../assets/discord-icon.svg';
-import apiClient from '../api/apiClient';
 
 const NavContainer = styled.nav`
   ${tw`flex items-center justify-between bg-secondary-700 py-6 px-6 lg:px-10 lg:py-8 w-full mb-6 lg:mb-12`}
@@ -46,33 +43,15 @@ const LoginContainer = tw.div`px-10 py-5 flex-col flex`;
 const LoginButton = tw(ConnectionButton)``;
 
 export default function Navbar() {
-  const { currentUser, setCurrentUser } = useUserContext();
+  const { currentUser, logout } = useUserContext();
 
   const [showModal, setShowModal] = useState(false);
-
-  const navigate = useNavigate();
 
   const discordLogin = () => {
     window.open(
       `${process.env.REACT_APP_API_ORIGIN}/api/auth/discord`,
       '_self'
     );
-  };
-
-  const logout = () => {
-    apiClient
-      .delete('/api/auth/logout', {
-        withCredentials: true,
-      })
-      .then((res: AxiosResponse) => {
-        if (res.data.message === 'Logout succesful') {
-          window.localStorage.removeItem('id');
-
-          // reset user state and navigate to '/'
-          setCurrentUser(null);
-          navigate('/');
-        }
-      });
   };
 
   return (
@@ -108,11 +87,11 @@ export default function Navbar() {
           {currentUser ? (
             <>
               <NavLink to="/profile">My Profile</NavLink>
-              <LogoutNavLink onClick={logout}>Logout</LogoutNavLink>
+              <LogoutNavLink onClick={logout}>Sign Out</LogoutNavLink>
             </>
           ) : (
             <LoginNavLink onClick={() => setShowModal(true)}>
-              Log In
+              Sign In
             </LoginNavLink>
           )}
         </UserContextLinks>

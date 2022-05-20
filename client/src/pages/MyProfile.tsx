@@ -9,7 +9,7 @@ import {
 } from '../components/misc/Buttons';
 import React, { useState } from 'react';
 import { UserCard } from '../components/UserCard';
-import apiClient from '../api/apiClient';
+import clientApi from '../api/clientApi';
 
 const Container = tw.div`flex flex-col px-6 text-gray-100`;
 
@@ -101,7 +101,7 @@ export default function Profile() {
 
   const removeConnection = async (platformName: string) => {
     try {
-      apiClient({
+      clientApi({
         method: 'put',
         url: '/api/user/removeConnection',
         data: { platformName },
@@ -121,7 +121,7 @@ export default function Profile() {
     setShowModal(false);
 
     try {
-      apiClient({
+      clientApi({
         method: 'put',
         url: '/api/user/update',
         data: formData,

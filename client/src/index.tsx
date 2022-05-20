@@ -2,7 +2,6 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
 import App from './App';
-import UserContextProvider from './hooks/UserContext';
 
 const validParameters: { [key: string]: Boolean } = {
   id: true,
@@ -17,9 +16,7 @@ parameters.forEach((value, key) => {
 
 ReactDOM.render(
   <React.StrictMode>
-    <UserContextProvider>
-      <App />
-    </UserContextProvider>
+    <App />
   </React.StrictMode>,
   document.getElementById('root')
 );

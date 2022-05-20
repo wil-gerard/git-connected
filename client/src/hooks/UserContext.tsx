@@ -1,36 +1,69 @@
-import React, { createContext, useEffect, useState, useContext } from 'react';
-import { AxiosResponse } from 'axios';
-import apiClient from '../api/apiClient';
-import { IUser } from '../interface';
+import React, {
+  createContext,
+  useEffect,
+  useState,
+  useContext,
+  ReactNode,
+  useMemo,
+} from 'react';
+import * as userInfoApi from '../api/userInfoApi';
+import * as authApi from '../api/authApi';
+import { SanitizedUser } from '../interface';
+
+interface UserContextType {
+  currentUser?: SanitizedUser;
+  setCurrentUser: any;
+  loading: boolean;
+  error?: any;
+  logout: () => void;
+}
 
 export const useUserContext = () => {
-  const context = useContext(UserContext);
-
-  return context;
+  return useContext(UserContext);
 };
 
-const UserContext = createContext({
-  currentUser: {} as IUser,
-  setCurrentUser: {} as any,
-});
+const UserContext = createContext<UserContextType>({} as UserContextType);
 
-export default function UserContextProvider(props: any) {
-  const [currentUser, setCurrentUser] = useState<any>();
+export default function UserContextProvider({
+  children,
+}: {
+  children: ReactNode;
+}): JSX.Element {
+  const [currentUser, setCurrentUser] = useState<SanitizedUser>();
+  const [error, setError] = useState<any>();
+  const [loading, setLoading] = useState<boolean>(true);
 
   useEffect(() => {
-    apiClient
-      .get('/api/user/getuser', {
-        withCredentials: true,
-      })
-      .then((res: AxiosResponse) => {
-        if (res.data) {
-          setCurrentUser(res.data);
-        }
-      });
-  }, []);
+    setLoading(true);
+    try {
+      userInfoApi
+        .getCurrentUser()
+        .then((currentUser) => setCurrentUser(currentUser));
+    } catch {
+      setError(error);
+    } finally {
+      setLoading(false);
+    }
+  }, [error]);
+
+  const logout = () => {
+    authApi.logoutCurrentUser().then(() => setCurrentUser(undefined));
+  };
+
+  const memoedValue = useMemo(
+    () => ({
+      currentUser,
+      setCurrentUser,
+      loading,
+      error,
+      logout,
+    }),
+    [currentUser, loading, error]
+  );
+
   return (
-    <UserContext.Provider value={{ currentUser, setCurrentUser }}>
-      {props.children}
+    <UserContext.Provider value={memoedValue}>
+      {!loading && children}
     </UserContext.Provider>
   );
 }
