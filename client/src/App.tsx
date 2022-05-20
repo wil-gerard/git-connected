@@ -1,6 +1,6 @@
 import React from 'react';
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
-import Profile from './pages/Profile';
+import MyProfile from './pages/MyProfile';
 import PublicProfile from './pages/PublicProfile';
 import Profiles from './pages/Profiles';
 import Featured from './pages/Featured';
@@ -21,12 +21,12 @@ function App() {
               <Route path="/" element={<Home />} />
               <Route path="/profiles" element={<Profiles />} />
               <Route path="/featured" element={<Featured />} />
-              <Route path="/publicprofile/:id" element={<PublicProfile />} />
+              <Route path="/profiles/:id" element={<PublicProfile />} />
               <Route
                 path="/profile"
                 element={
                   <RequireAuth>
-                    <Profile />
+                    <MyProfile />
                   </RequireAuth>
                 }
               />

@@ -19,7 +19,7 @@ export default function PublicProfile() {
     clientApi.get(`/api/user/getuserbyid/${id}`).then((res: AxiosResponse) => {
       setQueriedUser(res.data);
     });
-  }, [currentUser]);
+  }, [currentUser, id]);
 
   if (!queriedUser) {
     return <p>Loading...</p>;
