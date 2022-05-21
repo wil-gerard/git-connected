@@ -98,7 +98,7 @@ export default function TableUserRow({
   ];
 
   return (
-    <TableRow key={user._id}>
+    <TableRow>
       <TableDataCell>
         <TableDataNameContainer>
           <TableDataImage src={`${user.gitHub.json.avatar_url}`} />
