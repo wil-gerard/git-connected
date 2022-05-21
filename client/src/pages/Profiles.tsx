@@ -8,6 +8,7 @@ import { SanitizedUser } from '../interface';
 import { useUserContext } from '../hooks/UserContext';
 import GetWindowSize from '../hooks/GetWindowSize';
 import clientApi from '../api/clientApi';
+import TableLink from '../components/TableLink';
 
 const Content = tw.div`flex flex-col justify-center px-6 text-gray-100`;
 
@@ -40,8 +41,6 @@ const TableDataName = tw.div`font-medium text-gray-100`;
 const TableDataLocation = tw.div`font-medium text-gray-100 text-left`;
 
 const TableActions = tw.div`font-medium text-gray-100 text-left flex flex-row`;
-
-const TableLink = tw.a`flex rounded shadow cursor-pointer bg-secondary-600 transition duration-300 hover:bg-primary-500 w-6 h-6 ml-1 p-0.5`;
 
 const TableFollow = tw.a`flex items-center rounded shadow cursor-pointer bg-secondary-600 transition duration-300 hover:bg-primary-500  ml-1 py-0.5 px-2`;
 
@@ -158,6 +157,18 @@ export default function Profiles() {
               <TableBody>
                 {users ? (
                   users.map((user: SanitizedUser) => {
+                    const userLinks = [
+                      {
+                        name: 'Twitter',
+                        href: `https://www.twitter.com/${user.twitter.username}`,
+                        icon: <TwitterIcon />,
+                      },
+                      {
+                        name: 'GitHub',
+                        href: user.gitHub.json.html_url,
+                        icon: <GitHubIcon />,
+                      },
+                    ];
                     return (
                       <TableRow key={user._id}>
                         <TableDataCell>
@@ -177,20 +188,13 @@ export default function Profiles() {
                         )}
                         <TableDataCell>
                           <TableActions>
-                            <TableLink
-                              href={`https://www.twitter.com/${user.twitter.username}`}
-                              target="blank"
-                              rel="noopener noreferrer"
-                            >
-                              <TwitterIcon />
-                            </TableLink>
-                            <TableLink
-                              href={user.gitHub.json.html_url}
-                              target="blank"
-                              rel="noopener noreferrer"
-                            >
-                              <GitHubIcon />
-                            </TableLink>
+                            {userLinks.map((platform) => (
+                              <TableLink
+                                key={platform.name}
+                                href={platform.href}
+                                icon={platform.icon}
+                              />
+                            ))}
                             {/* <TableLink
                               href={`https://discordapp.com/channels/@me/${user.discord.username}#${user.discord.discriminator}`}
                               target="blank"
