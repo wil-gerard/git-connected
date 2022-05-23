@@ -54,6 +54,6 @@ router.get(
 
 router.delete('/auth/logout', auth, logout);
 
-router.delete('/auth/session', sessionStatus);
+router.get('/auth/session', sessionStatus);
 
 export default router;
