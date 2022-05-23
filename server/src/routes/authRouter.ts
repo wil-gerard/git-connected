@@ -2,7 +2,7 @@ import express from 'express';
 import auth from '../middleware/auth';
 import { Request, Response } from 'express';
 import passport from 'passport';
-import { logout } from '../controllers/authControllers';
+import { logout, sessionStatus } from '../controllers/authControllers';
 
 const router = express.Router();
 // --- Discord ---
@@ -53,5 +53,7 @@ router.get(
 );
 
 router.delete('/auth/logout', auth, logout);
+
+router.delete('/auth/session', sessionStatus);
 
 export default router;

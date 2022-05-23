@@ -13,3 +13,15 @@ export const logout = (req: ReqAuth, res: Response, next: NextFunction) => {
     next(err);
   }
 };
+
+export const sessionStatus= (req: ReqAuth, res: Response, next: NextFunction) => {
+  try {
+    if (req.session.passport) {
+      res.status(200).send({ session: true });
+    } else {
+      res.status(200).send({ session: false });
+    }
+  } catch (err) {
+    next(err);
+  }
+};
