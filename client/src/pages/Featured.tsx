@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { AxiosResponse } from 'axios';
 import tw from 'twin.macro';
 import { UserCard } from '../components/UserCard';
+import { Spinner } from '../components/Spinner';
 import { useUserContext } from '../hooks/UserContext';
 import { IUser } from '../interface';
 import apiClient from '../api/apiClient';
@@ -23,7 +24,9 @@ export default function Featured() {
   }, [currentUser]);
 
   if (!randomUser) {
-    return <p>Loading...</p>;
+    return (
+      <Spinner /> 
+    );
   }
 
   return (
@@ -39,3 +42,4 @@ export default function Featured() {
     </>
   );
 }
+
