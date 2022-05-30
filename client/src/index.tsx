@@ -4,7 +4,7 @@ import './index.css';
 import App from './App';
 
 const validParameters: { [key: string]: Boolean } = {
-  id: true,
+  session: true,
 };
 
 const parameters = new URLSearchParams(window.location.search);

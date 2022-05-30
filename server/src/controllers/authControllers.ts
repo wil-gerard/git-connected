@@ -16,7 +16,7 @@ export const logout = (req: ReqAuth, res: Response, next: NextFunction) => {
 
 export const sessionStatus= (req: ReqAuth, res: Response, next: NextFunction) => {
   try {
-    if (req.session.passport) {
+    if (req.isAuthenticated()) {
       res.status(200).send({ session: true });
     } else {
       res.status(200).send({ session: false });

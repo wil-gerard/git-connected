@@ -1,10 +1,7 @@
 import { Navigate } from 'react-router-dom';
 
 export default function RequireAuth({ children }: { children: JSX.Element }) {
-  const storageId = window.localStorage.getItem('id')
+  const session = window.localStorage.getItem('session')
 
-  if (!storageId) {
-    return <Navigate to="/" replace />;
-  }
-  return children;
+  return session ? children : <Navigate to="/" replace />
 }

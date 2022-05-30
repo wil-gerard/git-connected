@@ -17,7 +17,7 @@ router.get(
   function (req: Request, res: Response) {
     const userDetails: any = req.user;
     res.redirect(
-      `${process.env.FRONTEND_ORIGIN_URL}/profile?id=${userDetails._id}`
+      `${process.env.FRONTEND_ORIGIN_URL}/profile?session=yes`
     );
   }
 );
