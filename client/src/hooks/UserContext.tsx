@@ -72,15 +72,16 @@ export default function UserContextProvider({
   }, [error, authState]);
 
   const logout = () => {
-    authApi.logoutCurrentUser()
-    .then(() => {
-      setAuthState(false);
-      setCurrentUser(undefined);
-      window.localStorage.removeItem('session');
-    })
-    .catch((error) => {
-      setError(error);
-    });
+    authApi
+      .logoutCurrentUser()
+      .then(() => {
+        setAuthState(false);
+        setCurrentUser(undefined);
+        window.localStorage.removeItem('session');
+      })
+      .catch((error) => {
+        setError(error);
+      });
   };
 
   return (
