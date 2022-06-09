@@ -25,7 +25,10 @@ export default function Featured() {
 
   if (!randomUser) {
     return (
-      <Spinner /> 
+      <div className="flex items-center justify-center h-full">
+        <Spinner /> 
+      </div>
+      
     );
   }
 

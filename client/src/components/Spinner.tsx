@@ -1,7 +1,16 @@
-import React from 'react';
 import tw from 'twin.macro';
-import styled from 'styled-components';
+import styled, { keyframes } from 'styled-components';
 
-export const Spinner = styled.div`
-${tw`flex justify-center items-center ease-linear rounded-full border-8 border-t-8 border-gray-200 h-64 w-64`}
+const spin = keyframes`
+0% { -webkit-transform: rotate(0deg); }
+100% { -webkit-transform: rotate(360deg);
+`
+
+export const Spinner = styled.span`
+border-top-color: #1f48ff;
+-webkit-animation: ${spin} 1.5s linear infinite;
+animation: ${spin} 1.5s linear infinite;
+${tw`rounded-full border-8 border-t-8 h-32 w-32`}
 `;
+
+export default Spinner
