@@ -7,3 +7,11 @@ export async function logoutCurrentUser() {
 
   return response.data;
 }
+
+export async function getSessionStatus() {
+  const response = await apiClient.get('/api/auth/session', {
+    withCredentials: true,
+  });
+
+  return response.data;
+}

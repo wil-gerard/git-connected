@@ -2,7 +2,7 @@ import tw from 'twin.macro';
 import styled from 'styled-components';
 import { ReactComponent as LogoBase } from '../assets/logo.svg';
 import { GradientBar } from './GradiantBar';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { useUserContext } from '../hooks/UserContext';
 import React, { useState } from 'react';
 import { ConnectionButton } from './misc/Buttons';
@@ -43,15 +43,20 @@ const LoginContainer = tw.div`px-10 py-5 flex-col flex`;
 const LoginButton = tw(ConnectionButton)``;
 
 export default function Navbar() {
-  const { currentUser, logout } = useUserContext();
-
+  const { authState, logout } = useUserContext();
   const [showModal, setShowModal] = useState(false);
+  const navigate = useNavigate();
 
   const discordLogin = () => {
     window.open(
       `${process.env.REACT_APP_API_ORIGIN}/api/auth/discord`,
       '_self'
     );
+  };
+
+  const handleLogout = () => {
+    logout();
+    navigate('/');
   };
 
   return (
@@ -84,10 +89,10 @@ export default function Navbar() {
           <NavLink to="/featured">Featured</NavLink>
         </MainLinks>
         <UserContextLinks>
-          {currentUser ? (
+          {authState ? (
             <>
               <NavLink to="/profile">My Profile</NavLink>
-              <LogoutNavLink onClick={logout}>Sign Out</LogoutNavLink>
+              <LogoutNavLink onClick={handleLogout}>Sign Out</LogoutNavLink>
             </>
           ) : (
             <LoginNavLink onClick={() => setShowModal(true)}>
