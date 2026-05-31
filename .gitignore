@@ -12,6 +12,9 @@
 
 # testing
 /coverage
+*/coverage
+.playwright-cli
+output/playwright
 
 # production
 */build
