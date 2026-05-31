@@ -16,7 +16,7 @@ const Logo = tw(
   LogoBase
 )`h-10 w-10 hover:text-primary-500 transition duration-300 text-gray-300`;
 
-const DesktopLinks = tw.div`hidden md:flex items-center`;
+const DesktopLeft = tw.div`hidden md:flex items-center`;
 const DesktopRight = tw.div`hidden md:flex items-center`;
 
 // Hamburger button — mobile only
@@ -79,16 +79,19 @@ export default function Navbar() {
       )}
       <GradientBar />
       <NavContainer ref={menuRef}>
-        {/* Logo — always visible */}
-        <AppNavLink to="/" onClick={closeMenu}>
-          <Logo />
-        </AppNavLink>
-
-        {/* Desktop nav */}
-        <DesktopLinks>
+        {/* Logo + left nav grouped together */}
+        <DesktopLeft>
+          <AppNavLink to="/" onClick={closeMenu}>
+            <Logo />
+          </AppNavLink>
           <AppNavLink to="/profiles">Profiles</AppNavLink>
           <AppNavLink to="/featured">Featured</AppNavLink>
-        </DesktopLinks>
+        </DesktopLeft>
+
+        {/* Mobile: logo only */}
+        <AppNavLink to="/" onClick={closeMenu} className="md:hidden">
+          <Logo />
+        </AppNavLink>
         <DesktopRight>
           {currentUser ? (
             <>
