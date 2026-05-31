@@ -14,21 +14,15 @@ export const userUpdate = async (
   res: Response,
   next: NextFunction
 ) => {
-  const { ...userUpdateProps }: UserUpdateForm = req.body;
-  const id = req.user._id;
-  const update = { ...userUpdateProps };
-  const options = defaultOptions;
-
-  await User.findByIdAndUpdate(id, update, options, (err, user) => {
-    if (!err) {
-      res.status(200).send(user);
-    }
-  })
-    .clone()
-    .catch((err) => {
-      err.status = 422;
-      next(err);
-    });
+  try {
+    const { ...userUpdateProps }: UserUpdateForm = req.body;
+    const id = req.user._id;
+    const user = await User.findByIdAndUpdate(id, userUpdateProps, defaultOptions);
+    res.status(200).send(user);
+  } catch (err: any) {
+    err.status = 422;
+    next(err);
+  }
 };
 
 export const removeConnection = async (
@@ -36,28 +30,23 @@ export const removeConnection = async (
   res: Response,
   next: NextFunction
 ) => {
-  const { platformName } = req.body;
-  const id = req.user._id;
-  const userUpdateProps: any = {};
-  userUpdateProps[`${platformName}Connected`] = false;
-  userUpdateProps[`${platformName}Token`] = '';
-  userUpdateProps[`${platformName}`] = {};
-  if (platformName === 'twitter') {
-    userUpdateProps.twitterTokenSecret = '';
-  }
-
-  const options = defaultOptions;
-
-  await User.findByIdAndUpdate(id, userUpdateProps, options, (err, doc) => {
-    if (!err) {
-      res.status(200).send(doc);
+  try {
+    const { platformName } = req.body;
+    const id = req.user._id;
+    const userUpdateProps: any = {};
+    userUpdateProps[`${platformName}Connected`] = false;
+    userUpdateProps[`${platformName}Token`] = '';
+    userUpdateProps[`${platformName}`] = {};
+    if (platformName === 'twitter') {
+      userUpdateProps.twitterTokenSecret = '';
     }
-  })
-    .clone()
-    .catch((err) => {
-      err.status = 422;
-      next(err);
-    });
+
+    const doc = await User.findByIdAndUpdate(id, userUpdateProps, defaultOptions);
+    res.status(200).send(doc);
+  } catch (err: any) {
+    err.status = 422;
+    next(err);
+  }
 };
 
 export const userFollowAll = async (
@@ -78,35 +67,20 @@ export const userFollowAll = async (
       username: gitHubUsername,
     });
 
-    const options = defaultOptions;
     let allFollowedIds: any = {};
     if (req.user.alreadyFollowingTheseIds) {
-      allFollowedIds = {
-        ...req.user.alreadyFollowingTheseIds,
-      };
+      allFollowedIds = { ...req.user.alreadyFollowingTheseIds };
     }
     allFollowedIds[targetId] = true;
 
-    const userUpdateProps = {
-      alreadyFollowingTheseIds: allFollowedIds,
-    };
-
-    await User.findByIdAndUpdate(
+    const user = await User.findByIdAndUpdate(
       sourceId,
-      userUpdateProps,
-      options,
-      (err, user) => {
-        if (!err) {
-          res.status(200).send(user);
-        }
-      }
-    )
-      .clone()
-      .catch((err) => {
-        err.status = 400;
-        next(err);
-      });
-  } catch (err) {
+      { alreadyFollowingTheseIds: allFollowedIds },
+      defaultOptions
+    );
+    res.status(200).send(user);
+  } catch (err: any) {
+    err.status = 400;
     next(err);
   }
 };
@@ -125,7 +99,7 @@ export const getUser = async (
 
 const getUsersFromDB = async (next: NextFunction) => {
   try {
-    const users = await User.find(
+    return await User.find(
       { gitHubConnected: true },
       {
         discordToken: 0,
@@ -133,8 +107,7 @@ const getUsersFromDB = async (next: NextFunction) => {
         twitterToken: 0,
         twitterTokenSecret: 0,
       }
-    ).clone();
-    return users;
+    );
   } catch (err) {
     console.error(err);
     next(err);

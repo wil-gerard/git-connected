@@ -17,8 +17,8 @@ export const discordStrategy: any = new DiscordStrategy(
 
 async function handleDiscordLogin(
   req: ReqAuth,
-  discordAccessToken: String,
-  refreshToken: String,
+  discordAccessToken: string,
+  refreshToken: string,
   discordProfile: any,
   callback: Function
 ) {
@@ -29,23 +29,20 @@ async function handleDiscordLogin(
   ) {
     return;
   }
-  User.findOne(
-    { 'discord.id': discordProfile.id },
-    async (err: Error, userInDatabase: DatabaseUser) => {
-      if (err) {
-        return callback(err, null);
-      }
-      if (userInDatabase) {
-        return callback(null, userInDatabase);
-      }
-      const newUser = getNewUser(discordProfile, discordAccessToken);
-      await newUser.save();
-      return callback(null, newUser);
+  try {
+    const userInDatabase = await User.findOne({ 'discord.id': discordProfile.id });
+    if (userInDatabase) {
+      return callback(null, userInDatabase);
     }
-  );
+    const newUser = getNewUser(discordProfile, discordAccessToken);
+    await newUser.save();
+    return callback(null, newUser);
+  } catch (err) {
+    return callback(err, null);
+  }
 }
 
-function getNewUser(discordProfile: any, discordAccessToken: String) {
+function getNewUser(discordProfile: any, discordAccessToken: string) {
   const newUser = new User();
   newUser.gitHubConnected = false;
   newUser.twitterConnected = false;

@@ -16,14 +16,14 @@ export const twitterStrategy: any = twitterCredentialsAvailable
   ? new TwitterStrategy(twitterStrategySettings, handleConnectTwitterAccount)
   : null;
 
-function handleConnectTwitterAccount(
+async function handleConnectTwitterAccount(
   req: any,
   twitterToken: any,
   twitterTokenSecret: any,
   twitterProfile: any,
   callback: Function
 ) {
-  process.nextTick(() => {
+  process.nextTick(async () => {
     if (req.user) {
       let user = req.user;
 
@@ -33,10 +33,12 @@ function handleConnectTwitterAccount(
       user.twitterToken = twitterToken;
       user.twitterTokenSecret = twitterTokenSecret;
 
-      user.save((err: Error) => {
-        if (err) throw err;
+      try {
+        await user.save();
         return callback(null, user);
-      });
+      } catch (err) {
+        return callback(err, null);
+      }
     }
   });
 }

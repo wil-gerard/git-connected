@@ -12,14 +12,14 @@ export const gitHubStrategy: any = new GitHubStrategy(
   handleConnectGitHubAccount
 );
 
-function handleConnectGitHubAccount(
+async function handleConnectGitHubAccount(
   req: any,
   gitHubAccessToken: String,
   refreshToken: String,
   gitHubProfile: any,
   callback: Function
 ) {
-  process.nextTick(() => {
+  process.nextTick(async () => {
     if (req.user) {
       let user = req.user;
 
@@ -34,10 +34,12 @@ function handleConnectGitHubAccount(
         user.linkedInUrl = blog.startsWith('http') ? blog : `https://${blog}`;
       }
 
-      user.save((err: Error) => {
-        if (err) throw err;
+      try {
+        await user.save();
         return callback(null, user);
-      });
+      } catch (err) {
+        return callback(err, null);
+      }
     }
   });
 }

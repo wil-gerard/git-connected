@@ -1,7 +1,7 @@
 import { Request } from 'express';
 
 export interface DatabaseUser {
-  _id: string;
+  _id: any;
   __v: number;
   alreadyFollowingTheseIds: any;
   twitterConnected: boolean;
@@ -35,7 +35,7 @@ export interface DatabaseUser {
 }
 
 export interface SanitizedUser {
-  _id: string;
+  _id: any;
   alreadyFollowingTheseIds: any;
   twitterConnected: boolean;
   gitHubConnected: boolean;

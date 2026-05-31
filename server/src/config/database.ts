@@ -1,6 +1,6 @@
 import mongoose from 'mongoose';
 
-mongoose.connect(`${process.env.MONGODB_URL}`, (err) => {
-  if (err) throw err;
-  console.log('MongoDB connected');
-});
+mongoose
+  .connect(`${process.env.MONGODB_URL}`)
+  .then(() => console.log('MongoDB connected'))
+  .catch((err) => { throw err; });

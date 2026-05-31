@@ -16,13 +16,13 @@ const auth = async (req: ReqAuth, res: Response, next: NextFunction) => {
       next();
     } else if (req.isAuthenticated() && !req.user) {
       const user = await User.findById(req.session.passport.user);
-      req.user = user;
+      req.user = user as any;
       next();
     } else if (!req.isAuthenticated()) {
       return res.status(401).send('Invalid Authentication');
     }
   } catch (err) {
-    return res.status(500).send(err.message);
+    return res.status(500).send((err as Error).message);
   }
 };
 
