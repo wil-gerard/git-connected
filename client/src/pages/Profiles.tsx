@@ -1,6 +1,5 @@
 import { AxiosResponse } from 'axios';
 import tw from 'twin.macro';
-import { css } from 'styled-components/macro'; //eslint-disable-line
 import GitHubIcon from '../assets/github-icon.svg?react';
 import LinkedInIcon from '../assets/linkedin-icon.svg?react';
 import React, { useEffect, useState } from 'react';
