@@ -20,7 +20,7 @@ const EditProfileButton = tw(SmallButton)`mb-4`;
 
 const ModalContainer = tw.div`justify-center items-center flex overflow-x-hidden overflow-y-auto fixed inset-0 z-50 outline-none focus:outline-none w-full`;
 
-const ModalContentContainer = tw.div`relative w-auto my-6 mx-auto max-w-2xl`;
+const ModalContentContainer = tw.div`relative w-full my-6 mx-auto max-w-2xl px-4`;
 
 const ModalContent = tw.div`border-0 rounded-lg shadow-lg relative flex flex-col w-full bg-secondary-800 outline-none focus:outline-none`;
 
