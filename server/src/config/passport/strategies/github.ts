@@ -29,6 +29,11 @@ function handleConnectGitHubAccount(
       user.gitHub.displayName = gitHubProfile.displayName;
       user.gitHub.json = gitHubProfile._json;
 
+      const blog: string = gitHubProfile._json.blog ?? '';
+      if (!user.linkedInUrl && blog.includes('linkedin.com')) {
+        user.linkedInUrl = blog.startsWith('http') ? blog : `https://${blog}`;
+      }
+
       user.save((err: Error) => {
         if (err) throw err;
         return callback(null, user);
