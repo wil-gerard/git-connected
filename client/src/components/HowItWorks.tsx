@@ -26,7 +26,7 @@ const Icon = tw.div`bg-primary-200 p-4 text-primary-900 rounded-full`;
 
 export default function HowItWorks() {
   const heading = `How it works`;
-  const description = `Sign in with Discord, get to know other 100Devs, and connect with the community on Twitter and GitHub at the click of a button.`;
+  const description = `Sign in with Discord, get to know other 100Devs, and connect with the community on GitHub at the click of a button.`;
   const stats = [
     {
       title: 'Sign in with Discord',

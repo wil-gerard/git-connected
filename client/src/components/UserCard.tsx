@@ -5,7 +5,6 @@ import { Subtitle } from './misc/Typography';
 import { Subheading } from './misc/Typography';
 import { BodyText } from './misc/Typography';
 import { SanitizedUser } from '../interface';
-import { ReactComponent as TwitterIcon } from '../assets/twitter-icon.svg';
 import { ReactComponent as GitHubIcon } from '../assets/github-icon.svg';
 
 const Card = tw.div`mx-auto ml-auto max-w-sm md:max-w-xs lg:max-w-sm xl:max-w-xs bg-secondary-800 p-4 rounded shadow-lg`;
@@ -88,24 +87,12 @@ export const UserCard: React.FC<SanitizedUser> = (user) => {
         </CardHeaderContainer>
         <CardBio>{bio(user)}</CardBio>
         <CardMeta>
-          {user.twitter?.id && (
-            <CardMetaFeature
-              href={'https://www.twitter.com/' + user.twitter.id}
-              target="_blank"
-            >
-              <TwitterIcon />
-            </CardMetaFeature>
-          )}
           {user.gitHub?.json && (
             <CardMetaFeature href={user.gitHub.json.html_url} target="_blank">
               <GitHubIcon />
             </CardMetaFeature>
           )}
-          {user.gitHub && user.twitter ? (
-            ''
-          ) : (
-            <div>{'Connect Github & Twitter to be listed'}</div>
-          )}
+          {user.gitHub ? '' : <div>{'Connect GitHub to be listed'}</div>}
           {/* <CardMetaFeature>
             <LinkedInIcon />
           </CardMetaFeature> */}

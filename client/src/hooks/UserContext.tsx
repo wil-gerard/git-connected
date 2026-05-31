@@ -34,17 +34,24 @@ export default function UserContextProvider({
   const [loading, setLoading] = useState<boolean>(true);
 
   useEffect(() => {
-    setLoading(true);
-    try {
-      userInfoApi
-        .getCurrentUser()
-        .then((currentUser) => setCurrentUser(currentUser));
-    } catch {
-      setError(error);
-    } finally {
-      setLoading(false);
-    }
-  }, [error]);
+    const loadCurrentUser = async () => {
+      setLoading(true);
+
+      try {
+        const currentUser = await userInfoApi.getCurrentUser();
+        setCurrentUser(currentUser);
+        setError(undefined);
+      } catch (err: any) {
+        if (err?.response?.status !== 401) {
+          setError(err);
+        }
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    loadCurrentUser();
+  }, []);
 
   const logout = () => {
     authApi.logoutCurrentUser().then(() => setCurrentUser(undefined));

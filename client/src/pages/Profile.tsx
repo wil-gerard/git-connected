@@ -1,5 +1,4 @@
 import tw from 'twin.macro';
-import { ReactComponent as TwitterIcon } from '../assets/twitter-icon.svg';
 import { ReactComponent as GitHubIcon } from '../assets/github-icon.svg';
 import { useUserContext } from '../hooks/UserContext';
 import {
@@ -63,13 +62,6 @@ const LoginContainer = tw.div`px-10 py-2 flex-col flex`;
 export default function Profile() {
   const gitHubConnect = () => {
     window.open(`${process.env.REACT_APP_API_ORIGIN}/api/auth/github`, '_self');
-  };
-
-  const twitterConnect = () => {
-    window.open(
-      `${process.env.REACT_APP_API_ORIGIN}/api/auth/twitter`,
-      '_self'
-    );
   };
 
   const [showModal, setShowModal] = useState(false);
@@ -242,27 +234,6 @@ export default function Profile() {
               <ConnectAccountButton onClick={gitHubConnect}>
                 <GitHubIcon />
                 Connect to GitHub
-              </ConnectAccountButton>
-            )}
-            {currentUser.twitterConnected ? (
-              <ConnectedAccountButton
-                className="group"
-                onClick={() => {
-                  removeConnection('twitter');
-                }}
-              >
-                <TwitterIcon />
-                <ConnectedAccountText>
-                  Connected to Twitter
-                </ConnectedAccountText>
-                <DisconnectAccountText>
-                  Disconnect Twitter
-                </DisconnectAccountText>
-              </ConnectedAccountButton>
-            ) : (
-              <ConnectAccountButton onClick={twitterConnect}>
-                <TwitterIcon />
-                Connect to Twitter
               </ConnectAccountButton>
             )}
             {/* {user.lookingForCoffeeChats ? (

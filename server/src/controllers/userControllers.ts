@@ -1,7 +1,6 @@
 import User from '../models/User';
 import { Request, Response, NextFunction } from 'express';
 import { ReqAuth, UserUpdateForm } from '../config/interface';
-import Twitter from 'twit';
 import { Octokit } from '@octokit/core';
 
 const defaultOptions = {
@@ -69,31 +68,15 @@ export const userFollowAll = async (
   try {
     const targetId = req.query['targetId'] as string;
     const sourceId = req.user._id;
-    const twitterUsername = req.query['twitterUsername'] as string;
     const gitHubUsername = req.query['gitHubUsername'] as string;
-
-    const twitter = new Twitter({
-      consumer_key: process.env.TWITTER_CONSUMER_KEY,
-      consumer_secret: process.env.TWITTER_CONSUMER_SECRET,
-      access_token: req.user.twitterToken,
-      access_token_secret: req.user.twitterTokenSecret,
-    });
 
     const octokit = new Octokit({
       auth: req.user.gitHubToken,
     });
 
-    // Responses will be used for error handling
-    const twitterFollowResponse = await twitter.post('friendships/create', {
-      screen_name: twitterUsername,
+    await octokit.request(`PUT /user/following/${gitHubUsername}`, {
+      username: gitHubUsername,
     });
-
-    const gitHubFollowResponse = await octokit.request(
-      `PUT /user/following/${gitHubUsername}`,
-      {
-        username: gitHubUsername,
-      }
-    );
 
     const options = defaultOptions;
     let allFollowedIds: any = {};
@@ -143,7 +126,7 @@ export const getUser = async (
 const getUsersFromDB = async (next: NextFunction) => {
   try {
     const users = await User.find(
-      { gitHubConnected: true, twitterConnected: true },
+      { gitHubConnected: true },
       {
         discordToken: 0,
         gitHubToken: 0,

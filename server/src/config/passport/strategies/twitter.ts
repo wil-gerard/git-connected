@@ -1,5 +1,9 @@
 const TwitterStrategy = require('passport-twitter').Strategy;
 
+const twitterCredentialsAvailable = Boolean(
+  process.env.TWITTER_CONSUMER_KEY && process.env.TWITTER_CONSUMER_SECRET
+);
+
 const twitterStrategySettings: any = {
   consumerKey: `${process.env.TWITTER_CONSUMER_KEY}`,
   consumerSecret: `${process.env.TWITTER_CONSUMER_SECRET}`,
@@ -8,10 +12,9 @@ const twitterStrategySettings: any = {
   passReqToCallback: true,
 };
 
-export const twitterStrategy: any = new TwitterStrategy(
-  twitterStrategySettings,
-  handleConnectTwitterAccount
-);
+export const twitterStrategy: any = twitterCredentialsAvailable
+  ? new TwitterStrategy(twitterStrategySettings, handleConnectTwitterAccount)
+  : null;
 
 function handleConnectTwitterAccount(
   req: any,

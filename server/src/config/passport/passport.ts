@@ -7,7 +7,9 @@ import { DatabaseUser } from '../interface';
 
 passport.use(discordStrategy);
 passport.use(gitHubStrategy);
-passport.use(twitterStrategy);
+if (twitterStrategy) {
+  passport.use(twitterStrategy);
+}
 
 passport.serializeUser((user: DatabaseUser, cb) => {
   cb(null, user._id);

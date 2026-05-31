@@ -1,7 +1,6 @@
 import { AxiosResponse } from 'axios';
 import tw from 'twin.macro';
 import { css } from 'styled-components/macro'; //eslint-disable-line
-import { ReactComponent as TwitterIcon } from '../assets/twitter-icon.svg';
 import { ReactComponent as GitHubIcon } from '../assets/github-icon.svg';
 import React, { useEffect, useState } from 'react';
 import { SanitizedUser } from '../interface';
@@ -66,17 +65,12 @@ export default function Profiles() {
       });
   }
 
-  const handleFollowSubmit = async (
-    gitHubUsername: string,
-    twitterUsername: string,
-    targetId: string
-  ) => {
+  const handleFollowSubmit = async (gitHubUsername: string, targetId: string) => {
     try {
       const res = await clientApi({
         method: 'post',
         url: '/api/user/followall',
         params: {
-          twitterUsername,
           gitHubUsername,
           targetId,
         },
@@ -178,13 +172,6 @@ export default function Profiles() {
                         <TableDataCell>
                           <TableActions>
                             <TableLink
-                              href={`https://www.twitter.com/${user.twitter.username}`}
-                              target="blank"
-                              rel="noopener noreferrer"
-                            >
-                              <TwitterIcon />
-                            </TableLink>
-                            <TableLink
                               href={user.gitHub.json.html_url}
                               target="blank"
                               rel="noopener noreferrer"
@@ -208,7 +195,6 @@ export default function Profiles() {
                                 onClick={() => {
                                   handleFollowSubmit(
                                     user.gitHub.json.login,
-                                    user.twitter.username,
                                     user._id
                                   );
                                 }}
@@ -218,7 +204,7 @@ export default function Profiles() {
                                     : undefined
                                 }
                               >
-                                Follow All
+                                Follow GitHub
                               </TableFollow>
                             )}
                           </TableActions>

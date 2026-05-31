@@ -5,6 +5,10 @@ import passport from 'passport';
 import { logout } from '../controllers/authControllers';
 
 const router = express.Router();
+const twitterEnabled = Boolean(
+  process.env.TWITTER_CONSUMER_KEY && process.env.TWITTER_CONSUMER_SECRET
+);
+
 // --- Discord ---
 router.get('/auth/discord', passport.authenticate('discord'));
 
@@ -23,15 +27,29 @@ router.get(
 );
 
 // --- Twitter ---
-router.get('/auth/twitter', auth, passport.authorize('twitter'));
+router.get('/auth/twitter', auth, (req: Request, res: Response, next) => {
+  if (!twitterEnabled) {
+    return res.status(410).json({ error: 'Twitter/X integration is deferred' });
+  }
+
+  return passport.authorize('twitter')(req, res, next);
+});
 
 router.get(
   '/auth/twitter/callback',
   auth,
-  passport.authorize('twitter', {
-    failureRedirect: process.env.FRONTEND_ORIGIN_URL,
-    session: true,
-  }),
+  (req: Request, res: Response, next) => {
+    if (!twitterEnabled) {
+      return res
+        .status(410)
+        .json({ error: 'Twitter/X integration is deferred' });
+    }
+
+    return passport.authorize('twitter', {
+      failureRedirect: process.env.FRONTEND_ORIGIN_URL,
+      session: true,
+    })(req, res, next);
+  },
   function (req: Request, res: Response) {
     res.redirect(`${process.env.FRONTEND_ORIGIN_URL}/profile`);
   }
@@ -42,7 +60,6 @@ router.get('/auth/github', auth, passport.authorize('github'));
 
 router.get(
   '/auth/github/callback',
-  auth,
   passport.authorize('github', {
     failureRedirect: process.env.FRONTEND_ORIGIN_URL,
     session: true,
