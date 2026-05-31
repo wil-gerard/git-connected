@@ -5,8 +5,8 @@ import { Subtitle } from './misc/Typography';
 import { Subheading } from './misc/Typography';
 import { BodyText } from './misc/Typography';
 import { SanitizedUser } from '../interface';
-import { ReactComponent as GitHubIcon } from '../assets/github-icon.svg';
-import { ReactComponent as LinkedInIcon } from '../assets/linkedin-icon.svg';
+import GitHubIcon from '../assets/github-icon.svg?react';
+import LinkedInIcon from '../assets/linkedin-icon.svg?react';
 
 const Card = tw.div`mx-auto ml-auto max-w-sm md:max-w-xs lg:max-w-sm xl:max-w-xs bg-secondary-800 p-4 rounded shadow-lg`;
 

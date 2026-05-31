@@ -1,12 +1,12 @@
 import tw from 'twin.macro';
 import styled from 'styled-components';
-import { ReactComponent as LogoBase } from '../assets/logo.svg';
+import LogoBase from '../assets/logo.svg?react';
 import { GradientBar } from './GradiantBar';
 import { Link } from 'react-router-dom';
 import { useUserContext } from '../hooks/UserContext';
 import React, { useState } from 'react';
 import { ConnectionButton } from './misc/Buttons';
-import { ReactComponent as DiscordIcon } from '../assets/discord-icon.svg';
+import DiscordIcon from '../assets/discord-icon.svg?react';
 
 const NavContainer = styled.nav`
   ${tw`flex items-center justify-between bg-secondary-700 py-6 px-6 lg:px-10 lg:py-8 w-full mb-6 lg:mb-12`}
@@ -49,7 +49,7 @@ export default function Navbar() {
 
   const discordLogin = () => {
     window.open(
-      `${process.env.REACT_APP_API_ORIGIN}/api/auth/discord`,
+      `${import.meta.env.VITE_API_ORIGIN}/api/auth/discord`,
       '_self'
     );
   };

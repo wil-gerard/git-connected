@@ -1,5 +1,5 @@
 import tw from 'twin.macro';
-import { ReactComponent as GitHubIcon } from '../assets/github-icon.svg';
+import GitHubIcon from '../assets/github-icon.svg?react';
 import { useUserContext } from '../hooks/UserContext';
 import {
   PrimaryButton,
@@ -61,7 +61,7 @@ const LoginContainer = tw.div`px-10 py-2 flex-col flex`;
 
 export default function Profile() {
   const gitHubConnect = () => {
-    window.open(`${process.env.REACT_APP_API_ORIGIN}/api/auth/github`, '_self');
+    window.open(`${import.meta.env.VITE_API_ORIGIN}/api/auth/github`, '_self');
   };
 
   const [showModal, setShowModal] = useState(false);

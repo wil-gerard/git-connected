@@ -1,8 +1,8 @@
 import { AxiosResponse } from 'axios';
 import tw from 'twin.macro';
 import { css } from 'styled-components/macro'; //eslint-disable-line
-import { ReactComponent as GitHubIcon } from '../assets/github-icon.svg';
-import { ReactComponent as LinkedInIcon } from '../assets/linkedin-icon.svg';
+import GitHubIcon from '../assets/github-icon.svg?react';
+import LinkedInIcon from '../assets/linkedin-icon.svg?react';
 import React, { useEffect, useState } from 'react';
 import { SanitizedUser } from '../interface';
 import { useUserContext } from '../hooks/UserContext';
