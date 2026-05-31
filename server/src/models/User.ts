@@ -87,6 +87,12 @@ const User = new mongoose.Schema({
     type: String,
     trim: true,
   },
+  socialAccounts: [
+    {
+      provider: { type: String },
+      url: { type: String },
+    },
+  ],
 });
 
 export default mongoose.model('User', User);

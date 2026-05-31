@@ -32,6 +32,7 @@ export interface DatabaseUser {
     username: string;
   };
   linkedInUrl?: string;
+  socialAccounts?: Array<{ provider: string; url: string }>;
 }
 
 export interface SanitizedUser {
@@ -76,6 +77,7 @@ export interface SanitizedUser {
     username: string;
   };
   linkedInUrl?: string;
+  socialAccounts?: Array<{ provider: string; url: string }>;
 }
 
 export interface UserUpdateForm {

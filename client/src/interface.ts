@@ -40,4 +40,5 @@ export interface SanitizedUser {
     username: string;
   };
   linkedInUrl?: string;
+  socialAccounts?: Array<{ provider: string; url: string }>;
 }

@@ -1,4 +1,5 @@
 const GitHubStrategy = require('passport-github2').Strategy;
+import { Octokit } from '@octokit/core';
 
 const gitHubStrategySettings: any = {
   clientID: `${process.env.GITHUB_CLIENT_ID}`,
@@ -14,8 +15,8 @@ export const gitHubStrategy: any = new GitHubStrategy(
 
 async function handleConnectGitHubAccount(
   req: any,
-  gitHubAccessToken: String,
-  refreshToken: String,
+  gitHubAccessToken: string,
+  refreshToken: string,
   gitHubProfile: any,
   callback: Function
 ) {
@@ -30,11 +31,26 @@ async function handleConnectGitHubAccount(
       user.gitHub.json = gitHubProfile._json;
 
       const blog: string = gitHubProfile._json.blog ?? '';
-      if (!user.linkedInUrl && blog.includes('linkedin.com')) {
-        user.linkedInUrl = blog.startsWith('http') ? blog : `https://${blog}`;
-      }
 
       try {
+        const octokit = new Octokit({ auth: gitHubAccessToken });
+        const { data: socialAccounts } = await octokit.request('GET /user/social_accounts');
+        user.socialAccounts = socialAccounts.map((a: any) => ({
+          provider: a.provider,
+          url: a.url,
+        }));
+
+        const linkedInAccount = socialAccounts.find(
+          (a: any) => a.provider === 'linkedin'
+        );
+        if (!user.linkedInUrl) {
+          if (linkedInAccount) {
+            user.linkedInUrl = linkedInAccount.url;
+          } else if (blog.includes('linkedin.com')) {
+            user.linkedInUrl = blog.startsWith('http') ? blog : `https://${blog}`;
+          }
+        }
+
         await user.save();
         return callback(null, user);
       } catch (err) {

@@ -1,7 +1,7 @@
 import { AxiosResponse } from 'axios';
 import tw from 'twin.macro';
 import GitHubIcon from '../assets/github-icon.svg?react';
-import LinkedInIcon from '../assets/linkedin-icon.svg?react';
+import { SocialLinks } from '../components/SocialLinks';
 import React, { useEffect, useState } from 'react';
 import { SanitizedUser } from '../interface';
 import { useUserContext } from '../hooks/UserContext';
@@ -178,15 +178,10 @@ export default function Profiles() {
                             >
                               <GitHubIcon />
                             </TableLink>
-                            {user.linkedInUrl && (
-                              <TableLink
-                                href={user.linkedInUrl}
-                                target="_blank"
-                                rel="noopener noreferrer"
-                              >
-                                <LinkedInIcon />
-                              </TableLink>
-                            )}
+                            <SocialLinks
+                              socialAccounts={user.socialAccounts}
+                              linkedInUrl={user.linkedInUrl}
+                            />
                             {!currentUser ? (
                               ''
                             ) : alreadyFollowing &&
