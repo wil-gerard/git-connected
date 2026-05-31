@@ -24,6 +24,9 @@ output/playwright
 # dex task tracking
 .dex/
 
+# local-only scripts (not for version control)
+server/src/scripts/seed.ts
+
 # misc
 git-connected.code-workspace
 .DS_Store
