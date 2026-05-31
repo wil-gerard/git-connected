@@ -1,5 +1,6 @@
 import { AxiosResponse } from 'axios';
 import tw from 'twin.macro';
+import { SecondaryButton } from '../components/misc/Buttons';
 import GitHubIcon from '../assets/github-icon.svg?react';
 import LinkedInIcon from '../assets/linkedin-icon.svg?react';
 import TwitterIcon from '../assets/twitter-icon.svg?react';
@@ -16,7 +17,7 @@ const Header = tw.header`px-5 py-4 border-b border-gray-100 flex items-center ju
 
 const HeaderText = tw.h2`font-semibold text-gray-100`;
 
-const BulkOpenButton = tw.button`ml-4 text-fluid-sm px-3 py-1 rounded bg-secondary-600 hover:bg-primary-500 transition duration-300 text-gray-100 whitespace-nowrap cursor-pointer`;
+const BulkOpenButton = tw(SecondaryButton)`ml-4 text-fluid-sm py-1 px-3 rounded-md whitespace-nowrap`;
 
 const TableContainer = tw.div`w-full max-w-2xl mx-auto shadow-lg rounded bg-secondary-800`;
 
@@ -46,9 +47,8 @@ const TableActions = tw.div`font-medium text-gray-100 text-left flex flex-row`;
 
 const TableLink = tw.a`flex rounded shadow cursor-pointer bg-secondary-600 transition duration-300 hover:bg-primary-500 w-6 h-6 ml-1 p-0.5`;
 
-const TableFollow = tw.a`flex items-center rounded shadow cursor-pointer bg-secondary-600 transition duration-300 hover:bg-primary-500  ml-1 py-0.5 px-2`;
-
-const TableFollowed = tw.a`flex items-center justify-center rounded shadow cursor-default bg-green-600 transition duration-300  ml-1 py-0.5 px-2`;
+const TableFollow = tw(SecondaryButton)`rounded ml-1 py-0.5 px-2 text-fluid-xs rounded-md`;
+const TableFollowed = tw.span`flex items-center justify-center rounded shadow bg-green-600 ml-1 py-0.5 px-2 text-fluid-xs text-gray-100`;
 
 export default function Profiles() {
   const { currentUser } = useUserContext();

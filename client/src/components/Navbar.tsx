@@ -2,10 +2,10 @@ import tw from 'twin.macro';
 import styled from 'styled-components';
 import LogoBase from '../assets/logo.svg?react';
 import { GradientBar } from './GradiantBar';
-import { Link } from 'react-router-dom';
 import { useUserContext } from '../hooks/UserContext';
 import React, { useState } from 'react';
-import { ConnectionButton } from './misc/Buttons';
+import { ConnectionButton, IconButton } from './misc/Buttons';
+import { AppNavLink, AppNavButton } from './misc/NavLink';
 import DiscordIcon from '../assets/discord-icon.svg?react';
 
 const NavContainer = styled.nav`
@@ -16,83 +16,60 @@ const Logo = tw(
   LogoBase
 )`h-10 w-10 hover:text-primary-500 transition duration-300 text-gray-300`;
 
-const NavLink = tw(
-  Link
-)`cursor-pointer mr-6 hover:text-primary-500 transition duration-300 text-fluid-base font-semibold text-gray-300`;
-
-const LoginNavLink = tw.div`cursor-pointer mr-6 hover:text-primary-500 transition duration-300 text-fluid-base font-semibold text-gray-300`;
-
-const LogoutNavLink = tw.div`cursor-pointer mr-6 hover:text-primary-500 transition duration-300 text-fluid-base font-semibold text-gray-300`;
-
 const UserContextLinks = tw.div`flex items-center`;
-
 const MainLinks = tw.div`flex items-center`;
 
 const ModalContainer = tw.div`justify-center items-center flex overflow-x-hidden overflow-y-auto fixed inset-0 z-50 outline-none focus:outline-none w-full`;
-
 const ModalContent = tw.div`relative w-auto my-6 mx-auto max-w-sm rounded shadow-lg bg-secondary-800 p-2`;
-
 const CloseButtonContainer = tw.div`flex flex-col items-end`;
-
-const CloseButton = tw.button`flex items-center justify-center bg-transparent font-semibold hocus:bg-secondary-600 h-10 w-10 text-fluid-md rounded-full text-gray-100`;
-
 const BgOpacity = tw.div`opacity-25 fixed inset-0 z-40 bg-black`;
-
 const LoginContainer = tw.div`px-10 py-5 flex-col flex`;
-
-const LoginButton = tw(ConnectionButton)``;
 
 export default function Navbar() {
   const { currentUser, logout } = useUserContext();
-
   const [showModal, setShowModal] = useState(false);
 
   const discordLogin = () => {
-    window.open(
-      `${import.meta.env.VITE_API_ORIGIN}/api/auth/discord`,
-      '_self'
-    );
+    window.open(`${import.meta.env.VITE_API_ORIGIN}/api/auth/discord`, '_self');
   };
 
   return (
     <>
-      {showModal ? (
+      {showModal && (
         <>
           <ModalContainer>
             <ModalContent>
               <CloseButtonContainer>
-                <CloseButton onClick={() => setShowModal(false)}>x</CloseButton>
+                <IconButton onClick={() => setShowModal(false)}>✕</IconButton>
               </CloseButtonContainer>
               <LoginContainer>
-                <LoginButton onClick={discordLogin}>
+                <ConnectionButton onClick={discordLogin}>
                   <DiscordIcon />
                   Sign in with Discord
-                </LoginButton>
+                </ConnectionButton>
               </LoginContainer>
             </ModalContent>
           </ModalContainer>
           <BgOpacity />
         </>
-      ) : null}
+      )}
       <GradientBar />
       <NavContainer>
         <MainLinks>
-          <NavLink to="/">
+          <AppNavLink to="/">
             <Logo />
-          </NavLink>
-          <NavLink to="/profiles">Profiles</NavLink>
-          <NavLink to="/featured">Featured</NavLink>
+          </AppNavLink>
+          <AppNavLink to="/profiles">Profiles</AppNavLink>
+          <AppNavLink to="/featured">Featured</AppNavLink>
         </MainLinks>
         <UserContextLinks>
           {currentUser ? (
             <>
-              <NavLink to="/profile">My Profile</NavLink>
-              <LogoutNavLink onClick={logout}>Sign Out</LogoutNavLink>
+              <AppNavLink to="/profile">My Profile</AppNavLink>
+              <AppNavButton onClick={logout}>Sign Out</AppNavButton>
             </>
           ) : (
-            <LoginNavLink onClick={() => setShowModal(true)}>
-              Sign In
-            </LoginNavLink>
+            <AppNavButton onClick={() => setShowModal(true)}>Sign In</AppNavButton>
           )}
         </UserContextLinks>
       </NavContainer>

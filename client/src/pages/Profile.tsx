@@ -5,6 +5,8 @@ import {
   PrimaryButton,
   SmallButton,
   ConnectionButton,
+  ConnectedButton,
+  IconButton,
 } from '../components/misc/Buttons';
 import React, { useState } from 'react';
 import { UserCard } from '../components/UserCard';
@@ -38,7 +40,7 @@ const FormLabel = tw.label`block uppercase text-gray-300 text-fluid-xs font-bold
 
 const ModalHeaderText = tw.h3`text-fluid-md font-semibold`;
 
-const ModalCloseButton = tw.button`flex items-center justify-center bg-transparent font-semibold hocus:bg-secondary-600 h-10 w-10 text-fluid-md rounded-full`;
+const ModalCloseButton = IconButton;
 
 const ModalFooter = tw.div`flex items-center justify-center p-6 border-t border-solid rounded-b`;
 
@@ -49,10 +51,7 @@ const FormSubmitButton = tw(PrimaryButton)`bg-green-600 hocus:bg-green-800`;
 const BgOpacity = tw.div`opacity-25 fixed inset-0 z-40 bg-black`;
 
 const ConnectAccountButton = tw(ConnectionButton)`w-72`;
-
-const ConnectedAccountButton = tw(
-  ConnectAccountButton
-)`bg-green-800 hocus:bg-red-800`;
+const ConnectedAccountButton = tw(ConnectedButton)`w-72`;
 
 const ConnectedAccountText = tw.p` group-hocus:hidden `;
 const DisconnectAccountText = tw.p`hidden group-hocus:inline`;
