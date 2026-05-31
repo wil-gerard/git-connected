@@ -83,6 +83,10 @@ const User = new mongoose.Schema({
       type: String,
     },
   },
+  linkedInUrl: {
+    type: String,
+    trim: true,
+  },
 });
 
 export default mongoose.model('User', User);

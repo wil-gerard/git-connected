@@ -72,6 +72,7 @@ export default function Profile() {
     customBio: currentUser?.customBio,
     customLocation: currentUser?.customLocation,
     customName: currentUser?.customName,
+    linkedInUrl: currentUser?.linkedInUrl ?? '',
     lookingForCoffeeChats: currentUser?.lookingForCoffeeChats,
     openToCoffeeChats: currentUser?.openToCoffeeChats,
   });
@@ -80,6 +81,7 @@ export default function Profile() {
     customBio,
     customLocation,
     customName,
+    linkedInUrl,
     // lookingForCoffeeChats,
     // openToCoffeeChats,
   } = formData;
@@ -182,6 +184,16 @@ export default function Profile() {
                           rows={2}
                           name="customBio"
                           value={customBio ?? ''}
+                          onChange={handleInputChange}
+                        />
+                      </FormInputContainer>
+                      <FormInputContainer>
+                        <FormLabel>LinkedIn URL</FormLabel>
+                        <FormTextInput
+                          type="url"
+                          name="linkedInUrl"
+                          placeholder="https://linkedin.com/in/yourname"
+                          value={linkedInUrl ?? ''}
                           onChange={handleInputChange}
                         />
                       </FormInputContainer>

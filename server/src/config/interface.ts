@@ -31,6 +31,7 @@ export interface DatabaseUser {
     id: string;
     username: string;
   };
+  linkedInUrl?: string;
 }
 
 export interface SanitizedUser {
@@ -74,12 +75,14 @@ export interface SanitizedUser {
     id: string;
     username: string;
   };
+  linkedInUrl?: string;
 }
 
 export interface UserUpdateForm {
   customBio: string;
   customLocation: string;
   customName: string;
+  linkedInUrl: string;
   lookingForCoffeeChats: boolean;
   openToCoffeeChats: boolean;
 }

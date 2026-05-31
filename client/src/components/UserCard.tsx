@@ -6,6 +6,7 @@ import { Subheading } from './misc/Typography';
 import { BodyText } from './misc/Typography';
 import { SanitizedUser } from '../interface';
 import { ReactComponent as GitHubIcon } from '../assets/github-icon.svg';
+import { ReactComponent as LinkedInIcon } from '../assets/linkedin-icon.svg';
 
 const Card = tw.div`mx-auto ml-auto max-w-sm md:max-w-xs lg:max-w-sm xl:max-w-xs bg-secondary-800 p-4 rounded shadow-lg`;
 
@@ -92,10 +93,12 @@ export const UserCard: React.FC<SanitizedUser> = (user) => {
               <GitHubIcon />
             </CardMetaFeature>
           )}
+          {user.linkedInUrl && (
+            <CardMetaFeature href={user.linkedInUrl} target="_blank" rel="noopener noreferrer">
+              <LinkedInIcon />
+            </CardMetaFeature>
+          )}
           {user.gitHub ? '' : <div>{'Connect GitHub to be listed'}</div>}
-          {/* <CardMetaFeature>
-            <LinkedInIcon />
-          </CardMetaFeature> */}
         </CardMeta>
       </CardText>
     </Card>

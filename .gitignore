@@ -20,6 +20,9 @@ output/playwright
 */build
 */dist
 
+# dex task tracking
+.dex/
+
 # misc
 git-connected.code-workspace
 .DS_Store

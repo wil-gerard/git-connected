@@ -2,6 +2,7 @@ import { AxiosResponse } from 'axios';
 import tw from 'twin.macro';
 import { css } from 'styled-components/macro'; //eslint-disable-line
 import { ReactComponent as GitHubIcon } from '../assets/github-icon.svg';
+import { ReactComponent as LinkedInIcon } from '../assets/linkedin-icon.svg';
 import React, { useEffect, useState } from 'react';
 import { SanitizedUser } from '../interface';
 import { useUserContext } from '../hooks/UserContext';
@@ -173,18 +174,20 @@ export default function Profiles() {
                           <TableActions>
                             <TableLink
                               href={user.gitHub.json.html_url}
-                              target="blank"
+                              target="_blank"
                               rel="noopener noreferrer"
                             >
                               <GitHubIcon />
                             </TableLink>
-                            {/* <TableLink
-                              href={`https://discordapp.com/channels/@me/${user.discord.username}#${user.discord.discriminator}`}
-                              target="blank"
-                              rel="noopener noreferrer"
-                            >
-                              <LinkedInIcon />
-                            </TableLink> */}
+                            {user.linkedInUrl && (
+                              <TableLink
+                                href={user.linkedInUrl}
+                                target="_blank"
+                                rel="noopener noreferrer"
+                              >
+                                <LinkedInIcon />
+                              </TableLink>
+                            )}
                             {!currentUser ? (
                               ''
                             ) : alreadyFollowing &&

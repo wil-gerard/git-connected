@@ -39,4 +39,5 @@ export interface SanitizedUser {
     id: string;
     username: string;
   };
+  linkedInUrl?: string;
 }
