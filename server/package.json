@@ -15,7 +15,7 @@
   "author": "",
   "license": "MIT",
   "engines": {
-    "node": "v16.13.0"
+    "node": ">=24 <25"
   },
   "dependencies": {
     "@octokit/core": "^3.6.0",

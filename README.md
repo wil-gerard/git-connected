@@ -91,7 +91,7 @@ These instructions will get a copy of the project on your local machine for deve
 
 ### Prerequisites
 
-* Node v16 or higher
+* Node v24.16.0
 * Yarn v3.2.0
 
 ### Installation and setup
@@ -113,8 +113,9 @@ yarn
 ```
 
 #### Environment variables
-- You will find a .env template at git-connected/server/.envTEMPLATE
-- Delete "TEMPLATE" from the filename
+- Local examples live in `server/.env.example` and `client/.env.example`.
+- Copy them to `server/.env` and `client/.env.development`, then replace the placeholder values.
+- See `docs/environment.md` for local and production environment variable guidance.
 - MONGODB_URL: Instructions on [setting up a MongoDB Atlas account.](https://hevodata.com/learn/mongodb-atlas-nodejs/) Refer to the image below on where to find your connection string.
   
   ![mongodb_url](https://user-images.githubusercontent.com/74286884/159807213-b7146a46-22e6-4927-bc18-65a2ed63025b.png)
@@ -123,10 +124,10 @@ yarn
   
 *The previous two environment variables should be enough for most development adjustments. But if you'd like full app functionality, feel free to add the other environment variables.*
 
-- TWITTER_CONSUMER_KEY and TWITTER_CONSUMER_SECRET: [Create a Twitter OAuth app with v1.1 access](https://developer.twitter.com)
-  - Redirect URI: `http://localhost:4000/api/auth/twitter/callback`
 - GITHUB_CLIENT_ID and GITHUB_CLIENT_SECRET: [Create a GitHub OAuth app](https://docs.github.com/en/developers/apps/building-oauth-apps/creating-an-oauth-app)
   - Redirect URI: `http://localhost:4000/api/auth/github/callback`
+
+Twitter/X is deferred for this revival. LinkedIn is planned as future work.
 
 #### Developing locally
 
