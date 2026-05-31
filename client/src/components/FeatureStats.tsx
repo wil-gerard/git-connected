@@ -15,10 +15,8 @@ const TextContent = tw.div`py-8 text-center`;
 
 const StatsContainer = tw.div`mt-8 flex flex-col sm:flex-row items-center flex-wrap max-w-screen-md justify-between mx-auto text-gray-100`;
 const Stat = tw.div`flex flex-col text-center p-4 tracking-wide`;
-const StatKey = tw(Subtitle)`text-xl font-medium`;
-const StatValue = tw(
-  Subheading
-)`text-4xl sm:text-3xl md:text-4xl lg:text-5xl font-black`;
+const StatKey = tw(Subtitle)`font-medium`;
+const StatValue = tw(Subheading)`text-fluid-lg font-black`;
 const SectionHeading = tw(BaseSectionHeading)`text-center`;
 const Description = tw(BaseDescription)`text-center`;
 

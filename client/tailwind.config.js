@@ -306,6 +306,13 @@ module.exports = {
       '4xl': '2.25rem',
       '5xl': '3rem',
       '6xl': '4rem',
+      // Fluid scale — perfect-fourth ratio, clamp-based (responsive without breakpoints)
+      'fluid-xs':   'clamp(.6rem,   .17vw + .76rem,   .7rem)',
+      'fluid-sm':   'clamp(.8rem,   .17vw + .76rem,   .89rem)',
+      'fluid-base': 'clamp(1rem,    .34vw + .91rem,   1.19rem)',
+      'fluid-md':   'clamp(1.25rem, .61vw + 1.1rem,   1.58rem)',
+      'fluid-lg':   'clamp(1.56rem, 1vw   + 1.31rem,  2.11rem)',
+      'fluid-xl':   'clamp(1.95rem, 1.56vw + 1.56rem, 2.81rem)',
     },
     fontWeight: {
       hairline: '100',
@@ -366,6 +373,8 @@ module.exports = {
       normal: '1.5',
       relaxed: '1.625',
       loose: '2',
+      heading: '1.4',
+      reading: '1.7',
       3: '.75rem',
       4: '1rem',
       5: '1.25rem',

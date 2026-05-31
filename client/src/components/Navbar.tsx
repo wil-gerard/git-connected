@@ -18,11 +18,11 @@ const Logo = tw(
 
 const NavLink = tw(
   Link
-)`cursor-pointer mr-6 hover:text-primary-500 transition duration-300 text-base font-semibold text-gray-300`;
+)`cursor-pointer mr-6 hover:text-primary-500 transition duration-300 text-fluid-base font-semibold text-gray-300`;
 
-const LoginNavLink = tw.div`cursor-pointer mr-6 hover:text-primary-500 transition duration-300 text-base font-semibold text-gray-300`;
+const LoginNavLink = tw.div`cursor-pointer mr-6 hover:text-primary-500 transition duration-300 text-fluid-base font-semibold text-gray-300`;
 
-const LogoutNavLink = tw.div`cursor-pointer mr-6 hover:text-primary-500 transition duration-300 text-base font-semibold text-gray-300`;
+const LogoutNavLink = tw.div`cursor-pointer mr-6 hover:text-primary-500 transition duration-300 text-fluid-base font-semibold text-gray-300`;
 
 const UserContextLinks = tw.div`flex items-center`;
 
@@ -34,7 +34,7 @@ const ModalContent = tw.div`relative w-auto my-6 mx-auto max-w-sm rounded shadow
 
 const CloseButtonContainer = tw.div`flex flex-col items-end`;
 
-const CloseButton = tw.button`flex items-center justify-center bg-transparent font-semibold hocus:bg-secondary-600 h-10 w-10 text-2xl rounded-full text-gray-100`;
+const CloseButton = tw.button`flex items-center justify-center bg-transparent font-semibold hocus:bg-secondary-600 h-10 w-10 text-fluid-md rounded-full text-gray-100`;
 
 const BgOpacity = tw.div`opacity-25 fixed inset-0 z-40 bg-black`;
 

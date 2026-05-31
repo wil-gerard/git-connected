@@ -28,17 +28,17 @@ const ProfileForm = tw.form``;
 
 const FormInputContainer = tw.div`relative p-4 flex-auto w-full`;
 
-const FormTextInput = tw.input`border-0 px-3 py-3 placeholder-gray-600 text-gray-100 bg-secondary-700 rounded text-sm shadow focus:outline-none focus:ring hocus:w-full ease-linear transition-all duration-300`;
+const FormTextInput = tw.input`w-full border-0 px-3 py-3 placeholder-gray-600 text-gray-100 bg-secondary-700 rounded text-fluid-sm shadow focus:outline-none focus:ring ease-linear transition-all duration-300`;
 
-const FormTextArea = tw.textarea`w-full border-0 px-3 py-3 placeholder-gray-600 text-gray-100 bg-secondary-700 rounded text-sm shadow focus:outline-none focus:ring ease-linear transition-all duration-300`;
+const FormTextArea = tw.textarea`w-full border-0 px-3 py-3 placeholder-gray-600 text-gray-100 bg-secondary-700 rounded text-fluid-sm shadow focus:outline-none focus:ring ease-linear transition-all duration-300`;
 
 // const FormCheckbox = tw.input`h-4 w-4 focus:ring border-gray-300 border-0 px-3 py-3 text-gray-100 bg-secondary-700 rounded text-sm shadow focus:outline-none ease-linear transition-all duration-150`;
 
-const FormLabel = tw.label`block uppercase text-gray-300 text-xs font-bold mb-2`;
+const FormLabel = tw.label`block uppercase text-gray-300 text-fluid-xs font-bold mb-2`;
 
-const ModalHeaderText = tw.h3`text-xl font-semibold`;
+const ModalHeaderText = tw.h3`text-fluid-md font-semibold`;
 
-const ModalCloseButton = tw.button`flex items-center justify-center bg-transparent font-semibold hocus:bg-secondary-600 h-10 w-10 text-2xl rounded-full`;
+const ModalCloseButton = tw.button`flex items-center justify-center bg-transparent font-semibold hocus:bg-secondary-600 h-10 w-10 text-fluid-md rounded-full`;
 
 const ModalFooter = tw.div`flex items-center justify-center p-6 border-t border-solid rounded-b`;
 

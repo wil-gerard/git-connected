@@ -1,7 +1,17 @@
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap');
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+:root {
+  /* Fluid type scale — perfect-fourth ratio, responsive without breakpoints */
+  --text-xs:   clamp(.6rem,   .17vw + .76rem,   .7rem);
+  --text-sm:   clamp(.8rem,   .17vw + .76rem,   .89rem);
+  --text-base: clamp(1rem,    .34vw + .91rem,   1.19rem);
+  --text-md:   clamp(1.25rem, .61vw + 1.1rem,   1.58rem);
+  --text-lg:   clamp(1.56rem, 1vw   + 1.31rem,  2.11rem);
+  --text-xl:   clamp(1.95rem, 1.56vw + 1.56rem, 2.81rem);
+}
 
 html {
   background-color: #16253b;

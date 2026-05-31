@@ -16,7 +16,7 @@ const Header = tw.header`px-5 py-4 border-b border-gray-100 flex items-center ju
 
 const HeaderText = tw.h2`font-semibold text-gray-100`;
 
-const BulkOpenButton = tw.button`ml-4 text-sm px-3 py-1 rounded bg-secondary-600 hover:bg-primary-500 transition duration-300 text-gray-100 whitespace-nowrap cursor-pointer`;
+const BulkOpenButton = tw.button`ml-4 text-fluid-sm px-3 py-1 rounded bg-secondary-600 hover:bg-primary-500 transition duration-300 text-gray-100 whitespace-nowrap cursor-pointer`;
 
 const TableContainer = tw.div`w-full max-w-2xl mx-auto shadow-lg rounded bg-secondary-800`;
 
@@ -24,13 +24,13 @@ const Table = tw.table`table-auto w-full`;
 
 const TablePadding = tw.div`p-3`;
 
-const TableThead = tw.thead`text-sm font-semibold text-gray-300 bg-secondary-600`;
+const TableThead = tw.thead`text-fluid-sm font-semibold text-gray-300 bg-secondary-600`;
 
 const TableRow = tw.tr``;
 
 const TableHeader = tw.th`p-2 whitespace-nowrap font-semibold text-left`;
 
-const TableBody = tw.tbody`text-sm divide-y divide-gray-100`;
+const TableBody = tw.tbody`text-fluid-sm divide-y divide-gray-100`;
 
 const TableDataCell = tw.td`p-2 whitespace-nowrap`;
 
