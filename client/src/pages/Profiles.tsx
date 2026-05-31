@@ -14,7 +14,7 @@ const Header = tw.header`px-5 py-4 border-b border-gray-100 flex items-center ju
 
 const HeaderText = tw.h2`font-semibold text-gray-100`;
 
-const BulkOpenButton = tw.button`ml-4 text-sm px-3 py-1 rounded bg-secondary-600 hover:bg-primary-500 transition duration-300 text-gray-100 cursor-pointer whitespace-nowrap`;
+const BulkOpenButton = tw.button`ml-4 text-sm px-3 py-1 rounded bg-secondary-600 hover:bg-primary-500 transition duration-300 text-gray-100 whitespace-nowrap cursor-pointer`;
 
 const TableContainer = tw.div`w-full max-w-2xl mx-auto shadow-lg rounded bg-secondary-800`;
 
@@ -149,8 +149,12 @@ export default function Profiles() {
                 ? `You are following ${followingCount} out of ${totalUserCount} users`
                 : `Listing all ${totalUserCount} users`}
             </HeaderText>
-            {socialUrlsToOpen.length > 0 && (
-              <BulkOpenButton onClick={handleBulkOpen}>
+            {users !== undefined && (
+              <BulkOpenButton
+                onClick={handleBulkOpen}
+                disabled={socialUrlsToOpen.length === 0}
+                style={socialUrlsToOpen.length === 0 ? { opacity: 0.4, cursor: 'not-allowed' } : undefined}
+              >
                 Open {socialUrlsToOpen.length} profiles
               </BulkOpenButton>
             )}
