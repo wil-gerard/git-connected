@@ -1,7 +1,9 @@
 import { AxiosResponse } from 'axios';
 import tw from 'twin.macro';
 import GitHubIcon from '../assets/github-icon.svg?react';
-import { SocialLinks } from '../components/SocialLinks';
+import LinkedInIcon from '../assets/linkedin-icon.svg?react';
+import TwitterIcon from '../assets/twitter-icon.svg?react';
+import LinkIcon from '../assets/link-icon.svg?react';
 import React, { useEffect, useState } from 'react';
 import { SanitizedUser } from '../interface';
 import { useUserContext } from '../hooks/UserContext';
@@ -197,10 +199,22 @@ export default function Profiles() {
                             >
                               <GitHubIcon />
                             </TableLink>
-                            <SocialLinks
-                              socialAccounts={user.socialAccounts}
-                              linkedInUrl={user.linkedInUrl}
-                            />
+                            {(user.socialAccounts?.length
+                              ? user.socialAccounts
+                              : user.linkedInUrl
+                              ? [{ provider: 'linkedin', url: user.linkedInUrl }]
+                              : []
+                            ).map(({ provider, url }) => {
+                              const Icon =
+                                provider === 'linkedin' ? LinkedInIcon :
+                                provider === 'twitter' ? TwitterIcon :
+                                LinkIcon;
+                              return (
+                                <TableLink key={url} href={url} target="_blank" rel="noopener noreferrer">
+                                  <Icon />
+                                </TableLink>
+                              );
+                            })}
                             {!currentUser ? (
                               ''
                             ) : alreadyFollowing &&
