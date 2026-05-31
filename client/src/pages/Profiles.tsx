@@ -10,9 +10,11 @@ import clientApi from '../api/clientApi';
 
 const Content = tw.div`flex flex-col justify-center px-6 text-gray-100`;
 
-const Header = tw.header`px-5 py-4 border-b border-gray-100`;
+const Header = tw.header`px-5 py-4 border-b border-gray-100 flex items-center justify-between`;
 
 const HeaderText = tw.h2`font-semibold text-gray-100`;
+
+const BulkOpenButton = tw.button`ml-4 text-sm px-3 py-1 rounded bg-secondary-600 hover:bg-primary-500 transition duration-300 text-gray-100 cursor-pointer whitespace-nowrap`;
 
 const TableContainer = tw.div`w-full max-w-2xl mx-auto shadow-lg rounded bg-secondary-800`;
 
@@ -126,6 +128,14 @@ export default function Profiles() {
     }
   };
 
+  const socialUrlsToOpen = (users ?? [])
+    .map((u) => u.socialAccounts?.[0]?.url ?? u.linkedInUrl)
+    .filter(Boolean) as string[];
+
+  const handleBulkOpen = () => {
+    socialUrlsToOpen.forEach((url) => window.open(url, '_blank', 'noopener,noreferrer'));
+  };
+
   const followingCount = Object.keys(alreadyFollowing).length;
   const totalUserCount = users?.length;
 
@@ -139,6 +149,11 @@ export default function Profiles() {
                 ? `You are following ${followingCount} out of ${totalUserCount} users`
                 : `Listing all ${totalUserCount} users`}
             </HeaderText>
+            {socialUrlsToOpen.length > 0 && (
+              <BulkOpenButton onClick={handleBulkOpen}>
+                Open {socialUrlsToOpen.length} profiles
+              </BulkOpenButton>
+            )}
           </Header>
           <TablePadding>
             <Table>
