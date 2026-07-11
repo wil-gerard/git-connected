@@ -30,7 +30,7 @@
     "kill-port": "^1.6.1",
     "mongodb-memory-server": "^8.5.2",
     "mongoose": "^8",
-    "morgan": "^1.10.0",
+    "morgan": "^1.11.0",
     "passport": "^0.5.2",
     "passport-discord": "^0.1.4",
     "passport-github2": "^0.1.12",
