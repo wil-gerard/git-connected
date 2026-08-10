@@ -3840,7 +3840,7 @@ __metadata:
     babel-plugin-styled-components: ^2.0.7
     jest-watch-typeahead: ^1.0.0
     octokit: ^1.7.1
-    postcss: ^8.4.13
+    postcss: ^8.5.23
     prettier: 2.6.2
     react: ^19
     react-dom: ^19
@@ -7562,12 +7562,12 @@ __metadata:
   languageName: node
   linkType: hard
 
-"nanoid@npm:^3.3.3":
-  version: 3.3.4
-  resolution: "nanoid@npm:3.3.4"
+"nanoid@npm:^3.3.16":
+  version: 3.3.18
+  resolution: "nanoid@npm:3.3.18"
   bin:
     nanoid: bin/nanoid.cjs
-  checksum: 2fddd6dee994b7676f008d3ffa4ab16035a754f4bb586c61df5a22cf8c8c94017aadd360368f47d653829e0569a92b129979152ff97af23a558331e47e37cd9c
+  checksum: db804317d337b41602666f23014e399d1263033d13a903955c246378256fd4e002519e87199ca40b19aff52274965ac7cc6e70c13a63e194e15c4664724602d3
   languageName: node
   linkType: hard
 
@@ -8281,17 +8281,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"postcss@npm:^8.4.13":
-  version: 8.4.13
-  resolution: "postcss@npm:8.4.13"
-  dependencies:
-    nanoid: ^3.3.3
-    picocolors: ^1.0.0
-    source-map-js: ^1.0.2
-  checksum: 514fb3552805a5d039a2d6b4df3e73f657001716ca93c0d57e6067b0473abdea70276d80afc96005c9aaff82ed5d98062bd97724d3f47ca400fba0b5e9e436ed
-  languageName: node
-  linkType: hard
-
 "postcss@npm:^8.4.47, postcss@npm:^8.5.15":
   version: 8.5.15
   resolution: "postcss@npm:8.5.15"
@@ -8300,6 +8289,17 @@ __metadata:
     picocolors: ^1.1.1
     source-map-js: ^1.2.1
   checksum: 82e046d5bd0c537e7bcae1b97ec366968cac4ebdbd38773b69a2a4ad437f26641643a48f120317dd167199ac718ff8a0ab7dd102258430e4c919daaef0e57904
+  languageName: node
+  linkType: hard
+
+"postcss@npm:^8.5.23":
+  version: 8.5.23
+  resolution: "postcss@npm:8.5.23"
+  dependencies:
+    nanoid: ^3.3.16
+    picocolors: ^1.1.1
+    source-map-js: ^1.2.1
+  checksum: 02fe0aac9de34914104566b3fe3a29903dc7bae4a3fffffdca1331dc51e14aa62c48e8373fc4d107ef99f8f5cae98199d9a89fbcbf43371693b22a397ff5cc34
   languageName: node
   linkType: hard
 
@@ -9305,13 +9305,6 @@ __metadata:
     ip: ^1.1.5
     smart-buffer: ^4.2.0
   checksum: dd9194293059d737759d5c69273850ad4149f448426249325c4bea0e340d1cf3d266c3b022694b0dcf5d31f759de23657244c481fc1e8322add80b7985c36b5e
-  languageName: node
-  linkType: hard
-
-"source-map-js@npm:^1.0.2":
-  version: 1.0.2
-  resolution: "source-map-js@npm:1.0.2"
-  checksum: c049a7fc4deb9a7e9b481ae3d424cc793cb4845daa690bc5a05d428bf41bf231ced49b4cf0c9e77f9d42fdb3d20d6187619fc586605f5eabe995a316da8d377c
   languageName: node
   linkType: hard
 
